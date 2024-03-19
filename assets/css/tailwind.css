@@ -1,0 +1,123 @@
+@tailwind base;
+:root {
+    --primary: black;
+    --secondary: white;
+  }
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary) var(--primary);
+  }
+  
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 15px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: var(--primary);
+    border-radius: 5px;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--secondary);
+    border-radius: 14px;
+    border: 3px solid var(--primary);
+  }
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-black;
+    @apply text-white;
+    @apply my-0;
+    @apply box-border
+
+}
+
+
+@layer components {
+
+    @screen sm {
+      .text-grid{
+        @apply grid-cols-1 
+      }
+      .project-text{
+        @apply w-full
+      }
+      .dynamic-nav{
+        @apply relative flex justify-between mx-auto p-4 inset-0 items-center min-w-[20rem];
+      }
+      .dynamic-header{
+        @apply relative h-auto
+      }
+    }
+
+    @screen md {
+      .text-grid{
+        @apply grid-cols-2
+      }
+    }
+
+    @screen lg {
+      .dynamic-nav{
+        @apply max-w-[20rem] absolute p-4 flex flex-col inset-y-0 ml-0 justify-between items-start;
+      }
+      .project-text{
+        @apply w-3/4
+      }
+      .dynamic-header{
+        @apply fixed h-screen
+      }
+    }
+
+
+    .btn {
+        @apply bg-[#12b488] text-white px-3 py-2 rounded-md text-sm text-white;
+    }
+    .card {
+        @apply  p-3 bg-white h-full;
+    }
+    .remove-scrollbar {
+        -ms-overflow-style: none;  /* IE + Edge */
+        scrollbar-width: none;  /* Firefox */
+      }
+    .h-95 {
+        height: 95vh
+    }
+    .w-custom-80 {
+        width: 80vw
+    }
+
+    .w-custom-50 {
+      width: 50vw;
+    }
+    .w-custom-30 {
+        width: 30vw
+    }
+    p { 
+      word-break: break-word !important; 
+      -webkit-hyphens: auto !important; 
+      -moz-hyphens: auto !important; 
+      -ms-hyphens: auto !important; 
+      -o-hyphens: auto !important; 
+      hyphens: auto !important;
+     }
+    h2 {
+        font-family: Castoro;
+        /* font-weight: 700; */
+        font-style: italic;
+        margin-bottom: 10px;
+        font-size: 56px;
+    }
+    .heading-4 {
+        font-family: Castoro;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 20px;
+    }
+    /* .image-container {
+        max-width: 25vw;
+    } */
+}
+
