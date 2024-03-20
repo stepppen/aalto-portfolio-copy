@@ -1,8 +1,8 @@
 <template>
     <div class="flex justify-center inset-0 absolute z-0 left-48">
-        <!-- <div class="my-auto">
-            <ThreeHead />
-        </div> -->
+        <div class="my-auto">
+            <ThreeNew />
+        </div>
         <div class="flex flex-col w-1/3 my-auto">
             <p class="text-justify">I am currently studying interaction design at the Zurich University of the Arts in 
                 Switzerland. Looking to further my understanding of service and product design while continuing to explore 

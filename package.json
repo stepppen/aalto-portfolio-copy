@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@splinetool/loader": "^1.0.68",
     "@tresjs/nuxt": "^2.1.1",
     "json-server": "^1.0.0-alpha.23",
     "nuxt": "^3.10.3",

@@ -9,10 +9,11 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { AsciiEffect } from 'three/examples/jsm/effects/AsciiEffect.js';
 
 let renderer: THREE.WebGLRenderer
 let controls: OrbitControls
-let effect;
+let effect: AsciiEffect;
 const experience: Ref<HTMLCanvasElement | null> = ref(null)
 
 const pointer = new THREE.Vector2();
@@ -23,15 +24,12 @@ const scene = new THREE.Scene();
 const onMouseMove = (event) => {
     pointer.x = ((event.clientX / width)-1.5)/3;
     pointer.y = ((event.clientY / height)-0.5)/3;
-    // camera.position.set(pointer.x, camera.position.y, 0.2);
     camera.position.set(0, 0, 0.2);
     const gltfModel = scene.getObjectByName('gltfModel');
     if (gltfModel) {
         gltfModel.rotation.y = pointer.x;
         gltfModel.rotation.x = pointer.y;
     }
-    // camera.rotation.set(0, pointer.x, 0);
-    // console.log(pointer.x, pointer.y)
 }
 
 window.addEventListener('mousemove', onMouseMove)
@@ -46,22 +44,29 @@ const ambientLight = new THREE.AmbientLight(0xffffff, 1)
 scene.add(ambientLight)
 const gltfLoader = new GLTFLoader()
 
-
-
 gltfLoader.load('/three/skull.glb', (gltf) => {
     gltf.scene.name = 'gltfModel';
     scene.add(gltf.scene)
 }
 )
 
+function createEffect() {
+    const characters = ' .:-+*=%@#'; // Define characters
+    const effectSize = { amount: .205 }; // Define effect size
+    const backgroundColor = 'black'; // Define background color
+    const ASCIIColor = 'white'; // Define ASCII color
+
+    effect = new AsciiEffect(renderer, characters, { invert: true, resolution: effectSize.amount });
+    effect.setSize(width, height);
+    effect.domElement.style.color = ASCIIColor;
+    effect.domElement.style.backgroundColor = backgroundColor;
+}
+
 
 function setRenderer(){
     if(experience.value){
         renderer = new THREE.WebGLRenderer({ canvas: experience.value, alpha: true })
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-
-        // effect = new THREE.AsciiEffect(renderer);
-        // effect.setSize(width, height);
 
         controls = new OrbitControls(camera, renderer.domElement);
         controls.enableZoom = false;
