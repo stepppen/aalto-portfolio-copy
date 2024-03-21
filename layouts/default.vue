@@ -1,6 +1,6 @@
 <template>
     <div class="flex z-10">
-        <header class="lg:w-2/3">
+        <header class="lg:w-2/3 lg:fixed">
             <nav class=" h-screen relative p-4 flex flex-col justify-between">
                 <nuxt-link to="/" class="flex hover:px-1 slow-transition">
                     <p class="pr-2">Stepan</p>
@@ -24,7 +24,8 @@
             </nav>
         </header>
 
-        <div class="flex justify-between p-4">
+        <div class="flex justify-between">
+            <div class="w-1/2"></div>
             <slot />
         </div>
     </div>

@@ -20,24 +20,25 @@
     opacity: 1;
     }
 
-.occlusion-div{
-    opacity: 0;
-}
-.overlayTitle:hover {
-        .occlusion-div{
-            opacity: 1;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: rgba(0, 0, 0, 0.7);
-        }
-      background-color: rgba(0, 0, 0, 0.7);
-      color: #fff;
+// .occlusion-div{
+//     opacity: 0;
+// }
+.overlayTitle:hover + .occlusion-div {
+    //   background-color: rgba(0, 0, 0, 0.7);
+    //   color: #fff;
       opacity: 0.5;
       transition: opacity 0.1s ease;
 }
+// .occlusion-div{
+//             opacity: 1;
+//             position: absolute;
+//             top: 0;
+//             left: 0;
+//             width: 100%;
+//             height: 100%;
+//             opacity: 50%;
+//             // background-color: rgba(0, 0, 0, 0.7);
+//             // color: rgba(0, 0, 0, 0.7);
+//         }
 
 </style>

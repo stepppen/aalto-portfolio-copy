@@ -20,11 +20,10 @@ let isLandingPage = false;
 const route = useRoute();
 
 onMounted(() => {
-  isLandingPage = route.path === '/index';
+  isLandingPage = route.path === '/';
   if (isLandingPage) {
     init();
     loadModel();
-    animate();
     console.log("Landing is loaded")
   }
 });
@@ -39,10 +38,10 @@ onUnmounted(() => {
 // animate();
 function loadModel() {
   const gltfLoader = new GLTFLoader();
-  gltfLoader.load('/three/skull.glb', (gltf) => {
+  gltfLoader.load('/three/abstract.glb', (gltf) => {
     gltf.scene.name = 'gltfModel';
     scene.add(gltf.scene);
-    console.log("gltf added");
+    animate();
   });
 }
 
@@ -51,16 +50,16 @@ function init() {
 
     camera = new THREE.PerspectiveCamera( 75, width / height, 0.1, 1000 );
     camera.position.y = 0;
-    camera.position.z = 0.2;
+    camera.position.z = 5;
 
     scene = new THREE.Scene();
     scene.background = new THREE.Color( 0, 0, 0 );
 
     const pointer = new THREE.Vector2();
     const onMouseMove = (event) => {
-        pointer.x = ((event.clientX / width)-1.5)/3;
-        pointer.y = ((event.clientY / height)-0.5)/3;
-        camera.position.set(0, 0, 0.2);
+        pointer.x = ((event.clientX / width)-1.5)/4;
+        pointer.y = ((event.clientY / height)-0.5)/4;
+        camera.position.set(1, 0, 5);
         const gltfModel = scene.getObjectByName('gltfModel');
         if (gltfModel) {
             gltfModel.rotation.y = pointer.x;
@@ -71,9 +70,9 @@ function init() {
     const ambientLight = new THREE.AmbientLight(0xffffff, 1)
     scene.add(ambientLight)
 
-    const pointLight1 = new THREE.PointLight( 0xffffff, 3, 0, 0 );
-    pointLight1.position.set( 500, 500, 500 );
-    scene.add( pointLight1 );
+    // const pointLight1 = new THREE.PointLight( 0xffffff, 3, 0, 0 );
+    // pointLight1.position.set( 500, 500, 500 );
+    // scene.add( pointLight1 );
 
     const pointLight2 = new THREE.PointLight( 0xffffff, 1, 0, 0 );
     pointLight2.position.set( - 500, - 500, - 500 );
@@ -82,9 +81,9 @@ function init() {
     renderer = new THREE.WebGLRenderer();
     renderer.setSize( width, height );
 
-    effect = new AsciiEffect( renderer, ' .:-+*=%@#', { invert: true } );
+    effect = new AsciiEffect( renderer, '  .:-+*=%@#', { invert: true } );
     effect.setSize( width, height );
-    effect.domElement.style.color = 'white';
+    effect.domElement.style.color = 'blue';
     effect.domElement.style.backgroundColor = 'black';
     asciiEffectContainer.value.appendChild( effect.domElement );
 
@@ -107,8 +106,8 @@ function onWindowResize() {
 function animate() {
     requestAnimationFrame( animate );
     render();
-    // let gltfModel = scene.getObjectByName('gltfModel');
-    // gltfModel.rotation.y += 0.005;
+    let gltfModel = scene.getObjectByName('gltfModel');
+    gltfModel.rotation.y += 0.0005;
 
 }
 

@@ -1,7 +1,10 @@
 <template>
+    <Head>
+        <Title>Archive</Title>
+    </Head>
     <!-- <div class="w-1/4"></div> -->
     <div>
-        <div class='xl:w-full grid grid-cols-3 xl:grid-cols-4 gap-4'>
+        <div class='xl:w-full grid grid-cols-3 2xl:grid-cols-4 gap-4 p-4'>
             <div v-for="p in project">
                 <ProjectCard :project="p"/>
             </div>

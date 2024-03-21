@@ -24,7 +24,6 @@ onMounted(() => {
   if (isAboutPage) {
     init();
     loadModel();
-    animate();
   }
 });
 
@@ -40,8 +39,9 @@ function loadModel() {
   const gltfLoader = new GLTFLoader();
   gltfLoader.load('/three/skull.glb', (gltf) => {
     gltf.scene.name = 'gltfModel';
+    // gltf.rotation.y = 3
     scene.add(gltf.scene);
-    console.log("gltf added");
+    animate();
   });
 }
 
@@ -49,6 +49,7 @@ function loadModel() {
 function init() {
 
     camera = new THREE.PerspectiveCamera( 75, width / height, 0.1, 1000 );
+    // camera.rotation.y
     camera.position.y = 0;
     camera.position.z = 0.2;
 
@@ -74,16 +75,16 @@ function init() {
     pointLight1.position.set( 500, 500, 500 );
     scene.add( pointLight1 );
 
-    const pointLight2 = new THREE.PointLight( 0xffffff, 1, 0, 0 );
-    pointLight2.position.set( - 500, - 500, - 500 );
-    scene.add( pointLight2 );
+    // const pointLight2 = new THREE.PointLight( 0xffffff, 1, 0, 0 );
+    // pointLight2.position.set( - 500, - 500, - 500 );
+    // scene.add( pointLight2 );
 
     renderer = new THREE.WebGLRenderer();
     renderer.setSize( width, height );
 
-    effect = new AsciiEffect( renderer, ' .:-+*=%@#', { invert: true } );
+    effect = new AsciiEffect( renderer, '  .:-+*=%@#', { invert: true } );
     effect.setSize( width, height );
-    effect.domElement.style.color = 'white';
+    effect.domElement.style.color = 'blue';
     effect.domElement.style.backgroundColor = 'black';
     asciiEffectContainer.value.appendChild( effect.domElement );
 
@@ -106,8 +107,8 @@ function onWindowResize() {
 function animate() {
     requestAnimationFrame( animate );
     render();
-    // let gltfModel = scene.getObjectByName('gltfModel');
-    // gltfModel.rotation.y += 0.005;
+    let gltfModel = scene.getObjectByName('gltfModel');
+    gltfModel.rotation.y += 0.0005;
 
 }
 

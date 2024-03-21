@@ -3,7 +3,7 @@
     "id": 1,
     "title": "Neuranect",
     "year": 2023,
-    "thumb": "../Neuranect/thumb.png",
+    "thumb": "../Neuranect/thumb_new.png",
     "context": "Stanford University Center on\nLongevity Design Challenge",
     "team": "Sebastian Truijens (ETHz)\nElia Salerno (ZHdK)\nEge Seçgin (ZHdK) \n Stepan Vedunov (ZHdK)",
     "role": "Industrial Design\nUX/UI Design",
@@ -16,7 +16,7 @@
     "imgGridFour": "../Neuranect/concept.svg",
     "processTwo": "As we transitioned into the development phase, our focus shifted towards the actual design of Neuranect. Our primary objectives revolved around ensuring seamless setup and user-friendliness, all while maintaining affordability. Key to our efforts was the creation of an intuitive UI and engaging game concepts designed to address cognitive decline. However, the task of finding the right balance between simplicity and efficacy proved to be more difficult than we thought.",
     "imgGridFive": "../Neuranect/sketches.webp",
-    "imgGridSix": "../Neuranect/blender.webp",
+    "imgGridSix": "../Neuranect/blender_02.webp",
     "imgGridSeven": "../Neuranect/fusion.webp",
     "imgGridEight": "../Neuranect/user_flow.webp",
     "solution": "Following three intense weeks, we successfully created a solution that aligns with the goals outlined earlier. We dedicated significant effort to ensure that Neuranect is user-friendly while offering comprehensive service from A to Z. Its compact and portable design enables installation in healthcare facilities and private households alike. On top of that,  the game concepts we developed can be played alone or cooperatively, which connects people and transforms exercising into a shared experience.",
@@ -112,20 +112,20 @@
    
     },
     { 
-        "id": 5,
-        "title": "Rep:Lab",
-        "year": 2023,
-        "thumb": "../RepLab/RepLab_thumb.jpeg",
-        "context": "University module",
-        "team": "David Polke\nBasil Egger\n Ege Seçgin \nLuca Busby\nStepan Vedunov",
-        "role": "Service Design",
-        "overview": "Neuranect was created in the context of  the Stanford University Center on Longevity Design Challenge where the brief was to create a service for life transitions. Our solution focuses on the eldery, helping people with early signs of dementia to engage in purposeful, adaptive and collaborative games that are designed to stimulate cognitive functions and hinder memory loss."
-        },
+    "id": 5,
+    "title": "Rep:Lab",
+    "year": 2023,
+    "thumb": "../RepLab/thumb.png",
+    "context": "University module",
+    "team": "David Polke\nBasil Egger\n Ege Seçgin \nLuca Busby\nStepan Vedunov",
+    "role": "Service Design",
+    "overview": "Neuranect was created in the context of  the Stanford University Center on Longevity Design Challenge where the brief was to create a service for life transitions. Our solution focuses on the eldery, helping people with early signs of dementia to engage in purposeful, adaptive and collaborative games that are designed to stimulate cognitive functions and hinder memory loss."
+    },
     { 
     "id": 6,
     "title": "Arcaba",
     "year": 2024,
-    "thumb": "../Arcaba/Arcaba_thumb.png",
+    "thumb": "../Arcaba/thumb.png",
     "context": "Freelance project for Architektur Abächerli GmbH",
     "team": "Stepan Vedunov",
     "role": "Web Design & Development",
@@ -139,16 +139,6 @@
         "context": "Freelance project for Swiss Diversity Association",
         "team": "Stepan Vedunov",
         "role": "Web Design & Development",
-        "overview": "Neuranect was created in the context of  the Stanford University Center on Longevity Design Challenge where the brief was to create a service for life transitions. Our solution focuses on the eldery, helping people with early signs of dementia to engage in purposeful, adaptive and collaborative games that are designed to stimulate cognitive functions and hinder memory loss."
-    },
-    { 
-        "id": 8,
-        "title": "Gestural NUI",
-        "year": 2024,
-        "thumb": "../NUI/thumb.png",
-        "context": "University module",
-        "team": "Elia Salerno\nStepan Vedunov",
-        "role": "GUI\nSound Design",
         "overview": "Neuranect was created in the context of  the Stanford University Center on Longevity Design Challenge where the brief was to create a service for life transitions. Our solution focuses on the eldery, helping people with early signs of dementia to engage in purposeful, adaptive and collaborative games that are designed to stimulate cognitive functions and hinder memory loss."
     }
 ]

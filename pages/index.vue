@@ -1,5 +1,11 @@
 <template>
-        <div class="absolute">
+        <Head>
+            <Title>Home</Title>
+        </Head>
+        <!-- <div class="occlusion-div">
+
+        </div> -->
+        <div>
             <LandingAnimation />
         </div>
         <div class="flex inset-0 absolute left-48">
@@ -7,7 +13,7 @@
                 <img v-if="hoveredProject" :src="hoveredProject ? hoveredProject.thumb : project.thumb" alt="project img" loading="lazy" class="object-cover min-w-full aspect-[4/3]">
             </div>  
             <div class="flex flex-col justify-center pl-8">
-                <div class="flex flex-col" v-for="p in project.slice(0,4)">
+                <div class="flex flex-col" v-for="p in project.slice(0,5)">
                     <LandingLink :project="p" @mouseover="handleMouseOver(p)" @mouseleave="handleMouseLeave"/>
                 </div>
             </div>
