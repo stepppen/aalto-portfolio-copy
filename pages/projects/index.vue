@@ -1,7 +1,7 @@
 <template>
-    <div class="w-1/4"></div>
+    <!-- <div class="w-1/4"></div> -->
     <div>
-        <div class='xl:w-full w-custom-80 grid grid-cols-3 xl:grid-cols-4 gap-4'>
+        <div class='xl:w-full grid grid-cols-3 xl:grid-cols-4 gap-4'>
             <div v-for="p in project">
                 <ProjectCard :project="p"/>
             </div>

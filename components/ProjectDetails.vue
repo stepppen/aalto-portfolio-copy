@@ -56,15 +56,15 @@
         </div>
         <div>
             <div>
-                <img v-if="project.imgGridOne" :src="project.imgGridOne" alt="project img" class="object-cover min-w-full py-2 ">
+                <img v-if="project.imgGridOne" :src="project.imgGridOne" alt="project img" loading="lazy" class="object-cover min-w-full py-2 ">
             </div>
             <div class="grid text-grid lg:gap-4 gap-0 py-2 lg:pb-4">
-                <img v-if="project.imgGridTwo" :src="project.imgGridTwo" alt="project img" class="object-cover min-w-full lg:p-0 md:pr-4 pb-4">
-                <img v-if="project.imgGridThree" :src="project.imgGridThree" alt="project img" class="object-cover min-w-full lg:p-0 md:pl-4 pb-4">
+                <img v-if="project.imgGridTwo" :src="project.imgGridTwo" alt="project img" loading="lazy" class="object-cover min-w-full lg:p-0 md:pr-4 pb-4">
+                <img v-if="project.imgGridThree" :src="project.imgGridThree" alt="project img" loading="lazy" class="object-cover min-w-full lg:p-0 md:pl-4 pb-4">
             </div>
             <div>
-                <img v-if="project.imgGridFour" :src="project.imgGridFour" alt="project img" class="object-cover min-w-full py-2 ">
-                <img v-if="project.imgGridExtra" :src="project.imgGridExtra" alt="project img" class="object-cover min-w-full py-2 ">
+                <img v-if="project.imgGridFour" :src="project.imgGridFour" alt="project img" loading="lazy" class="object-cover min-w-full py-2 ">
+                <img v-if="project.imgGridExtra" :src="project.imgGridExtra" alt="project img" loading="lazy" class="object-cover min-w-full py-2 ">
             </div>
         </div>
 
@@ -79,18 +79,18 @@
         </div>
         <div>
             <div>
-                <img v-if="project.imgGridFive" :src="project.imgGridFive" alt="project img" class="object-cover min-w-full py-2 ">
+                <img v-if="project.imgGridFive" :src="project.imgGridFive" alt="project img" loading="lazy" class="object-cover min-w-full py-2 ">
             </div>
             <div class="grid text-grid lg:gap-4 gap-0 py-2">
-                <img v-if="project.imgGridSix" :src="project.imgGridSix" alt="project img" class="object-cover min-w-full lg:p-0 md:pr-4">
-                <img v-if="project.imgGridSeven" :src="project.imgGridSeven" alt="project img" class="object-cover min-w-full lg:p-0 md:pl-4">
+                <img v-if="project.imgGridSix" :src="project.imgGridSix" alt="project img" loading="lazy" class="object-cover min-w-full lg:p-0 md:pr-4">
+                <img v-if="project.imgGridSeven" :src="project.imgGridSeven" alt="project img" loading="lazy" class="object-cover min-w-full lg:p-0 md:pl-4">
             </div>
             <div>
-                <img v-if="project.imgGridEight" :src="project.imgGridEight" alt="project img" class="object-cover min-w-full py-2 ">
+                <img v-if="project.imgGridEight" :src="project.imgGridEight" alt="project img" loading="lazy" class="object-cover min-w-full py-2 ">
             </div>
             <div class="grid text-grid lg:gap-4 gap-0 py-2">
-                <img v-if="project.imgGridNine" :src="project.imgGridNine" alt="project img" class="object-cover min-w-full lg:p-0 md:pr-4">
-                <img v-if="project.imgGridTen" :src="project.imgGridTen" alt="project img" class="object-cover min-w-full lg:p-0 md:pl-4">
+                <img v-if="project.imgGridNine" :src="project.imgGridNine" alt="project img" loading="lazy" class="object-cover min-w-full lg:p-0 md:pr-4">
+                <img v-if="project.imgGridTen" :src="project.imgGridTen" alt="project img" loading="lazy" class="object-cover min-w-full lg:p-0 md:pl-4">
             </div>
         </div>
 
@@ -104,17 +104,17 @@
             </div>
         </div>
         <div>
-            <img v-if="project.imgFinalOne" :src="project.imgFinalOne" alt="project img" class="object-cover min-w-full py-2 ">
-            <img v-if="project.imgFinalTwo" :src="project.imgFinalTwo" alt="project img" class="object-cover min-w-full py-2 ">
+            <img v-if="project.imgFinalOne" :src="project.imgFinalOne" alt="project img" loading="lazy" class="object-cover min-w-full py-2 ">
+            <img v-if="project.imgFinalTwo" :src="project.imgFinalTwo" alt="project img" loading="lazy" class="object-cover min-w-full py-2 ">
         </div>
         <div class="grid text-grid lg:gap-4 gap-0 py-2">
-                <img v-if="project.imgFinalThree" :src="project.imgFinalThree" alt="project img" class="object-cover min-w-full lg:p-0 md:pr-4 pb-4">
-                <img v-if="project.imgFinalFour" :src="project.imgFinalFour" alt="project img" class="object-cover min-w-full lg:p-0 md:pl-4 pb-4">
+                <img v-if="project.imgFinalThree" :src="project.imgFinalThree" alt="project img" loading="lazy" class="object-cover min-w-full lg:p-0 md:pr-4 pb-4">
+                <img v-if="project.imgFinalFour" :src="project.imgFinalFour" alt="project img" loading="lazy" class="object-cover min-w-full lg:p-0 md:pl-4 pb-4">
         </div>
         <div>
-            <img v-if="project.imgFinalFive" :src="project.imgFinalFive" alt="project img" class="object-cover min-w-full py-2 ">
-            <img v-if="project.imgFinalSix" :src="project.imgFinalSix" alt="project img" class="object-cover min-w-full py-2 ">
-            <img v-if="project.imgFinalSeven" :src="project.imgFinalSeven" alt="project img" class="object-cover min-w-full py-2 ">
+            <img v-if="project.imgFinalFive" :src="project.imgFinalFive" alt="project img" loading="lazy" class="object-cover min-w-full py-2 ">
+            <img v-if="project.imgFinalSix" :src="project.imgFinalSix" alt="project img" loading="lazy" class="object-cover min-w-full py-2 ">
+            <img v-if="project.imgFinalSeven" :src="project.imgFinalSeven" alt="project img" loading="lazy" class="object-cover min-w-full py-2 ">
         </div>
         <div class="grid text-grid pt-16">
             <div></div>

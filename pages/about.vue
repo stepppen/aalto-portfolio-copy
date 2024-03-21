@@ -1,6 +1,6 @@
 <template>
     <div class="flex justify-center inset-0 absolute z-0 left-48">
-        <div class="my-auto">
+        <div class="my-auto z-50">
             <ThreeNew />
         </div>
         <div class="flex flex-col w-1/3 my-auto">

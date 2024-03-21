@@ -2,8 +2,8 @@
     <div class="container">
         <div class="aspect-[4/3] image-container flex justify-center align-center" @mouseover="hover = true" @mouseleave="hover = false">
             <nuxt-link :to="`/projects/${project.id}`"> 
-                    <div class="container object-cover min-w-full">
-                        <img :src="project.thumb" alt="project thumbnail" class="thumb">
+                    <div class="container object-cover min-w-full h-full">
+                        <img :src="project.thumb" alt="project thumbnail" loading="lazy" class="thumb">
                         <div  v-if="hover" class="overlay">
                             <p class="truncate"> {{ project.title }}</p>
                             <p class="truncate"> {{ project.year }}</p>
@@ -26,7 +26,7 @@
 .thumb {
     aspect-ratio: 4/3;
     object-fit: cover;
-    max-height: 320px;
+    height: 100%;
 }
 
 .overlay {

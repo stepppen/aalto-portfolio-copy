@@ -1,7 +1,7 @@
 <template>
-    <div class="z-10">
-        <header class="fixed">
-            <nav class="max-w-[20rem] h-screen relative p-4 flex flex-col justify-between">
+    <div class="flex z-10">
+        <header class="lg:w-2/3">
+            <nav class=" h-screen relative p-4 flex flex-col justify-between">
                 <nuxt-link to="/" class="flex hover:px-1 slow-transition">
                     <p class="pr-2">Stepan</p>
                     <p>Vedunov</p>
