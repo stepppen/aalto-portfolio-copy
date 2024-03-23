@@ -84,8 +84,9 @@ function init() {
 
     effect = new AsciiEffect( renderer, '  .:-+*=%@#', { invert: true } );
     effect.setSize( width, height );
-    effect.domElement.style.color = 'blue';
-    effect.domElement.style.backgroundColor = 'black';
+    effect.domElement.style.color = '#4583B2';
+    const bgColor = 
+    effect.domElement.style.backgroundColor = "#020617";
     asciiEffectContainer.value.appendChild( effect.domElement );
 
     window.addEventListener( 'resize', onWindowResize );

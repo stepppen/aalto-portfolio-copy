@@ -2,6 +2,7 @@
 :root {
     --primary: black;
     --secondary: white;
+    --tertiary: blue;
   }
 
 * {
@@ -28,7 +29,7 @@
 @tailwind utilities;
 
 body {
-    @apply bg-black;
+    @apply bg-slate-950;
     @apply text-white;
     @apply my-0;
     @apply box-border
@@ -125,7 +126,7 @@ body {
     background-color: rgba(0, 0, 0, 0.7); /* Initial background color */
     opacity: 0; /* Initial opacity */
     transition: opacity 0.3s ease; 
-    
+
     
     }
     /* .image-container {

@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div class="h-96"></div>
+        <div v-if="project.process" class="h-96"></div>
 
         <!-- Process_01 -->
         <div class="aspect-[16/9] flex justify-center align-center overflow-hidden">
@@ -47,8 +47,8 @@
             <!-- <img v-if="project.img1" :src="project.img1" alt="project img" class="object-cover min-w-full"> -->
         </div>
 
-        <div class="h-96"></div>
-        <div class="grid text-grid">
+        <div v-if="project.process" class="h-96"></div>
+        <div v-if="project.process" class="grid text-grid">
             <div class="project-text">
                 <h3 class="heading-4 w-32 pb-4">Process</h3>
                 <p class="text-justify pb-16">{{project.process}}</p>
@@ -69,8 +69,8 @@
         </div>
 
         <!-- Process_02 -->
-        <div class="h-96"></div>
-        <div class="grid text-grid">
+        <div v-if="project.process" class="h-96"></div>
+        <div v-if="project.processTwo" class="grid text-grid">
             <div></div>
             <div class="project-text">
                 <h3 class="heading-4 w-32 pb-4">Design</h3>
@@ -96,8 +96,8 @@
 
 
         <!-- Solution & Learnings-->
-        <div class="h-96"></div>
-        <div class="grid text-grid">
+        <div v-if="project.solution" class="h-96"></div>
+        <div v-if="project.solution" class="grid text-grid">
             <div class="project-text">
                 <h3 class="heading-4 w-32 pb-4">Solution</h3>
                 <p class="text-justify pb-16">{{project.solution}}</p>
@@ -118,12 +118,12 @@
         </div>
         <div class="grid text-grid pt-16">
             <div></div>
-            <div class="project-text">
+            <div v-if="project.learnings" class="project-text">
                 <h3 class="heading-4 w-32 pb-4">Learnings</h3>
                 <p class="text-justify">{{project.learnings}}</p>
             </div>
         </div>
-        <div class="h-32"></div>
+        <div v-if="project.learnings" class="h-32"></div>
 
 
 

@@ -83,8 +83,8 @@ function init() {
 
     effect = new AsciiEffect( renderer, '  .:-+*=%@#', { invert: true } );
     effect.setSize( width, height );
-    effect.domElement.style.color = 'blue';
-    effect.domElement.style.backgroundColor = 'black';
+    effect.domElement.style.color = '#4583B2';
+    // effect.domElement.style.backgroundColor = 'black';
     asciiEffectContainer.value.appendChild( effect.domElement );
 
     window.addEventListener( 'resize', onWindowResize );

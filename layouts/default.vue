@@ -47,6 +47,6 @@ p {
     transition: 0.1s ease-in-out;
 }
     /* .router-link-exact-active {
-        color:rgb(122, 217, 26);
+        color:rgb(217, 255, 0);
     } */
 </style>

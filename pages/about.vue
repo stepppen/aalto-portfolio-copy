@@ -12,7 +12,7 @@
                 interdisciplinary learning. Feel free to contact me under:
             </p>
             <p>
-                stepan.vedunov@outlook.com
+                stepan@vedunov.com
             </p>
         </div>
     </div>
@@ -32,8 +32,8 @@
         margin: 20px 0;
     }
 
-    .router-link-exact-active {
-        color:rgb(122, 217, 26);
-    } 
+    // .router-link-exact-active {
+    //     color:rgb(122, 217, 26);
+    // } 
 
 </style>

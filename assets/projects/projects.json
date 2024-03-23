@@ -62,7 +62,7 @@
     "year": 2023,
     "thumb": "../TsunComp/thumb.webp",
     "context": "University module",
-    "team": "Andreas Kohler\nElia Salerno\nDavid Polker\nStepan Vedunov",
+    "team": "Andreas Kohler\nElia Salerno\nDavid Polke\nStepan Vedunov",
     "role": "Industrial Design\nGUI",
     "overview": "Drawing robots are not uncommon these days, but TsunComp offers a unique feature: the ability to create custom drawings based on direct requests. Our developed pipeline is a fully automated speech to machine code process, that uses GPT3.5 and StableDiffusion at its core. It sends out the data to a customly designed plotter that then draws the generated image for you using a pen, which results in a physical memory that you can hold on to.",
     "videoTsunComp": "_",
@@ -125,20 +125,31 @@
     "id": 6,
     "title": "Arcaba",
     "year": 2024,
-    "thumb": "../Arcaba/thumb.png",
-    "context": "Freelance project for Architektur Abächerli GmbH",
+    "thumb": "../Arcaba/thumb.webp",
+    "context": "Architektur Abächerli GmbH",
     "team": "Stepan Vedunov",
     "role": "Web Design & Development",
-    "overview": "Neuranect was created in the context of  the Stanford University Center on Longevity Design Challenge where the brief was to create a service for life transitions. Our solution focuses on the eldery, helping people with early signs of dementia to engage in purposeful, adaptive and collaborative games that are designed to stimulate cognitive functions and hinder memory loss."
+    "overview": "The task was to design and develop a portfolio website for an architecture firm based in Zurich.  The solution is a result of several design iterations providing an adaptive viewing experience across multiple devices. ",
+    "processTwo": "After initial discussions with the client and rapid sketching of ideas, we proceeded to create first low-fi wireframes. The goal was to understand the clients wants and needs and to find a common direction that would  lead us along the rest of the project. We settled on large and bold images as our main theme throughout the website design.",
+    "imgGridFive": "../Arcaba/sketches.webp",
+    "imgGridEight": "../Arcaba/lowfi.webp",
+    "solution": "The final product is optimised for mobile as well as desktop devices and provides exposure to potential clients and investors. The first website for Arcaba is a mix of professional, modern aesthetics and functional design, placing the owners values of sustainable and playful architecture at its core.", 
+    "imgFinalOne": "../Arcaba/rendering_01.webp",
+    "imgFinalTwo": "../Arcaba/rendering_02.webp",
+    "imgFinalFive": "../Arcaba/rendering_03.webp"
+   
     },
     { 
         "id": 7,
         "title": "Swiss Diversity",
         "year": 2023,
-        "thumb": "../SwissDiversity/thumb.png",
-        "context": "Freelance project for Swiss Diversity Association",
+        "thumb": "../SwissDiversity/thumb.webp",
+        "context": "Swiss Diversity Association",
         "team": "Stepan Vedunov",
         "role": "Web Design & Development",
-        "overview": "Neuranect was created in the context of  the Stanford University Center on Longevity Design Challenge where the brief was to create a service for life transitions. Our solution focuses on the eldery, helping people with early signs of dementia to engage in purposeful, adaptive and collaborative games that are designed to stimulate cognitive functions and hinder memory loss."
+        "overview": "I was tasked with enhancing and maintaining the website for the Swiss Diversity Association. This included working on aesthetic and functional improvements and regularly updating content as well as optimising for mobile. The website serves as a dynamic platform to promote the association's mission of fostering diversity and inclusion in Switzerland.",
+        "imgFinalOne": "../SwissDiversity/beforeAfter_01.webp",
+        "imgFinalTwo": "../SwissDiversity/beforeAfter_02.webp",
+        "imgFinalFive": "../SwissDiversity/rendering_01.webp"
     }
 ]
