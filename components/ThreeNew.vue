@@ -50,7 +50,8 @@ function init() {
 
     camera = new THREE.PerspectiveCamera( 75, width / height, 0.1, 1000 );
     // camera.rotation.y
-    camera.position.y = 0;
+    camera.position.x = 0.03;
+    camera.position.y = -0.02;
     camera.position.z = 0.2;
 
     scene = new THREE.Scene();
@@ -60,7 +61,7 @@ function init() {
     const onMouseMove = (event) => {
         pointer.x = ((event.clientX / width)-1.5)/3;
         pointer.y = ((event.clientY / height)-0.5)/3;
-        camera.position.set(0, 0, 0.2);
+        camera.position.set(0.03, -0.02, 0.2);
         const gltfModel = scene.getObjectByName('gltfModel');
         if (gltfModel) {
             gltfModel.rotation.y = pointer.x;
@@ -82,11 +83,14 @@ function init() {
     renderer = new THREE.WebGLRenderer();
     renderer.setSize( width, height );
 
-    effect = new AsciiEffect( renderer, '  .:-+*=%@#', { invert: true } );
+    // effect = new AsciiEffect( renderer, '  .:-+*=%@#', { invert: true } );
+    effect = new AsciiEffect( renderer, '  .-oz@#', { invert: true } );
     effect.setSize( width, height );
     effect.domElement.style.color = '#4583B2';
-    const bgColor = 
+  
     effect.domElement.style.backgroundColor = "#020617";
+    // effect.domElement.style.backgroundColor = "grey";
+
     asciiEffectContainer.value.appendChild( effect.domElement );
 
     window.addEventListener( 'resize', onWindowResize );

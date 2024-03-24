@@ -1,31 +1,31 @@
 <template>
-    <div class="flex z-10">
-        <header class="lg:w-2/3 lg:fixed">
-            <nav class=" h-screen relative p-4 flex flex-col justify-between">
-                <nuxt-link to="/" class="flex hover:px-1 slow-transition">
+    <div class="">
+        <header class="dynamic-header">
+            <nav class="dynamic-nav">
+                <nuxt-link to="/" class="flex lg:hover:px-1 slow-transition">
                     <p class="pr-2">Stepan</p>
                     <p>Vedunov</p>
                 </nuxt-link>
-                <ul class="flex flex-col gap-2">
+                <ul class="flex lg:flex-col gap-2">
                     <li>
                         <nuxt-link to="/about" class="flex">
-                            <p class="hover:px-1 slow-transition">About</p>
+                            <p class="lg:hover:px-1 slow-transition">About</p>
                             <img class="px-2" src="../assets/icons/arrow.svg" alt="arrow-icon">
                         </nuxt-link>
                     </li>
                     <li>
                         <nuxt-link to="/projects" class="flex">
-                            <p class="hover:px-1 slow-transition">Archive</p>
+                            <p class="lg:hover:px-1 slow-transition">Archive</p>
                             <img class="px-2" src="../assets/icons/arrow.svg" alt="arrow-icon">
                         </nuxt-link>
                     </li>
                 </ul>
-                <p>©2024</p>
+                <p class="lg:block hidden">©2024</p>
             </nav>
         </header>
 
         <div class="flex justify-between">
-            <div class="w-1/2"></div>
+            <div class="lg:w-1/2"></div>
             <slot />
         </div>
     </div>

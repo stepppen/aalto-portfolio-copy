@@ -2,12 +2,13 @@
         <Head>
             <Title>About</Title>
         </Head>
-    <div class="flex justify-center inset-0 absolute z-0 left-48">
-        <div class="my-auto z-50">
+    <div class="flex flex-col lg:flex-row justify-center inset-0 lg:left-48 px-4">
+        <div class="lg:my-auto">
             <ThreeNew />
         </div>
-        <div class="flex flex-col w-1/3 my-auto">
-            <p class="text-justify">I am currently studying interaction design at the Zurich University of the Arts in 
+        <div class="w-16"></div>
+        <div class="flex flex-col w-full md:w-1/2 lg:w-1/4  my-auto md:inset-0">
+            <p class="text-justify md:justify-center">I am currently studying interaction design at the Zurich University of the Arts in 
                 Switzerland. Looking to further my understanding of service and product design while continuing to explore 
                 interdisciplinary learning. Feel free to contact me under:
             </p>

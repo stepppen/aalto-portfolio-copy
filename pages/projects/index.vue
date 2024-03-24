@@ -4,7 +4,7 @@
     </Head>
     <!-- <div class="w-1/4"></div> -->
     <div>
-        <div class='xl:w-full grid grid-cols-3 2xl:grid-cols-4 gap-4 p-4'>
+        <div class='xl:w-full grid lg:grid-cols-3 2xl:grid-cols-4 gap-4 p-4'>
             <div v-for="p in project">
                 <ProjectCard :project="p"/>
             </div>
@@ -13,12 +13,10 @@
 </template>
 
 <script setup>
-// import { ProjectCard } from '#build/components';
 import jsonData from './assets/projects/projects.json';
 
     const project = jsonData;
     console.log(project.title);
-    // console.log(project[0].id)
 
     useHead({
         title: 'Projects',
