@@ -2,7 +2,7 @@
         <Head>
             <Title>About</Title>
         </Head>
-    <div class="flex flex-col lg:flex-row justify-center inset-0 lg:left-48 px-4">
+    <div class="flex flex-col lg:flex-row justify-center inset-0 lg:left-48 px-4 absolute">
         <div class="lg:my-auto">
             <ThreeNew />
         </div>

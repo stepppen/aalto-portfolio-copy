@@ -62,7 +62,7 @@ body {
 
     @screen lg {
       .dynamic-nav{
-        @apply flex-col h-screen;
+        @apply flex-col h-screen max-w-[15rem];
       }
       .project-text{
         @apply w-3/4
@@ -70,6 +70,26 @@ body {
       .dynamic-header{
         @apply fixed h-screen w-2/3
       }
+    }
+
+    /* .text-grid{
+      @apply grid-cols-1 
+    }
+    .project-text{
+      @apply w-full
+    }
+    .dynamic-nav{
+      @apply relative p-4 flex justify-between z-50;
+    }
+    .dynamic-header{
+      @apply relative h-auto
+    } */
+
+    .dynamic-nav{
+      @apply relative p-4 flex justify-between z-50;
+    }
+    .project-text{
+      @apply w-full
     }
 
 
