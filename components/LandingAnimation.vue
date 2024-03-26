@@ -56,21 +56,12 @@ onBeforeUnmount(() => {
   window.removeEventListener('mousemove', onMouseMove);
 });
 
-// init();
-// animate();
 function loadModel() {
   const gltfLoader = new GLTFLoader();
   const group = new THREE.Group();
   gltfLoader.load('/three/abstract.glb', (gltf) => {
     gltf.scene.name = 'gltfModel';
     gltf.scene.rotateY(-(Math.PI/4));
-    // const boxBoundaries = new THREE.Box3().setFromObject(gltf.scene);
-    // const center = new THREE.Vector3();
-    // boxBoundaries.getCenter(center);
-    // // gltf.scene.position.sub(center);
-    // center.y += 0.5;
-    // gltf.scene.worldToLocal(center);
-    // group.add(gltf.scene)
     scene.add(gltf.scene)
   });
 }
@@ -81,17 +72,11 @@ function init() {
     camera = new THREE.PerspectiveCamera( 75, width / height, 0.1, 1000 );
     camera.position.y = 0;
     camera.position.z = 5;
-
     scene = new THREE.Scene();
     scene.background = new THREE.Color( 0, 0, 0 );
 
-
     const ambientLight = new THREE.AmbientLight(0xffffff, 1)
     scene.add(ambientLight)
-
-    // const pointLight1 = new THREE.PointLight( 0xffffff, 3, 0, 0 );
-    // pointLight1.position.set( 500, 500, 500 );
-    // scene.add( pointLight1 );
 
     const pointLight2 = new THREE.PointLight( 0xffffff, 1, 0, 0 );
     pointLight2.position.set( - 500, - 500, - 500 );
@@ -103,7 +88,6 @@ function init() {
     effect = new AsciiEffect( renderer, '  .:-+*=%@#', { invert: true } );
     effect.setSize( width, height );
     effect.domElement.style.color = '#4583B2';
-    // effect.domElement.style.backgroundColor = 'black';
     asciiEffectContainer.value.appendChild( effect.domElement );
 
     window.addEventListener( 'resize', onWindowResize );
