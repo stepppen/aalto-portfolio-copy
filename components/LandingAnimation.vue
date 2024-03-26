@@ -27,12 +27,21 @@ const gltfLoader = new GLTFLoader()
 let isLandingPage = false;
 const route = useRoute();
 let center = new THREE.Vector3();
+let cachedTargetQuaternion = new THREE.Quaternion();
+
+const onMouseMove = (event) => {
+      pointer.x = ((event.clientX / width)-1.5)/4;
+      pointer.y = ((event.clientY / height)-0.5)/6;
+
+  }
+
 
 onMounted(() => {
   isLandingPage = route.path === '/';
   if (isLandingPage) {
     init();
     loadModel();
+    window.addEventListener('mousemove', onMouseMove)
     animate();
   }
 });
@@ -41,6 +50,10 @@ onUnmounted(() => {
   if (isLandingPage) {
     isLandingPage = false;
   }
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('mousemove', onMouseMove);
 });
 
 // init();
@@ -107,48 +120,80 @@ function onWindowResize() {
 
 }
 
-//
-
 function animate() {
-  // const pointer = new THREE.Vector2();
-  const onMouseMove = (event) => {
-      pointer.x = ((event.clientX / width)-1.5)/4;
-      pointer.y = ((event.clientY / height)-0.5)/6;
+  let scenePosition = 0;  // Initial position of the scene
+  let direction = 1;      // Initial animation direction: 1 for forward, -1 for backward
 
-  }
-  window.addEventListener('mousemove', onMouseMove)
-
-  function render(){
-    const gltfModelGroup = scene.getObjectByName('gltfModel');
-    if (gltfModelGroup) {
+  function render() {
+  const gltfModelGroup = scene.getObjectByName('gltfModel');
+  if (gltfModelGroup) {
     const gltfModel = gltfModelGroup.children[0];
-      const targetRotation = {
-        x: pointer.y,
-        y: pointer.x
-      };
-      gltfModel.rotation.x = MathUtils.lerp(gltfModel.rotation.x, targetRotation.x, 0.1); 
-      gltfModel.rotation.y = MathUtils.lerp(gltfModel.rotation.y, targetRotation.y, 0.1); 
 
-      // Accumulate constant rotation increment
-      rotationIncrementMouse += rotationIncrementConstant * constantRotationDirection;
-      
-      // Check if rotationIncrementMouse crosses the threshold of 0.05 and direction hasn't been switched yet
-      if (Math.abs(rotationIncrementMouse) >= 0.05 && !directionSwitched) {
-          // Change direction of constant rotation
-          constantRotationDirection *= -1;
-          directionSwitched = true; // Update flag to indicate direction switch
-      } else if (Math.abs(rotationIncrementMouse) < 0.05) {
-          directionSwitched = false; // Reset flag if rotationIncrementMouse goes below threshold
-      }
-          gltfModel.rotation.y += rotationIncrementMouse * 0.5;
-      }
-      
-      effect.render(scene, camera);
-      requestAnimationFrame(render);
+    // Check if the target rotation has changed
+    if (cachedTargetQuaternion.x !== pointer.x || cachedTargetQuaternion.y !== pointer.y) {
+      cachedTargetQuaternion.setFromEuler(new THREE.Euler(pointer.y, pointer.x, 0, 'XYZ'));
+    }
+
+    // Apply cached target rotation
+    gltfModel.quaternion.slerp(cachedTargetQuaternion, 0.1);
+
+    // Apply back and forth animation to the scene along the x-axis
+    const maxPosition = 0.5;  // Maximum position for the animation
+    const speed = 0.0005;       // Animation speed
+    scenePosition += direction * speed;
+
+    if (Math.abs(scenePosition) >= maxPosition) {
+      direction *= -1;  // Reverse direction
+    }
+
+    scene.rotation.y = scenePosition;
+
+    effect.render(scene, camera);
+  }
+
+    requestAnimationFrame(render);
   }
 
   render();
-
 }
+
+
+
+//
+
+// function animate() {
+//   function render(){
+//     const gltfModelGroup = scene.getObjectByName('gltfModel');
+//     if (gltfModelGroup) {
+//     const gltfModel = gltfModelGroup.children[0];
+
+//       const targetRotation = {
+//         x: pointer.y,
+//         y: pointer.x
+//       };
+//       gltfModel.rotation.x = MathUtils.lerp(gltfModel.rotation.x, targetRotation.x, 0.1); 
+//       gltfModel.rotation.y = MathUtils.lerp(gltfModel.rotation.y, targetRotation.y, 0.1); 
+
+//       // Accumulate constant rotation increment
+//       rotationIncrementMouse += rotationIncrementConstant * constantRotationDirection;
+      
+//       // Check if rotationIncrementMouse crosses the threshold of 0.05 and direction hasn't been switched yet
+//       if (Math.abs(rotationIncrementMouse) >= 0.05 && !directionSwitched) {
+//           // Change direction of constant rotation
+//           constantRotationDirection *= -1;
+//           directionSwitched = true; // Update flag to indicate direction switch
+//       } else if (Math.abs(rotationIncrementMouse) < 0.05) {
+//           directionSwitched = false; // Reset flag if rotationIncrementMouse goes below threshold
+//       }
+//           gltfModel.rotation.y += rotationIncrementMouse * 0.5;
+//       }
+      
+//       effect.render(scene, camera);
+//       requestAnimationFrame(render);
+//   }
+
+//   render();
+
+// }
 
 </script>
