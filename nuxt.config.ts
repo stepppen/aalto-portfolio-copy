@@ -6,8 +6,7 @@ export default defineNuxtConfig({
   static: true,
   modules: [
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/google-fonts',
-    '@tresjs/nuxt'
+    '@nuxtjs/google-fonts'
   ],
   head: {
     title: 'Vedunov',

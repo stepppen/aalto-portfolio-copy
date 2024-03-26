@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <!-- <div>
       <LandingAnimation />
-    </div>
+    </div> -->
     <div class="flex inset-0 absolute lg:left-48">
       <div class="hidden lg:flex flex-col justify-center w-custom-50">
         <img v-if="hoveredProject" :src="hoveredProject ? hoveredProject.thumb : project.thumb" alt="project img" loading="lazy" class="object-cover min-w-full aspect-[4/3]">
