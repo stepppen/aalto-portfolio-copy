@@ -1,5 +1,5 @@
 <template>
-    <div ref="asciiEffectContainer"></div>
+  <div ref="asciiEffectContainer"></div>
 </template>
 <script setup>
 import * as THREE from 'three';
@@ -35,122 +35,122 @@ let center = new THREE.Vector3();
 let cachedTargetQuaternion = new THREE.Quaternion();
 
 const onMouseMove = (event) => {
-      pointer.x = ((event.clientX / width)-1.5)/4;
-      // pointer.y = ((event.clientY / height)-0.5)/4;
-  }
+    pointer.x = ((event.clientX / width)-1.5)/4;
+    // pointer.y = ((event.clientY / height)-0.5)/4;
+}
 
 onMounted(() => {
-  isAboutPage = route.path === '/about';
-  if (isAboutPage) {
-    init();
-    loadModel();
-    window.addEventListener('mousemove', onMouseMove)
-    animate();
-  }
+isAboutPage = route.path === '/about';
+if (isAboutPage) {
+  init();
+  loadModel();
+  window.addEventListener('mousemove', onMouseMove)
+  animate();
+}
 });
 
 onUnmounted(() => {
-  if (isAboutPage) {
-    isAboutPage = false;
-  }
+if (isAboutPage) {
+  isAboutPage = false;
+}
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener('mousemove', onMouseMove);
+window.removeEventListener('mousemove', onMouseMove);
 });
 
 
 function loadModel() {
-  const gltfLoader = new GLTFLoader();
-  const group = new THREE.Group();
-  gltfLoader.load('/three/poly.glb', (gltf) => {
-    gltf.scene.name = 'gltfModel';
-    // gltf.scene.rotateX(Math.PI/ 8);
+const gltfLoader = new GLTFLoader();
+const group = new THREE.Group();
+gltfLoader.load('/three/poly2.glb', (gltf) => {
+  gltf.scene.name = 'gltfModel';
+  // gltf.scene.rotateX(Math.PI/ 8);
 
-    const boxBoundaries = new THREE.Box3().setFromObject(gltf.scene);
-    const center = new THREE.Vector3();
-    boxBoundaries.getCenter(center);
-    center.y += 0.5;
-    gltf.scene.worldToLocal(center);
-    group.add(gltf.scene)
-    scene.add(group)
-  });
+  // const boxBoundaries = new THREE.Box3().setFromObject(gltf.scene);
+  // const center = new THREE.Vector3();
+  // boxBoundaries.getCenter(center);
+  // center.y += 0.5;
+  // gltf.scene.worldToLocal(center);
+  // group.add(gltf.scene)
+  scene.add(gltf.scene)
+});
 }
 
 function init() {
-    camera = new THREE.PerspectiveCamera( 30, width / height, 0.1, 1000 );
-    camera.position.y = 1.2;
-    camera.position.z = 1.2;
+  camera = new THREE.PerspectiveCamera( 30, width / height, 0.1, 1000 );
+  camera.position.y = 1.2;
+  camera.position.z = 1.2;
 
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color( 0, 0, 0 );
+  scene = new THREE.Scene();
+  // scene.background = new THREE.Color( 0, 0, 0 );
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.1)
-    scene.add(ambientLight)
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.1)
+  scene.add(ambientLight)
 
-    const pointLight1 = new THREE.PointLight( 0xffffff, 3, 0, 0 );
-    pointLight1.position.set( 500, 500, 500 );
-    scene.add( pointLight1 );
+  const pointLight1 = new THREE.PointLight( 0xffffff, 3, 0, 0 );
+  pointLight1.position.set( 500, 500, 500 );
+  scene.add( pointLight1 );
 
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize( width, height );
+  renderer = new THREE.WebGLRenderer();
+  renderer.setSize( width, height );
 
-    effect = new AsciiEffect( renderer, '   .:-+*=%@#', { invert: true } );
-    effect.setSize( width, height );
-    effect.domElement.style.color = '#4583B2';
-  
-    effect.domElement.style.backgroundColor = "#020617";
-    asciiEffectContainer.value.appendChild( effect.domElement );
-    window.addEventListener( 'resize', onWindowResize );
+  effect = new AsciiEffect( renderer, '   .:-+*=%@#', { invert: true } );
+  effect.setSize( width, height );
+  effect.domElement.style.color = '#4583B2';
 
-}
-
-function onWindowResize() {
-
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-
-    renderer.setSize( width, height );
-    effect.setSize( width, height );
+  // effect.domElement.style.backgroundColor = "#020617";
+  asciiEffectContainer.value.appendChild( effect.domElement );
+  // window.addEventListener( 'resize', onWindowResize );
 
 }
+
+// function onWindowResize() {
+
+//   camera.aspect = width / height;
+//   camera.updateProjectionMatrix();
+
+//   renderer.setSize( width, height );
+//   effect.setSize( width, height );
+
+// }
 
 //
 
 function animate() {
-  let scenePosition = 0;
-  let direction = 1; 
+let scenePosition = 0;
+let direction = 1; 
 
-  function render() {
-  const gltfModelGroup = scene.getObjectByName('gltfModel');
-  if (gltfModelGroup) {
-    const gltfModel = gltfModelGroup.children[0];
+function render() {
+const gltfModelGroup = scene.getObjectByName('gltfModel');
+if (gltfModelGroup) {
+  const gltfModel = gltfModelGroup.children[0];
 
-    // Check if the target rotation has changed
-    if (cachedTargetQuaternion.x !== pointer.x || cachedTargetQuaternion.y !== pointer.y) {
-      cachedTargetQuaternion.setFromEuler(new THREE.Euler(pointer.y, pointer.x, 0, 'XYZ'));
-    }
-
-    // Apply cached target rotation
-    gltfModel.quaternion.slerp(cachedTargetQuaternion, 0.1);
-
-    // Apply back and forth animation to the scene along the x-axis
-    const maxPosition = 0.5;  // Maximum position for the animation
-    const speed = 0.0005;       // Animation speed
-    scenePosition += direction * speed;
-
-    if (Math.abs(scenePosition) >= maxPosition) {
-      direction *= -1;  // Reverse direction
-    }
-
-    scene.rotation.y = scenePosition;
-
-    effect.render(scene, camera);
+  // Check if the target rotation has changed
+  if (cachedTargetQuaternion.x !== pointer.x || cachedTargetQuaternion.y !== pointer.y) {
+    cachedTargetQuaternion.setFromEuler(new THREE.Euler(pointer.y, pointer.x, 0, 'XYZ'));
   }
 
-    requestAnimationFrame(render);
+  // Apply cached target rotation
+  gltfModel.quaternion.slerp(cachedTargetQuaternion, 0.1);
+
+  // Apply back and forth animation to the scene along the x-axis
+  const maxPosition = 0.5;  // Maximum position for the animation
+  const speed = 0.0005;       // Animation speed
+  scenePosition += direction * speed;
+
+  if (Math.abs(scenePosition) >= maxPosition) {
+    direction *= -1;  // Reverse direction
   }
 
-    render();
+  scene.rotation.y = scenePosition;
+
+  effect.render(scene, camera);
+}
+
+  requestAnimationFrame(render);
+}
+
+  render();
 }
 </script>

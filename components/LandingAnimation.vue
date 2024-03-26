@@ -72,8 +72,9 @@ function init() {
     camera = new THREE.PerspectiveCamera( 75, width / height, 0.1, 1000 );
     camera.position.y = 0;
     camera.position.z = 5;
+
     scene = new THREE.Scene();
-    scene.background = new THREE.Color( 0, 0, 0 );
+    // scene.background = new THREE.Color( 0, 0, 0 );
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 1)
     scene.add(ambientLight)
@@ -88,21 +89,21 @@ function init() {
     effect = new AsciiEffect( renderer, '  .:-+*=%@#', { invert: true } );
     effect.setSize( width, height );
     effect.domElement.style.color = '#4583B2';
-    asciiEffectContainer.value.appendChild( effect.domElement );
+    asciiEffectContainer.value.appendChild( effect.domElement);
 
-    window.addEventListener( 'resize', onWindowResize );
-
-}
-
-function onWindowResize() {
-
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-
-    renderer.setSize( width, height );
-    effect.setSize( width, height );
+    // window.addEventListener( 'resize', onWindowResize );
 
 }
+
+// function onWindowResize() {
+
+//     camera.aspect = width / height;
+//     camera.updateProjectionMatrix();
+
+//     renderer.setSize( width, height );
+//     effect.setSize( width, height );
+
+// }
 
 function animate() {
   let scenePosition = 0;  // Initial position of the scene

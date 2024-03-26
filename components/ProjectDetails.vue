@@ -1,5 +1,5 @@
 <template>
-    <div class="lg:w-custom-80 overflow-hidden" >
+    <div lang="en" class="lg:w-custom-80 overflow-hidden" >
         <div class="aspect-[4/3] flex justify-center align-center overflow-hidden">
             <img :src="project.thumb" alt="project img" class="object-cover min-w-full">
         </div>
