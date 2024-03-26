@@ -36,10 +36,10 @@
                 </div>
             </div>
         </div>
-        <div v-if="project.process" class="h-96"></div>
+        <div class="h-48"></div>
 
         <!-- Process_01 -->
-        <div class="aspect-[16/9] flex justify-center align-center overflow-hidden">
+        <div v-if="project.video" class="aspect-[16/9] flex justify-center align-center overflow-hidden">
             <iframe v-if="project.videoNeuranect" src="https://www.youtube.com/embed/60ArR2pHCS4?si=p6_0hCMpdkbtN7p-" title="YouTube video player" frameborder="0" class="object-cover min-w-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             <iframe v-if="project.videoTsunComp" src="https://www.youtube.com/embed/KK_POE7b3FM?si=bdWUbyQ3XOBhkGbr" title="YouTube video player2" frameborder="0" class="object-cover min-w-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             <iframe v-if="project.videoZVV" src="https://www.youtube.com/embed/qb8BCE7JLU4?si=vXDeVmZpiaNSij23" title="YouTube video player" frameborder="0" class="object-cover min-w-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -47,7 +47,7 @@
             <!-- <img v-if="project.img1" :src="project.img1" alt="project img" class="object-cover min-w-full"> -->
         </div>
 
-        <div v-if="project.process" class="h-96"></div>
+        <div class="h-48"></div>
         <div v-if="project.process" class="grid text-grid">
             <div class="project-text">
                 <h3 class="heading-4 w-32 pb-4">Process</h3>
@@ -69,7 +69,7 @@
         </div>
 
         <!-- Process_02 -->
-        <div v-if="project.process" class="h-96"></div>
+        <div v-if="project.process" class="h-48"></div>
         <div v-if="project.processTwo" class="grid text-grid">
             <div></div>
             <div class="project-text">
@@ -96,7 +96,7 @@
 
 
         <!-- Solution & Learnings-->
-        <div v-if="project.solution" class="h-96"></div>
+        <div v-if="project.solution" class="h-48"></div>
         <div v-if="project.solution" class="grid text-grid">
             <div class="project-text">
                 <h3 class="heading-4 w-32 pb-4">Solution</h3>

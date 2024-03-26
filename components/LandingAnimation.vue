@@ -113,7 +113,7 @@ function animate() {
   // const pointer = new THREE.Vector2();
   const onMouseMove = (event) => {
       pointer.x = ((event.clientX / width)-1.5)/4;
-      pointer.y = ((event.clientY / height)-0.5)/4;
+      pointer.y = ((event.clientY / height)-0.5)/6;
 
   }
   window.addEventListener('mousemove', onMouseMove)
@@ -140,7 +140,7 @@ function animate() {
       } else if (Math.abs(rotationIncrementMouse) < 0.05) {
           directionSwitched = false; // Reset flag if rotationIncrementMouse goes below threshold
       }
-          gltfModel.rotation.y += rotationIncrementMouse;
+          gltfModel.rotation.y += rotationIncrementMouse * 0.5;
       }
       
       effect.render(scene, camera);

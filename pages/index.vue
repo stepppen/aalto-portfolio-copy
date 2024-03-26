@@ -8,6 +8,7 @@
         <div class="flex inset-0 absolute lg:left-48">
             <div class=" hidden lg:flex flex-col justify-center w-custom-50">
                 <img v-if="hoveredProject" :src="hoveredProject ? hoveredProject.thumb : project.thumb" alt="project img" loading="lazy" class="object-cover min-w-full aspect-[4/3]">
+                <!-- <img :src="project.thumb" alt="project img" loading="lazy" class="object-cover min-w-full aspect-[4/3]"> -->
             </div>  
             <div class="flex flex-col justify-center pl-8">
                 <div class="flex flex-col" v-for="p in project.slice(0,5)">
@@ -24,13 +25,24 @@
 
     // const largeBreakpoint = window.matchMedia("(min-width: 700px)")
 
-        const handleMouseOver = (project) => {
+    const handleMouseOver = (project) => {
         hoveredProject.value = project;
     };
 
     const handleMouseLeave = () => {
         hoveredProject.value = null;
     };
+
+    onMounted(() => {
+        // Preload project thumbnail images
+        project.forEach(p => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = p.thumb;
+            document.head.appendChild(link);
+        });
+    });
     
 </script>
 
