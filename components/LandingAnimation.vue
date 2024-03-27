@@ -68,51 +68,32 @@ function loadModel() {
 
 
 function init() {
-    camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+
+    camera = new THREE.PerspectiveCamera( 75, width / height, 0.1, 1000 );
     camera.position.y = 0;
     camera.position.z = 5;
 
     scene = new THREE.Scene();
+    // scene.background = new THREE.Color( 0, 0, 0 );
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-    scene.add(ambientLight);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1)
+    scene.add(ambientLight)
 
-    const pointLight2 = new THREE.PointLight(0xffffff, 1, 0, 0);
-    pointLight2.position.set(-500, -500, -500);
-    scene.add(pointLight2);
+    const pointLight2 = new THREE.PointLight( 0xffffff, 1, 0, 0 );
+    pointLight2.position.set( - 500, - 500, - 500 );
+    scene.add( pointLight2 );
 
     renderer = new THREE.WebGLRenderer();
-    renderer.setSize(width, height);
+    renderer.setSize( width, height );
 
-    effect = new AsciiEffect(renderer, '  .:-+*=%@#', { invert: true });
-    effect.setSize(width, height);
+    effect = new AsciiEffect( renderer, '  .:-+*=%@#', { invert: true } );
+    effect.setSize( width, height );
     effect.domElement.style.color = '#4583B2';
+    asciiEffectContainer.value.appendChild( effect.domElement);
 
-    asciiEffectContainer.value.appendChild(effect.domElement);
+    // window.addEventListener( 'resize', onWindowResize );
 
-    const observeAsciiCanvas = () => {
-        const targetNode = asciiEffectContainer.value;
-
-        const observer = new MutationObserver((mutationsList) => {
-            for (const mutation of mutationsList) {
-                if (mutation.type === 'childList') {
-                    const asciiCanvas = asciiEffectContainer.value.querySelector('canvas');
-                    if (asciiCanvas) {
-                        asciiCanvas.setAttribute('willReadFrequently', 'true');
-                        console.log('willReadFrequently attribute set to:', asciiCanvas.getAttribute('willReadFrequently'));
-                        observer.disconnect();
-                    }
-                }
-            }
-        });
-
-        const observerConfig = { childList: true };
-        observer.observe(targetNode, observerConfig);
-    };
-
-    setTimeout(observeAsciiCanvas, 1000);
 }
-
 
 // function onWindowResize() {
 

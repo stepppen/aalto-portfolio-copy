@@ -2,8 +2,8 @@
         <Head>
             <Title>Home</Title>
         </Head>
-        <div v-if="isWebsiteLoaded">
-            <LandingAnimation v-if="!landingAnimationStarted" @animationComplete="handleAnimationComplete" />
+        <div>
+            <LandingAnimation />
         </div>
         <!-- <div>
             <div ref="landingAnimationContainer"></div>
@@ -24,16 +24,8 @@
 <script setup>
     // import LandingAnimation from '../LazyThree.vue';
     import jsonData from './assets/projects/projects.json';
-    import LandingAnimation from '../components/LandingAnimation.vue';
     const project = jsonData;
     const hoveredProject = ref(null);
-
-    const isWebsiteLoaded = ref(false);
-    const landingAnimationStarted = ref(false);
-
-    const handleAnimationComplete = () => {
-        landingAnimationStarted.value = true;
-    };
 
     // const largeBreakpoint = window.matchMedia("(min-width: 700px)")
 
@@ -45,30 +37,20 @@
         hoveredProject.value = null;
     };
 
-
     onMounted(() => {
-  // Simulate website loading completion after a delay
-  setTimeout(() => {
-    isWebsiteLoaded.value = true;
-    preloadImages();
-  }, 2000); // Adjust the delay as needed
-});
 
-const preloadImages = () => {
-  project.forEach(p => {
-    const img = new Image();
-    img.src = p.thumb;
-  });
-};
-
-// Preload images using link preload with appropriate 'as' attribute
-project.forEach(p => {
-  const link = document.createElement('link');
-  link.rel = 'preload';
-  link.as = 'image';
-  link.href = p.thumb;
-  document.head.appendChild(link);
-});
+        // const script = document.createElement('script');
+        // script.src = '/components/LandingAnimation.vue';
+        // document.body.appendChild(script);
+        
+        project.forEach(p => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = p.thumb;
+            document.head.appendChild(link);
+        });
+    });
 
 
     
