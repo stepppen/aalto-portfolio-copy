@@ -47,7 +47,7 @@ body {
         @apply w-full
       }
       .dynamic-nav{
-        @apply relative p-4 flex justify-between z-50;
+        @apply relative p-4 flex justify-between z-10;
       }
       .dynamic-header{
         @apply relative h-auto
@@ -68,7 +68,7 @@ body {
         @apply w-3/4
       }
       .dynamic-header{
-        @apply fixed h-screen w-2/3
+        @apply fixed h-screen max-w-[15rem]
       }
     }
 
