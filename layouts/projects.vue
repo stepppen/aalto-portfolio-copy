@@ -26,7 +26,7 @@
         </header>
 
         <div class="flex justify-between justify-items-end p-4">
-            <div class="lg:w-1/4 z-50"></div>
+            <div class="lg:w-1/4"></div>
             <slot />
         </div>
     </div>

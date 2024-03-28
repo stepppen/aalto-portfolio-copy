@@ -26,7 +26,7 @@
 .thumb {
     aspect-ratio: 4/3;
     object-fit: cover;
-    height: 100%;
+    max-height: 100vh;
 }
 
 .overlay {
