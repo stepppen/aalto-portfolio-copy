@@ -115,7 +115,7 @@ function animate() {
   const cachedTargetQuaternion = new THREE.Quaternion();
   const maxPosition = 0.5;
   const speed = 0.0005;
-  const frameRate = 10; // Desired frame rate (e.g., 30 frames per second)
+  const frameRate = 20; // Desired frame rate (e.g., 30 frames per second)
 
   function render(currentTime) {
     const deltaTime = currentTime - lastRenderTime;
@@ -135,12 +135,12 @@ function animate() {
 
         gltfModel.quaternion.slerp(cachedTargetQuaternion, 0.1);
 
-        scenePosition += direction * speed;
-        if (Math.abs(scenePosition) >= maxPosition) {
-          direction *= -1;
-        }
+        // scenePosition += direction * speed;
+        // if (Math.abs(scenePosition) >= maxPosition) {
+        //   direction *= -1;
+        // }
 
-        scene.rotation.y = scenePosition;
+        scene.rotation.y += speed;
 
         effect.render(scene, camera);
       }
