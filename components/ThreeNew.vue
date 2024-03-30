@@ -15,7 +15,6 @@ const asciiEffectContainer = ref(null);
 let camera, scene, renderer, effect;
 let width = 600;
 let height = 600;
-let speed = 0.1
 let whereTo = 2
 const easingFactor = 0.05;
 let pointer = { x: 0, z: 0 };
@@ -25,6 +24,8 @@ let rotationIncrementConstant = 0.0001;
 let constantRotationDirection = 1;
 let directionSwitched = false;
 let lastMove = 0;
+const maxPosition = 0.5;  // Maximum position for the animation
+  const speed = 0.0005;  
 
 
 
@@ -140,8 +141,7 @@ if (gltfModelGroup) {
   gltfModel.quaternion.slerp(cachedTargetQuaternion, 0.1);
 
   // Apply back and forth animation to the scene along the x-axis
-  const maxPosition = 0.5;  // Maximum position for the animation
-  const speed = 0.0005;       // Animation speed
+       // Animation speed
   scenePosition += direction * speed;
 
   if (Math.abs(scenePosition) >= maxPosition) {
@@ -149,8 +149,14 @@ if (gltfModelGroup) {
 }
 
   scene.rotation.y = scenePosition;
+  let previousTime = 0;
+  const currentTime = performance.now();
+  const timeDiff = currentTime - previousTime;
 
-  effect.render(scene, camera);
+  if (timeDiff > 33.33) {
+    effect.render(scene, camera);
+    previousTime = currentTime;
+  }
 }
 
   requestAnimationFrame(render);

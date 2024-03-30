@@ -132,7 +132,15 @@ function animate() {     // Initial animation direction: 1 for forward, -1 for b
 
     scene.rotation.y = scenePosition;
 
+  let previousTime = 0;
+  const currentTime = performance.now();
+  const timeDiff = currentTime - previousTime;
+
+   
+  if (timeDiff > 33.33) {
     effect.render(scene, camera);
+    previousTime = currentTime;
+  }
   }
 
     requestAnimationFrame(render);
@@ -176,44 +184,6 @@ function animate() {     // Initial animation direction: 1 for forward, -1 for b
 //   }
 
 //   render();
-// }
-
-
-//
-
-// function animate() {
-//   function render(){
-//     const gltfModelGroup = scene.getObjectByName('gltfModel');
-//     if (gltfModelGroup) {
-//     const gltfModel = gltfModelGroup.children[0];
-
-//       const targetRotation = {
-//         x: pointer.y,
-//         y: pointer.x
-//       };
-//       gltfModel.rotation.x = MathUtils.lerp(gltfModel.rotation.x, targetRotation.x, 0.1); 
-//       gltfModel.rotation.y = MathUtils.lerp(gltfModel.rotation.y, targetRotation.y, 0.1); 
-
-//       // Accumulate constant rotation increment
-//       rotationIncrementMouse += rotationIncrementConstant * constantRotationDirection;
-      
-//       // Check if rotationIncrementMouse crosses the threshold of 0.05 and direction hasn't been switched yet
-//       if (Math.abs(rotationIncrementMouse) >= 0.05 && !directionSwitched) {
-//           // Change direction of constant rotation
-//           constantRotationDirection *= -1;
-//           directionSwitched = true; // Update flag to indicate direction switch
-//       } else if (Math.abs(rotationIncrementMouse) < 0.05) {
-//           directionSwitched = false; // Reset flag if rotationIncrementMouse goes below threshold
-//       }
-//           gltfModel.rotation.y += rotationIncrementMouse * 0.5;
-//       }
-      
-//       effect.render(scene, camera);
-//       requestAnimationFrame(render);
-//   }
-
-//   render();
-
 // }
 
 </script>
