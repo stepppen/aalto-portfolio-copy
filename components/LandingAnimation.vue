@@ -41,7 +41,7 @@ onMounted(() => {
   if (isLandingPage) {
     init();
     loadModel();
-    // window.addEventListener('mousemove', onMouseMove)
+    window.addEventListener('mousemove', onMouseMove)
     animate();
   }
 });
@@ -52,9 +52,9 @@ onUnmounted(() => {
   }
 });
 
-// onBeforeUnmount(() => {
-//   window.removeEventListener('mousemove', onMouseMove);
-// });
+onBeforeUnmount(() => {
+  window.removeEventListener('mousemove', onMouseMove);
+});
 
 function loadModel() {
   const gltfLoader = new GLTFLoader();
@@ -70,7 +70,7 @@ function loadModel() {
 
 function init() {
 
-    camera = new THREE.PerspectiveCamera( 40, width / height, 0.1, 1000 );
+    camera = new THREE.PerspectiveCamera( 40, width / height, 0.1, 10);
     camera.position.y = 0;
     camera.position.z = 10;
 

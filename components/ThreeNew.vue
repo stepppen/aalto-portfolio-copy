@@ -35,14 +35,14 @@ const route = useRoute();
 let center = new THREE.Vector3();
 let cachedTargetQuaternion = new THREE.Quaternion();
 
-// const onMouseMove = (event) => {
-//   if(Date.now() - lastMove > 50) {
-//     pointer.x = ((event.clientX / width)-1.5)/4;
-//     lastMove = Date.now();
-//   }
+const onMouseMove = (event) => {
+  if(Date.now() - lastMove > 50) {
+    pointer.x = ((event.clientX / width)-1.5)/4;
+    lastMove = Date.now();
+  }
    
-//     // pointer.y = ((event.clientY / height)-0.5)/4;
-// }
+    // pointer.y = ((event.clientY / height)-0.5)/4;
+}
 // render();
 onMounted(() => {
 isAboutPage = route.path === '/about';
@@ -50,7 +50,7 @@ if (isAboutPage) {
   init();
   loadModel();
   animate();
-  // window.addEventListener('mousemove', onMouseMove)
+  window.addEventListener('mousemove', onMouseMove)
 }
 });
 
@@ -60,9 +60,9 @@ if (isAboutPage) {
 }
 });
 
-// onBeforeUnmount(() => {
-// window.removeEventListener('mousemove', onMouseMove);
-// });
+onBeforeUnmount(() => {
+window.removeEventListener('mousemove', onMouseMove);
+});
 
 
 function loadModel() {
@@ -83,15 +83,15 @@ gltfLoader.load('/three/poly2.glb', (gltf) => {
 }
 
 function init() {
-  camera = new THREE.PerspectiveCamera( 30, width / height, 0.1, 1000 );
+  camera = new THREE.PerspectiveCamera( 30, width / height, 0.1, 2);
   camera.position.y = 1.2;
   camera.position.z = 1.2;
 
   scene = new THREE.Scene();
   // scene.background = new THREE.Color( 0, 0, 0 );
 
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.1)
-  scene.add(ambientLight)
+  // const ambientLight = new THREE.AmbientLight(0xffffff, 0.1)
+  // scene.add(ambientLight)
 
   const pointLight1 = new THREE.PointLight( 0xffffff, 3, 0, 0 );
   pointLight1.position.set( 500, 500, 500 );
