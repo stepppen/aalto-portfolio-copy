@@ -111,16 +111,18 @@ function animate() {
   let scenePosition = 0;
   let direction = 1;
   let lastRenderTime = performance.now();
+  let frameRate = 30; // Desired frame rate (e.g., 30 frames per second)
+  let frameTime = 1000 / frameRate; // Time per frame in milliseconds
 
   const cachedTargetQuaternion = new THREE.Quaternion();
   const maxPosition = 0.5;
   const speed = 0.0005;
-  const frameRate = 20; // Desired frame rate (e.g., 30 frames per second)
-
-  function render(currentTime) {
+  
+  function render() {
+    const currentTime = performance.now();
     const deltaTime = currentTime - lastRenderTime;
 
-    if (deltaTime > 1000 / frameRate) {
+    if (deltaTime >= frameTime) {
       lastRenderTime = currentTime;
 
       const gltfModelGroup = scene.getObjectByName('gltfModel');
@@ -135,12 +137,12 @@ function animate() {
 
         gltfModel.quaternion.slerp(cachedTargetQuaternion, 0.1);
 
-        // scenePosition += direction * speed;
-        // if (Math.abs(scenePosition) >= maxPosition) {
-        //   direction *= -1;
-        // }
+        scenePosition += direction * speed;
+        if (Math.abs(scenePosition) >= maxPosition) {
+          direction *= -1;
+        }
 
-        scene.rotation.y += speed;
+        scene.rotation.y = scenePosition;
 
         effect.render(scene, camera);
       }
@@ -149,8 +151,9 @@ function animate() {
     requestAnimationFrame(render);
   }
 
-  render(performance.now());
+  render();
 }
+
 
 
 // function animate() {
