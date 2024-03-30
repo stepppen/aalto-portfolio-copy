@@ -3,14 +3,19 @@
             <Title>Home</Title>
         </Head>
         <div>
-            <LandingAnimation />
+            <!-- <LandingAnimation :class="{ 'semi-transparent': hoveredProject }"  /> -->
+            <transition name="defaultAnimation">
+                    <LandingAnimation :class="{ 'semi-transparent': hoveredProject }"  />
+            </transition>
         </div>
         <!-- <div>
             <div ref="landingAnimationContainer"></div>
         </div> -->
         <div class="flex inset-0 absolute lg:left-48">
             <div class=" hidden lg:flex flex-col justify-center w-custom-50">
-                <img v-if="hoveredProject" :src="hoveredProject ? hoveredProject.thumb : project.thumb" alt="project img" loading="lazy" class="object-cover min-w-full aspect-[4/3]">
+                <transition name="image">
+                    <img v-if="hoveredProject" :src="hoveredProject ? hoveredProject.thumb : project.thumb" alt="project img" loading="lazy" class="object-cover min-w-full aspect-[4/3] fade-in">
+                </transition>
                 <!-- <img :src="project.thumb" alt="project img" loading="lazy" class="object-cover min-w-full aspect-[4/3]"> -->
             </div>  
             <div class="flex flex-col justify-center pl-8">
@@ -60,5 +65,46 @@
 .landing-img{
     width: 220px;
     transition: 0.3s ease;
+}
+.image-enter-from,
+.image-leave-to{
+    opacity: 0;
+}
+.image-enter-to,
+.image-leave-from{
+    opacity: 1;
+}
+.image-enter-active{
+    transition: opacity 0.5s ease-out;
+}
+
+.image-leave-active{
+    transition: opacity 0.2s ease-out;
+}
+
+
+.semi-transparent {
+  opacity: 0.5; /* Opacity when hovered over */
+  transition: 0.5s ease; /* Transition for both entering and leaving hover */
+}
+
+.image-enter-from,
+.image-leave-to {
+  opacity: 0;
+}
+
+.image-enter-to,
+.image-leave-from {
+  opacity: 1;
+}
+
+.image-enter-active {
+    // transition-delay: 3s;
+    transition: opacity 0.1s ease-out;
+}
+
+.image-leave-active {
+    // transition-delay: 3s;
+  transition: opacity 0.2s ease-out;
 }
 </style>

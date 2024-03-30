@@ -24,6 +24,7 @@ let rotationIncrementMouse = 0;
 let rotationIncrementConstant = 0.0001;
 let constantRotationDirection = 1;
 let directionSwitched = false;
+let lastMove = 0;
 
 
 
@@ -34,18 +35,22 @@ const route = useRoute();
 let center = new THREE.Vector3();
 let cachedTargetQuaternion = new THREE.Quaternion();
 
-const onMouseMove = (event) => {
-    pointer.x = ((event.clientX / width)-1.5)/4;
-    // pointer.y = ((event.clientY / height)-0.5)/4;
-}
-
+// const onMouseMove = (event) => {
+//   if(Date.now() - lastMove > 50) {
+//     pointer.x = ((event.clientX / width)-1.5)/4;
+//     lastMove = Date.now();
+//   }
+   
+//     // pointer.y = ((event.clientY / height)-0.5)/4;
+// }
+// render();
 onMounted(() => {
 isAboutPage = route.path === '/about';
 if (isAboutPage) {
   init();
   loadModel();
-  window.addEventListener('mousemove', onMouseMove)
   animate();
+  // window.addEventListener('mousemove', onMouseMove)
 }
 });
 
@@ -55,9 +60,9 @@ if (isAboutPage) {
 }
 });
 
-onBeforeUnmount(() => {
-window.removeEventListener('mousemove', onMouseMove);
-});
+// onBeforeUnmount(() => {
+// window.removeEventListener('mousemove', onMouseMove);
+// });
 
 
 function loadModel() {
@@ -141,7 +146,7 @@ if (gltfModelGroup) {
 
   if (Math.abs(scenePosition) >= maxPosition) {
     direction *= -1;  // Reverse direction
-  }
+}
 
   scene.rotation.y = scenePosition;
 
@@ -153,4 +158,9 @@ if (gltfModelGroup) {
 
   render();
 }
+
+// function render() {
+//   requestAnimationFrame(render);
+//   effect.render(scene, camera);
+// }
 </script>
