@@ -5,7 +5,7 @@
         <div>
             <!-- <LandingAnimation :class="{ 'semi-transparent': hoveredProject }"  /> -->
             <transition name="defaultAnimation">
-                    <LandingAnimation :class="{ 'semi-transparent': hoveredProject }"  />
+                    <LandingAnimation :class="{ 'semi-transparent': hoveredProject }"/>
             </transition>
         </div>
         <!-- <div>
@@ -83,9 +83,12 @@
 }
 
 
+.alpha-80{
+    opacity: 0.8;
+}
 .semi-transparent {
-  opacity: 0.5; /* Opacity when hovered over */
-  transition: 0.5s ease; /* Transition for both entering and leaving hover */
+  opacity: 0.4; /* Opacity when hovered over */
+  transition: 0.3s ease; /* Transition for both entering and leaving hover */
 }
 
 .image-enter-from,

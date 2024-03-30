@@ -89,7 +89,8 @@ function init() {
 
     effect = new AsciiEffect( renderer, '  .:-+*=%@#', { invert: true } );
     effect.setSize( width, height );
-    effect.domElement.style.color = '#4583B2';
+    // effect.domElement.style.color = '#4583B2';
+    effect.domElement.style.color = "rgb(148 163 184)";
     asciiEffectContainer.value.appendChild( effect.domElement);
 
     // window.addEventListener( 'resize', onWindowResize );
@@ -107,41 +108,87 @@ function init() {
 // }
 
 function animate() {
-  let scenePosition = 0;  // Initial position of the scene
-  let direction = 1;      // Initial animation direction: 1 for forward, -1 for backward
+  let scenePosition = 0;
+  let direction = 1;
+  let lastRenderTime = performance.now();
 
-  function render() {
-  const gltfModelGroup = scene.getObjectByName('gltfModel');
-  if (gltfModelGroup) {
-    const gltfModel = gltfModelGroup.children[0];
+  const cachedTargetQuaternion = new THREE.Quaternion();
+  const maxPosition = 0.5;
+  const speed = 0.0005;
+  const frameRate = 10; // Desired frame rate (e.g., 30 frames per second)
 
-    // Check if the target rotation has changed
-    if (cachedTargetQuaternion.x !== pointer.x || cachedTargetQuaternion.y !== pointer.y) {
-      cachedTargetQuaternion.setFromEuler(new THREE.Euler(pointer.y, pointer.x, 0, 'XYZ'));
+  function render(currentTime) {
+    const deltaTime = currentTime - lastRenderTime;
+
+    if (deltaTime > 1000 / frameRate) {
+      lastRenderTime = currentTime;
+
+      const gltfModelGroup = scene.getObjectByName('gltfModel');
+
+      if (gltfModelGroup) {
+        const gltfModel = gltfModelGroup.children[0];
+
+        if (pointer.hasChanged) {
+          cachedTargetQuaternion.setFromEuler(new THREE.Euler(pointer.y, pointer.x, 0, 'XYZ'));
+          pointer.hasChanged = false;
+        }
+
+        gltfModel.quaternion.slerp(cachedTargetQuaternion, 0.1);
+
+        scenePosition += direction * speed;
+        if (Math.abs(scenePosition) >= maxPosition) {
+          direction *= -1;
+        }
+
+        scene.rotation.y = scenePosition;
+
+        effect.render(scene, camera);
+      }
     }
-
-    // Apply cached target rotation
-    gltfModel.quaternion.slerp(cachedTargetQuaternion, 0.1);
-
-    // Apply back and forth animation to the scene along the x-axis
-    const maxPosition = 0.5;  // Maximum position for the animation
-    const speed = 0.0005;       // Animation speed
-    scenePosition += direction * speed;
-
-    if (Math.abs(scenePosition) >= maxPosition) {
-      direction *= -1;  // Reverse direction
-    }
-
-    scene.rotation.y = scenePosition;
-
-    effect.render(scene, camera);
-  }
 
     requestAnimationFrame(render);
   }
 
-  render();
+  render(performance.now());
 }
+
+
+// function animate() {
+//   let scenePosition = 0;  // Initial position of the scene
+//   let direction = 1;      // Initial animation direction: 1 for forward, -1 for backward
+
+//   function render() {
+//   const gltfModelGroup = scene.getObjectByName('gltfModel');
+//   if (gltfModelGroup) {
+//     const gltfModel = gltfModelGroup.children[0];
+
+//     // Check if the target rotation has changed
+//     if (cachedTargetQuaternion.x !== pointer.x || cachedTargetQuaternion.y !== pointer.y) {
+//       cachedTargetQuaternion.setFromEuler(new THREE.Euler(pointer.y, pointer.x, 0, 'XYZ'));
+//     }
+
+//     // Apply cached target rotation
+//     gltfModel.quaternion.slerp(cachedTargetQuaternion, 0.1);
+
+//     // Apply back and forth animation to the scene along the x-axis
+//     const maxPosition = 0.5;  // Maximum position for the animation
+//     const speed = 0.0005;       // Animation speed
+//     scenePosition += direction * speed;
+
+//     if (Math.abs(scenePosition) >= maxPosition) {
+//       direction *= -1;  // Reverse direction
+//     }
+
+//     scene.rotation.y = scenePosition;
+
+//     effect.render(scene, camera);
+//   }
+
+//     requestAnimationFrame(render);
+//   }
+
+//   render();
+// }
 
 
 
