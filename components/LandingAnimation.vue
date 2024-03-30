@@ -114,8 +114,8 @@ function animate() {
 
   const cachedTargetQuaternion = new THREE.Quaternion();
   const maxPosition = 0.5;
-  const speed = 0.0005;
-  const frameRate = 10; // Desired frame rate (e.g., 30 frames per second)
+  const speed = 0.0009;
+  const frameRate = 25; // Desired frame rate (e.g., 30 frames per second)
 
   function render(currentTime) {
     const deltaTime = currentTime - lastRenderTime;
