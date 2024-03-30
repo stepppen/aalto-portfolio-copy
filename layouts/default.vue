@@ -35,24 +35,24 @@
     </div>
 </template>
 
-<script>
+<script setup>
 let hover = ref(null);
 let showHeader = ref(false);
 
-onMounted(() => {
-      // Set showHeader to true after a short delay to trigger the transition
-    //   showHeader.value = true;
-      setTimeout(() => {
-        showHeader.value = true;
-      }, 100);
+// onMounted(() => {
+//       // Set showHeader to true after a short delay to trigger the transition
+//     //   showHeader.value = true;
+//       setTimeout(() => {
+//         showHeader.value = true;
+//       }, 100);
       
 
-setTimeout(() => {
-        if (headerRef.value) {
-          headerRef.value.classList.add('slide-fade-enter-active');
-        }
-      }, 200); // Adjust the delay as needed
-    });
+// setTimeout(() => {
+//         if (headerRef.value) {
+//           headerRef.value.classList.add('slide-fade-enter-active');
+//         }
+//       }, 200); // Adjust the delay as needed
+//     });
 </script>
 
 <style>

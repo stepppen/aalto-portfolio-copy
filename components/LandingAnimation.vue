@@ -1,57 +1,49 @@
 <template>
-    <div ref="asciiEffectContainer"></div>
+  <div ref="asciiEffectContainer"></div>
 </template>
+
 <script setup>
 import * as THREE from 'three';
-import { MathUtils } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { AsciiEffect } from 'three/addons/effects/AsciiEffect.js';
+import { ref, onMounted, onUnmounted, onBeforeUnmount } from 'vue';
 
 const asciiEffectContainer = ref(null);
 
 let camera, scene, renderer, effect;
-let width = window.innerWidth;
-let height = window.innerHeight;
-let whereTo = 2
-const easingFactor = 0.05;
+let width, height;
 let pointer = { x: 0, y: 0 };
-let targetRotation = { x: 0, z: 0 }
-let rotationIncrementMouse = 0;
-let rotationIncrementConstant = 0.0001;
-let constantRotationDirection = 1;
-let directionSwitched = false;
-let scenePosition = 0;  // Initial position of the scene
-let direction = 1; 
-const maxPosition = 0.5;  // Maximum position for the animation
-const speed = 0.0005; 
+let scenePosition = 0;
+let direction = 1;
+const maxPosition = 0.5;
+const speed = 0.0005;
+let previousTime = 0;
 
-const start = Date.now();
-const gltfLoader = new GLTFLoader()
+const gltfLoader = new GLTFLoader();
 let isLandingPage = false;
 const route = useRoute();
-let center = new THREE.Vector3();
 let cachedTargetQuaternion = new THREE.Quaternion();
 
 const onMouseMove = (event) => {
-      pointer.x = ((event.clientX / width)-1.5)/4;
-      pointer.y = ((event.clientY / height)-0.5)/6;
-
-  }
-
+  pointer.x = ((event.clientX / width) - 1.5) / 4;
+  pointer.y = ((event.clientY / height) - 0.5) / 6;
+}
 
 onMounted(() => {
+  width = window.innerWidth;
+  height = window.innerHeight;
   isLandingPage = route.path === '/';
   if (isLandingPage) {
-    init();
-    loadModel();
-    window.addEventListener('mousemove', onMouseMove)
-    animate();
+      init();
+      loadModel();
+      window.addEventListener('mousemove', onMouseMove);
+      animate();
   }
 });
 
 onUnmounted(() => {
   if (isLandingPage) {
-    isLandingPage = false;
+      isLandingPage = false;
   }
 });
 
@@ -60,130 +52,65 @@ onBeforeUnmount(() => {
 });
 
 function loadModel() {
-  const gltfLoader = new GLTFLoader();
-  const group = new THREE.Group();
   gltfLoader.load('/three/abstract.glb', (gltf) => {
-    gltf.scene.name = 'gltfModel';
-    gltf.scene.rotateY(-(Math.PI/3));
-    // gltf.scene.rotateY((Math.PI));
-    scene.add(gltf.scene)
+      const model = gltf.scene;
+      model.name = 'gltfModel';
+      model.castShadow = false;
+      model.receiveShadow = false;
+      model.rotateY(-(Math.PI / 3));
+      scene.add(model);
   });
 }
 
-
 function init() {
+  camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 10);
+  camera.position.y = 0;
+  camera.position.z = 10;
 
-    camera = new THREE.PerspectiveCamera( 40, width / height, 0.1, 10);
-    camera.position.y = 0;
-    camera.position.z = 10;
+  scene = new THREE.Scene();
 
-    scene = new THREE.Scene();
-    // scene.background = new THREE.Color( 0, 0, 0 );
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+  scene.add(ambientLight);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1)
-    scene.add(ambientLight)
+  const pointLight2 = new THREE.PointLight(0xffffff, 1, 0, 0);
+  pointLight2.position.set(-500, -500, -500);
+  scene.add(pointLight2);
 
-    const pointLight2 = new THREE.PointLight( 0xffffff, 1, 0, 0 );
-    pointLight2.position.set( - 500, - 500, - 500 );
-    scene.add( pointLight2 );
+  renderer = new THREE.WebGLRenderer();
+  renderer.setSize(width, height);
 
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize( width, height );
-
-    effect = new AsciiEffect( renderer, '  .:-+*=%@#', { invert: true } );
-    effect.setSize( width, height );
-    // effect.domElement.style.color = '#4583B2';
-    effect.domElement.style.color = "rgb(148 163 184)";
-    asciiEffectContainer.value.appendChild( effect.domElement);
-
-    // window.addEventListener( 'resize', onWindowResize );
-
+  effect = new AsciiEffect(renderer, '  .:-+*=%@#', { invert: true });
+  effect.setSize(width, height);
+  effect.domElement.style.color = "rgb(148 163 184)";
+  asciiEffectContainer.value.appendChild(effect.domElement);
 }
 
-// function onWindowResize() {
-
-//     camera.aspect = width / height;
-//     camera.updateProjectionMatrix();
-
-//     renderer.setSize( width, height );
-//     effect.setSize( width, height );
-
-// }
-
-function animate() {     // Initial animation direction: 1 for forward, -1 for backward
+function animate() {
   function render() {
-  const gltfModelGroup = scene.getObjectByName('gltfModel');
-  if (gltfModelGroup) {
-    const gltfModel = gltfModelGroup.children[0];
+      const currentTime = performance.now();
+      const timeDiff = currentTime - previousTime;
 
-    // Check if the target rotation has changed
-    if (cachedTargetQuaternion.x !== pointer.x || cachedTargetQuaternion.y !== pointer.y) {
-      cachedTargetQuaternion.setFromEuler(new THREE.Euler(pointer.y, pointer.x, 0, 'XYZ'));
-    }
+      if (timeDiff > 33.33) {
+          const gltfModelGroup = scene.getObjectByName('gltfModel');
+          if (gltfModelGroup) {
+              const gltfModel = gltfModelGroup.children[0];
 
-    // Apply cached target rotation
-    gltfModel.quaternion.slerp(cachedTargetQuaternion, 0.1);
+              if (cachedTargetQuaternion.x !== pointer.x || cachedTargetQuaternion.y !== pointer.y) {
+                  cachedTargetQuaternion.setFromEuler(new THREE.Euler(pointer.y, pointer.x, 0, 'XYZ'));
+              }
+              gltfModel.quaternion.slerp(cachedTargetQuaternion, 0.1);
 
-    scenePosition += direction * speed;
-
-    if (Math.abs(scenePosition) >= maxPosition) {
-      direction *= -1;  // Reverse direction
-    }
-
-    scene.rotation.y = scenePosition;
-
-  let previousTime = 0;
-  const currentTime = performance.now();
-  const timeDiff = currentTime - previousTime;
-
-   
-  if (timeDiff > 33.33) {
-    effect.render(scene, camera);
-    previousTime = currentTime;
+              scenePosition += direction * speed;
+              if (Math.abs(scenePosition) >= maxPosition) {
+                  direction *= -1;
+              }
+              scene.rotation.y = scenePosition;
+              effect.render(scene, camera);
+          }
+          previousTime = currentTime;
+      }
+      requestAnimationFrame(render);
   }
-  }
-
-    requestAnimationFrame(render);
-  }
-
   render();
 }
-
-// function animate() {
-//   function render() {
-//     const gltfModelGroup = scene.getObjectByName('gltfModel');
-//     if (gltfModelGroup) {
-//       const gltfModel = gltfModelGroup.children[0];
-      
-//       // Pre-calculate Euler angles
-//       const targetPointerEuler = new THREE.Euler(pointer.y, pointer.x, 0, 'XYZ');
-
-//       // Check if the target rotation has changed
-//       if (cachedTargetQuaternion.equals(targetPointerEuler)) {
-//         cachedTargetQuaternion.setFromEuler(targetPointerEuler);
-//       }
-
-//       // Apply cached target rotation
-//       gltfModel.quaternion.slerp(cachedTargetQuaternion, 0.1);
-
-//       // Pre-calculate final rotation increment
-//       const rotationIncrement = direction * speed;
-
-//       scenePosition += rotationIncrement;
-
-//       if (Math.abs(scenePosition) >= maxPosition) {
-//         direction *= -1; // Reverse direction
-//       }
-
-//       scene.rotation.y = scenePosition;
-
-//       effect.render(scene, camera);
-//     }
-
-//     requestAnimationFrame(render);
-//   }
-
-//   render();
-// }
-
 </script>
