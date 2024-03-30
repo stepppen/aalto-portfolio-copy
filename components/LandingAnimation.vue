@@ -114,8 +114,8 @@ function animate() {
 
   const cachedTargetQuaternion = new THREE.Quaternion();
   const maxPosition = 0.5;
-  const speed = 0.0009;
-  const frameRate = 25; // Desired frame rate (e.g., 30 frames per second)
+  const speed = 0.0005;
+  const frameRate = 10; // Desired frame rate (e.g., 30 frames per second)
 
   function render(currentTime) {
     const deltaTime = currentTime - lastRenderTime;
@@ -128,9 +128,9 @@ function animate() {
       if (gltfModelGroup) {
         const gltfModel = gltfModelGroup.children[0];
 
-        if (pointer.hasChanged) {
+        if (gltfModel) {
           cachedTargetQuaternion.setFromEuler(new THREE.Euler(pointer.y, pointer.x, 0, 'XYZ'));
-          pointer.hasChanged = false;
+          // pointer.hasChanged = false;
         }
 
         gltfModel.quaternion.slerp(cachedTargetQuaternion, 0.1);
