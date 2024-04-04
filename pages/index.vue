@@ -2,12 +2,6 @@
         <Head>
             <Title>Home</Title>
         </Head>
-        <div>
-            <!-- <LandingAnimation :class="{ 'semi-transparent': hoveredProject }"  /> -->
-            <transition name="defaultAnimation">
-                    <LandingAnimation :class="{ 'semi-transparent': hoveredProject }"/>
-            </transition>
-        </div>
         <!-- <div>
             <div ref="landingAnimationContainer"></div>
         </div> -->
@@ -24,9 +18,13 @@
                 </div>
             </div>
         </div>
+        <div>
+            <P5Animation />
+        </div>
 </template>
 
 <script setup>
+    import P5Animation from '@/components/P5Animation.vue';
     // import LandingAnimation from '../LazyThree.vue';
     import jsonData from './assets/projects/projects.json';
     const project = jsonData;
@@ -55,6 +53,8 @@
             link.href = p.thumb;
             document.head.appendChild(link);
         });
+
+        
     });
 
 

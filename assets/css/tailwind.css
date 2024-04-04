@@ -29,7 +29,7 @@
 @tailwind utilities;
 
 body {
-    @apply bg-slate-950;
+    @apply bg-black;
     @apply text-white;
     @apply my-0;
     @apply box-border

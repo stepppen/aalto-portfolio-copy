@@ -1,116 +1,58 @@
 <template>
-  <div ref="asciiEffectContainer"></div>
+  <div class="container border">
+    <div class="d-flex justify-content-center" id="p5Canvas"></div>
+  </div>
 </template>
 
 <script setup>
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { AsciiEffect } from 'three/addons/effects/AsciiEffect.js';
-import { ref, onMounted, onUnmounted, onBeforeUnmount } from 'vue';
+const elementsY = 31;
 
-const asciiEffectContainer = ref(null);
+var charset = "░▒▓█"; 
 
-let camera, scene, renderer, effect;
-let width, height;
-let pointer = { x: 0, y: 0 };
-let scenePosition = 0;
-let direction = 1;
-const maxPosition = 0.5;
-const speed = 0.0005;
-let previousTime = 0;
+let font;
 
-const gltfLoader = new GLTFLoader();
-let isLandingPage = false;
-const route = useRoute();
-let cachedTargetQuaternion = new THREE.Quaternion();
-
-const onMouseMove = (event) => {
-  pointer.x = ((event.clientX / width) - 1.5) / 4;
-  pointer.y = ((event.clientY / height) - 0.5) / 6;
+function preload() {
+  font = loadFont("IBMPlexMono-Bold.otf");  
 }
 
-onMounted(() => {
-  width = window.innerWidth;
-  height = window.innerHeight;
-  isLandingPage = route.path === '/';
-  if (isLandingPage) {
-      init();
-      loadModel();
-      window.addEventListener('mousemove', onMouseMove);
-      animate();
+function setup() {
+  createCanvas(700, 700);
+}
+
+function draw() {
+  background(255);
+
+  var elements = 10;
+  fill(0);
+  noStroke();
+  
+  textFont(font);
+  textAlign(CENTER,CENTER);
+  textSize(30);
+
+  for (let y = 0; y < elementsY + 1; y++) {
+    for (let x = 0; x < charset.length + 1; x++) {
+      
+      let posY = map(y, 0, elementsY, 0, height);
+      let magX = map(sin(radians(posY * 1 + frameCount)), -1, 1, -width*0.4, 200);
+      let posX = map(x, 0, charset.length,-magX, magX);
+      
+      
+      let selector = x;
+      
+      push();
+      translate(width/2+posX, posY);
+      text(charset[selector],0,0);
+      pop();
+    }
   }
-});
-
-onUnmounted(() => {
-  if (isLandingPage) {
-      isLandingPage = false;
-  }
-});
-
-onBeforeUnmount(() => {
-  window.removeEventListener('mousemove', onMouseMove);
-});
-
-function loadModel() {
-  gltfLoader.load('/three/abstract.glb', (gltf) => {
-      const model = gltf.scene;
-      model.name = 'gltfModel';
-      model.castShadow = false;
-      model.receiveShadow = false;
-      model.rotateY(-(Math.PI / 3));
-      scene.add(model);
-  });
 }
 
-function init() {
-  camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 10);
-  camera.position.y = 0;
-  camera.position.z = 10;
-
-  scene = new THREE.Scene();
-
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-  scene.add(ambientLight);
-
-  const pointLight2 = new THREE.PointLight(0xffffff, 1, 0, 0);
-  pointLight2.position.set(-500, -500, -500);
-  scene.add(pointLight2);
-
-  renderer = new THREE.WebGLRenderer();
-  renderer.setSize(width, height);
-
-  effect = new AsciiEffect(renderer, '  .:-+*=%@#', { invert: true });
-  effect.setSize(width, height);
-  effect.domElement.style.color = "rgb(148 163 184)";
-  asciiEffectContainer.value.appendChild(effect.domElement);
-}
-
-function animate() {
-  function render() {
-      const currentTime = performance.now();
-      const timeDiff = currentTime - previousTime;
-
-      if (timeDiff > 33.33) {
-          const gltfModelGroup = scene.getObjectByName('gltfModel');
-          if (gltfModelGroup) {
-              const gltfModel = gltfModelGroup.children[0];
-
-              if (cachedTargetQuaternion.x !== pointer.x || cachedTargetQuaternion.y !== pointer.y) {
-                  cachedTargetQuaternion.setFromEuler(new THREE.Euler(pointer.y, pointer.x, 0, 'XYZ'));
-              }
-              gltfModel.quaternion.slerp(cachedTargetQuaternion, 0.1);
-
-              scenePosition += direction * speed;
-              if (Math.abs(scenePosition) >= maxPosition) {
-                  direction *= -1;
-              }
-              scene.rotation.y = scenePosition;
-              effect.render(scene, camera);
-          }
-          previousTime = currentTime;
-      }
-      requestAnimationFrame(render);
-  }
-  render();
-}
 </script>
+
+<style>
+.full-size {
+  height: 100vh;
+  width: 100vw;
+}
+</style>
