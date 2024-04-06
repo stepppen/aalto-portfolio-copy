@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col lg:flex-row justify-center inset-0 lg:left-48 px-4 absolute">
       <div class="lg:my-auto">
-        <!-- <ThreeNew /> -->
+        <ThreeNew />
       </div>
       <div class="w-16"></div>
       <div class="flex flex-col w-full md:w-1/2 lg:w-1/4 my-auto md:inset-0">
