@@ -76,6 +76,7 @@ function animate() {
       if (Math.abs(gltfModel.rotation.y) >= Math.PI / 8) {
         rotationDirection *= -1;
       }
+    }
     
 
     // const elapsed = timestamp - lastRenderTime;
@@ -99,7 +100,7 @@ function animate() {
         effect.render(scene, camera);
       
     }
-  }
+  
   render();
 }
 </script>
