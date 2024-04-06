@@ -25,7 +25,7 @@ let constantRotationDirection = 1;
 let directionSwitched = false;
 let lastMove = 0;
 const maxPosition = 0.5;  // Maximum position for the animation
-  const speed = 0.0005;  
+  const speed = 0.005;  
 
   let scenePosition = 0;
 let direction = 1;
@@ -80,7 +80,7 @@ function init() {
   renderer = new THREE.WebGLRenderer();
   renderer.setSize( width, height );
   // renderer.getContext().willReadFrequently = true;
-  effect = new AsciiEffect( renderer, '   ....::::', { invert: true, resolution: 0.1 } );
+  effect = new AsciiEffect( renderer, '   ....::::', { invert: true, resolution: 0.13} );
   effect.setSize( width, height );
   // effect.domElement.style.color = '#4583B2';
   effect.domElement.style.color = 'blue';
@@ -118,7 +118,7 @@ const onMouseMove = (event) => {
 
 
 function animate() {
-  const frameTime = 1000 / 10; // Calculate the frame time for 15 FPS
+  const frameTime = 100; // Calculate the frame time for 15 FPS
 
   let lastFrameTime = 0;
 
