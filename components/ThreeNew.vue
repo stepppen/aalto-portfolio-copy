@@ -13,7 +13,7 @@ let height = 600;
 let lastRenderTime = 0;
 const fpsInterval = 100;
 
-let rotationIncrement = 0.0005;
+let rotationIncrement = 0.0003;
 let rotationDirection = 1;
 
 onMounted(() => {
@@ -37,7 +37,7 @@ function init() {
 
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(width, height);
-  effect = new AsciiEffect(renderer, '    ....::', { invert: true, resolution: 0.14 });
+  effect = new AsciiEffect(renderer, '    ....::', { invert: true, resolution: 0.15 });
   effect.setSize(width, height);
   effect.domElement.style.color = '#006CFF';
 
