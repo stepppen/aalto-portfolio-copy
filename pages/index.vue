@@ -2,33 +2,25 @@
         <Head>
             <Title>Home</Title>
         </Head>
-        <!-- <div>
-            <div ref="landingAnimationContainer"></div>
-        </div> -->
-        <div class="flex inset-0 absolute lg:left-48">
-            <div class="w-custom-50">
-
-            </div>
-            <!-- <div class=" hidden lg:flex flex-col justify-center w-custom-50">
-                <transition name="image">
-                    <img v-if="hoveredProject" :src="hoveredProject ? hoveredProject.thumb : project.thumb" alt="project img" loading="lazy" class="object-cover min-w-full aspect-[4/3] fade-in">
-                </transition>
-
-            </div>   -->
-            <div class="flex flex-col justify-center pl-8">
-                <div class="flex flex-col" v-for="p in project.slice(0,5)">
-                    <!-- <img :src="project.thumb" alt="project img" loading="lazy" class="object-cover min-w-full aspect-[4/3] fade-in"> -->
-                    <LandingLink :project="p" @mouseover="handleMouseOver(p)" @mouseleave="handleMouseLeave"/>
+        <body>
+            <div class="flex inset-0 absolute lg:left-48">
+                <div class="md:w-custom-50">
+                </div>
+                <div class="flex flex-col justify-center pl-8">
+                    <div class="flex flex-col" v-for="p in project.slice(0,5)">
+                        <!-- <img :src="project.thumb" alt="project img" loading="lazy" class="object-cover min-w-full aspect-[4/3] fade-in"> -->
+                        <LandingLink :project="p" @mouseover="handleMouseOver(p)" @mouseleave="handleMouseLeave"/>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div>
-            <P5Animation />
-        </div>
+            <div>
+                <P5Animation />
+            </div>
+        </body>
 </template>
 
 <script setup>
-    import P5Animation from '@/components/P5Animation.vue';
+    // import P5Animation from '@/components/P5Animation.vue';
     // import LandingAnimation from '../LazyThree.vue';
     import jsonData from './assets/projects/projects.json';
     const project = jsonData;

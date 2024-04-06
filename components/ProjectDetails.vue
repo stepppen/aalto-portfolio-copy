@@ -1,5 +1,5 @@
 <template>
-    <div lang="en" class="lg:w-custom-80 overflow-hidden" >
+    <div lang="en" class="lg:w-custom-80 overflow-hidden">
         <div class="aspect-[4/3] flex justify-center align-center overflow-hidden">
             <img :src="project.thumb" alt="project img" class="object-cover min-w-full">
         </div>
@@ -142,24 +142,15 @@
     project.teamMembers = teamMembers
     project.roles = roles 
     project.projContext = projContext
-
-
-//     mounted() {
-//     this.player = videojs(this.$refs.videoPlayer, this.options, () => {
-//       this.player.log('onPlayerReady', this);
-//     });
-//   },
-//   beforeDestroy() {
-//     if (this.player) {
-//       this.player.dispose();
-//     }
-//   }
 </script>
 
 <style lang="scss" scoped>
-img {
+@media (min-width: 650px) {
+    img {
     max-width: 400px;
 }
+}
+
 .text-justify { 
       word-break: break-word !important; 
       -webkit-hyphens: auto !important; 

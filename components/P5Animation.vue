@@ -23,7 +23,7 @@ export default {
       p.setup = () => {
         p.createCanvas(window.innerWidth, window.innerHeight);
         p.textAlign(p.CENTER, p.CENTER);
-        p.fill('blue');
+        p.fill('#006CFF');
         p.textSize((p.height / elementsY) * 2);
       };
 

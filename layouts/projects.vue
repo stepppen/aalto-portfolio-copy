@@ -18,7 +18,7 @@
                     <li>
                         <nuxt-link to="/projects" class="flex">
                             <p class="lg:hover:px-1 slow-transition">Projects</p>
-                            <img class="px-2" src="../assets/icons/arrow.svg" alt="arrow-icon">
+                            <img class="md:px-2 pl-2" src="../assets/icons/arrow.svg" alt="arrow-icon">
                         </nuxt-link>
                     </li>
                 </ul>
