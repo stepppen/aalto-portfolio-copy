@@ -68,14 +68,7 @@ function animate() {
     const gltfModelGroup = scene.getObjectByName('gltfModel');
     if (gltfModelGroup) {
       const gltfModel = gltfModelGroup.children[0];
-
-      // Rotate the model back and forth
-      gltfModel.rotation.y += rotationIncrement * rotationDirection;
-
-      // Change rotation direction if reaching the limits
-      if (Math.abs(gltfModel.rotation.y) >= Math.PI / 8) {
-        rotationDirection *= -1;
-      }
+      gltfModel.rotation.y += rotationIncrement
     }
     
 
@@ -99,8 +92,8 @@ function animate() {
 
         effect.render(scene, camera);
       
-    }
-  
+    
+  }
   render();
 }
 </script>
