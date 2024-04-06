@@ -8,7 +8,7 @@ import { AsciiEffect } from 'three/addons/effects/AsciiEffect.js';
 
 const asciiEffectContainer = ref(null);
 let camera, scene, renderer, effect;
-let width = calculateWidth();
+let width = 600;
 let height = 600;
 let lastRenderTime = 0;
 const fpsInterval = 100;
@@ -17,15 +17,11 @@ let rotationIncrement = 0.001;
 let rotationDirection = 1;
 
 onMounted(() => {
-  window.addEventListener('resize', onWindowResize);
   init();
   loadModel();
   animate();
 });
 
-onUnmounted(() => {
-  window.removeEventListener('resize', onWindowResize);
-});
 
 function init() {
   camera = new THREE.PerspectiveCamera(30, width / height, 0.1, 2);
@@ -41,7 +37,7 @@ function init() {
 
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(width, height);
-  effect = new AsciiEffect(renderer, '    ....::', { invert: true, resolution: 0.1 });
+  effect = new AsciiEffect(renderer, '    ....::', { invert: true, resolution: 0.15 });
   effect.setSize(width, height);
   effect.domElement.style.color = '#006CFF';
 
@@ -69,33 +65,29 @@ function loadModel() {
 function animate() {
   function render(timestamp) {
     requestAnimationFrame(render);
+
     const elapsed = timestamp - lastRenderTime;
-    const gltfModelGroup = scene.getObjectByName('gltfModel');
+
+    // Check if enough time has elapsed to render the next frame
     if (elapsed > fpsInterval) {
       lastRenderTime = timestamp - (elapsed % fpsInterval);
+
+      const gltfModelGroup = scene.getObjectByName('gltfModel');
       if (gltfModelGroup) {
         const gltfModel = gltfModelGroup.children[0];
 
         // Rotate the model back and forth
-        gltfModel.rotation.y += rotationIncrement
+        gltfModel.rotation.y += rotationIncrement * rotationDirection;
+
+        // Change rotation direction if reaching the limits
+        if (Math.abs(gltfModel.rotation.y) >= Math.PI / 8) {
+          rotationDirection *= -1;
+        }
+
         effect.render(scene, camera);
       }
     }
   }
   render();
-}
-
-function onWindowResize() {
-  width = calculateWidth();
-  height = window.innerHeight;
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
-  renderer.setSize(width, height);
-  effect.setSize(width, height);
-}
-
-function calculateWidth() {
-  // Determine device width and return the appropriate width
-  return window.innerWidth >= 1024 ? 600 : window.innerWidth;
 }
 </script>
