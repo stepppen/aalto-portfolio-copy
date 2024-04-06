@@ -80,29 +80,14 @@ function init() {
   renderer = new THREE.WebGLRenderer();
   renderer.setSize( width, height );
   // renderer.getContext().willReadFrequently = true;
-  effect = new AsciiEffect( renderer, '   ....::::', { invert: true} );
+  effect = new AsciiEffect( renderer, '   ....::::', { invert: true, resolution: 0.1 } );
   effect.setSize( width, height );
   // effect.domElement.style.color = '#4583B2';
   effect.domElement.style.color = 'blue';
 
-  // effect.domElement.style.backgroundColor = "#020617";
   asciiEffectContainer.value.appendChild( effect.domElement );
-  // window.addEventListener( 'resize', onWindowResize );
 
 }
-
-// function onWindowResize() {
-
-//   camera.aspect = width / height;
-//   camera.updateProjectionMatrix();
-
-//   renderer.setSize( width, height );
-//   effect.setSize( width, height );
-
-// }
-
-//
-
 
 function loadModel() {
   const gltfLoader = new GLTFLoader();
