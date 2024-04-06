@@ -11,7 +11,7 @@ let camera, scene, renderer, effect;
 let width = calculateWidth();
 let height = 600;
 let lastRenderTime = 0;
-const fpsInterval = 100
+const fpsInterval = 100;
 
 let rotationIncrement = 0.001;
 let rotationDirection = 1;
@@ -41,7 +41,7 @@ function init() {
 
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(width, height);
-  effect = new AsciiEffect(renderer, '   .,:-+=@#', { invert: true, resolution: 0.1 });
+  effect = new AsciiEffect(renderer, '    ....::', { invert: true, resolution: 0.1 });
   effect.setSize(width, height);
   effect.domElement.style.color = '#006CFF';
 
@@ -69,25 +69,15 @@ function loadModel() {
 function animate() {
   function render(timestamp) {
     requestAnimationFrame(render);
-
     const elapsed = timestamp - lastRenderTime;
-
-    // Check if enough time has elapsed to render the next frame
+    const gltfModelGroup = scene.getObjectByName('gltfModel');
     if (elapsed > fpsInterval) {
       lastRenderTime = timestamp - (elapsed % fpsInterval);
-
-      const gltfModelGroup = scene.getObjectByName('gltfModel');
       if (gltfModelGroup) {
         const gltfModel = gltfModelGroup.children[0];
 
         // Rotate the model back and forth
-        gltfModel.rotation.y += rotationIncrement * rotationDirection;
-
-        // Change rotation direction if reaching the limits
-        if (Math.abs(gltfModel.rotation.y) >= Math.PI / 8) {
-          rotationDirection *= -1;
-        }
-
+        gltfModel.rotation.y += rotationIncrement
         effect.render(scene, camera);
       }
     }
