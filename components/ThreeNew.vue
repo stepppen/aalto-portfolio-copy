@@ -25,7 +25,7 @@ let constantRotationDirection = 1;
 let directionSwitched = false;
 let lastMove = 0;
 const maxPosition = 0.5;  // Maximum position for the animation
-  const speed = 0.005;  
+  const speed = 0.001;  
 
   let scenePosition = 0;
 let direction = 1;
@@ -80,7 +80,7 @@ function init() {
   renderer = new THREE.WebGLRenderer();
   renderer.setSize( width, height );
   // renderer.getContext().willReadFrequently = true;
-  effect = new AsciiEffect( renderer, '   ....::::', { invert: true, resolution: 0.13} );
+  effect = new AsciiEffect( renderer, '   ....::::', { invert: true, resolution: 0.12} );
   effect.setSize( width, height );
   // effect.domElement.style.color = '#4583B2';
   effect.domElement.style.color = 'blue';
