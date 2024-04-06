@@ -11,10 +11,9 @@ let camera, scene, renderer, effect;
 let width = calculateWidth();
 let height = 600;
 let lastRenderTime = 0;
-const fpsInterval = 1000 / 10; // 10 FPS
+const fpsInterval = 100
 
-// Variables for back and forth rotation
-let rotationIncrement = 0.005;
+let rotationIncrement = 0.001;
 let rotationDirection = 1;
 
 onMounted(() => {
@@ -37,12 +36,12 @@ function init() {
 
   
   const pointLight1 = new THREE.PointLight(0xffffff, 5, 0, 0);
-  pointLight1.position.set(3, 6, 6);
+  pointLight1.position.set(3,5,5);
   scene.add(pointLight1);
 
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(width, height);
-  effect = new AsciiEffect(renderer, '   ....::', { invert: true, resolution: 0.12 });
+  effect = new AsciiEffect(renderer, '   .,:-+=@#', { invert: true, resolution: 0.1 });
   effect.setSize(width, height);
   effect.domElement.style.color = '#006CFF';
 
