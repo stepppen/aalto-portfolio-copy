@@ -80,7 +80,7 @@ function init() {
   renderer = new THREE.WebGLRenderer();
   renderer.setSize( width, height );
   // renderer.getContext().willReadFrequently = true;
-  effect = new AsciiEffect( renderer, '   ....::::', { invert: true, resolution: 0.1 } );
+  effect = new AsciiEffect( renderer, '   ....::::', { invert: true} );
   effect.setSize( width, height );
   // effect.domElement.style.color = '#4583B2';
   effect.domElement.style.color = 'blue';
@@ -132,43 +132,44 @@ const onMouseMove = (event) => {
 
 
 
-function animate() {    
-  function render() {
-  const gltfModelGroup = scene.getObjectByName('gltfModel');
-  if (gltfModelGroup) {
-    const gltfModel = gltfModelGroup.children[0];
+function animate() {
+  const frameTime = 1000 / 10; // Calculate the frame time for 15 FPS
 
-    // // Check if the target rotation has changed
-    // if (cachedTargetQuaternion.x !== pointer.x || cachedTargetQuaternion.y !== pointer.y) {
-    //   cachedTargetQuaternion.setFromEuler(new THREE.Euler(pointer.y, pointer.x, 0, 'XYZ'));
-    // }
+  let lastFrameTime = 0;
 
-    // Apply cached target rotation
-    gltfModel.quaternion.slerp(cachedTargetQuaternion, 0.1);
+  function render(timestamp) {
+    const deltaTime = timestamp - lastFrameTime;
 
-    scenePosition += direction * speed;
+    // Check if it's time to render a frame
+    if (deltaTime >= frameTime) {
+      lastFrameTime = timestamp;
 
-    if (Math.abs(scenePosition) >= maxPosition) {
-      direction *= -1;  // Reverse direction
+      const gltfModelGroup = scene.getObjectByName('gltfModel');
+      if (gltfModelGroup) {
+        const gltfModel = gltfModelGroup.children[0];
+
+        // Apply cached target rotation
+        gltfModel.quaternion.slerp(cachedTargetQuaternion, 0.1);
+
+        scenePosition += direction * speed;
+
+        if (Math.abs(scenePosition) >= maxPosition) {
+          direction *= -1; // Reverse direction
+        }
+
+        scene.rotation.y = scenePosition;
+
+        effect.render(scene, camera);
+      }
     }
-
-    scene.rotation.y = scenePosition;
-
-  const currentTime = performance.now();
-  const timeDiff = currentTime - previousTime;
-
-   
-  if (timeDiff > 50) {
-    effect.render(scene, camera);
-    previousTime = currentTime;
-  }
-  }
 
     requestAnimationFrame(render);
   }
 
-  render();
+  // Start the animation loop
+  requestAnimationFrame(render);
 }
+
 
 </script>
 
