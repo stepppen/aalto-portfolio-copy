@@ -152,6 +152,7 @@
 }
 
 .text-justify { 
+    width: 80%;
       word-break: break-word !important; 
       -webkit-hyphens: auto !important; 
       -moz-hyphens: auto !important; 

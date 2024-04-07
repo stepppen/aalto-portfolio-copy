@@ -6,7 +6,7 @@
       </div>
       <div class="w-16"></div>
       <div class="flex flex-col w-full md:w-1/2 lg:w-1/4 my-auto md:inset-0">
-        <p lang="en" class="text-justify md:justify-center">I am currently studying interaction design at the Zurich University of the Arts in Switzerland. Looking to further my understanding of interaction and product design while continuing to explore interdisciplinary learning. Feel free to contact me under: </p>
+        <p lang="en" class="text-justify md:justify-center">I am an interaction designer looking to further my understanding in the intersection of digital and physical. Feel free to contact me under: </p>
         <p>stepan@vedunov.com</p>
       </div>
     </div>
