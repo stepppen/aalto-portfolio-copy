@@ -9,10 +9,10 @@ import { AsciiEffect } from 'three/examples/jsm/effects/AsciiEffect.js';
 
 const asciiEffectContainer = ref(null);
 let camera, scene, renderer, effect;
-let rotationIncrement = 0.0003;
+let rotationIncrement = 0.0009;
 let rotationDirection = 1;
 let lastRenderTime = 0;
-const fpsInterval = 100;
+const fpsInterval = 10;
 const width = 600;
 const height = 600;
 
@@ -83,16 +83,17 @@ function loadModel() {
 }
 
 function animate() {
-  function render(timestamp) {
-    requestAnimationFrame(render);
-    const gltfModelGroup = scene.getObjectByName('gltfModel');
-    if (gltfModelGroup) {
-      const gltfModel = gltfModelGroup.children[0];
-      gltfModel.rotation.y += rotationIncrement
-    }
-
-    effect.render(scene, camera);
-  }
-  render();
+    setTimeout(function() {
+        requestAnimationFrame(animate);
+        
+        const gltfModelGroup = scene.getObjectByName('gltfModel');
+        if (gltfModelGroup) {
+            const gltfModel = gltfModelGroup.children[0];
+            gltfModel.rotation.y += rotationIncrement;
+        }
+        
+        effect.render(scene, camera);
+    }, 50);
 }
+
 </script>
