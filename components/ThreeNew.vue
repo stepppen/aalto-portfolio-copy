@@ -17,33 +17,12 @@ const width = 600;
 const height = 600;
 
 onMounted(() => {
-  // window.addEventListener('resize', reactiveWindow);
   init();
   loadModel();
   animate();
 });
 
-// onUnmounted(() => {
-//   window.removeEventListener('resize', reactiveWindow);
-// });
-
-// function reactiveWindow() {
-//   const isMobile = window.innerWidth <= 600;
-//   const maxWidth = isMobile ? 400 : 600; // Change maximum width for mobile
-//   const width = maxWidth;
-//   const height = isMobile ? 400 : window.innerHeight - 200; // Change height for mobile
-
-//   renderer.setSize(width, height);
-//   camera.aspect = width / height;
-//   camera.updateProjectionMatrix();
-// }
-
-
 function init() {
-  // const isMobile = window.innerWidth <= 600;
-  // const maxWidth = isMobile ? 400 : 600; // Change maximum width for mobile
-  // const width = maxWidth;
-  // const height = isMobile ? 400 : window.innerHeight - 200; // Change height for mobile
 
   camera = new THREE.PerspectiveCamera(30, width / height, 0.1, 2);
   camera.position.y = 1.2;

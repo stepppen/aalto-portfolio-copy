@@ -1,8 +1,10 @@
 <template>
     <div lang="en" class="lg:w-custom-80 overflow-hidden">
-        <div class="aspect-[4/3] flex justify-center align-center overflow-hidden">
-            <img :src="project.thumb" alt="project img" class="object-cover min-w-full">
+      <transition name="fade">
+        <div v-show="showImage" class="aspect-[4/3] flex justify-center align-center overflow-hidden">
+          <img :src="project.thumb" alt="project img" class="object-cover min-w-full">
         </div>
+      </transition>
 
         <!-- Head -->
         <h2 class="my-7"> {{ project.title }}</h2>
@@ -134,31 +136,35 @@
 </template>
 
 <script setup>
-    // import videojs from 'video.js';
-    const { project } = defineProps(['project'])
-    const teamMembers = project.team.split('\n').map(member => member.trim())
-    const roles = project.role.split('\n').map(role => role.trim())
-    const projContext = project.context.split('\n').map(context => context.trim())
-    project.teamMembers = teamMembers
-    project.roles = roles 
-    project.projContext = projContext
+
+const { project } = defineProps(['project']);
+const teamMembers = project.team.split('\n').map(member => member.trim());
+const roles = project.role.split('\n').map(role => role.trim());
+const projContext = project.context.split('\n').map(context => context.trim());
+
+const showImage = ref(false);
+
+project.teamMembers = teamMembers;
+project.roles = roles;
+project.projContext = projContext;
+
+// Watch for changes in the project prop and set showImage to true when a project is clicked
+watch(() => project, () => {
+  showImage.value = true;
+}, { immediate: true }); // Set immediate to true to trigger the watch callback immediately
 </script>
 
 <style lang="scss" scoped>
-@media (min-width: 650px) {
-    img {
-    max-width: 400px;
-}
+/* Define the fade transition */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s ease-out;
 }
 
-.text-justify { 
-    width: 80%;
-      word-break: break-word !important; 
-      -webkit-hyphens: auto !important; 
-      -moz-hyphens: auto !important; 
-      -ms-hyphens: auto !important; 
-      -o-hyphens: auto !important; 
-      hyphens: auto !important;
-     }
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 
+.fade-leave, .fade-enter-to {
+  opacity: 1;
+}
 </style>
