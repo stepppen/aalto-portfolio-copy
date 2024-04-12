@@ -1,7 +1,7 @@
 <template>
     <div>
-      <transition name="slide-fade">
-        <header v-if="showHeader" class="dynamic-header">
+      <transition name="slide-fade" v-if="!pageChanging">
+        <header v-if="showHeader" class="dynamic-header z-50">
           <nav class="dynamic-nav">
             <nuxt-link to="/" class="flex lg:hover:px-1 slow-transition">
               <div class="flex">
@@ -37,13 +37,26 @@
   <script setup>
   
   let showHeader = ref(false);
-  
+  let pageChanging = ref(false);
+  const router = useRouter();
+
   onMounted(() => {
-    // Set showHeader to true after a short delay to trigger the transition
-    setTimeout(() => {
-      showHeader.value = true;
-    }, 100);
+      // showHeader.value = true;
+      if(!pageChanging.value){
+            setTimeout(() => {
+            showHeader.value = true;
+        },100);
+      }
+
   });
+
+  watch(() => router.currentRoute.value, () => {
+  pageChanging.value = true;
+  
+  setTimeout(() => {
+    pageChanging.value = false;
+  }, 1000);
+});
   </script>
   
   <style>
@@ -61,12 +74,11 @@
     transition: all 0.3s ease-out;
   }
   
-  .slide-fade-leave-active {
+  /* .slide-fade-leave-active {
     transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
-  }
+  } */
   
-  .slide-fade-enter-to,
-  .slide-fade-leave-from {
+  .slide-fade-enter-to {
     opacity: 1;
   }
   

@@ -1,5 +1,6 @@
 <template>
-    <div class="container">
+    <transition name="card-fade">
+        <div v-if="cardLoaded" class="container">
         <div class="aspect-[4/3] image-container flex justify-center align-center" @mouseover="hover = true" @mouseleave="hover = false">
             <nuxt-link :to="`/projects/${project.id}`"> 
                     <div class="container object-cover min-w-full h-full">
@@ -12,11 +13,22 @@
             </nuxt-link>
         </div>
     </div>
+    </transition>
+    
 </template>
 
 <script setup>
     const { project } = defineProps(['project']);
+
+    let cardLoaded = ref(false);
     let hover = ref(false);
+
+    onMounted(()=>{
+        setTimeout(()=>{
+            cardLoaded.value = true;
+        }, 100)
+        
+    })
 </script>
 
 <style scoped>
@@ -46,5 +58,17 @@
     }
 .overlay:hover {
     opacity: 1;
+}
+
+.card-fade-enter-active {
+      transition: all 0.3s ease-out;
+    }
+.card-fade-enter-to {
+    opacity: 1;
+}
+
+.card-fade-enter-from {
+    transform: translateY(20px);
+    opacity: 0;
 }
 </style>

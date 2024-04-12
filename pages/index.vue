@@ -1,109 +1,79 @@
 <template>
-        <Head>
-            <Title>Home</Title>
-        </Head>
-        <body>
-            <div class="flex inset-0 absolute lg:left-48">
-                <div class="md:w-custom-50">
-                </div>
-                <div class="flex flex-col justify-center pl-8">
-                    <div class="flex flex-col" v-for="p in project.slice(0,5)">
-                        <!-- <img :src="project.thumb" alt="project img" loading="lazy" class="object-cover min-w-full aspect-[4/3] fade-in"> -->
-                        <LandingLink :project="p" @mouseover="handleMouseOver(p)" @mouseleave="handleMouseLeave"/>
-                    </div>
-                </div>
-            </div>
-            <div>
+    <div>
+      <Head>
+        <Title>Home</Title>
+      </Head>
+      <body>
+        <transition name="opacity-p5">
+            <div v-if="showP5">
                 <P5Animation />
             </div>
-        </body>
-</template>
+        </transition>
+        <transition name="fade-titles">
+          <div v-if="showTitles" class="flex inset-0 absolute lg:left-48 z-50">
+            <div class="md:w-custom-50">
+            </div>
+              <div class="flex flex-col justify-center pl-8">
+                <div v-for="p in project.slice(0,5)" :key="p.id">
+                    <LandingLink  :project="p" @mouseover="handleMouseOver(p)" @mouseleave="handleMouseLeave"/>
+                </div>
+              </div>
+          </div>
+        </transition>
 
-<script setup>
-    // import P5Animation from '@/components/P5Animation.vue';
-    // import LandingAnimation from '../LazyThree.vue';
+      </body>
+    </div>
+  </template>
+  
+  <script setup>
     import jsonData from './assets/projects/projects.json';
     const project = jsonData;
     const hoveredProject = ref(null);
-
-    // const largeBreakpoint = window.matchMedia("(min-width: 700px)")
-
-    const handleMouseOver = (project) => {
-        hoveredProject.value = project;
-    };
-
-    const handleMouseLeave = () => {
-        hoveredProject.value = null;
-    };
-
+    let showTitles = ref(false);
+    let showP5 = ref(false);
+  
     onMounted(() => {
-
-        // const script = document.createElement('script');
-        // script.src = '/components/LandingAnimation.vue';
-        // document.body.appendChild(script);
+      showP5.value = true;
+      setTimeout(() => {
+        showTitles.value = true;
         
-        project.forEach(p => {
-            const link = document.createElement('link');
-            link.rel = 'preload';
-            link.as = 'image';
-            link.href = p.thumb;
-            document.head.appendChild(link);
-        });
-
+      }, 100);
+      // setTimeout(() => {
         
+      // }, 100);
     });
+  
+    const handleMouseOver = (project) => {
+      hoveredProject.value = project;
+    };
+  
+    const handleMouseLeave = () => {
+      hoveredProject.value = null;
+    };
+  </script>
+  
+  <style lang="scss" scoped>
+    .fade-titles-enter-active {
+      transition: all 0.3s ease-out;
+    }
+    .fade-titles-enter-to {
+      opacity: 1;
+    }
+  
+    .fade-titles-enter-from {
+      transform: translateX(-20px);
+      opacity: 0;
+    }
 
+    .opacity-p5-enter-from{
+        opacity: 0;
+    }
+    .opacity-p5-enter-to{
+        opacity: 1;
+    }
+    .opacity-p5-enter-active{
+        transition: opacity 3s ease-out;
+    }
 
-    
-</script>
-
-<style lang="scss" scoped> 
-.landing-img{
-    width: 220px;
-    transition: 0.3s ease;
-}
-.image-enter-from,
-.image-leave-to{
-    opacity: 0;
-}
-.image-enter-to,
-.image-leave-from{
-    opacity: 1;
-}
-.image-enter-active{
-    transition: opacity 0.5s ease-out;
-}
-
-.image-leave-active{
-    transition: opacity 0.2s ease-out;
-}
-
-
-.alpha-80{
-    opacity: 0.8;
-}
-.semi-transparent {
-  opacity: 0.4; /* Opacity when hovered over */
-  transition: 0.3s ease; /* Transition for both entering and leaving hover */
-}
-
-.image-enter-from,
-.image-leave-to {
-  opacity: 0;
-}
-
-.image-enter-to,
-.image-leave-from {
-  opacity: 1;
-}
-
-.image-enter-active {
-    // transition-delay: 3s;
-    transition: opacity 0.1s ease-out;
-}
-
-.image-leave-active {
-    // transition-delay: 3s;
-  transition: opacity 0.2s ease-out;
-}
-</style>
+  </style>
+  

@@ -1,12 +1,12 @@
 <template>
+  <transition name="fade">
     <nuxt-link :to="`/projects/${project.id}`"> 
-      <transition name="fade">
-        <div class="flex items-baseline hover:px-1 slow-transition overlayTitle">
+        <div class="flex items-baseline hover:px-2 slow-transition overlayTitle">
           <p class="px-4">0{{ project.id }}</p>
           <h2>{{ project.title }}</h2>
         </div>
-      </transition>
     </nuxt-link>
+  </transition>
   </template>
   
   <script setup>

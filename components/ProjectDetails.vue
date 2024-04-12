@@ -1,45 +1,51 @@
 <template>
     <div lang="en" class="lg:w-custom-80 overflow-hidden">
-      <transition name="fade">
-        <div v-show="showImage" class="aspect-[4/3] flex justify-center align-center overflow-hidden">
-          <img :src="project.thumb" alt="project img" class="object-cover min-w-full">
+      <transition name="fade-img">
+        <div v-if="imageDisplayed" class="imageDisplayed">
+            <div v-show="showImage" class="aspect-[4/3] flex justify-center align-center overflow-hidden">
+                <img :src="project.thumb" alt="project img" class="object-cover min-w-full">
+            </div>
         </div>
       </transition>
 
         <!-- Head -->
-        <h2 class="my-7"> {{ project.title }}</h2>
-        <div class="grid gap-16 text-grid">
-            <div class="project-text">
-                <h3 class="heading-4 w-32 pb-4">Overview</h3>
-                <p class="text-justify">{{project.overview}}</p>
+        <transition name="fade-img">
+            <div v-if="imageDisplayed">
+                <h2 class="my-7"> {{ project.title }}</h2>
+                <div class="grid gap-16 text-grid">
+                    <div class="project-text">
+                        <h3 class="heading-4 w-32 pb-4">Overview</h3>
+                        <p class="text-justify">{{project.overview}}</p>
+                    </div>
+                    <div class="flex flex-col w-full gap-4">
+                        <div class="flex">
+                            <h3 class="heading-4 w-32">Year</h3>
+                            <p class="">{{project.year}}</p>
+                        </div>
+                        <div class="flex">
+                            <h3 class="heading-4 w-32">Context</h3>
+                            <div class="w-1/2">
+                                <p v-for="context in project.projContext" :key="context">{{ context }}</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <h3 class="heading-4 w-32">Team</h3>
+                            <div>
+                                <p v-for="member in project.teamMembers" :key="member">{{ member }}</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <h3 class="heading-4 w-32">Role</h3>
+                            <div>
+                                <p v-for="role in project.roles" :key="role">{{ role }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-48"></div>
             </div>
-            <div class="flex flex-col w-full gap-4">
-                <div class="flex">
-                    <h3 class="heading-4 w-32">Year</h3>
-                    <p class="">{{project.year}}</p>
-                </div>
-                <div class="flex">
-                    <h3 class="heading-4 w-32">Context</h3>
-                    <div class="w-1/2">
-                        <p v-for="context in project.projContext" :key="context">{{ context }}</p>
-                    </div>
-                </div>
-                <div class="flex">
-                    <h3 class="heading-4 w-32">Team</h3>
-                    <div>
-                        <p v-for="member in project.teamMembers" :key="member">{{ member }}</p>
-                    </div>
-                </div>
-                <div class="flex">
-                    <h3 class="heading-4 w-32">Role</h3>
-                    <div>
-                        <p v-for="role in project.roles" :key="role">{{ role }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="h-48"></div>
-
+        </transition>
+        
         <!-- Process_01 -->
         <div v-if="project.video" class="aspect-[16/9] flex justify-center align-center overflow-hidden">
             <iframe v-if="project.videoNeuranect" src="https://www.youtube.com/embed/60ArR2pHCS4?si=p6_0hCMpdkbtN7p-" title="YouTube video player" frameborder="0" class="object-cover min-w-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -143,12 +149,20 @@ const roles = project.role.split('\n').map(role => role.trim());
 const projContext = project.context.split('\n').map(context => context.trim());
 
 const showImage = ref(false);
+let imageDisplayed = ref(false);
 
 project.teamMembers = teamMembers;
 project.roles = roles;
 project.projContext = projContext;
 
-// Watch for changes in the project prop and set showImage to true when a project is clicked
+onMounted(() => {
+      setTimeout(() => {
+        imageDisplayed.value = true;
+        
+      }, 100);
+    });
+
+// // Watch for changes in the project prop and set showImage to true when a project is clicked
 watch(() => project, () => {
   showImage.value = true;
 }, { immediate: true }); // Set immediate to true to trigger the watch callback immediately
@@ -156,15 +170,18 @@ watch(() => project, () => {
 
 <style lang="scss" scoped>
 /* Define the fade transition */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s ease-out;
+.text-justify {
+    width: 80%;
+}
+.fade-img-enter-active {
+      transition: all 0.3s ease-out;
+    }
+.fade-img-enter-to {
+    opacity: 1;
 }
 
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-
-.fade-leave, .fade-enter-to {
-  opacity: 1;
+.fade-img-enter-from {
+    transform: translateY(20px);
+    opacity: 0;
 }
 </style>
