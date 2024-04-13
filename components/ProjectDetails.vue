@@ -43,8 +43,7 @@
                     </div>
                 </div>
                 <div class="h-48"></div>
-            </div>
-        </transition>
+
         
         <!-- Process_01 -->
         <div v-if="project.video" class="aspect-[16/9] flex justify-center align-center overflow-hidden">
@@ -135,7 +134,8 @@
 
 
 
-
+        </div>
+        </transition>
 
 
     </div>
@@ -159,7 +159,7 @@ onMounted(() => {
       setTimeout(() => {
         imageDisplayed.value = true;
         
-      }, 100);
+      }, 200);
     });
 
 // // Watch for changes in the project prop and set showImage to true when a project is clicked
@@ -170,9 +170,13 @@ watch(() => project, () => {
 
 <style lang="scss" scoped>
 /* Define the fade transition */
-.text-justify {
+
+@media (min-width: 1024px){
+    .text-justify {
     width: 80%;
 }
+}
+
 .fade-img-enter-active {
       transition: all 0.3s ease-out;
     }

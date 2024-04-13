@@ -17,6 +17,13 @@ export default defineNuxtConfig({
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'}
     ]
   },
+  css: [
+    '@/assets/css/main.css',
+  ],
+  app: {
+    pageTransition: { name: 'slide-fade', mode: 'out-in' },
+    layoutTransition: { name: 'project-fade', mode: 'out-in' }
+  },
   googleFonts: {
     families: {
       Caladea: [300, 500, 700],

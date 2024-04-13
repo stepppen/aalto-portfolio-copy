@@ -26,7 +26,7 @@
     onMounted(()=>{
         setTimeout(()=>{
             cardLoaded.value = true;
-        }, 100)
+        }, 200)
         
     })
 </script>

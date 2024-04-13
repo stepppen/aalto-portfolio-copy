@@ -3,17 +3,17 @@
       <Head>
         <Title>Home</Title>
       </Head>
-      <body>
-        <transition name="opacity-p5">
+      <body class="overflow-hidden">
+        <transition name="opacity-p5"> 
             <div v-if="showP5">
                 <P5Animation />
             </div>
         </transition>
         <transition name="fade-titles">
-          <div v-if="showTitles" class="flex inset-0 absolute lg:left-48 z-50">
-            <div class="md:w-custom-50">
-            </div>
-              <div class="flex flex-col justify-center pl-8">
+          <div v-if="showTitles" class="flex inset-0 absolute lg:left-48 z-40 md:justify-end">
+            <!-- <div class="2xl:w-custom-50">
+            </div> -->
+              <div class="flex flex-col justify-center md:px-32">
                 <div v-for="p in project.slice(0,5)" :key="p.id">
                     <LandingLink  :project="p" @mouseover="handleMouseOver(p)" @mouseleave="handleMouseLeave"/>
                 </div>

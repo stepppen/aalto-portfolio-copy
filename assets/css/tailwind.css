@@ -91,31 +91,6 @@ body {
     .project-text{
       @apply w-full
     }
-
-
-    .btn {
-        @apply bg-[#12b488] text-white px-3 py-2 rounded-md text-sm text-white;
-    }
-    .card {
-        @apply  p-3 bg-white h-full;
-    }
-    .remove-scrollbar {
-        -ms-overflow-style: none;  /* IE + Edge */
-        scrollbar-width: none;  /* Firefox */
-      }
-    .h-95 {
-        height: 95vh
-    }
-    .w-custom-80 {
-        width: 80vw
-    }
-
-    .w-custom-50 {
-      width: 50vw;
-    }
-    .w-custom-30 {
-        width: 30vw
-    }
     p { 
       word-break: break-word !important; 
       -webkit-hyphens: auto !important; 
@@ -137,6 +112,51 @@ body {
         font-weight: 400;
         font-size: 20px;
     }
+
+    @media (max-width: 768px){
+      h2{
+        font-family: Castoro;
+        /* font-weight: 700; */
+        font-style: italic;
+        margin-bottom: 10px;
+        font-size: 42px;
+      }
+    }
+
+
+
+
+    .btn {
+        @apply bg-[#12b488] text-white px-3 py-2 rounded-md text-sm text-white;
+    }
+    .card {
+        @apply  p-3 bg-white h-full;
+    }
+    .remove-scrollbar {
+        -ms-overflow-style: none;  /* IE + Edge */
+        scrollbar-width: none;  /* Firefox */
+      }
+    .h-95 {
+        height: 95vh
+    }
+    .w-custom-80 {
+        width: 80vw
+    }
+
+    .w-150-centered{
+      overflow: hidden;
+      width: 150vw;
+      display: flex;
+      inset: 0;
+    }
+
+    .w-custom-50 {
+      width: 50vw;
+    }
+    .w-custom-30 {
+        width: 30vw
+    }
+
     .occlusion-div{
       position: absolute;
     top: 0;

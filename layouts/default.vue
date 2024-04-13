@@ -1,7 +1,7 @@
 <template>
     <div>
-      <transition name="slide-fade" v-if="!pageChanging">
-        <header v-if="showHeader" class="dynamic-header z-50">
+      <transition name="slide-fade">
+        <header class="dynamic-header z-50" v-if="showHeader">
           <nav class="dynamic-nav">
             <nuxt-link to="/" class="flex lg:hover:px-1 slow-transition">
               <div class="flex">
@@ -27,7 +27,7 @@
           </nav>
         </header>
       </transition>
-      <div class="flex justify-between">
+      <div class="flex lg:justify-between justify-center">
         <div class="lg:w-1/2"></div>
         <slot />
       </div>
@@ -37,26 +37,22 @@
   <script setup>
   
   let showHeader = ref(false);
-  let pageChanging = ref(false);
   const router = useRouter();
+  
 
   onMounted(() => {
       // showHeader.value = true;
-      if(!pageChanging.value){
-            setTimeout(() => {
-            showHeader.value = true;
+        setTimeout(() => {
+          showHeader.value = true;
         },100);
-      }
 
   });
 
-  watch(() => router.currentRoute.value, () => {
-  pageChanging.value = true;
-  
-  setTimeout(() => {
-    pageChanging.value = false;
-  }, 1000);
-});
+  // router.afterEach(() => {
+  //   // Reset showHeader when navigating to a new route
+  //   showHeader.value = false;
+  // });
+
   </script>
   
   <style>
@@ -65,20 +61,20 @@
     font-size: 18px;
     font-weight: 300;
   }
-  
   .slow-transition {
-    transition: 0.1s ease-in-out;
-  }
-  
-  .slide-fade-enter-active {
+      transition: 0.1s ease-in-out;
+    }
+    
+    .slide-fade-enter-active {
     transition: all 0.3s ease-out;
   }
   
-  /* .slide-fade-leave-active {
-    transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
-  } */
+  .slide-fade-leave-active {
+    transition: all 0.1s ease-out;
+  }
   
-  .slide-fade-enter-to {
+  .slide-fade-enter-to,
+  .slide-fade-leave-from {
     opacity: 1;
   }
   
@@ -87,5 +83,6 @@
     transform: translateX(-20px);
     opacity: 0;
   }
+
   </style>
   
