@@ -148,6 +148,10 @@ body {
       transform: translateX(6.5rem);
     }
 
+    .scale-custom-60{
+      transform: scale(.6);
+    }
+
     .h-custom-90 {
       height: 90vh
   }

@@ -6,13 +6,13 @@
       <body class="max-md:overflow-hidden">
         <transition name="opacity-p5"> 
             <div v-if="showP5" class="max-md:h-custom-90">
-              <div class="max-md:translate-x-24 max-md:scale-150">
+              <div class="max-md:scale-150 max-md:-translate-x-16">
                 <P5Animation />
               </div>
             </div>
         </transition>
         <transition name="fade-titles">
-          <div v-if="showTitles" class="flex inset-0 absolute lg:left-48 z-40 md:justify-end">
+          <div v-if="showTitles" class="flex inset-0 absolute lg:left-48 z-40 md:justify-end overflow-hidden">
             <!-- <div class="2xl:w-custom-50">
             </div> -->
               <div class="flex flex-col justify-center 2xl:pr-32 lg:w-custom-40 min-w-96">
