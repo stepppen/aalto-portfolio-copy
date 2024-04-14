@@ -33,7 +33,7 @@ function init() {
 
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(width, height);
-  effect = new AsciiEffect(renderer, '  ..:', { invert: true, resolution: 0.11 });
+  effect = new AsciiEffect(renderer, '   ...::', { invert: true });
   effect.setSize(width, height);
   effect.domElement.style.color = '#006CFF';
 
