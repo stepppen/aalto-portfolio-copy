@@ -10,9 +10,6 @@ import { AsciiEffect } from 'three/examples/jsm/effects/AsciiEffect.js';
 const asciiEffectContainer = ref(null);
 let camera, scene, renderer, effect;
 let rotationIncrement = 0.0009;
-let rotationDirection = 1;
-let lastRenderTime = 0;
-const fpsInterval = 10;
 const width = 600;
 const height = 600;
 
@@ -72,7 +69,7 @@ function animate() {
         }
         
         effect.render(scene, camera);
-    }, 50);
+    }, 75);
 }
 
 </script>

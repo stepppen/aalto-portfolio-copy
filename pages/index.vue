@@ -6,7 +6,7 @@
       <body class="max-md:overflow-hidden">
         <transition name="opacity-p5"> 
             <div v-if="showP5" class="max-md:h-custom-90">
-              <div class="max-md:scale-150 max-md:-translate-x-16">
+              <div>
                 <P5Animation />
               </div>
             </div>

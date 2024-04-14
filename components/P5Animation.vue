@@ -29,8 +29,6 @@ export default {
 
       p.draw = () => {
         p.background(0, 0, 0);
-
-        // Update easingMouseX and easingMouseY towards the current mouse position
         easingMouseX += (p.mouseX - easingMouseX) * easingFactor;
         easingMouseY += (p.mouseY - easingMouseY) * easingFactor;
 
@@ -63,5 +61,4 @@ export default {
 </script>
 
 <style scoped>
-/* Add any necessary styles */
 </style>
