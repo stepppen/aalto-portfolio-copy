@@ -3,17 +3,19 @@
       <Head>
         <Title>Home</Title>
       </Head>
-      <body class="overflow-hidden">
+      <body class="max-md:overflow-hidden">
         <transition name="opacity-p5"> 
-            <div v-if="showP5">
+            <div v-if="showP5" class="max-md:h-custom-90">
+              <div class="max-md:translate-x-24 max-md:scale-150">
                 <P5Animation />
+              </div>
             </div>
         </transition>
         <transition name="fade-titles">
           <div v-if="showTitles" class="flex inset-0 absolute lg:left-48 z-40 md:justify-end">
             <!-- <div class="2xl:w-custom-50">
             </div> -->
-              <div class="flex flex-col justify-center md:px-32">
+              <div class="flex flex-col justify-center 2xl:pr-32 lg:w-custom-40 min-w-96">
                 <div v-for="p in project.slice(0,5)" :key="p.id">
                     <LandingLink  :project="p" @mouseover="handleMouseOver(p)" @mouseleave="handleMouseLeave"/>
                 </div>
@@ -37,7 +39,7 @@
       setTimeout(() => {
         showTitles.value = true;
         
-      }, 100);
+      }, 300);
       // setTimeout(() => {
         
       // }, 100);

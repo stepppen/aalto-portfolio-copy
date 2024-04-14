@@ -5,7 +5,7 @@
     </Head>
     <!-- <div class="w-1/4"></div> -->
     <div>
-        <div class='xl:w-full grid lg:grid-cols-3 2xl:grid-cols-4 gap-4 lg:p-4 px-0'>
+        <div class='xl:w-full grid lg:grid-cols-3 2xl:grid-cols-4 gap-4 p-4 md:max-lg:p-0 '>
             <div v-for="p in project">
                 <ProjectCard :project="p"/>
             </div>

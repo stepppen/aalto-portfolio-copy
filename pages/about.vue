@@ -1,9 +1,9 @@
 <template>
     <div class="flex flex-col lg:flex-row justify-center inset-0 lg:left-48 px-4 absolute overflow-hidden">
-      <div class="h-32 lg:hidden"></div>
+      <div class="md:h-32 lg:hidden"></div>
       <transition name="opacity-p5">
-        <div v-if="showP5" class="lg:my-auto">
-          <ThreeNew />
+        <div v-if="showThree" class="lg:my-auto max-md:scale-90 max-md:flex max-md:inset-0 max-md:justify-center">
+            <ThreeNew />
         </div>
       </transition>
 
@@ -11,7 +11,7 @@
 
       </div>
       <transition name="fade-titles">
-        <div v-if="showTitles" class="flex flex-col w-full md:w-1/2 lg:w-1/4 my-auto md:inset-0">
+        <div v-if="showTitles" class="flex flex-col w-full md:w-1/2 lg:w-1/4 md:my-auto md:inset-0 max-md:pt-0">
           <p lang="en" class="text-justify md:justify-center">I am an interaction designer looking to further my understanding in the intersection of digital and physical. Feel free to contact me under: </p>
           <p>stepan@vedunov.com</p>
         </div>
@@ -22,12 +22,11 @@
   
   <script setup>
   import { onMounted } from 'vue';
-  let showP5 = ref(false);
+  let showThree = ref(false);
   let showTitles = ref(false);
   
   onMounted(() => {
-    // Preload Three.js script
-    showP5.value = true;
+    showThree.value = true;
     const threeScript = document.createElement('script');
     threeScript.src = 'ThreeNew.vue';
     threeScript.defer = true;

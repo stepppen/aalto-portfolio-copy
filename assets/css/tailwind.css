@@ -139,20 +139,37 @@ body {
     .h-95 {
         height: 95vh
     }
+
+    .h-custom-80 {
+      height: 80vh;
+    }
+
+    .translate-x-26 {
+      transform: translateX(6.5rem);
+    }
+
+    .h-custom-90 {
+      height: 90vh
+  }
     .w-custom-80 {
         width: 80vw
     }
 
     .w-150-centered{
-      overflow: hidden;
+      /* overflow: hidden; */
       width: 150vw;
-      display: flex;
-      inset: 0;
+      /* display: flex;
+      inset: 0; */
     }
 
     .w-custom-50 {
       width: 50vw;
     }
+
+    .w-custom-40 {
+      width: 40vw;
+    }
+
     .w-custom-30 {
         width: 30vw
     }
