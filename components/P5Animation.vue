@@ -18,7 +18,7 @@ export default {
       let easingMouseY = 0; // Initialize easingMouseY
       let easingFactor = 0.05;
       const elementsY = 40;
-      const charset = "...................";
+      const charset = "...........";
 
       p.setup = () => {
         p.createCanvas(window.innerWidth, window.innerHeight);
