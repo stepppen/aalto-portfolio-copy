@@ -23,11 +23,12 @@ export default defineNuxtConfig({
   },
   googleFonts: {
     families: {
-      Caladea: [300, 500, 700],
+      // Caladea: [300, 500, 700],
       Barlow: [300, 500, 700],
-      Castoro: [300, 500, 700],
-      Inter: [300, 500, 700],
-      Arvo: [300, 500, 700],
+      // Castoro: [300, 500, 700],
+      // Inter: [300, 500, 700],
+      // "Schibsted Grotesk": [300, 500, 700],
+      "Playfair Display": [300, 500, 700]
     }
   }
 });

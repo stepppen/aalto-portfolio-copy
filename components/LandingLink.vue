@@ -17,7 +17,7 @@
   
   <style lang="scss" scoped>
   .slow-transition {
-    transition: 0.1s ease-in-out;
+    transition: 0.2s ease-in-out;
   }
   
   .overlayTitle {
@@ -27,7 +27,7 @@
   .fade-enter-active, .fade-leave-active {
     transition: opacity 0.5s ease-out;
   }
-  
+
   .fade-enter, .fade-leave-to {
     opacity: 0;
   }

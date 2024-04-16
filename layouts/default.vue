@@ -38,6 +38,7 @@
   
   let showHeader = ref(false);
   const router = useRouter();
+  const cursor = ref(null);
   
 
   onMounted(() => {
@@ -52,6 +53,7 @@
   //   // Reset showHeader when navigating to a new route
   //   showHeader.value = false;
   // });
+
 
   </script>
   

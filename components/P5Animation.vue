@@ -18,17 +18,17 @@ export default {
       let easingMouseY = 0; // Initialize easingMouseY
       let easingFactor = 0.05;
       const elementsY = 40;
-      const charset = ".................";
+      const charset = ".............";
 
       p.setup = () => {
         p.createCanvas(window.innerWidth, window.innerHeight);
         p.textAlign(p.CENTER, p.CENTER);
-        p.fill('#006CFF');
         p.textSize((p.height / elementsY) * 2);
       };
 
       p.draw = () => {
-        p.background(0, 0, 0);
+        p.background(0,0,0, 100)
+        p.fill('#006CFF');
         easingMouseX += (p.mouseX - easingMouseX) * easingFactor;
         easingMouseY += (p.mouseY - easingMouseY) * easingFactor;
 

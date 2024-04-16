@@ -32,7 +32,7 @@ body {
     @apply bg-black;
     @apply text-white;
     @apply my-0;
-    @apply box-border
+    @apply box-border;
 
 }
 
@@ -100,22 +100,26 @@ body {
       hyphens: auto !important;
      }
     h2 {
-        font-family: Castoro;
-        /* font-weight: 700; */
+        font-family: "Playfair Display";
+        font-weight: 500;
+        font-optical-sizing: auto;
+        /* font-style: normal; */
         font-style: italic;
         margin-bottom: 10px;
-        font-size: 56px;
+        font-size: 62px;
+        font-variation-settings:
+        "wdth" 87.5;
     }
     .heading-4 {
-        font-family: Castoro;
+        font-family: Playfair Display;
         font-style: italic;
-        font-weight: 400;
-        font-size: 20px;
+        font-weight: 300;
+        font-size: 18px;
     }
 
     @media (max-width: 768px){
       h2{
-        font-family: Castoro;
+        font-family: Playfair Display;
         /* font-weight: 700; */
         font-style: italic;
         margin-bottom: 10px;
