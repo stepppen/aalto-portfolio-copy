@@ -11,10 +11,12 @@
               </div>
             </div>
         </transition>
+        <!-- <div class="flex flex-col inset-0 absolute lg:left-48 z-40 md:justify-center overflow-hidden">
+          <h2>Stepan Vedunov</h2>
+          <h3 class="opacity-50">Design Portfolio 24</h3>
+        </div> -->
         <transition name="fade-titles">
           <div v-if="showTitles" class="flex inset-0 absolute lg:left-48 z-40 md:justify-end overflow-hidden">
-            <!-- <div class="2xl:w-custom-50">
-            </div> -->
               <div class="flex flex-col justify-center 2xl:pr-32 lg:w-custom-40 min-w-96">
                 <div v-for="p in project.slice(0,5)" :key="p.id">
                     <LandingLink  :project="p" @mouseover="handleMouseOver(p)" @mouseleave="handleMouseLeave"/>

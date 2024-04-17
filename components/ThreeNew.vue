@@ -10,6 +10,7 @@ import { AsciiEffect } from 'three/examples/jsm/effects/AsciiEffect.js';
 const asciiEffectContainer = ref(null);
 let camera, scene, renderer, effect;
 let rotationIncrement = 0.0009;
+let rotationDirection = 1;
 const width = 600;
 const height = 600;
 
@@ -35,7 +36,8 @@ function init() {
   renderer.setSize(width, height);
   effect = new AsciiEffect(renderer, '   ...::', { invert: true });
   effect.setSize(width, height);
-  effect.domElement.style.color = '#006CFF';
+  effect.domElement.style.color = '#35a7b8';
+  // effect.domElement.style.color = '#eed9c4';
 
   asciiEffectContainer.value.appendChild(effect.domElement);
 }
@@ -65,10 +67,18 @@ function animate() {
         const gltfModelGroup = scene.getObjectByName('gltfModel');
         if (gltfModelGroup) {
             const gltfModel = gltfModelGroup.children[0];
-            gltfModel.rotation.y += rotationIncrement;
+            // gltfModel.rotation.y += rotationIncrement;
+        
+
+        // Rotate the model back and forth
+        gltfModel.rotation.y += rotationIncrement * rotationDirection;
+        // Change rotation direction if reaching the limits
+        if (Math.abs(gltfModel.rotation.y) >= Math.PI / 8) {
+          rotationDirection *= -1;
         }
         
         effect.render(scene, camera);
+      }
     }, 50);
 }
 

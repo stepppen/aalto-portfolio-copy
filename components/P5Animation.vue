@@ -18,7 +18,7 @@ export default {
       let easingMouseY = 0; // Initialize easingMouseY
       let easingFactor = 0.05;
       const elementsY = 40;
-      const charset = ".............";
+      const charset = "...............";
 
       p.setup = () => {
         p.createCanvas(window.innerWidth, window.innerHeight);
@@ -28,7 +28,9 @@ export default {
 
       p.draw = () => {
         p.background(0,0,0, 100)
-        p.fill('#006CFF');
+        p.fill('#35a7b8');
+        // p.fill('#eed9c4');
+        // p.fill('#006CFF');
         easingMouseX += (p.mouseX - easingMouseX) * easingFactor;
         easingMouseY += (p.mouseY - easingMouseY) * easingFactor;
 
@@ -36,7 +38,7 @@ export default {
           for (let x = 0; x < charset.length + 1; x++) {
             let posY = p.map(y, 0, elementsY, 0, p.height);
             let magX = p.map(
-              p.tan(p.radians(posY * 0.2 + (p.frameCount) / 20)),
+              p.tan(p.radians(posY * 0.2 + (p.frameCount) / 30)),
               -1 + (easingMouseY / 2000),
               1 + (easingMouseX / 3000),
               -p.width * 0.3,

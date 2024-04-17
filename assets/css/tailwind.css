@@ -33,6 +33,7 @@ body {
     @apply text-white;
     @apply my-0;
     @apply box-border;
+    /* @apply cursor-none */
 
 }
 
@@ -91,6 +92,10 @@ body {
     .project-text{
       @apply w-full
     }
+    /* a {
+      cursor: none;
+      
+    } */
     p { 
       word-break: break-word !important; 
       -webkit-hyphens: auto !important; 

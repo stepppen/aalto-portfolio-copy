@@ -3,20 +3,20 @@
     <transition name="project-fade">
       <header v-if="showHeader" class="dynamic-header">
         <nav class="dynamic-nav">
-          <nuxt-link to="/" class="flex lg:hover:px-1 slow-transition">
+          <nuxt-link to="/" class="flex lg:hover:px-2 lg:hover:bg-rose-700 slow-transition">
             <p class="pr-2">Stepan</p>
             <p>Vedunov</p>
           </nuxt-link>
           <ul class="flex lg:flex-col gap-2">
-            <li>
+            <li class="lg:hover:px-2 slow-transition lg:hover:bg-rose-700">
               <nuxt-link to="/about" class="flex">
-                <p class="lg:hover:px-1 slow-transition">About</p>
+                <p class="">About</p>
                 <img class="px-2" src="../assets/icons/arrow.svg" alt="arrow-icon">
               </nuxt-link>
             </li>
-            <li>
+            <li class="lg:hover:px-2 slow-transition lg:hover:bg-rose-700">
               <nuxt-link to="/projects" class="flex">
-                <p class="lg:hover:px-1 slow-transition">Projects</p>
+                <p class="">Projects</p>
                 <img class="md:px-2 pl-2" src="../assets/icons/arrow.svg" alt="arrow-icon">
               </nuxt-link>
             </li>
