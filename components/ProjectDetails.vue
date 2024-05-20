@@ -177,6 +177,12 @@ watch(() => project, () => {
 }
 }
 
+@media (min-width: 1920px){
+    .text-justify {
+    width: 60%;
+}
+}
+
 .fade-img-enter-active {
       transition: all 0.3s ease-out;
     }

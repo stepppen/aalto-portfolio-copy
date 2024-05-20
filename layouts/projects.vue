@@ -1,30 +1,31 @@
 <template>
   <div>
-    <transition name="project-fade">
-      <header v-if="showHeader" class="dynamic-header">
-        <nav class="dynamic-nav">
-          <nuxt-link to="/" class="flex lg:hover:px-2 lg:hover:bg-rose-700 slow-transition">
-            <p class="pr-2">Stepan</p>
-            <p>Vedunov</p>
-          </nuxt-link>
-          <ul class="flex lg:flex-col gap-2">
-            <li class="lg:hover:px-2 slow-transition lg:hover:bg-rose-700">
-              <nuxt-link to="/about" class="flex">
-                <p class="">About</p>
-                <img class="px-2" src="../assets/icons/arrow.svg" alt="arrow-icon">
-              </nuxt-link>
-            </li>
-            <li class="lg:hover:px-2 slow-transition lg:hover:bg-rose-700">
-              <nuxt-link to="/projects" class="flex">
-                <p class="">Projects</p>
-                <img class="md:px-2 pl-2" src="../assets/icons/arrow.svg" alt="arrow-icon">
-              </nuxt-link>
-            </li>
-          </ul>
-          <p class="lg:block hidden">©2024</p>
-        </nav>
-      </header>
-    </transition>
+    <transition name="slide-fade">
+        <header class="dynamic-header z-50" v-if="showHeader">
+          <nav class="dynamic-nav">
+            <nuxt-link to="/" class="flex">
+              <div class="flex align-center px-3 py-1 border-white lg:hover:px-4 slow-transition icon">
+                <p class=" p-0 "> Stepan Vedunov</p>
+              </div>
+            </nuxt-link>
+            <ul class="flex lg:flex-col gap-2">
+              <li class="lg:hover:px-4 slow-transition px-3 w-[9rem] py-1 border-white nav-button">
+                <nuxt-link to="/about" class="flex">
+                  <p class=" ">About</p>
+                  <img class="px-2" src="../assets/icons/arrow.svg" alt="arrow-icon">
+                </nuxt-link>
+              </li>
+              <li class="lg:hover:px-4 slow-transition px-3 w-[9rem] py-1 border-white nav-button">
+                <nuxt-link to="/projects" class="flex">
+                  <p class="">Projects</p>
+                  <img class="md:px-2 pl-2" src="../assets/icons/arrow.svg" alt="arrow-icon">
+                </nuxt-link>
+              </li>
+            </ul>
+            <p class="lg:block hidden">©2024</p>
+          </nav>
+        </header>
+      </transition>
 
     <div class="flex justify-between justify-items-end p-4">
       <div class="lg:w-1/4"></div>
@@ -52,6 +53,7 @@
   });
   </script>
   
+
   <style>
   .project-fade-enter-active {
     transition: all 0.3s ease-out;

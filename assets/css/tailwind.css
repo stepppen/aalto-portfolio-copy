@@ -41,6 +41,9 @@ body {
 @layer components {
 
     @screen sm {
+      h1{
+        font-size: 1.5rem;
+      }
       .text-grid{
         @apply grid-cols-1 
       }
@@ -73,6 +76,16 @@ body {
       }
     }
 
+    @screen xl {
+      .icon{
+        padding: 3px 4px 3px 4px;
+      }
+      .nav-button{
+        padding: 2px 4px 2px 4px;
+        width: 10rem;
+      }
+    }
+
     /* .text-grid{
       @apply grid-cols-1 
     }
@@ -96,7 +109,9 @@ body {
       cursor: none;
       
     } */
+    
     p { 
+      /* font-size: 0.5rem; */
       word-break: break-word !important; 
       -webkit-hyphens: auto !important; 
       -moz-hyphens: auto !important; 
@@ -104,33 +119,72 @@ body {
       -o-hyphens: auto !important; 
       hyphens: auto !important;
      }
+
     h2 {
         font-family: "Playfair Display";
         font-weight: 500;
         font-optical-sizing: auto;
         /* font-style: normal; */
-        font-style: italic;
+        font-style: normal;
         margin-bottom: 10px;
-        font-size: 62px;
+        font-size: 3.5rem;
         font-variation-settings:
         "wdth" 87.5;
     }
     .heading-4 {
-        font-family: Playfair Display;
-        font-style: italic;
+        font-family: "Playfair Display";
+        font-style: normal;
         font-weight: 300;
-        font-size: 18px;
+        font-size: 1rem;
     }
 
     @media (max-width: 768px){
       h2{
-        font-family: Playfair Display;
+        font-family: "Playfair Display";
         /* font-weight: 700; */
-        font-style: italic;
+        /* font-style: italic; */
         margin-bottom: 10px;
         font-size: 42px;
       }
+       h1{
+      font-family: "Playfair Display";
+      font-weight: 500;
+      font-optical-sizing: auto;
+      /* font-style: normal; */
+      /* font-style: italic; */
+      margin-bottom: 10px;
+      font-size: 2.5rem;
+      font-variation-settings:
+      "wdth" 87.5;
     }
+    }
+
+    @media (max-width: 1536px){
+      h1{
+        font-family: "Playfair Display";
+        font-weight: 500;
+        color:white;
+        margin-bottom: 10px;
+        font-size: 3.5rem;
+      }
+    }
+
+    @media (min-width: 1537px){
+      h1{
+        font-family: "Playfair Display";
+        font-weight: 500;
+        font-optical-sizing: auto;
+        /* font-style: normal; */
+        /* font-style: italic; */
+        color:white;
+        
+        margin-bottom: 10px;
+        font-size: 5rem;
+        font-variation-settings:
+        "wdth" 87.5;
+      }
+    }
+
 
 
 
@@ -155,6 +209,22 @@ body {
 
     .translate-x-26 {
       transform: translateX(6.5rem);
+    }
+
+    .contact-button{
+      font-family: Barlow, sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+
+      padding: 4px 8px 4px 8px;
+      margin: 4px;
+      border: 1px solid #ffffff;
+      border-radius: 5px;
+    }
+    .contact-button:hover{
+      background-color: rgb(190 18 60);
+      
+      transition: 0.2s ease-in-out;
     }
 
     .scale-custom-60{

@@ -10,9 +10,15 @@
 
       </div>
       <transition name="fade-titles">
-        <div v-if="showTitles" class="flex flex-col w-full md:w-1/2 lg:w-1/4 md:my-auto md:inset-0">
-          <p lang="en" class="text-justify md:justify-center margin-handeler">I am an interaction designer looking to further my understanding in the intersection of digital and physical. Feel free to contact me under: </p>
+        <div v-if="showTitles" class="flex flex-col w-full md:w-1/2 lg:w-96 md:my-auto md:inset-0">
+          <p lang="en" class="text-justify md:justify-center margin-handeler">I am a designer focused on intelligent interfaces that enhance real-world interactions. Apart from digital experiences I have a deep interest for industrial design and am looking to further my understanding in the intersection of digital and physical. Feel free to contact me under: </p>
           <p>stepan@vedunov.com</p>
+          <!-- <div class="flex w-48 flex-wrap">
+            <a href="mailto: stepan@vedunov.com"><button class="contact-button"> stepan@vedunov.com</button></a>
+            
+            <a href="https://www.linkedin.com/in/stepan-v-0242b2226/"><button class="contact-button"> Linkedin</button></a>
+            <a href="https://www.instagram.com/vedunooov/"><button class="contact-button"> Instagram</button></a>
+          </div> -->
         </div>
       </transition>
 
@@ -33,7 +39,7 @@
     setTimeout(() => {
         showTitles.value = true;
         
-      }, 100);
+      }, 300);
   });
   </script>
   

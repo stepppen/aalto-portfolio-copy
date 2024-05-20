@@ -11,8 +11,8 @@ const asciiEffectContainer = ref(null);
 let camera, scene, renderer, effect;
 let rotationIncrement = 0.0009;
 let rotationDirection = 1;
-const width = 600;
-const height = 600;
+const width = window.innerWidth/3;
+const height =  window.innerWidth/3;
 
 onMounted(() => {
   init();
@@ -34,7 +34,7 @@ function init() {
 
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(width, height);
-  effect = new AsciiEffect(renderer, '   ...::', { invert: true });
+  effect = new AsciiEffect(renderer, '   ...::', { invert: true , resolution: 0.15});
   effect.setSize(width, height);
   effect.domElement.style.color = '#35a7b8';
   // effect.domElement.style.color = '#eed9c4';

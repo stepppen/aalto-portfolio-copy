@@ -1,13 +1,18 @@
 <template>
     <transition name="card-fade">
-        <div v-if="cardLoaded" class="container">
-        <div class="aspect-[4/3] image-container flex justify-center align-center" @mouseover="hover = true" @mouseleave="hover = false">
+        <div v-if="cardLoaded" class="container grid-item">
+        <div class="image-container flex justify-center align-center" @mouseover="hover = true" @mouseleave="hover = false">
             <nuxt-link :to="`/projects/${project.id}`"> 
-                    <div class="container object-cover min-w-full h-full">
-                        <img :src="project.thumb" alt="project thumbnail" loading="lazy" class="thumb">
+                    <div class="container object-cover min-w-full h-full grid-item">
+                        <img :src="project.preview" alt="project thumbnail" loading="lazy" class="rounded new-img">
                         <div  v-if="hover" class="overlay">
+                            <!-- <img src="/assets/icons/arrow.svg" alt="arrow"> -->
+                            <!-- <p class="truncate"> {{ project.title }}</p>
+                            <p class="truncate"> {{ project.year }}</p> -->
+                        </div>
+                        <div>
                             <p class="truncate"> {{ project.title }}</p>
-                            <p class="truncate"> {{ project.year }}</p>
+                            <p class="truncate opacity-50"> {{ project.year }}</p>
                         </div>
                     </div>
             </nuxt-link>
@@ -41,16 +46,31 @@
     max-height: 100vh;
 }
 
+.grid-item {
+    margin-bottom: 8px;
+    break-inside: avoid;
+    /* padding-top: 4px; */
+  /* width: 600px; */
+  /* margin-bottom: auto; */
+}
+
+.new-img{
+    object-fit: cover;
+  width: 100%;
+  /* height: 400px; */
+  margin-bottom: auto;
+}
+
 .overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(0, 0, 0, 0.5);
       color: #fff;
       opacity: 0;
-      transition: opacity 0.1s ease;
+      transition: opacity 0.3s ease-out;
       display: flex;
       flex-direction: column;
       justify-content: center;

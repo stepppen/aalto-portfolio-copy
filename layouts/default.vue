@@ -1,22 +1,21 @@
 <template>
     <div>
       <transition name="slide-fade">
-        <header class="dynamic-header z-50" v-if="showHeader">
+        <header class="dynamic-header z-50 overflow-hidden" v-if="showHeader">
           <nav class="dynamic-nav">
-            <nuxt-link to="/" class="flex lg:hover:px-2 lg:hover:bg-rose-700 slow-transition">
-              <div class="flex">
-                <p class="pr-2">Stepan</p>
-                <p>Vedunov</p>
+            <nuxt-link to="/" class="flex">
+              <div class="flex align-center px-3 py-1 border-white lg:hover:px-4 slow-transition icon">
+                <p class=" p-0 "> Stepan Vedunov</p>
               </div>
             </nuxt-link>
             <ul class="flex lg:flex-col gap-2">
-              <li class="lg:hover:px-2 slow-transition lg:hover:bg-rose-700">
+              <li class="lg:hover:px-4 slow-transition px-3 w-[9rem] py-1 border-white nav-button">
                 <nuxt-link to="/about" class="flex">
                   <p class=" ">About</p>
                   <img class="px-2" src="../assets/icons/arrow.svg" alt="arrow-icon">
                 </nuxt-link>
               </li>
-              <li class="lg:hover:px-2 slow-transition lg:hover:bg-rose-700">
+              <li class="lg:hover:px-4 slow-transition px-3 w-[9rem] py-1 border-white nav-button">
                 <nuxt-link to="/projects" class="flex">
                   <p class="">Projects</p>
                   <img class="md:px-2 pl-2" src="../assets/icons/arrow.svg" alt="arrow-icon">
@@ -27,7 +26,7 @@
           </nav>
         </header>
       </transition>
-      <div class="flex lg:justify-between justify-center">
+      <div class="flex lg:justify-between justify-center overflow-hidden">
         <div class="lg:w-1/2"></div>
         <slot />
       </div>
@@ -58,9 +57,21 @@
   </script>
   
   <style>
+  .border-white{
+    /* border: 1px solid #f7f7f7; */
+     border-radius: 5px;
+  }
+  .border-white:hover{
+    background-color: rgb(190 18 60);
+    transition: 0.2s ease-in-out;
+  }
+  .border-white:active{
+    /* border: 1px solid rgb(125, 12, 41); */
+    /* background-color: rgb(10, 76, 127); */
+  }
   p {
     font-family: Barlow, sans-serif;
-    font-size: 18px;
+    font-size: 1rem;
     font-weight: 300;
   }
   .slow-transition {
