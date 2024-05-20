@@ -32,10 +32,10 @@
           </div>
         </transition>
         <transition name="fade-titles">
-          <div v-if="showTitles" id="typewriter" class="flex inset-0 absolute lg:left-32 z-40 lg:justify-end md:justify-center overflow-hidden p-4">
+          <div v-if="showTitles" id="typewriter" class="flex inset-0 absolute lg:left-32 z-40 justify-end  overflow-hidden p-4">
               <div class="flex flex-col justify-center 2xl:pr-32 lg:pr-16 lg:w-[50vw] w-[70vw]">
                 <div class="justify-self-center">
-                  <h1 class="max-md:text-center" >Designing interactions <br>for the <em>digital</em> and <br> <em>physical</em> worlds.</h1>
+                  <h1 class="max-md:text-right" >Designing interactions <br>for the <em>digital</em> and <br> <em>physical</em> worlds.</h1>
                 </div>
               </div>
           </div>
@@ -43,13 +43,13 @@
 
         <div class="h-64"></div>
         <div class="flex">
-          <div class="w-1/4"></div>
-          <div class="flex flex-col w-3/4 justify-end overflow-hidden">
+          <div class="hidden lg:inline-block lg:w-1/4"></div>
+          <div class="flex flex-col lg:w-3/4 justify-end overflow-hidden p-4">
             <div class="">
               <h2>Recent Work</h2>
             </div>
             <div class="">
-              <div class='xl:w-full adaptive-grid'>
+              <div class='xl:w-full adaptive-grid max-md:grid lg:pr-[20px]'>
                 <div v-for="p in project.slice(0,5)" :key="p.id">
                     <ProjectCard :project="p"/>
                 </div>
@@ -124,8 +124,13 @@ const startTypewriterAnimation = () => {
   
   <style lang="scss" scoped>
 
+@media (max-width: 1500px) {
+  .adaptive-grid{
+        column-count: 1;
+        column-gap: 20px;
+    }
+}
     .adaptive-grid{
-      padding-right: 20px;
         column-count: 2;
         column-gap: 20px;
     }

@@ -9,16 +9,16 @@
               </div>
             </nuxt-link>
             <ul class="flex lg:flex-col gap-2">
-              <li class="lg:hover:px-4 slow-transition px-3 w-[9rem] py-1 border-white nav-button">
+              <li class="lg:hover:px-4 slow-transition px-3 md:w-[9rem] py-1 border-white nav-button">
                 <nuxt-link to="/about" class="flex">
                   <p class=" ">About</p>
-                  <img class="px-2" src="../assets/icons/arrow.svg" alt="arrow-icon">
+                  <img class="hidden lg:inline-block px-2" src="../assets/icons/arrow.svg" alt="arrow-icon">
                 </nuxt-link>
               </li>
-              <li class="lg:hover:px-4 slow-transition px-3 w-[9rem] py-1 border-white nav-button">
+              <li class="lg:hover:px-4 slow-transition px-3 md:w-[9rem] py-1 border-white nav-button">
                 <nuxt-link to="/projects" class="flex">
                   <p class="">Projects</p>
-                  <img class="md:px-2 pl-2" src="../assets/icons/arrow.svg" alt="arrow-icon">
+                  <img class="hidden lg:inline-block md:px-2 pl-2" src="../assets/icons/arrow.svg" alt="arrow-icon">
                 </nuxt-link>
               </li>
             </ul>

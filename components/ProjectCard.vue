@@ -61,6 +61,10 @@
   margin-bottom: auto;
 }
 
+.new-img:active{
+    border: 1px solid rgb(255, 255, 255);
+}
+
 .overlay {
       position: absolute;
       top: 0;
@@ -78,6 +82,7 @@
     }
 .overlay:hover {
     opacity: 1;
+    /* border: 1px solid rgb(190 18 60); */
 }
 
 .card-fade-enter-active {

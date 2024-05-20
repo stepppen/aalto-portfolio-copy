@@ -5,7 +5,7 @@
     </Head>
     <!-- <div class="w-1/4"></div> -->
     <div>
-        <div class='xl:w-full adaptive-grid p-4'>
+        <div class='xl:w-full adaptive-grid max-md:grid p-4'>
             <div v-for="p in project">
                 <ProjectCard :project="p"/>
             </div>

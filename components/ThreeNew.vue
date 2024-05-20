@@ -11,8 +11,8 @@ const asciiEffectContainer = ref(null);
 let camera, scene, renderer, effect;
 let rotationIncrement = 0.0009;
 let rotationDirection = 1;
-const width = window.innerWidth/3;
-const height =  window.innerWidth/3;
+const width = 500;
+const height =  500;
 
 onMounted(() => {
   init();

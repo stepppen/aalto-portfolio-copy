@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col lg:flex-row justify-center inset-0 lg:left-48 px-4 lg:absolute overflow-hidden">
       <transition name="opacity-p5">
-        <div v-if="showThree" class="lg:my-auto max-md:scale-50 max-md:flex max-md:justify-center max-md:h-96 max-md:-translate-y-16">
+        <div v-if="showThree" class="lg:my-auto max-md:flex max-md:scale-50 max-md:mt-12 max-md:justify-center max-md:h-72 max-md:-translate-y-16">
             <ThreeNew />
         </div>
       </transition>
