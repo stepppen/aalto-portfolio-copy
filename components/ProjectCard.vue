@@ -64,7 +64,6 @@
 .new-img:active{
     border: 1px solid rgb(255, 255, 255);
 }
-
 .overlay {
       position: absolute;
       top: 0;
