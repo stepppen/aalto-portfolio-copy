@@ -17,10 +17,10 @@ export default defineNuxtConfig({
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'}
     ]
   },
-  app: {
-    pageTransition: { name: 'slide-fade', mode: 'out-in' },
-    layoutTransition: { name: 'project-fade', mode: 'out-in' }
-  },
+  // app: {
+  //   pageTransition: { name: 'slide-fade', mode: 'out-in' },
+  //   layoutTransition: { name: 'project-fade', mode: 'out-in' }
+  // },
   googleFonts: {
     families: {
       Caladea: [300, 500, 700],
@@ -31,7 +31,8 @@ export default defineNuxtConfig({
       },
       Castoro: [300, 500, 700],
       Inter: [300, 500, 700],
-      Arvo: [300, 500, 700]
+      Arvo: [300, 500, 700],
+      Roboto: [300, 400, 700]
       
     }
   }

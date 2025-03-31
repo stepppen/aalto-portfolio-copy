@@ -1,5 +1,4 @@
 <template>
-  <P5Animation />
     <div>
       <transition name="slide-fade">
         <header class="dynamic-header z-50 overflow-hidden" v-if="showHeader">
@@ -21,7 +20,7 @@
                 </nuxt-link>
               </li>
             </ul>
-            <p class="lg:block hidden">©2025</p>
+            <p class="lg:block hidden">©2024</p>
           </nav>
         </header>
       </transition>
@@ -62,18 +61,18 @@
      border-radius: 5px;
   }
   .border-white:hover{
-    border: 1px solid rgb(255, 255, 255);
+    background-color: rgb(190 18 60);
     transition: 0.2s ease-in-out;
   }
   .border-white:active{
-    border: 1px solid rgb(240, 0, 0);
+    border: 1px solid rgb(255, 255, 255);
     /* border: 1px solid rgb(125, 12, 41); */
     /* background-color: rgb(10, 76, 127); */
   }
   p {
     font-family: Roboto, sans-serif;
     font-size: 1rem;
-    font-weight: 300;
+    font-weight: 400;
   }
   .slow-transition {
       transition: 0.2s ease-in-out;

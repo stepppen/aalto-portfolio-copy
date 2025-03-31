@@ -5,11 +5,6 @@
             <nuxt-link :to="`/projects/${project.id}`"> 
                     <div class="container object-cover min-w-full h-full grid-item">
                         <img :src="project.preview" alt="project thumbnail" loading="lazy" class="rounded new-img">
-                        <div  v-if="hover" class="overlay">
-                            <!-- <img src="/assets/icons/arrow.svg" alt="arrow"> -->
-                            <!-- <p class="truncate"> {{ project.title }}</p>
-                            <p class="truncate"> {{ project.year }}</p> -->
-                        </div>
                         <div>
                             <p class="truncate"> {{ project.title }}</p>
                             <p class="truncate opacity-50"> {{ project.year }}</p>
@@ -59,10 +54,23 @@
   width: 100%;
   /* height: 400px; */
   margin-bottom: auto;
+  transition: opacity 0.3s ease-out;
+
 }
 
 .new-img:active{
+    border: 1px solid rgb(190 18 60);
+}
+.new-img:hover {
     border: 1px solid rgb(255, 255, 255);
+    
+}
+.border {
+    object-fit: cover;
+  width: 100%;
+  /* height: 400px; */
+  margin-bottom: auto;
+    transition: opacity 0.3s ease-out;
 }
 .overlay {
       position: absolute;
@@ -80,9 +88,9 @@
       align-items: center;
     }
 .overlay:hover {
-    opacity: 1;
-    /* border: 1px solid rgb(190 18 60); */
+    border: 1px solid rgb(255, 255, 255);
 }
+
 
 .card-fade-enter-active {
       transition: all 0.3s ease-out;

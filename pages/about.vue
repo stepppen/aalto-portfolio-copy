@@ -11,7 +11,7 @@
       </div>
       <transition name="fade-titles">
         <div v-if="showTitles" class="flex flex-col w-full md:w-1/2 lg:w-96 md:my-auto md:inset-0">
-          <p lang="en" class="text-justify md:justify-center margin-handeler">I am a designer focused on intelligent interfaces that enhance real-world interactions. Apart from digital experiences I have a deep interest for industrial design and am looking to further my understanding in the intersection of digital and physical. Feel free to contact me under: </p>
+          <p lang="en" class="text-justify md:justify-center margin-handeler">I design intelligent interfaces that enhance real-world interactions, with a strong interest in human-machine interaction and industrial design. Contact me at: </p>
           <p>stepan@vedunov.com</p>
           <!-- <div class="flex w-48 flex-wrap">
             <a href="mailto: stepan@vedunov.com"><button class="contact-button"> stepan@vedunov.com</button></a>

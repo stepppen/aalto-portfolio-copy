@@ -1,133 +1,159 @@
 <template>
-  <div>
+  <div class="main-container">
     <Head>
       <Title>Home</Title>
     </Head>
-    <body class="overflow-hidden">
-      <transition name="opacity-p5">
-        <div v-if="showP5" class="max-md:h-custom-90 overflow-hidden">
-          <div>
-            <exp />
+    
+    <!-- Place P5Animation at the very top level -->
+    
+    
+    <transition name="fade-titles">
+      <!-- CHANGE: Add height constraint instead of covering entire viewport -->
+      <div v-if="showTitles" id="typewriter" class="flex lg:pl-32 z-40 justify-start overflow-hidden p-4 fixed hero-content">
+        <div class="flex flex-col justify-center 2xl:pl-32 lg:pl-16">
+          <div class="justify-self-center">
+            <h1 class="text-reveal max-md:text-right">
+              <span class="line-reveal">
+                <span class="word">Designing</span>
+                <span class="word">interactions</span> 
+              </span>
+              <span class="line-reveal">
+                <span class="word">for</span>
+                <span class="word">the</span>
+                <span class="word digital-word"><i>digital</i></span>
+                <span class="word">and</span>
+              </span>
+              <span class="line-reveal">
+                <span class="word physical-word"><i>physical</i></span>
+                <span class="word">worlds.</span>
+              </span>
+            </h1>
           </div>
         </div>
-      </transition>
-      <transition name="fade-info">
-        <div v-if="showInfo" class="flex inset-0 absolute lg:left-48 z-40 md:justify-end overflow-hidden p-4 max-lg:hidden">
-          <div class="flex flex-col 2xl:pr-32 lg:w-[50vw] w-[70vw]">
-            <div>
-              <p>Based in Zurich, CH</p>
-              <p class="opacity-50">Design Portfolio 2024</p>
-            </div>
-          </div>
-        </div>
-      </transition>
-      <transition name="fade-titles">
-        
-        <div v-if="showTitles" id="typewriter" class="flex inset-0 absolute lg:left-32 z-40 justify-end overflow-hidden p-4">
-          <div class="flex flex-col justify-center 2xl:pr-32 lg:pr-16 lg:w-[50vw] w-[70vw]">
-            <div class="justify-self-center">
-              
-                <h1 class="max-md:text-right">
-                Designing interactions <br />for the <i>digital</i> and <br />
-                <i>physical</i> worlds.
-              </h1>
-              
+      </div>
+    </transition>
 
 
-            </div>
-          </div>
-        </div>
-      </transition>
-
-      <div class="h-64"></div>
-      <div class="flex">
-        <div class="hidden lg:inline-block lg:w-1/4"></div>
-        <div class="flex flex-col lg:w-3/4 justify-end overflow-hidden p-4">
-          <div class="">
-            <h1>Recent Work</h1>
-          </div>
-          <div class="">
-            <div class="xl:w-full adaptive-grid max-md:grid lg:pr-[20px]">
-              <div v-for="p in project.slice(0, 5)" :key="p.id">
-                <ProjectCard :project="p" />
-              </div>
+    <div class="flex pt-4">
+      <div class="lg:w-1/2"></div>
+      <div class="flex flex-col lg:w-1/2 justify-end overflow-hidden p-4">
+        <div class="">
+          <div class="xl:w-full adaptive-grid max-md:grid lg:pr-[20px]">
+            <div v-for="p in projects.slice(0, 5)" :key="p.id">
+              <ProjectCard :project="p" />
             </div>
           </div>
         </div>
       </div>
-    </body>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, nextTick } from 'vue';
-import jsonData from './assets/projects/projects.json';
-const project = jsonData;
-const hoveredProject = ref(null);
-let showTitles = ref(false);
-let showInfo = ref(false);
-let showP5 = ref(false);
+import P5Animation from '~/components/P5Animation.vue';
+import projectsData from '~/assets/projects/projects.json'; // Adjust path as needed
+
+const projects = ref(projectsData);
+const showTitles = ref(false);
+const showInfo = ref(false);
 
 onMounted(() => {
-  showP5.value = true;
+  // Show the titles and info after a short delay
   setTimeout(() => {
     showInfo.value = true;
     showTitles.value = true;
+    
+    // Initialize text reveal animation after titles are shown
     nextTick(() => {
-      startTypewriterAnimation();
+      animateText();
     });
   }, 300);
 });
 
-const handleMouseOver = (project) => {
-  hoveredProject.value = project;
-};
-
-const handleMouseLeave = () => {
-  hoveredProject.value = null;
-};
-
-const startTypewriterAnimation = () => {
-  const textElement = document.getElementById('typewriter').querySelector('h1');
-  if (textElement) {
-    const text = textElement.innerHTML;
-    textElement.innerHTML = '';  // Clear the text content
-    let character = 0;
-    let i = 0
-
-    const typeWriter = () => {
-      if (character < text.length) {
-        if(text[character] === '<' && text[character + 1] === 'i'){
-          const tagEnd = text.indexOf('>', character) + 1;
-          
-          const tag = text.substring(character, tagEnd);
-          textElement.innerHTML += tag;
-          character = tagEnd;
-        
-        }
-
-
-        // Exclude from printing tag 
-        if (text[character] === '<') {
-          const tagEnd = text.indexOf('>', character) + 1;
-          
-          const tag = text.substring(character, tagEnd);
-          textElement.innerHTML += text.substring(character, tagEnd);
-          character = tagEnd;
-        } else {
-          textElement.innerHTML += text[character];
-          character++;
-        }
-        setTimeout(typeWriter, 50);
-      }
-    };
-
-    typeWriter();
-  }
-};
+// Animation function for text reveal
+function animateText() {
+  const words = document.querySelectorAll('.word');
+  
+  words.forEach((word, index) => {
+    setTimeout(() => {
+      word.classList.add('revealed');
+    }, 100 * index); // Stagger each word
+  });
+}
 </script>
 
 <style lang="scss" scoped>
+.main-container {
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.hero-content {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh; /* Limit to just the viewport height */
+  pointer-events: none; /* Let clicks pass through the container */
+}
+
+/* But allow pointer events on the actual text */
+.hero-content h1, 
+.hero-content .word {
+  pointer-events: auto;
+}
+
+// Text effect styles
+.text-reveal {
+  position: relative;
+  line-height: 1.4;
+  
+  // Create subtle gradient effect
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(220, 220, 255, 1) 50%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  
+  // Create interesting blend with background
+  mix-blend-mode: difference;
+  
+  // Add subtle text glow
+  text-shadow: 
+    0 0 3px rgba(255, 255, 255, 0.1),
+    0 0 15px rgba(255, 255, 255, 0.05);
+    
+  // Line reveal container
+  .line-reveal {
+    display: block;
+    overflow: hidden;
+    
+    &:not(:last-child) {
+      margin-bottom: 0.3rem;
+    }
+  }
+  
+  // Word animation
+  .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    margin-right: 1.5rem;
+    
+    &.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+// Your existing styles...
 @media (max-width: 1500px) {
   .adaptive-grid {
     column-count: 1;
@@ -172,5 +198,10 @@ const startTypewriterAnimation = () => {
 }
 .opacity-p5-enter-active {
   transition: opacity 3s ease-out;
+}
+
+// Add hover effect to the heading
+.text-reveal:hover .word {
+  animation: subtle-wave 3s ease-in-out infinite;
 }
 </style>
