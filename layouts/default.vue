@@ -4,23 +4,7 @@
       <transition name="slide-fade">
         <header class="dynamic-header z-50 overflow-hidden" v-if="showHeader">
           <nav class="dynamic-nav">
-            <nuxt-link to="/" class="flex">
-              <div class="flex align-center px-3 py-1 border-white  lg:hover:px-4 slow-transition icon">
-                <p class=" p-0 "> Stepan Vedunov</p>
-              </div>
-            </nuxt-link>
-            <ul class="flex lg:flex-col gap-2">
-              <li class="lg:hover:px-4 slow-transition px-3 md:w-[9rem] py-1 border-white nav-button">
-                <nuxt-link to="/about" class="flex">
-                  <p class=" ">About</p>
-                </nuxt-link>
-              </li>
-              <li class="lg:hover:px-4 slow-transition px-3 md:w-[9rem] py-1 border-white nav-button">
-                <nuxt-link to="/projects" class="flex">
-                  <p class="">Projects</p>
-                </nuxt-link>
-              </li>
-            </ul>
+            <Tab />
             <p class="lg:block hidden">©2025</p>
           </nav>
         </header>

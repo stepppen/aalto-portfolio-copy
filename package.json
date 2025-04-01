@@ -14,7 +14,7 @@
     "@splinetool/runtime": "^1.0.91",
     "@tresjs/nuxt": "^2.1.1",
     "json-server": "^1.0.0-alpha.23",
-    "nuxt": "^3.10.3",
+    "nuxt": "^3.16.1",
     "p5": "^1.9.2",
     "vue": "^3.4.19",
     "vue-router": "^4.3.0"

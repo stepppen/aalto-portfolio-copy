@@ -9,10 +9,10 @@
     
     <transition name="fade-titles">
       <!-- CHANGE: Add height constraint instead of covering entire viewport -->
-      <div v-if="showTitles" id="typewriter" class="flex lg:pl-32 z-40 justify-start overflow-hidden p-4 fixed hero-content">
-        <div class="flex flex-col justify-center 2xl:pl-32 lg:pl-16">
+      <div v-if="showTitles" id="typewriter" class="flex lg:pl-16 z-40 justify-start overflow-hidden p-4 fixed hero-content">
+        <div class="flex flex-col justify-center 2xl:pl-32">
           <div class="justify-self-center">
-            <h1 class="text-reveal max-md:text-right">
+            <h1 class="text-reveal max-lg:hidden">
               <span class="line-reveal">
                 <span class="word">Designing</span>
                 <span class="word">interactions</span> 

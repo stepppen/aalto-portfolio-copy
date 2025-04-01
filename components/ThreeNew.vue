@@ -36,7 +36,7 @@ function init() {
   renderer.setSize(width, height);
   effect = new AsciiEffect(renderer, '   ...::', { invert: true , resolution: 0.15});
   effect.setSize(width, height);
-  effect.domElement.style.color = '#35a7b8';
+  effect.domElement.style.color = '#FFFFFF';
   // effect.domElement.style.color = '#eed9c4';
 
   asciiEffectContainer.value.appendChild(effect.domElement);
