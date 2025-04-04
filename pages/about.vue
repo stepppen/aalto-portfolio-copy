@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col lg:flex-row justify-center inset-0 lg:left-48 px-4 lg:absolute overflow-hidden">
+  <div class="flex flex-col lg:flex-row justify-center inset-0 lg:left-48 px-4 lg:absolute overflow-hidden  max-lg:items-center max-lg:gap-8">
     <transition name="opacity-p5">
-      <div v-if="showThree" class="lg:my-auto max-md:flex max-md:scale-50 max-md:mt-12 max-md:justify-center max-md:h-72 max-md:-translate-y-16">
+      <div v-if="showThree" class="lg:my-auto max-md:flex max-md:scale-75 max-md:mt-12 max-md:justify-center max-md:h-72 max-md:-translate-y-16">
         <ThreeNew />
       </div>
     </transition>
@@ -9,8 +9,9 @@
     <div class="w-16">
     </div>
     <transition name="fade-titles">
-      <div v-if="showTitles" class="flex flex-col w-full md:w-1/2 lg:w-96 md:my-auto md:inset-0">
-        <p lang="en" class="text-justify md:justify-center margin-handeler">I design intelligent interfaces that enhance real-world interactions, with a strong interest in human-machine interaction and industrial design. Contact me at: </p>
+      <div v-if="showTitles" class="flex flex-col w-dvw md:w-1/2 lg:w-96 lg:my-auto lg:inset-0 max-lg:justify-center max-lg:items-center margin-handeler max-lg:text-center">
+        <h2>Stepan Vedunov</h2>
+        <p lang="en" class=" lg:justify-center  max-md:max-w-sm">I design intelligent interfaces that enhance real-world interactions, with a strong interest in human-machine interaction and industrial design. Contact me at: </p>
         
         <!-- Updated contact section with icons -->
         <div class="contact-info">
@@ -53,7 +54,7 @@ h2 {
 
 @media (max-width: 700px){
   .margin-handeler{
-    margin: 0;
+    margin: auto;
   }
 }
 
@@ -125,8 +126,8 @@ p {
 
 @media (max-width: 640px) {
   .contact-info {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
     gap: 8px;
   }
 }

@@ -3,6 +3,7 @@
     --primary: black;
     --secondary: white;
     --tertiary: blue;
+    --scrollbar-width: 15px;
   }
 
 * {
@@ -25,6 +26,10 @@
     border-radius: 14px;
     border: 3px solid var(--primary);
   }
+
+  html {
+    scrollbar-gutter: stable both-edges; 
+  }
 @tailwind components;
 @tailwind utilities;
 
@@ -34,6 +39,7 @@ body {
     @apply my-0;
     @apply box-border;
     /* @apply cursor-none */
+    scrollbar-gutter: stable;
 
 }
 
@@ -41,6 +47,9 @@ body {
 @layer components {
   .dynamic-nav {
     @apply relative p-4 flex z-50;
+  }
+  .dynamic-header{
+    @apply relative h-auto flex justify-center;
   }
     @screen sm {
       h1{
@@ -53,11 +62,9 @@ body {
         @apply w-full
       }
       .dynamic-nav{
-        @apply justify-center items-center gap-4;
+        @apply justify-center items-center;
       }
-      .dynamic-header{
-        @apply relative h-auto flex justify-center w-full;
-      }
+
     }
 
     @screen md {

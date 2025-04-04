@@ -9,7 +9,7 @@
           </nav>
         </header>
       </transition>
-      <div class="flex lg:justify-between justify-center overflow-hidden max-lg:p-4 p-8">
+      <div class="flex lg:justify-between justify-center overflow-hidden p-4 xl:pl-8">
         <div class="lg:w-1/4"></div>
         <slot />
       </div>
@@ -29,10 +29,10 @@
     }, 100);
   });
   
-  router.afterEach(() => {
-    // Reset showHeader when navigating to a new route
-    showHeader.value = false;
-  });
+  // router.afterEach(() => {
+  //   // Reset showHeader when navigating to a new route
+  //   showHeader.value = false;
+  // });
   </script>
   
 

@@ -1,106 +1,133 @@
 <template>
     <transition name="card-fade">
-        <div v-if="cardLoaded" class="container grid-item">
-        <div class="image-container flex justify-center align-center" @mouseover="hover = true" @mouseleave="hover = false">
-            <nuxt-link :to="`/projects/${project.id}`"> 
-                    <div class="container object-cover min-w-full h-full grid-item">
-                        <img :src="project.preview" alt="project thumbnail" loading="lazy" class="rounded new-img">
-                        <div>
-                            <p class="truncate"> {{ project.title }}</p>
-                            <p class="truncate opacity-50"> {{ project.year }}</p>
-                        </div>
-                    </div>
-            </nuxt-link>
-        </div>
-    </div>
+      <div v-if="cardLoaded" class="project-card-container">
+        <nuxt-link :to="`/projects/${project.id}`" class="project-link">
+          <div class="project-card">
+            <!-- Image container with subtle scaling effect -->
+            <div class="image-wrapper">
+              <img 
+                :src="project.preview" 
+                :alt="project.title" 
+                loading="lazy" 
+                class="project-image"
+              />
+            </div>
+            
+            <!-- Text content -->
+            <div class="project-info">
+              <h3 class="project-title">{{ project.title }}</h3>
+              <div class="flex justify-between">
+                  <p class="project-year">{{ project.role }}</p>
+              </div>
+            </div>
+
+          </div>
+        </nuxt-link>
+      </div>
     </transition>
-    
-</template>
-
-<script setup>
-    const { project } = defineProps(['project']);
-
-    let cardLoaded = ref(false);
-    let hover = ref(false);
-
-    onMounted(()=>{
-        setTimeout(()=>{
-            cardLoaded.value = true;
-        }, 200)
-        
-    })
-</script>
-
-<style scoped>
-.container {
-    position: relative;
-}
-.thumb {
-    aspect-ratio: 4/3;
-    object-fit: cover;
-    max-height: 100vh;
-}
-
-.grid-item {
-    margin-bottom: 8px;
+  </template>
+  
+  <script setup>
+  import { ref, onMounted } from 'vue';
+  
+  const props = defineProps({
+    project: { type: Object, required: true }
+  });
+  
+  const cardLoaded = ref(false);
+  
+  onMounted(() => {
+    setTimeout(() => {
+      cardLoaded.value = true;
+    }, 200);
+  });
+  </script>
+  
+  <style scoped>
+  .project-card-container {
+    margin-bottom: 1.5rem;
     break-inside: avoid;
-    /* padding-top: 4px; */
-  /* width: 600px; */
-  /* margin-bottom: auto; */
-}
-
-.new-img{
+  }
+  
+  .project-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .project-card {
+    position: relative;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.10);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  
+  /* Subtle elevation on hover */
+  .project-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Image container with overflow control */
+  .image-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 3/2;
+    border-radius: 1rem;
+  }
+  
+  .project-image {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-  width: 100%;
-  /* height: 400px; */
-  margin-bottom: auto;
-  transition: opacity 0.3s ease-out;
+    transition: transform 0.3s ease;
+  }
+  
+  .project-card:hover .project-image {
+    transform: scale(1.03);
+  }
+  
+  /* Text content styling */
+  .project-info {
+    padding: 0.8rem;
+    transition: padding-left 0.2s ease;
+  }
+  
+  .project-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  
+  .project-year {
+    margin: 0.2rem 0 0;
+    font-size: 0.85rem;
+    opacity: 0.6;
+  }
+  
 
-}
-
-.new-img:active{
-    border: 1px solid rgb(190 18 60);
-}
-.new-img:hover {
-    border: 1px solid rgb(255, 255, 255);
-    
-}
-.border {
-    object-fit: cover;
-  width: 100%;
-  /* height: 400px; */
-  margin-bottom: auto;
-    transition: opacity 0.3s ease-out;
-}
-.overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      opacity: 0;
-      transition: opacity 0.3s ease-out;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-.overlay:hover {
-    border: 1px solid rgb(255, 255, 255);
-}
-
-
-.card-fade-enter-active {
-      transition: all 0.3s ease-out;
-    }
-.card-fade-enter-to {
+  
+  .project-card:hover  {
+    transform: scaleY(1);
+  }
+  
+  /* Subtle text shift when indicator appears */
+  .project-card:hover .project-info {
+    padding-left: 1rem;
+  }
+  
+  /* Appearance animation */
+  .card-fade-enter-active {
+    transition: all 0.3s ease-out;
+  }
+  .card-fade-enter-to {
     opacity: 1;
-}
-
-.card-fade-enter-from {
+  }
+  .card-fade-enter-from {
     transform: translateY(20px);
     opacity: 0;
-}
-</style>
+  }
+
+  </style>
