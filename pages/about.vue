@@ -9,7 +9,7 @@
     <div class="w-16">
     </div>
     <transition name="fade-titles">
-      <div v-if="showTitles" class="flex flex-col w-dvw md:w-1/2 lg:w-96 lg:my-auto lg:inset-0 max-lg:justify-center max-lg:items-center margin-handeler max-lg:text-center">
+      <div v-if="showTitles" class="flex flex-col md:w-1/2 lg:w-96 lg:my-auto lg:inset-0 max-lg:justify-center max-lg:items-center margin-handeler max-lg:text-center">
         <h2>Stepan Vedunov</h2>
         <p lang="en" class=" lg:justify-center  max-md:max-w-sm">I design intelligent interfaces that enhance real-world interactions, with a strong interest in human-machine interaction and industrial design. Contact me at: </p>
         
@@ -59,7 +59,7 @@ h2 {
 }
 
 p {
-  margin: 10px 0;
+  margin: 0;
   word-break: break-word !important; 
   -webkit-hyphens: auto !important; 
   -moz-hyphens: auto !important; 
