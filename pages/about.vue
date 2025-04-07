@@ -9,21 +9,26 @@
     <div class="w-16">
     </div>
     <transition name="fade-titles">
-      <div v-if="showTitles" class="flex flex-col md:w-1/2 lg:w-96 lg:my-auto lg:inset-0 max-lg:justify-center max-lg:items-center margin-handeler max-lg:text-center">
+      <div v-if="showTitles" class="flex flex-col md:w-2/3 lg:w-96 lg:my-auto lg:inset-0 max-lg:justify-center max-lg:items-center margin-handeler max-lg:text-center">
         <h2>Stepan Vedunov</h2>
-        <p lang="en" class=" lg:justify-center  max-md:max-w-sm">I design intelligent interfaces that enhance real-world interactions, with a strong interest in human-machine interaction and industrial design. Contact me at: </p>
+        <p lang="en" class=" lg:justify-center  max-md:max-w-sm">I design intelligent, human-centred interfaces that enhance real-world interactions. With a background in interaction design and a deep curiosity for emerging technologies, my work explores the evolving relationship between people, machines, and everything in-between.  </p>
         
         <!-- Updated contact section with icons -->
         <div class="contact-info">
-          <p class="email">stepan@vedunov.com</p>
-          <div class="social-links">
-            <a href="https://www.linkedin.com/in/stepan-v-0242b2226/" target="_blank" class="social-icon linkedin" aria-label="LinkedIn Profile">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
+  <a href="mailto:stepan.vedunov@outlook.com" class="contact-tag email-tag">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+      <polyline points="22,6 12,13 2,6"></polyline>
+    </svg>
+    stepan.vedunov@outlook.com
+  </a>
+  <a href="https://www.linkedin.com/in/stepan-v-0242b2226/" target="_blank" class="contact-tag linkedin-tag">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+    </svg>
+    LinkedIn
+  </a>
+</div>
       </div>
     </transition>
   </div>
@@ -130,5 +135,65 @@ p {
     align-items: center;
     gap: 8px;
   }
+}
+
+
+/* Contact tags styling */
+.contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.contact-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(4px);
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.contact-tag:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.email-tag:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.linkedin-tag:hover {
+  background: rgba(0, 119, 181, 0.15);
+  border-color: rgba(0, 119, 181, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .contact-info {
+    justify-content: center;
+  }
+  
+  .contact-tag {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* Remove old social styling */
+.social-links,
+.social-icon,
+.email {
+  /* Overriding old styles */
+  margin: 0;
+  padding: 0;
+  display: inline;
 }
 </style>
