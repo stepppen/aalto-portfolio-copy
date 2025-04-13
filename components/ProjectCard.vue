@@ -1,106 +1,135 @@
 <template>
-    <transition name="card-fade">
-      <div v-if="cardLoaded" class="project-card-container">
-        <nuxt-link :to="`/projects/${project.id}`" class="project-link">
-          <div class="project-card">
-            <!-- Image container with subtle scaling effect -->
-            <div class="image-wrapper">
-              <NuxtImg
-                :src="project.preview" 
-                :alt="project.title"
-                class="project-image"
-                width="800"
-                height="533"
-                placeholder
-              />
-            </div>
+  <transition name="card-fade">
+    <div v-if="cardLoaded" class="project-card-container">
+      <nuxt-link :to="`/projects/${project.id}`" class="project-link">
+        <div class="project-card">
+          <div class="image-wrapper" :style="{ 
+            paddingBottom: imageLoaded ? '0' : `${getAspectRatio(project.aspectRatio || '3:2')}%` 
+          }">
+            <!-- Greyscale placeholder -->
+            <div 
+              v-if="!imageLoaded" 
+              class="image-placeholder"
+            ></div>
             
-            <!-- Text content -->
-            <div class="project-info">
-              <h3 class="project-title">{{ project.title }}</h3>
-              <div class="flex justify-between">
-                  <p class="project-year">{{ project.role }}</p>
-              </div>
-            </div>
-
+            <img
+              :src="project.preview" 
+              :alt="project.title"
+              class="project-image"
+              :style="{ height: imageLoaded ? 'auto' : '0' }"
+              @load="handleImageLoaded"
+            />
           </div>
-        </nuxt-link>
-      </div>
-    </transition>
-  </template>
+          
+          <!-- Text content -->
+          <div class="project-info">
+            <h3 class="project-title">{{ project.title }}</h3>
+            <div class="flex justify-between">
+              <p class="project-year">{{ project.role }}</p>
+            </div>
+          </div>
+        </div>
+      </nuxt-link>
+    </div>
+  </transition>
+</template>
   
-  <script setup>
-  import { ref, onMounted } from 'vue';
-  
-  const props = defineProps({
-    project: { type: Object, required: true }
-  });
-  
-  const cardLoaded = ref(false);
+<script setup>
+import { ref, onMounted } from 'vue';
 
-  function getImagePath(path) {
-  // If the path already starts with /, return it as is
-  if (path.startsWith('/')) {
-    return path;
+const props = defineProps({
+  project: { type: Object, required: true }
+});
+
+const cardLoaded = ref(false);
+const imageLoaded = ref(false);
+
+// Convert aspect ratio string to percentage for padding-bottom
+function getAspectRatio(ratio) {
+  // Handle different formats: "3:2", "1:1", etc.
+  if (typeof ratio === 'string' && ratio.includes(':')) {
+    const [width, height] = ratio.split(':').map(Number);
+    return (height / width) * 100;
   }
-  // Otherwise, add the leading /
-  return `/${path}`;
+  // Default to 2:3 (portrait) if not specified
+  return 66.67;
 }
 
-  onMounted(() => {
-    setTimeout(() => {
-      cardLoaded.value = true;
-    }, 200);
-  });
-  </script>
+function handleImageLoaded() {
+  imageLoaded.value = true;
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    cardLoaded.value = true;
+  }, 200);
+});
+</script>
   
-  <style scoped>
-  .project-card-container {
-    margin-bottom: 1.5rem;
-    break-inside: avoid;
-  }
-  
-  .project-link {
-    display: block;
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  .project-card {
-    position: relative;
-    border-radius: 1rem;
-    background-color: rgba(255, 255, 255, 0.10);
-    overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
-  }
-  
-  /* Enhanced elevation on hover - matching your other components */
-  .project-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    background-color: rgba(255, 255, 255, 0.15);
-  }
-  
-  /* Image container with overflow control */
-  .image-wrapper {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    aspect-ratio: 3/2;
-    border-radius: 1rem;
-  }
-  
-  .project-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-  
-  .project-card:hover .project-image {
-    transform: scale(1.03);
-  }
-  
+<style scoped>
+.project-card-container {
+  margin-bottom: 1.5rem;
+  break-inside: avoid;
+  isolation: isolate;
+  position: relative;
+  z-index: 1;
+}
+
+.project-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card {
+  position: relative;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.10);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  pointer-events: auto;
+  will-change: transform;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Image container with variable height */
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  border-radius: 1rem 1rem 0 0;
+  background-color: #e0e0e0; /* Light grey placeholder */
+}
+
+.image-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.project-image {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+
+/* Keep your existing hover and animation styles */
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(2px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.03);
+}
   /* Text content styling */
   .project-info {
     padding: 0.8rem;

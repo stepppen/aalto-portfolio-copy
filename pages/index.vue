@@ -3,9 +3,11 @@
     <Head>
       <Title>Home</Title>
     </Head>
-    
+
+    <div class="hero-placeholder"></div>
+
     <transition name="fade-titles">
-      <div v-if="showTitles" id="typewriter" class="flex lg:pl-8 z-40 justify-start overflow-hidden p-4 fixed hero-content">
+      <div v-if="showTitles" id="typewriter" class="flex lg:pl-8 justify-start overflow-hidden p-4 fixed hero-content">
         <div class="flex flex-col justify-center 2xl:pl-32 max-lg:text-center w-full">
           <div class="justify-self-center">
             <h1 class="text-reveal">
@@ -41,11 +43,11 @@
       </div>
     </transition>
 
-    <div class="flex pt-4">
+    <div class="flex pt-4 z-50">
       <div class="lg:w-1/2"></div>
       <div class="flex flex-col lg:w-1/2 justify-end overflow-hidden p-4">
-        <div class="">
-          <div class="xl:w-full adaptive-grid max-md:grid lg:pr-[20px]">
+        <div>
+          <div v-if="showProjects" class="xl:w-full adaptive-grid max-md:grid lg:pr-[20px]">
             <div v-for="p in projects" :key="p.id">
               <ProjectCard :project="p" />
             </div>
@@ -64,16 +66,22 @@ import projectsData from '~/assets/projects/projects.json'; // Adjust path as ne
 const projects = ref(projectsData);
 const showTitles = ref(false);
 const showInfo = ref(false);
+const showProjects = ref(false);
 
 onMounted(() => {
-  // Show the titles and info after a short delay
+  // Show the titles first
   setTimeout(() => {
     showInfo.value = true;
     showTitles.value = true;
     
-    // Initialize text reveal animation after titles are shown
+    // Initialize text reveal animation
     nextTick(() => {
       animateText();
+      
+      // Only show projects after title animation has started
+      setTimeout(() => {
+        showProjects.value = true;
+      }, 400);
     });
   }, 300);
 });
@@ -91,6 +99,25 @@ function animateText() {
 </script>
 
 <style lang="scss" scoped>
+.hero-placeholder {
+  height: 280px; /* Adjust based on your hero content height on mobile */
+  display: none; /* Hidden by default */
+}
+
+/* Only show placeholder on mobile */
+@media (max-width: 1024px) {
+  .hero-placeholder {
+    display: block;
+  }
+}
+
+.fade-projects-enter-active {
+  transition: opacity 0.6s ease-out;
+}
+.fade-projects-enter-from {
+  opacity: 0;
+}
+
 
 /* Updated styles for non-clickable tags */
 .personal-tags {
@@ -142,19 +169,8 @@ function animateText() {
   }
 }
 
-/* Responsive adjustments */
-@media (max-width: 1064px) {
-  .personal-tags {
-    padding-top: 2rem;
-    justify-content: center;
-    width: 100%;
-  }
-}
-
 @media (max-width: 480px) {
   .personal-tags {
-    flex-direction: column;
-    align-items: center;
     gap: 0.5rem;
   }
   
@@ -332,6 +348,7 @@ function animateText() {
 .adaptive-grid {
   column-count: 2;
   column-gap: 20px;
+  width: 100%;
 }
 
 .fade-titles-enter-active {
@@ -377,10 +394,16 @@ function animateText() {
 /* Add responsive adjustments for smaller screens */
 @media (max-width: 1024px) {
   .hero-content {
-    position: relative !important;
+    position: absolute !important; /* Keep it absolute on mobile */
+    top: 0;
+    left: 0;
+    right: 0;
     height: auto;
+  }
+  .personal-tags {
     padding-top: 2rem;
-    padding-bottom: 1rem;
+    justify-content: center;
+    width: 100%;
   }
   
   .word {

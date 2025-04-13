@@ -1,6 +1,7 @@
 [
     { 
         "id": 8,
+        "aspectRatio": "4:3",
         "title": "Volkswagen HMI",
         "year": 2024,
         "preview": "../VW/preview_05.webp",
@@ -12,6 +13,7 @@
         },
         { 
             "id": 2,
+            "aspectRatio": "16:9",
             "title": "Neuranect",
             "year": 2023,
             "preview": "../Neuranect/thumb_new.webp",
@@ -42,6 +44,7 @@
             },
         { 
             "id": 1,
+            "aspectRatio": "3:4",
             "title": "ZVV",
             "year": 2023,
             "preview": "../ZVV/thumb.webp",
@@ -72,6 +75,7 @@
             },
             { 
                 "id": 5,
+                "aspectRatio": "4:3",
                 "title": "Arcaba",
                 "year": 2024,
                 "preview": "../Arcaba/thumb.webp",
@@ -91,6 +95,7 @@
                 },
         { 
             "id": 3,
+            "aspectRatio": "1:1",
             "title": "DataVis",
             "year": 2023,
             "preview": "../DataVis/preview.png",
@@ -120,6 +125,7 @@
             },
             { 
                 "id": 4,
+                "aspectRatio": "3:4",
                 "title": "TsunComp",
                 "year": 2023,
                 "preview": "../TsunComp/preview.png",
@@ -151,6 +157,7 @@
 
     { 
         "id": 6,
+        "aspectRatio": "9:16",
         "title": "Swiss Diversity",
         "year": 2023,
         "preview": "../SwissDiversity/preview.png",
@@ -170,6 +177,7 @@
 
 { 
 "id": 7,
+"aspectRatio": "1:1",
 "title": "Rep:Lab",
 "year": 2023,
 "preview": "../RepLab/thumb.webp",
