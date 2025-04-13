@@ -5,11 +5,13 @@
           <div class="project-card">
             <!-- Image container with subtle scaling effect -->
             <div class="image-wrapper">
-              <img 
+              <NuxtImg
                 :src="project.preview" 
-                :alt="project.title" 
-                loading="lazy" 
+                :alt="project.title"
                 class="project-image"
+                width="800"
+                height="533"
+                placeholder
               />
             </div>
             
@@ -35,7 +37,16 @@
   });
   
   const cardLoaded = ref(false);
-  
+
+  function getImagePath(path) {
+  // If the path already starts with /, return it as is
+  if (path.startsWith('/')) {
+    return path;
+  }
+  // Otherwise, add the leading /
+  return `/${path}`;
+}
+
   onMounted(() => {
     setTimeout(() => {
       cardLoaded.value = true;

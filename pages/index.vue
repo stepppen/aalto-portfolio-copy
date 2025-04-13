@@ -46,7 +46,7 @@
       <div class="flex flex-col lg:w-1/2 justify-end overflow-hidden p-4">
         <div class="">
           <div class="xl:w-full adaptive-grid max-md:grid lg:pr-[20px]">
-            <div v-for="p in projects.slice(0, 5)" :key="p.id">
+            <div v-for="p in projects" :key="p.id">
               <ProjectCard :project="p" />
             </div>
           </div>

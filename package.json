@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/image": "^1.10.0",
     "@splinetool/loader": "^1.0.91",
     "@splinetool/runtime": "^1.0.91",
     "@tresjs/nuxt": "^2.1.1",

@@ -5,11 +5,23 @@ export default defineNuxtConfig({
   ssr: false,
   static: true,
 
-  modules: [
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/google-fonts'
-  ],
-
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', '@nuxt/image'],
+  image: {
+    provider: 'netlify',
+    netlify: {
+      baseURl: process.env.IMAGES_URL
+    },
+    quality: 85,
+    formats: ['webp', 'jpg', 'png'],
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536
+    }
+  },
   head: {
     title: 'Vedunov',
     meta: [
