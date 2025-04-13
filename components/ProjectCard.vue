@@ -98,7 +98,7 @@ onMounted(() => {
   overflow: hidden;
   width: 100%;
   border-radius: 1rem 1rem 0 0;
-  background-color: #e0e0e0; /* Light grey placeholder */
+  background-color: #282828; /* Light grey placeholder */
 }
 
 .image-placeholder {
