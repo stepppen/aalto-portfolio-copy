@@ -47,9 +47,9 @@
       <div class="lg:w-1/2"></div>
       <div class="flex flex-col lg:w-1/2 justify-end overflow-hidden p-4">
         <div>
-          <div v-if="showProjects" class="xl:w-full adaptive-grid max-md:grid lg:pr-[20px]">
-            <div v-for="p in projects" :key="p.id">
-              <ProjectCard :project="p" />
+          <div class="xl:w-full adaptive-grid max-md:grid lg:pr-[20px]">
+            <div v-for="(p, index) in projects" :key="p.id">
+              <ProjectCard :project="p" :index="index" />
             </div>
           </div>
         </div>

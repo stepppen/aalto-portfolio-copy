@@ -12,11 +12,18 @@
               class="image-placeholder"
             ></div>
             
-            <img
-              :src="project.preview" 
+            <NuxtImg
+              :src="getImagePath(project.preview)"
               :alt="project.title"
               class="project-image"
-              :style="{ height: imageLoaded ? 'auto' : '0' }"
+              :width="400"
+              :height="getHeightFromAspectRatio(project.aspectRatio || '3:2', 400)"
+              format="webp"
+              quality="80"
+              loading="lazy"
+              placeholder
+              sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 400px"
+              decoding="async"
               @load="handleImageLoaded"
             />
           </div>
@@ -44,20 +51,41 @@ const props = defineProps({
 const cardLoaded = ref(false);
 const imageLoaded = ref(false);
 
+// Calculate height based on aspect ratio and width
+function getHeightFromAspectRatio(ratio, width) {
+  if (typeof ratio === 'string' && ratio.includes(':')) {
+    const [w, h] = ratio.split(':').map(Number);
+    return Math.round((h / w) * width);
+  }
+  return 266; // Default height for 3:2 ratio at 400px width
+}
+
 // Convert aspect ratio string to percentage for padding-bottom
 function getAspectRatio(ratio) {
-  // Handle different formats: "3:2", "1:1", etc.
   if (typeof ratio === 'string' && ratio.includes(':')) {
     const [width, height] = ratio.split(':').map(Number);
     return (height / width) * 100;
   }
-  // Default to 2:3 (portrait) if not specified
-  return 66.67;
+  return 66.67; // Default to 2:3 (portrait) if not specified
 }
 
 function handleImageLoaded() {
   imageLoaded.value = true;
 }
+
+function getImagePath(path) {
+  if (!path) {
+    return '/images/placeholder.webp';
+  }
+  
+  if (path.startsWith('/')) {
+    return path;
+  }
+  
+  return `/${path}`;
+}
+
+
 
 onMounted(() => {
   setTimeout(() => {
