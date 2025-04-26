@@ -1,25 +1,31 @@
 <template>
-  <svg class="constellation-bg" ref="svg"></svg>
+  <canvas ref="canvas" class="starfield-bg"></canvas>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      svgNS: "http://www.w3.org/2000/svg",
-      particles: [],
-      connections: [],
+      ctx: null,
+      stars: [],
       mouseX: 0,
       mouseY: 0,
-      maxParticles: 70, 
-      connectionDistance: 150,
+      width: 0,
+      height: 0,
+      dpr: 1,
       animationId: null,
-      isMobile: false
+      isMobile: false,
+      lastFrameTime: 0,
+      maxStars: 70,
+      connectionDistance: 150,
+      starColorBase: [100, 110, 130],
+      lineColorBase: [70, 80, 100, 0.2],
+      resizeTimer: null
     }
   },
   mounted() {
     this.checkIfMobile();
-    this.initBackground();
+    this.initCanvas();
     
     if (!this.isMobile) {
       window.addEventListener('mousemove', this.handleMouseMove);
@@ -29,137 +35,170 @@ export default {
     window.addEventListener('resize', this.handleResize);
   },
   methods: {
-    initBackground() {
-      const svg = this.$refs.svg;
-      svg.innerHTML = '';
-      svg.setAttribute('width', window.innerWidth);
-      svg.setAttribute('height', window.innerHeight);
+    checkIfMobile() {
+      this.isMobile = window.innerWidth < 768;
+      this.maxStars = this.isMobile ? 40 : 150;
+      this.connectionDistance = this.isMobile ? 120 : 150;
+    },
+    initCanvas() {
+      const canvas = this.$refs.canvas;
+      this.dpr = this.isMobile ? 1 : (window.devicePixelRatio || 1);
       
-      this.particles = [];
-      this.connections = [];
+      // Set display size
+      this.width = window.innerWidth;
+      this.height = window.innerHeight;
+      canvas.style.width = this.width + 'px';
+      canvas.style.height = this.height + 'px';
       
-      // Create particles group
-      const particlesGroup = document.createElementNS(this.svgNS, 'g');
-      svg.appendChild(particlesGroup);
+      // Set actual size with pixel ratio adjustment
+      canvas.width = this.width * this.dpr;
+      canvas.height = this.height * this.dpr;
       
-      // Create connections group (drawn first, below particles)
-      const connectionsGroup = document.createElementNS(this.svgNS, 'g');
-      svg.insertBefore(connectionsGroup, particlesGroup);
+      // Get context and scale
+      this.ctx = canvas.getContext('2d', { alpha: false });
+      this.ctx.scale(this.dpr, this.dpr);
       
-      // Create particles
-      for (let i = 0; i < this.maxParticles; i++) {
-        const particle = {
-          x: Math.random() * window.innerWidth,
-          y: Math.random() * window.innerHeight,
-          size: Math.random() * 3 + 1,
-          vx: Math.random() * 0.5 - 0.25,
-          vy: Math.random() * 0.5 - 0.25,
-          element: document.createElementNS(this.svgNS, 'circle')
-        };
-        
-        particle.element.setAttribute('cx', particle.x);
-        particle.element.setAttribute('cy', particle.y);
-        particle.element.setAttribute('r', particle.size);
-        particle.element.setAttribute('fill', 'rgba(120, 120, 120, 0.6)');
-        
-        particlesGroup.appendChild(particle.element);
-        this.particles.push(particle);
+      // Init stars
+      this.initStars();
+    },
+    initStars() {
+      this.stars = [];
+      
+      // Create stars with varied sizes and speeds
+      for (let i = 0; i < this.maxStars; i++) {
+        this.stars.push({
+          x: Math.random() * this.width,
+          y: Math.random() * this.height,
+          radius: Math.random() * 2 + 1,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5
+        });
       }
     },
-    animate() {
-      // Move particles
-      this.particles.forEach(particle => {
-        // Apply gentle movement
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-        
-        // Wrap around edges
-        if (particle.x < 0) particle.x = window.innerWidth;
-        if (particle.x > window.innerWidth) particle.x = 0;
-        if (particle.y < 0) particle.y = window.innerHeight;
-        if (particle.y > window.innerHeight) particle.y = 0;
-        
-        // Update DOM (only necessary attributes)
-        particle.element.setAttribute('cx', particle.x);
-        particle.element.setAttribute('cy', particle.y);
-        
-        // Adjust particle based on mouse proximity
-        if (!this.isMobile) {
-          const dx = particle.x - this.mouseX;
-          const dy = particle.y - this.mouseY;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          if (distance < 200) {
-            // Gently repel from mouse
-            const angle = Math.atan2(dy, dx);
-            const force = (200 - distance) / 3000;
-            particle.vx += Math.cos(angle) * force;
-            particle.vy += Math.sin(angle) * force;
-            
-            // Limit velocity
-            const speed = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);
-            if (speed > 2) {
-              particle.vx = (particle.vx / speed) * 2;
-              particle.vy = (particle.vy / speed) * 2;
-            }
-            
-            // Enhance appearance near mouse
-            particle.element.setAttribute('fill', `rgba(200, 200, 220, ${0.6 + (200-distance)/400})`);
-            particle.element.setAttribute('r', particle.size + (200-distance)/40);
-          } else {
-            // Return to normal appearance
-            particle.element.setAttribute('fill', 'rgba(120, 120, 120, 0.6)');
-            particle.element.setAttribute('r', particle.size);
-          }
-        }
-      });
+    animate(timestamp) {
+      this.lastFrameTime = timestamp;
       
-      // Update connections
-      this.updateConnections();
+      // Clear canvas
+      this.ctx.fillStyle = '#050505';
+      this.ctx.fillRect(0, 0, this.width, this.height);
+      
+      // Update and draw stars
+      this.updateAndDrawStars();
+      
+      // Draw connections
+      this.drawConnections();
       
       this.animationId = requestAnimationFrame(this.animate);
     },
-    updateConnections() {
-      const connectionsGroup = this.$refs.svg.querySelector('g:first-child');
-      connectionsGroup.innerHTML = ''; // Clear existing connections
+    updateAndDrawStars() {
+      const mouseActive = !this.isMobile && (this.mouseX !== 0 || this.mouseY !== 0);
       
-      // Only check particles within connectionDistance of each other
-      for (let i = 0; i < this.particles.length; i++) {
-        const p1 = this.particles[i];
+      // Draw non-highlighted stars
+      this.ctx.fillStyle = `rgba(${this.starColorBase[0]}, ${this.starColorBase[1]}, ${this.starColorBase[2]}, 0.8)`;
+
+      this.stars.forEach(star => {
+        // Update position
+        star.x += star.vx;
+        star.y += star.vy;
         
-        for (let j = i + 1; j < this.particles.length; j++) {
-          const p2 = this.particles[j];
-          const dx = p1.x - p2.x;
-          const dy = p1.y - p2.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+        // Wrap around edges
+        if (star.x < -10) star.x = this.width + 10;
+        if (star.x > this.width + 10) star.x = -10;
+        if (star.y < -10) star.y = this.height + 10;
+        if (star.y > this.height + 10) star.y = -10;
+        
+        let radius = star.radius;
+        
+        // Handle mouse interaction if mouse is active
+        if (mouseActive) {
+          const dx = star.x - this.mouseX;
+          const dy = star.y - this.mouseY;
+          const distanceSquared = dx * dx + dy * dy;
           
-          if (distance < this.connectionDistance) {
-            // Draw line with opacity based on distance
-            const line = document.createElementNS(this.svgNS, 'line');
-            line.setAttribute('x1', p1.x);
-            line.setAttribute('y1', p1.y);
-            line.setAttribute('x2', p2.x);
-            line.setAttribute('y2', p2.y);
+          if (distanceSquared < 40000) { // 200²
+            const distance = Math.sqrt(distanceSquared);
             
+            // Gentle attraction to mouse
+            const angle = Math.atan2(dy, dx);
+            const force = (200 - distance) / 10000;
+            
+            star.vx += Math.cos(angle) * -force;
+            star.vy += Math.sin(angle) * -force;
+            
+            // Enhanced size and brightness near mouse
+            const influence = 1 - (distance / 200);
+            radius = star.radius + (influence * 2);
+            
+            // WHITE COLOR ON HOVER
+            this.ctx.fillStyle = `rgba(${
+              200 + 55 * influence}, ${
+              200 + 55 * influence}, ${
+              200 + 55 * influence}, ${0.8})`;
+          } else {
+            this.ctx.fillStyle = `rgba(${this.starColorBase[0]}, ${this.starColorBase[1]}, ${this.starColorBase[2]}, 0.8)`;
+          }
+        }
+        
+        // Draw the star
+        this.ctx.beginPath();
+        this.ctx.arc(star.x, star.y, radius, 0, Math.PI * 2);
+        this.ctx.fill();
+      });
+    },
+    drawConnections() {
+      const mouseActive = !this.isMobile && (this.mouseX !== 0 || this.mouseY !== 0);
+      const connectionDistanceSquared = this.connectionDistance * this.connectionDistance;
+      
+      // Draw non-highlighted connections
+      this.ctx.strokeStyle = `rgba(${this.lineColorBase[0]}, ${this.lineColorBase[1]}, ${this.lineColorBase[2]}, ${this.lineColorBase[3]})`;
+      this.ctx.lineWidth = 0.5;
+      this.ctx.beginPath();
+      
+      // Only check a subset of all possible connections on mobile
+      const starsToCheck = this.isMobile ? this.stars.length / 2 : this.stars.length;
+      const skipFactor = this.isMobile ? 2 : 1;
+
+      for (let i = 0; i < starsToCheck; i++) {
+        const star1 = this.stars[i];
+        
+        for (let j = i + 1; j < this.stars.length; j += skipFactor) {
+          const star2 = this.stars[j];
+          
+          // Calculate distance between stars
+          const dx = star1.x - star2.x;
+          const dy = star1.y - star2.y;
+          const distanceSquared = dx * dx + dy * dy;
+          
+          if (distanceSquared < connectionDistanceSquared) {
+            const distance = Math.sqrt(distanceSquared);
             // Calculate opacity based on distance
-            const opacity = 0.2 * (1 - distance / this.connectionDistance);
+            const opacity = (1 - distance / this.connectionDistance) * this.lineColorBase[3];
             
             // Check if near mouse for highlighting
-            const mouseDistance = Math.min(
-              Math.sqrt(Math.pow(p1.x - this.mouseX, 2) + Math.pow(p1.y - this.mouseY, 2)),
-              Math.sqrt(Math.pow(p2.x - this.mouseX, 2) + Math.pow(p2.y - this.mouseY, 2))
-            );
-            
-            if (mouseDistance < 200 && !this.isMobile) {
-              // Highlight connection near mouse
-              line.setAttribute('stroke', `rgba(180, 180, 255, ${opacity * 2})`);
-              line.setAttribute('stroke-width', '0.8');
+            if (mouseActive) {
+              const mouseDist1 = Math.hypot(star1.x - this.mouseX, star1.y - this.mouseY);
+              const mouseDist2 = Math.hypot(star2.x - this.mouseX, star2.y - this.mouseY);
+              const mouseDistance = Math.min(mouseDist1, mouseDist2);
+              
+              if (mouseDistance < 200) {
+                // WHITE HIGHLIGHT CONNECTION NEAR MOUSE
+                const influence = 1 - (mouseDistance / 200);
+                this.ctx.strokeStyle = `rgba(${
+                  220 + 35 * influence}, ${
+                  220 + 35 * influence}, ${
+                  220 + 35 * influence}, ${opacity * 2})`;
+              } else {
+                this.ctx.strokeStyle = `rgba(${this.lineColorBase[0]}, ${this.lineColorBase[1]}, ${this.lineColorBase[2]}, ${opacity})`;
+              }
             } else {
-              line.setAttribute('stroke', `rgba(100, 100, 100, ${opacity})`);
-              line.setAttribute('stroke-width', '0.5');
+              this.ctx.strokeStyle = `rgba(${this.lineColorBase[0]}, ${this.lineColorBase[1]}, ${this.lineColorBase[2]}, ${opacity})`;
             }
             
-            connectionsGroup.appendChild(line);
+            // Draw the connection
+            this.ctx.beginPath();
+            this.ctx.moveTo(star1.x, star1.y);
+            this.ctx.lineTo(star2.x, star2.y);
+            this.ctx.stroke();
           }
         }
       }
@@ -172,12 +211,8 @@ export default {
       clearTimeout(this.resizeTimer);
       this.resizeTimer = setTimeout(() => {
         this.checkIfMobile();
-        this.initBackground();
+        this.initCanvas();
       }, 200);
-    },
-    checkIfMobile() {
-      this.isMobile = window.innerWidth < 768;
-      this.maxParticles = this.isMobile ? 40 : 70;
     }
   },
   beforeUnmount() {
@@ -189,7 +224,7 @@ export default {
 </script>
 
 <style>
-.constellation-bg {
+.starfield-bg {
   position: fixed;
   top: 0;
   left: 0;
