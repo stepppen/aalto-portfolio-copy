@@ -12,11 +12,14 @@
               class="image-placeholder"
             ></div>
             
-            <img
-              :src="project.preview" 
+            <NuxtImg
+              :src="getImagePath(project.preview)"
               :alt="project.title"
               class="project-image"
               :style="{ height: imageLoaded ? 'auto' : '0' }"
+              format="webp"
+              quality="60"
+              loading="lazy"
               @load="handleImageLoaded"
             />
           </div>
@@ -57,6 +60,24 @@ function getAspectRatio(ratio) {
 
 function handleImageLoaded() {
   imageLoaded.value = true;
+}
+
+function getImagePath(path) {
+  // Debug the path to see what's actually coming from your JSON
+  console.log("Original image path:", path);
+  
+  // If path is undefined or empty, use a fallback
+  if (!path) {
+    return '/images/placeholder.webp';
+  }
+  
+  // If the path already starts with /, return it as is
+  if (path.startsWith('/')) {
+    return path;
+  }
+  
+  // Otherwise, add the leading /
+  return `/${path}`;
 }
 
 onMounted(() => {
