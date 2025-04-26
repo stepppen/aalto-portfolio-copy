@@ -16,9 +16,10 @@
               :src="getImagePath(project.preview)"
               :alt="project.title"
               class="project-image"
+              :width="400"
+              :height="getHeightFromAspectRatio(project.aspectRatio)"
               :style="{ height: imageLoaded ? 'auto' : '0' }"
               format="webp"
-              quality="60"
               loading="lazy"
               @load="handleImageLoaded"
             />
@@ -78,6 +79,13 @@ function getImagePath(path) {
   
   // Otherwise, add the leading /
   return `/${path}`;
+}
+
+function getHeightFromAspectRatio(aspectRatio, baseWidth = 400) {
+  if (!aspectRatio) return baseWidth; // Default to square if no ratio provided
+  
+  const [width, height] = aspectRatio.split(':').map(Number);
+  return Math.round((baseWidth * height) / width);
 }
 
 onMounted(() => {

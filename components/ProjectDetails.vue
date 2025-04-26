@@ -3,7 +3,7 @@
       <transition name="fade-img">
         <div v-if="imageDisplayed" class="imageDisplayed">
             <div v-show="showImage" class="aspect-[4/3] flex justify-center align-center overflow-hidden">
-                <img :src="project.thumb" alt="project img" class="object-cover min-w-full">
+                <img :src="project.thumb" alt="project img" class="object-cover min-w-full rounded-2xl">
             </div>
         </div>
       </transition>
