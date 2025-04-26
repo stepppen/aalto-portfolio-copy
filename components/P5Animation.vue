@@ -1,236 +1,240 @@
 <template>
-  <canvas ref="canvas" class="starfield-bg"></canvas>
+  <svg class="grid-background" ref="svg"></svg>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      ctx: null,
-      stars: [],
+      svgNS: "http://www.w3.org/2000/svg",
+      gridSize: 40,
       mouseX: 0,
       mouseY: 0,
-      width: 0,
-      height: 0,
-      dpr: 1,
+      targetMouseX: 0,
+      targetMouseY: 0,
       animationId: null,
-      isMobile: false,
-      lastFrameTime: 0,
-      maxStars: 70,
-      connectionDistance: 150,
-      starColorBase: [100, 110, 130],
-      lineColorBase: [70, 80, 100, 0.2],
-      resizeTimer: null
+      pointsCache: [],
+      interactionRadius: 150,
+      updateDelay: null,
+      isMobile: false
     }
   },
   mounted() {
     this.checkIfMobile();
-    this.initCanvas();
+    this.createGrid();
     
+    // Only add mouse events if not mobile
     if (!this.isMobile) {
       window.addEventListener('mousemove', this.handleMouseMove);
     }
     
+    window.addEventListener('resize', this.throttledResize);
+    // Start animation loop
     this.animate();
-    window.addEventListener('resize', this.handleResize);
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.throttledResize);
+    if (!this.isMobile) {
+      window.removeEventListener('mousemove', this.handleMouseMove);
+    }
+    cancelAnimationFrame(this.animationId);
+    clearTimeout(this.updateDelay);
   },
   methods: {
     checkIfMobile() {
+      // Simple detection based on screen width
       this.isMobile = window.innerWidth < 768;
-      this.maxStars = this.isMobile ? 40 : 150;
-      this.connectionDistance = this.isMobile ? 120 : 150;
     },
-    initCanvas() {
-      const canvas = this.$refs.canvas;
-      this.dpr = this.isMobile ? 1 : (window.devicePixelRatio || 1);
-      
-      // Set display size
-      this.width = window.innerWidth;
-      this.height = window.innerHeight;
-      canvas.style.width = this.width + 'px';
-      canvas.style.height = this.height + 'px';
-      
-      // Set actual size with pixel ratio adjustment
-      canvas.width = this.width * this.dpr;
-      canvas.height = this.height * this.dpr;
-      
-      // Get context and scale
-      this.ctx = canvas.getContext('2d', { alpha: false });
-      this.ctx.scale(this.dpr, this.dpr);
-      
-      // Init stars
-      this.initStars();
-    },
-    initStars() {
-      this.stars = [];
-      
-      // Create stars with varied sizes and speeds
-      for (let i = 0; i < this.maxStars; i++) {
-        this.stars.push({
-          x: Math.random() * this.width,
-          y: Math.random() * this.height,
-          radius: Math.random() * 2 + 1,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5
-        });
+    animate() {
+      // Only do mouse smoothing if not mobile
+      if (!this.isMobile) {
+        // Smooth mouse movement with lerp (linear interpolation)
+        this.mouseX += (this.targetMouseX - this.mouseX) * 0.15;
+        this.mouseY += (this.targetMouseY - this.mouseY) * 0.15;
+        
+        // Update points based on smooth mouse position
+        this.updatePointsNearMouse();
       }
-    },
-    animate(timestamp) {
-      this.lastFrameTime = timestamp;
       
-      // Clear canvas
-      this.ctx.fillStyle = '#050505';
-      this.ctx.fillRect(0, 0, this.width, this.height);
-      
-      // Update and draw stars
-      this.updateAndDrawStars();
-      
-      // Draw connections
-      this.drawConnections();
-      
+      // Continue animation loop
       this.animationId = requestAnimationFrame(this.animate);
     },
-    updateAndDrawStars() {
-      const mouseActive = !this.isMobile && (this.mouseX !== 0 || this.mouseY !== 0);
+    createGrid() {
+      const svg = this.$refs.svg;
+      svg.innerHTML = '';
+      svg.setAttribute('width', window.innerWidth);
+      svg.setAttribute('height', window.innerHeight);
       
-      // Draw non-highlighted stars
-      this.ctx.fillStyle = `rgba(${this.starColorBase[0]}, ${this.starColorBase[1]}, ${this.starColorBase[2]}, 0.8)`;
-
-      this.stars.forEach(star => {
-        // Update position
-        star.x += star.vx;
-        star.y += star.vy;
-        
-        // Wrap around edges
-        if (star.x < -10) star.x = this.width + 10;
-        if (star.x > this.width + 10) star.x = -10;
-        if (star.y < -10) star.y = this.height + 10;
-        if (star.y > this.height + 10) star.y = -10;
-        
-        let radius = star.radius;
-        
-        // Handle mouse interaction if mouse is active
-        if (mouseActive) {
-          const dx = star.x - this.mouseX;
-          const dy = star.y - this.mouseY;
-          const distanceSquared = dx * dx + dy * dy;
-          
-          if (distanceSquared < 40000) { // 200²
-            const distance = Math.sqrt(distanceSquared);
-            
-            // Gentle attraction to mouse
-            const angle = Math.atan2(dy, dx);
-            const force = (200 - distance) / 10000;
-            
-            star.vx += Math.cos(angle) * -force;
-            star.vy += Math.sin(angle) * -force;
-            
-            // Enhanced size and brightness near mouse
-            const influence = 1 - (distance / 200);
-            radius = star.radius + (influence * 2);
-            
-            // WHITE COLOR ON HOVER
-            this.ctx.fillStyle = `rgba(${
-              200 + 55 * influence}, ${
-              200 + 55 * influence}, ${
-              200 + 55 * influence}, ${0.8})`;
-          } else {
-            this.ctx.fillStyle = `rgba(${this.starColorBase[0]}, ${this.starColorBase[1]}, ${this.starColorBase[2]}, 0.8)`;
-          }
-        }
-        
-        // Draw the star
-        this.ctx.beginPath();
-        this.ctx.arc(star.x, star.y, radius, 0, Math.PI * 2);
-        this.ctx.fill();
-      });
-    },
-    drawConnections() {
-      const mouseActive = !this.isMobile && (this.mouseX !== 0 || this.mouseY !== 0);
-      const connectionDistanceSquared = this.connectionDistance * this.connectionDistance;
+      // Create grid lines (less frequent for better performance)
+      for (let x = 0; x < window.innerWidth; x += this.gridSize) {
+        const line = document.createElementNS(this.svgNS, 'line');
+        line.setAttribute('x1', x);
+        line.setAttribute('y1', 0);
+        line.setAttribute('x2', x);
+        line.setAttribute('y2', window.innerHeight);
+        line.setAttribute('stroke', 'rgba(30, 30, 30, 0.1)'); // Darker grid lines
+        line.setAttribute('stroke-width', '0.5');
+        svg.appendChild(line);
+      }
       
-      // Draw non-highlighted connections
-      this.ctx.strokeStyle = `rgba(${this.lineColorBase[0]}, ${this.lineColorBase[1]}, ${this.lineColorBase[2]}, ${this.lineColorBase[3]})`;
-      this.ctx.lineWidth = 0.5;
-      this.ctx.beginPath();
+      for (let y = 0; y < window.innerHeight; y += this.gridSize) {
+        const line = document.createElementNS(this.svgNS, 'line');
+        line.setAttribute('x1', 0);
+        line.setAttribute('y1', y);
+        line.setAttribute('x2', window.innerWidth);
+        line.setAttribute('y2', y);
+        line.setAttribute('stroke', 'rgba(30, 30, 30, 0.1)'); // Darker grid lines
+        line.setAttribute('stroke-width', '0.5');
+        svg.appendChild(line);
+      }
       
-      // Only check a subset of all possible connections on mobile
-      const starsToCheck = this.isMobile ? this.stars.length / 2 : this.stars.length;
-      const skipFactor = this.isMobile ? 2 : 1;
-
-      for (let i = 0; i < starsToCheck; i++) {
-        const star1 = this.stars[i];
-        
-        for (let j = i + 1; j < this.stars.length; j += skipFactor) {
-          const star2 = this.stars[j];
+      // Create grid points and build the cache
+      this.pointsCache = [];
+      const cols = Math.ceil(window.innerWidth / this.gridSize);
+      const rows = Math.ceil(window.innerHeight / this.gridSize);
+      
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const circle = document.createElementNS(this.svgNS, 'circle');
+          const posX = x * this.gridSize;
+          const posY = y * this.gridSize;
           
-          // Calculate distance between stars
-          const dx = star1.x - star2.x;
-          const dy = star1.y - star2.y;
-          const distanceSquared = dx * dx + dy * dy;
+          circle.setAttribute('cx', posX);
+          circle.setAttribute('cy', posY);
+          circle.setAttribute('r', 1.5);
+          circle.setAttribute('fill', 'rgba(80, 80, 80, 0.5)');
+          circle.classList.add('grid-point');
+          svg.appendChild(circle);
           
-          if (distanceSquared < connectionDistanceSquared) {
-            const distance = Math.sqrt(distanceSquared);
-            // Calculate opacity based on distance
-            const opacity = (1 - distance / this.connectionDistance) * this.lineColorBase[3];
-            
-            // Check if near mouse for highlighting
-            if (mouseActive) {
-              const mouseDist1 = Math.hypot(star1.x - this.mouseX, star1.y - this.mouseY);
-              const mouseDist2 = Math.hypot(star2.x - this.mouseX, star2.y - this.mouseY);
-              const mouseDistance = Math.min(mouseDist1, mouseDist2);
-              
-              if (mouseDistance < 200) {
-                // WHITE HIGHLIGHT CONNECTION NEAR MOUSE
-                const influence = 1 - (mouseDistance / 200);
-                this.ctx.strokeStyle = `rgba(${
-                  220 + 35 * influence}, ${
-                  220 + 35 * influence}, ${
-                  220 + 35 * influence}, ${opacity * 2})`;
-              } else {
-                this.ctx.strokeStyle = `rgba(${this.lineColorBase[0]}, ${this.lineColorBase[1]}, ${this.lineColorBase[2]}, ${opacity})`;
-              }
-            } else {
-              this.ctx.strokeStyle = `rgba(${this.lineColorBase[0]}, ${this.lineColorBase[1]}, ${this.lineColorBase[2]}, ${opacity})`;
-            }
-            
-            // Draw the connection
-            this.ctx.beginPath();
-            this.ctx.moveTo(star1.x, star1.y);
-            this.ctx.lineTo(star2.x, star2.y);
-            this.ctx.stroke();
-          }
+          // Store in cache for quick access
+          this.pointsCache.push({
+            element: circle,
+            x: posX,
+            y: posY,
+            currentSize: 1.5,
+            targetSize: 1.5,
+            currentOpacity: 0.5,
+            targetOpacity: 0.5,
+            currentColor: [80, 80, 80], // Darker RGB values
+            targetColor: [80, 80, 80]  // Darker RGB values
+          });
         }
       }
     },
-    handleMouseMove(e) {
-      this.mouseX = e.clientX;
-      this.mouseY = e.clientY;
+    updatePointsNearMouse() {
+      // Skip this entirely on mobile devices
+      if (this.isMobile) return;
+      
+      // Update only points that need to change
+      this.pointsCache.forEach(point => {
+        const dx = point.x - this.mouseX;
+        const dy = point.y - this.mouseY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        // Calculate target values based on distance
+        if (distance < this.interactionRadius) {
+          // Use smooth easing based on distance
+          const influence = 1 - (distance / this.interactionRadius);
+          
+          // Larger dots near mouse
+          point.targetSize = 1.5 + (influence * 5);
+          
+          // Higher opacity near mouse
+          point.targetOpacity = 0.5 + (influence);
+          
+          // Whiter color near mouse (interpolate from default to white)
+          point.targetColor = [
+            80 + (influence * 175), // Towards 255 (white)
+            80 + (influence * 175), // Towards 255 (white)
+            80 + (influence * 175)  // Towards 255 (white)
+          ];
+        } else {
+          // Default values when away from mouse
+          point.targetSize = 1.5;
+          point.targetOpacity = 0.5;
+          point.targetColor = [80, 80, 80]; // Default darker color
+        }
+        
+        // Smooth transition to target values
+        point.currentSize += (point.targetSize - point.currentSize) * 0.2;
+        point.currentOpacity += (point.targetOpacity - point.currentOpacity) * 0.2;
+        
+        // Smooth color transition
+        point.currentColor = [
+          point.currentColor[0] + (point.targetColor[0] - point.currentColor[0]) * 0.2,
+          point.currentColor[1] + (point.targetColor[1] - point.currentColor[1]) * 0.2,
+          point.currentColor[2] + (point.targetColor[2] - point.currentColor[2]) * 0.2
+        ];
+        
+        // Only update DOM if values changed significantly
+        if (
+          Math.abs(point.currentSize - parseFloat(point.element.getAttribute('r'))) > 0.05 ||
+          Math.abs(point.currentColor[0] - point.targetColor[0]) > 3
+        ) {
+          point.element.setAttribute('r', point.currentSize);
+          point.element.setAttribute('fill', 
+            `rgba(${Math.round(point.currentColor[0])}, 
+                  ${Math.round(point.currentColor[1])}, 
+                  ${Math.round(point.currentColor[2])}, 
+                  ${point.currentOpacity})`
+          );
+        }
+      });
     },
-    handleResize() {
-      clearTimeout(this.resizeTimer);
-      this.resizeTimer = setTimeout(() => {
+    throttledResize() {
+      if (this.updateDelay) return;
+      this.updateDelay = setTimeout(() => {
+        // Check if mobile status changed on resize
+        const wasMobile = this.isMobile;
         this.checkIfMobile();
-        this.initCanvas();
+        
+        // If switching between mobile and desktop, update event listeners
+        if (wasMobile !== this.isMobile) {
+          if (this.isMobile) {
+            // Switching to mobile: remove mouse events
+            window.removeEventListener('mousemove', this.handleMouseMove);
+            
+            // Reset all points to default state
+            this.pointsCache.forEach(point => {
+              point.currentSize = 1.5;
+              point.targetSize = 1.5;
+              point.currentOpacity = 0.5;
+              point.targetOpacity = 0.5;
+              point.currentColor = [80, 80, 80];
+              point.targetColor = [80, 80, 80];
+              
+              point.element.setAttribute('r', 1.5);
+              point.element.setAttribute('fill', 'rgba(80, 80, 80, 0.5)');
+            });
+          } else {
+            // Switching to desktop: add mouse events
+            window.addEventListener('mousemove', this.handleMouseMove);
+          }
+        }
+        
+        this.createGrid();
+        this.updateDelay = null;
       }, 200);
+    },
+    handleMouseMove(e) {
+      // Only update if not mobile (extra safety check)
+      if (!this.isMobile) {
+        this.targetMouseX = e.clientX;
+        this.targetMouseY = e.clientY;
+      }
     }
-  },
-  beforeUnmount() {
-    cancelAnimationFrame(this.animationId);
-    window.removeEventListener('mousemove', this.handleMouseMove);
-    window.removeEventListener('resize', this.handleResize);
   }
 }
 </script>
 
 <style>
-.starfield-bg {
+.grid-background {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: -1;
+  background-color: #050505; /* Darker background */
   width: 100%;
   height: 100%;
-  z-index: -1;
-  background-color: #050505;
 }
 </style>
