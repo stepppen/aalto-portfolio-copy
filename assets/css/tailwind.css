@@ -46,20 +46,6 @@ body {
 
 
 @layer components {
-  .wrapper-container {
-  display: flex;
-  width: 100vw;
-  justify-content: center;
-  justify-items: center;
-  overflow-x: hidden;
-  position: relative;
-}
-
-.main-container {
-  max-width: 80%;
-  overflow-x: hidden;
-  position: relative;
-}
   .dynamic-nav {
     @apply relative p-4 flex z-50;
   }
@@ -78,6 +64,11 @@ body {
       }
       .dynamic-nav{
         @apply justify-center items-center;
+      }
+      .main-container {
+        max-width: 100%;
+        overflow-x: hidden;
+        position: relative;
       }
 
     }
@@ -101,6 +92,23 @@ body {
       .dynamic-header{
         @apply fixed w-screen max-h-[15rem]
       }
+      h1{
+        font-size: 3rem;
+      }
+      .wrapper-container {
+        max-width: 100%;
+        overflow-x: hidden;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .main-container {
+        max-width: 80%;
+        overflow-x: hidden;
+        position: relative;
+      }
     }
 
     @screen xl {
@@ -111,6 +119,7 @@ body {
         padding: 2px 4px 2px 4px;
         width: 10rem;
       }
+
     }
 
     /* .text-grid{
@@ -192,8 +201,9 @@ body {
         font-weight: 400;
         color:white;
         margin-bottom: 10px;
-        font-size: 3rem;
+        /* font-size: 1.5rem; */
       }
+      
     }
 
     @media (min-width: 1537px){
@@ -209,6 +219,11 @@ body {
         font-size: 3rem;
         font-variation-settings:
         "wdth" 87.5;
+      }
+      .main-container {
+        max-width: 80%;
+        overflow-x: hidden;
+        position: relative;
       }
     }
 

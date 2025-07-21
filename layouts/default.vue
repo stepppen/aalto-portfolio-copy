@@ -9,7 +9,7 @@
           </nav>
         </header>
       </transition>
-      <div class="overflow-hidden pt-32">
+      <div class="overflow-hidden lg:pt-32">
         <slot />
       </div>
     </div>

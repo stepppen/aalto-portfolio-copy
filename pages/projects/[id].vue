@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper-container">
-        <div class="main-container">
+        <div class="main-container max-lg:px-4">
             <div> 
                 <Head>
                     <Title>{{ project.title }}</Title>
