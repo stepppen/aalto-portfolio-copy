@@ -1,9 +1,14 @@
 <template>
-    <div> 
-        <Head>
-            <Title>{{ project.title }}</Title>
-        </Head>
-        <ProjectDetails :project="project"/>
+    <div class="wrapper-container">
+        <div class="main-container">
+            <div> 
+                <Head>
+                    <Title>{{ project.title }}</Title>
+                </Head>
+
+                <ProjectDetails :project="project"/>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -23,9 +28,9 @@ if (!project) {
     throw createError({statusCode: 404, statusMessage: 'Project not found', fatal: true})
 }
 
-definePageMeta({
-    layout: 'projects'
-})
+// definePageMeta({
+//     layout: 'default'
+// })
 </script>
 
 <style lang="scss" scoped>

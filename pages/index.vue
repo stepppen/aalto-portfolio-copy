@@ -1,60 +1,41 @@
 <template>
-  <div class="main-container">
-    <Head>
-      <Title>Home</Title>
-    </Head>
-
-    <div class="hero-placeholder"></div>
-
-    <transition name="fade-titles">
-      <div v-if="showTitles" id="typewriter" class="flex lg:pl-8 justify-start overflow-hidden p-4 fixed hero-content">
-        <div class="flex flex-col justify-center 2xl:pl-32 max-lg:text-center w-full">
-          <div class="justify-self-center">
-            <h1 class="text-reveal">
-              <span class="line-reveal">
-                <span class="word">Designing</span>
-                <span class="word">interactions</span> 
-              </span>
-              <span class="line-reveal">
-                <span class="word">in</span>
-                <span class="word digital-word">
-                  <i>digital</i>
-                  <span class="word-fx digital-fx"></span>
-                </span>
-                <span class="word">space</span>
-                <span class="word">and</span>
-              </span>
-              <span class="line-reveal">
-                <span class="word physical-word">
-                  <i>physical</i>
-                  <span class="word-fx physical-fx"></span>
-                </span>
-                <span class="word">form.</span>
-              </span>
-            </h1>
+  <div class="wrapper-container">
+    <div class="main-container">
+      <Head>
+        <Title>Home</Title>
+      </Head>
+  
+      <!-- <div class="hero-placeholder"></div> -->
+  
+      <transition name="fade-titles">
+        <div v-if="showTitles" id="typewriter" class="flex lg:pl-8 justify-start overflow-hidden p-4 h-min">
+          <div class="flex flex-col justify-center max-lg:text-center w-full py-32">
+            <div class="justify-self-center">
+              <h1 class="word text-stone-300"> I build human-centred interactions, environments, experiences - both in digital and physical form.</h1>
+            </div>
+            <div class="personal-tags">
+              <span class="info-tag">Stepan Vedunov</span>
+              <span class="info-tag location">Zurich, Switzerland</span>
+              <span class="info-tag focus">Interaction Design</span>
+            </div>
+  
           </div>
-          <div class="personal-tags">
-            <span class="info-tag">Stepan Vedunov</span>
-            <span class="info-tag location">Zurich, Switzerland</span>
-            <span class="info-tag focus">Interaction Design</span>
-          </div>
-
         </div>
-      </div>
-    </transition>
-
-    <div class="flex pt-4 z-50">
-      <div class="lg:w-1/2"></div>
-      <div class="flex flex-col lg:w-1/2 justify-end overflow-hidden p-4">
-        <div>
-          <div v-if="showProjects" class="xl:w-full adaptive-grid max-md:grid lg:pr-[20px]">
-            <div v-for="p in projects" :key="p.id">
-              <ProjectCard :project="p" />
+      </transition>
+  
+      <div>
+        <div class="overflow-hidden p-4">
+          <div>
+            <div v-if="showProjects" class="xl:w-full adaptive-grid max-md:grid lg:pr-[20px]">
+              <div v-for="p in projects" :key="p.id">
+                <ProjectCard :project="p" />
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -128,7 +109,7 @@ function animateText() {
   opacity: 0;
   transform: translateY(10px);
   animation: fade-in-up 0.8s forwards;
-  animation-delay: 1.2s;
+  animation-delay: 0.2s;
 }
 
 .info-tag {
@@ -178,14 +159,6 @@ function animateText() {
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;
   }
-}
-
-
-.main-container {
-  min-height: 100vh;
-  width: 100%;
-  overflow-x: hidden;
-  position: relative;
 }
 
 .hero-content {
@@ -330,7 +303,7 @@ function animateText() {
 // Your existing styles...
 @media (max-width: 1500px) {
   .adaptive-grid {
-    column-count: 1;
+    column-count: 2;
     column-gap: 20px;
   }
 }
@@ -340,7 +313,7 @@ function animateText() {
 }
 
 .adaptive-grid {
-  column-count: 2;
+  column-count: 3;
   column-gap: 20px;
   width: 100%;
 }

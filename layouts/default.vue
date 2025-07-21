@@ -1,18 +1,18 @@
 <template>
-  <P5Animation />
-    <div>
+  <div class="page-wrapper">
+   <bgGradient />
+    <div class="page-wrapper relative z-10">
       <transition name="slide-fade">
         <header class="dynamic-header z-50 overflow-hidden" v-if="showHeader">
           <nav class="dynamic-nav">
             <Tab />
-            <p class="lg:block hidden">©2025</p>
           </nav>
         </header>
       </transition>
-      <div class="flex lg:justify-between justify-center overflow-hidden">
-        <!-- <div class="lg:w-1/2"></div> -->
+      <div class="overflow-hidden pt-32">
         <slot />
       </div>
+    </div>
     </div>
   </template>
   
@@ -82,5 +82,9 @@
     opacity: 0;
   }
 
+  .content {
+    position: relative;
+    z-index: 10;
+  }
   </style>
   

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col lg:flex-row justify-center inset-0 lg:left-48 px-4 lg:absolute overflow-hidden  max-lg:items-center max-lg:gap-8">
+  <div class="flex flex-col lg:flex-row justify-center inset-0 px-4 overflow-hidden  max-lg:items-center max-lg:gap-8">
     <transition name="opacity-p5">
       <div v-if="showThree" class="lg:my-auto max-md:flex max-md:scale-75 max-md:mt-12 max-md:justify-center max-md:h-72 max-md:-translate-y-16">
         <ThreeNew />

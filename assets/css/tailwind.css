@@ -44,7 +44,22 @@ body {
 }
 
 
+
 @layer components {
+  .wrapper-container {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  justify-items: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.main-container {
+  max-width: 80%;
+  overflow-x: hidden;
+  position: relative;
+}
   .dynamic-nav {
     @apply relative p-4 flex z-50;
   }
@@ -78,13 +93,13 @@ body {
 
     @screen lg {
       .dynamic-nav{
-        @apply flex-col h-screen max-w-[15rem] justify-start items-start;
+        @apply justify-center items-center;
       }
       .project-text{
         @apply w-3/4
       }
       .dynamic-header{
-        @apply fixed h-screen max-w-[15rem]
+        @apply fixed w-screen max-h-[15rem]
       }
     }
 
@@ -191,7 +206,7 @@ body {
         color:white;
         
         margin-bottom: 10px;
-        font-size: 5rem;
+        font-size: 3rem;
         font-variation-settings:
         "wdth" 87.5;
       }
