@@ -2,10 +2,9 @@
 
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  ssr: false,
-  static: true,
+  ssr: true,
 
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', '@nuxt/image'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', '@nuxt/image', '@nuxt/content'],
   head: {
     title: 'Vedunov',
     meta: [

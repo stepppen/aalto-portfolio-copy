@@ -8,7 +8,7 @@
         <div class="main-content">
             
             <div class='adaptive-grid'>
-                <div v-for="p in project" :key="p.id" class="project-item">
+                <div v-for="p in project" :key="p.slug" class="project-item">
                     <ProjectCard :project="p"/>
                 </div>
             </div>

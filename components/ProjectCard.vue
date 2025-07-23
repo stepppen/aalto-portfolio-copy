@@ -1,7 +1,7 @@
 <template>
   <transition name="card-fade">
     <div v-if="cardLoaded" class="project-card-container">
-      <nuxt-link :to="`/projects/${project.id}`" class="project-link">
+      <nuxt-link :to="`/projects/${project.meta.slug}`" class="project-link">
         <div class="project-card">
           <div class="image-wrapper" :style="{ 
             paddingBottom: imageLoaded ? '0' : `${getAspectRatio(project.aspectRatio || '3:2')}%` 
@@ -23,6 +23,7 @@
               loading="lazy"
               @load="handleImageLoaded"
             />
+            <!-- <img :src="getImagePath(project.preview)" :alt="project.title" /> -->
           </div>
           
           <!-- Text content -->
@@ -89,6 +90,7 @@ function getHeightFromAspectRatio(aspectRatio, baseWidth = 400) {
 }
 
 onMounted(() => {
+  console.log('ProjectCard project:', props.project);
   setTimeout(() => {
     cardLoaded.value = true;
   }, 200);

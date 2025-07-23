@@ -26,10 +26,10 @@
       <div>
         <div class="overflow-hidden p-4">
           <div>
-            <div v-if="showProjects" class="xl:w-full adaptive-grid max-md:grid lg:pr-[20px]">
-              <div v-for="p in projects" :key="p.id">
-                <ProjectCard :project="p" />
-              </div>
+            
+            <div v-if="projects?.length" class="xl:w-full adaptive-grid max-md:grid lg:pr-[20px]">
+              
+              <ProjectCard v-for="p in projects" :key="p.slug" :project="p" />
             </div>
           </div>
         </div>
@@ -41,16 +41,19 @@
 
 <script setup>
 import { ref, onMounted, nextTick } from 'vue';
-import P5Animation from '~/components/P5Animation.vue';
-import projectsData from '~/assets/projects/projects.json'; // Adjust path as needed
-
-const projects = ref(projectsData);
 const showTitles = ref(false);
 const showInfo = ref(false);
 const showProjects = ref(false);
 
+
+
+const { data: projects } = await useAsyncData('projects', () =>
+  queryCollection('projects').all()
+);
+
 onMounted(() => {
   // Show the titles first
+  // console.log('Loaded projects:', projects.value)
   setTimeout(() => {
     showInfo.value = true;
     showTitles.value = true;

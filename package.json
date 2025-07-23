@@ -10,10 +10,12 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/content": "^3.6.3",
     "@nuxt/image": "^1.10.0",
     "@splinetool/loader": "^1.0.91",
     "@splinetool/runtime": "^1.0.91",
     "@tresjs/nuxt": "^2.1.1",
+    "better-sqlite3": "^12.2.0",
     "json-server": "^1.0.0-alpha.23",
     "nuxt": "^3.16.1",
     "p5": "^1.9.2",
