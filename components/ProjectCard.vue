@@ -13,11 +13,11 @@
             ></div>
             
             <NuxtImg
-              :src="getImagePath(project.preview)"
+              :src="getImagePath(project.meta.preview)"
               :alt="project.title"
               class="project-image"
               :width="400"
-              :height="getHeightFromAspectRatio(project.aspectRatio)"
+              :height="getHeightFromAspectRatio(project.meta.aspectRatio)"
               :style="{ height: imageLoaded ? 'auto' : '0' }"
               format="webp"
               loading="lazy"
@@ -30,7 +30,7 @@
           <div class="project-info">
             <h3 class="project-title">{{ project.title }}</h3>
             <div class="flex justify-between">
-              <p class="project-year">{{ project.role }}</p>
+              <p class="one-liner">{{ project.meta.oneLiner }}</p>
             </div>
           </div>
         </div>
@@ -175,10 +175,10 @@ onMounted(() => {
     transition: color 0.2s ease;
   }
   
-  .project-year {
+  .one-liner {
     margin: 0.2rem 0 0;
     font-size: 0.85rem;
-    opacity: 0.6;
+    opacity: 0.4;
     transition: opacity 0.2s ease;
   }
   
@@ -191,8 +191,8 @@ onMounted(() => {
     color: rgba(255, 255, 255, 1);
   }
   
-  .project-card:hover .project-year {
-    opacity: 0.8;
+  .project-card:hover .one-liner {
+    opacity: 0.6;
   }
   
   /* Add a subtle border glow effect */

@@ -26,9 +26,7 @@
       <div>
         <div class="overflow-hidden p-4">
           <div>
-            
             <div v-if="projects?.length" class="xl:w-full adaptive-grid max-md:grid lg:pr-[20px]">
-              
               <ProjectCard v-for="p in projects" :key="p.slug" :project="p" />
             </div>
           </div>

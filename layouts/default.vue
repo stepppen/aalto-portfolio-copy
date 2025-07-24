@@ -12,6 +12,9 @@
       <div class="overflow-hidden lg:pt-32">
         <slot />
       </div>
+      <!-- <footer>
+        <DefaultFooter />
+      </footer> -->
     </div>
     </div>
   </template>
