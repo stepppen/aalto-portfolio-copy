@@ -11,7 +11,7 @@
     <transition name="fade-titles">
       <div v-if="showTitles" class="flex flex-col md:w-2/3 lg:w-96 lg:my-auto lg:inset-0 max-lg:justify-center max-lg:items-center margin-handeler max-lg:text-center">
         <h2>Stepan Vedunov</h2>
-        <p lang="en" class=" lg:justify-center  max-md:max-w-sm">I’m an interaction designer with a strong foundation in UX/UI, going beyond conventional web design to shape experiences for emerging technologies such as VR, IoT and robotics. <br> <br> My work spans from HMI concepts at Volkswagen to neurorehabilitation platforms and healthcare-focused VR tools. I employ a research-driven, collaborative design approach shaped by real-world testing and iterative refinement. </p>
+        <p lang="en" class=" lg:justify-center  max-md:max-w-sm">I’m an interaction designer with a strong foundation in UX/UI, going beyond conventional web design to shape experiences for emerging technologies such as VR, IoT and robotics. <br> </p>
         
         <!-- Updated contact section with icons -->
         <div class="contact-info">

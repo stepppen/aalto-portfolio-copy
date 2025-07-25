@@ -57,11 +57,11 @@
     /* border: 1px solid rgb(125, 12, 41); */
     /* background-color: rgb(10, 76, 127); */
   }
-  p {
+  /* p {
     font-family: Roboto, sans-serif;
     font-size: 1rem;
     font-weight: 300;
-  }
+  } */
   .slow-transition {
       transition: 0.2s ease-in-out;
     }

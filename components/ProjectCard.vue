@@ -170,7 +170,7 @@ onMounted(() => {
   .project-title {
     margin: 0;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 200;
     line-height: 1.4;
     transition: color 0.2s ease;
   }
