@@ -24,8 +24,8 @@ interface Props {
   title: string,
   year: string,
   context: string,
-  team: Array,
-  roles: Array
+  team: string,
+  roles: string
 }
 
 const props = defineProps<Props>()
@@ -70,7 +70,7 @@ onMounted(() => {
     align-items: center;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(4px);
-    border-radius: 2rem;
+    border-radius: 1.5rem;
     padding: 1rem 1.5rem;
     font-size: 0.85rem;
     border: 1px solid rgba(255, 255, 255, 0.08);

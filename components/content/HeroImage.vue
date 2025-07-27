@@ -1,9 +1,9 @@
 <template>
-  <div class="hero-wrapper">
+  <div class="hero-wrapper rounded-xl">
     <NuxtImg
       :src="src.startsWith('/') ? src : `/${src}`"
       :alt="alt"
-      class="hero-image"
+      class="hero-image object-cover"
       format="webp"
       loading="lazy"
     />
@@ -26,13 +26,11 @@ defineProps({
 <style scoped>
 .hero-wrapper {
   width: 100%;
-  margin: 2rem 0;
-  border-radius: 8px;
   overflow: hidden;
 }
 
 .hero-image {
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 </style>

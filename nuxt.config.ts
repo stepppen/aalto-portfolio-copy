@@ -3,7 +3,13 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: true,
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', '@nuxt/image', '@nuxt/content'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/google-fonts',
+    '@nuxt/image',
+    '@nuxt/content',
+    '@nuxt/scripts'
+  ],
   head: {
     title: 'Vedunov',
     meta: [
@@ -13,11 +19,6 @@ export default defineNuxtConfig({
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'}
     ]
   },
-
-  // app: {
-  //   pageTransition: { name: 'slide-fade', mode: 'out-in' },
-  //   layoutTransition: { name: 'project-fade', mode: 'out-in' }
-  // },
   googleFonts: {
     families: {
       Roboto: [300, 400, 700],
