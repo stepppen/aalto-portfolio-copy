@@ -3,7 +3,7 @@
       <transition name="fade-img">
         <div v-if="imageDisplayed" class="imageDisplayed">
             <div v-show="showImage" class="aspect-[4/3] flex justify-center align-center overflow-hidden">
-                <img :src="project.thumb" alt="project img" class="object-cover min-w-full rounded-2xl">
+                <img :src="project.meta.preview" alt="project img" class="object-cover min-w-full rounded-2xl">
             </div>
         </div>
       </transition>
@@ -25,19 +25,19 @@
                         <div class="flex">
                             <h3 class="heading-4 w-32">Context</h3>
                             <div class="w-1/2">
-                                <p v-for="context in project.projContext" :key="context">{{ context }}</p>
+                                <p v-for="context in project.context" :key="context">{{ context }}</p>
                             </div>
                         </div>
                         <div class="flex">
                             <h3 class="heading-4 w-32">Team</h3>
                             <div>
-                                <p v-for="member in project.teamMembers" :key="member">{{ member }}</p>
+                                <p v-for="member in project.team" :key="member">{{ member }}</p>
                             </div>
                         </div>
                         <div class="flex">
                             <h3 class="heading-4 w-32">Role</h3>
                             <div>
-                                <p v-for="role in project.roles" :key="role">{{ role }}</p>
+                                <p v-for="role in project.role" :key="role">{{ role }}</p>
                             </div>
                         </div>
                     </div>
@@ -143,19 +143,23 @@
 
 <script setup>
 
-const { project } = defineProps(['project']);
-const teamMembers = project.team.split('\n').map(member => member.trim());
-const roles = project.role.split('\n').map(role => role.trim());
-const projContext = project.context.split('\n').map(context => context.trim());
+const props = defineProps({
+  project: { type: Object, required: true }
+});
+// const team = project.team.split('\n').map(member => member.trim());
+// const role = project.role.split('\n').map(role => role.trim());
+// const context = project.context.split('\n').map(context => context.trim());
 
 const showImage = ref(false);
 let imageDisplayed = ref(false);
 
-project.teamMembers = teamMembers;
-project.roles = roles;
-project.projContext = projContext;
+// project.meta.team = team;
+// project.meta.role = role;
+// project.meta.context = context;
 
 onMounted(() => {
+    console.log('ProjectCard project:', props.project);
+    
       setTimeout(() => {
         imageDisplayed.value = true;
         
@@ -163,9 +167,9 @@ onMounted(() => {
     });
 
 // // Watch for changes in the project prop and set showImage to true when a project is clicked
-watch(() => project, () => {
-  showImage.value = true;
-}, { immediate: true }); // Set immediate to true to trigger the watch callback immediately
+// watch(() => project, () => {
+//   showImage.value = true;
+// }, { immediate: true }); // Set immediate to true to trigger the watch callback immediately
 </script>
 
 <style lang="scss" scoped>

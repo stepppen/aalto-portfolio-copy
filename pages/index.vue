@@ -13,17 +13,16 @@
             <div class="justify-self-center">
               <h1 class="word text-stone-300 title-font"> I build human-centred interactions, environments, experiences - both in digital and physical form.</h1>
             </div>
-            <div class="personal-tags">
-              <span class="info-tag">Stepan Vedunov</span>
-              <span class="info-tag location">Zurich, Switzerland</span>
-              <span class="info-tag focus">Interaction Design</span>
-            </div>
-  
+            <TagsContainer 
+              :tags="tags"
+              :should-animate="true"
+              delay="0.2s"
+            />
           </div>
         </div>
       </transition>
   
-      <div>
+      <div v-if="showProjects">
         <div class="overflow-hidden p-4">
           <div>
             <div v-if="projects?.length" class="xl:w-full adaptive-grid max-md:grid lg:pr-[20px]">
@@ -43,7 +42,11 @@ const showTitles = ref(false);
 const showInfo = ref(false);
 const showProjects = ref(false);
 
-
+const tags = [
+  {text: "Stepan Vedunov"},
+  {text: "Zurich, Switzerland", emoji: "📍" },
+  {text: "Interaction Design", emoji: "⚡"},
+]
 
 const { data: projects } = await useAsyncData('projects', () =>
   queryCollection('projects').all()
@@ -55,16 +58,7 @@ onMounted(() => {
   setTimeout(() => {
     showInfo.value = true;
     showTitles.value = true;
-    
-    // Initialize text reveal animation
-    nextTick(() => {
-      animateText();
-      
-      // Only show projects after title animation has started
-      setTimeout(() => {
-        showProjects.value = true;
-      }, 400);
-    });
+    showProjects.value = true;
   }, 300);
 });
 
@@ -101,48 +95,7 @@ function animateText() {
 }
 
 
-/* Updated styles for non-clickable tags */
-.personal-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  padding-top: 2.5rem;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fade-in-up 0.8s forwards;
-  animation-delay: 0.2s;
-}
 
-.info-tag {
-  display: inline-flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.08);  /* Slightly more subtle background */
-  backdrop-filter: blur(4px);
-  border-radius: 2rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.85rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  cursor: default;  /* Explicitly show this is not clickable */
-  
-  /* Remove hover effects that made them look clickable */
-  
-  &.location {
-    &::before {
-      content: "📍"; /* Location icon */
-      margin-right: 0.4rem;
-      font-size: 0.9rem;
-    }
-  }
-  
-  &.focus {
-    
-    &::before {
-      content: "⚡"; /* Focus/specialty icon */
-      margin-right: 0.4rem;
-      font-size: 0.9rem;
-    }
-  }
-}
 
 @keyframes fade-in-up {
   to {
@@ -151,16 +104,7 @@ function animateText() {
   }
 }
 
-@media (max-width: 480px) {
-  .personal-tags {
-    gap: 0.5rem;
-  }
-  
-  .info-tag {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
-  }
-}
+
 
 .hero-content {
   top: 0;
@@ -317,6 +261,11 @@ function animateText() {
   column-count: 3;
   column-gap: 20px;
   width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fade-in-up 0.8s forwards;
+  animation-delay: 0.8s;
+
 }
 
 .fade-titles-enter-active {
@@ -367,11 +316,6 @@ function animateText() {
     left: 0;
     right: 0;
     height: auto;
-  }
-  .personal-tags {
-    padding-top: 2rem;
-    justify-content: center;
-    width: 100%;
   }
   
   .word {

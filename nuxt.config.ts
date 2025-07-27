@@ -3,7 +3,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: true,
-  components: true,
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', '@nuxt/image', '@nuxt/content'],
   head: {
     title: 'Vedunov',
@@ -25,6 +24,11 @@ export default defineNuxtConfig({
       "Bricolage Grotesque": [200, 300, 400, 600], 
       "Space Grotesk": [300, 400, 600],
       Lato: [300, 400, 700]
+    }
+  },
+  content: {
+    markdown: {
+      mdc: true
     }
   },
 

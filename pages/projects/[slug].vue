@@ -2,14 +2,14 @@
   <div class="wrapper-container">
     <div class="main-container max-lg:px-4">
       <Head>
-        <Title>{{ data?.title || 'Project' }}</Title>
+        <Title>{{ project?.title || 'Project' }}</Title>
       </Head>
     <!-- <ContentQuery :path="$route.path" find="one" v-slot="{ data }">
       <ContentRenderer :value="data" />
       
     </ContentQuery> -->
-      <div v-if="data">
-        <ContentRenderer :value="data" />
+      <div v-if="project">
+        <ContentRenderer :value="project" />
         <!-- Optionally render a detailed component -->
         <!-- <ProjectDetails :project="project" /> -->
       </div>
@@ -18,19 +18,19 @@
       </div>
     </div>
   </div>
-</template>
+</template> 
 
 <script setup>
 const route = useRoute();
 
-const { data } = await useAsyncData('project', () =>
+const { data: project } = await useAsyncData('project', () =>
   queryCollection('projects').path(`/projects/${route.params.slug}`).first()
 );
 
 // Optional: set SEO meta based on project
 useSeoMeta({
-  title: data.value?.title,
-  description: data.value?.overview || ''
+  title: project.value?.title,
+  description: project.value?.overview || ''
 });
 </script>
 
