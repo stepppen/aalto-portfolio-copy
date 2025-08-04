@@ -1,5 +1,5 @@
 <template>
-    <span class="info-tag">
+    <span class="info-tag" data-aos="fade-up">
         <span v-if="title" class="title"> {{ title }}</span>
         <div>
             <slot></slot>

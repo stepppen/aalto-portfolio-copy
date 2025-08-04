@@ -81,7 +81,8 @@
   
   .slide-fade-enter-from,
   .slide-fade-leave-to {
-    transform: translateX(-20px);
+    /* transform: translateX(-20px); */
+    backdrop-filter: blur(4px);
     opacity: 0;
   }
 

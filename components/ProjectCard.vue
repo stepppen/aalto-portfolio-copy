@@ -20,8 +20,8 @@
               :height="getHeightFromAspectRatio(project.meta.aspectRatio)"
               :style="{ height: imageLoaded ? 'auto' : '0' }"
               format="webp"
-              loading="lazy"
               @load="handleImageLoaded"
+              preload
             />
             <!-- <img :src="getImagePath(project.preview)" :alt="project.title" /> -->
           </div>

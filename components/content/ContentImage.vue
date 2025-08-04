@@ -6,7 +6,7 @@
       :width="width || 1200"
       format="webp"
       loading="lazy"
-      class="image"
+      class="image rounded-2xl"
     />
     <figcaption v-if="caption">{{ caption }}</figcaption>
   </figure>
@@ -35,7 +35,6 @@ defineProps({
 .image {
   width: 100%;
   height: auto;
-  border-radius: 8px;
 }
 
 figcaption {

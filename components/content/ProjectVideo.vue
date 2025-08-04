@@ -27,27 +27,28 @@ defineProps<Props>()
 </script>
 
 <template>
-  <client-only> 
     <div class="my-16">
       <div class="flex items-center justify-center">
-        <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-xl w-full max-w-full mx-auto">
+        <div class="aspect-w-16 aspect-h-9 overflow-hidden rounded-2xl w-full max-w-full mx-auto">
           <ScriptYouTubePlayer
             ref="video"
             :video-id="id"
             @ready="isLoaded = true"
             @state-change="stateChange"
             :player-options="{ host: 'https://www.youtube.com' }"
-            class="w-full h-full"
+            class="w-full h-full v-fade"
+            data-aos="fade-up"
           >
-            <template #awaitingLoad>
-              <!-- your custom play icon here -->
-            </template>
+            <div v-if="!isLoaded">
+              <div class="bg-slate-500 h-full w-full">
+
+              </div>
+            </div>
           </ScriptYouTubePlayer>
         </div>
       </div>
       <figcaption v-if="caption">{{ caption }}</figcaption>
     </div>
-  </client-only>
 </template>
 
 <style>

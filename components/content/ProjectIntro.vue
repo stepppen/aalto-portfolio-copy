@@ -1,6 +1,6 @@
 <template>
   <div class="min-md:mt-12 mb-12 project-intro">
-    <h1 class="mb-4">{{ props.title }}</h1>
+    <h1 class="mb-4 title-animation">{{ props.title }}</h1>
     <div class="min-md:pt-16 intro-content">
       <div class="intro-meta">
         <TagsContainer 
@@ -10,7 +10,7 @@
               justify="center"
             />
       </div>
-      <div class="intro-text">
+      <div class="intro-text text-animation">
         <div>
             <slot></slot>
         </div>
@@ -90,6 +90,33 @@ onMounted(() => {
   padding: 0;
   margin: 0;
 }
+
+
+/* Title Animation */
+.title-animation {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fade-in-up 0.8s forwards;
+  animation-delay: 0s;
+}
+
+/* Tags animation has 0.2sec delay */
+
+/* Text Animation */
+.text-animation {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fade-in-up 0.8s forwards;
+  animation-delay: 0.4s;
+}
+
+@keyframes fade-in-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 @media (max-width: 768px) {
   .intro-content {

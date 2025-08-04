@@ -1,5 +1,5 @@
 <template>
-    <span class="info-tag">
+    <span class="info-tag" v-if="text">
         <span v-if="emoji" class="emoji"> {{ emoji }}</span>
         {{ text }}
         </span>
@@ -7,6 +7,8 @@
 
 
 <script setup lang="ts">
+import { CubeTextureLoader } from 'three';
+
 interface Props {
   text: string
   emoji?: string

@@ -1,5 +1,5 @@
 <template>
-  <div class="image-grid" :class="columns">
+  <div class="image-grid" :class="columns" data-aos="fade-up">
     <slot></slot>
   </div>
 </template>

@@ -9,7 +9,7 @@
       
     </ContentQuery> -->
       <div v-if="project">
-        <ContentRenderer :value="project" />
+        <ContentRenderer :value="project" class="overflow-hidden"/>
         <!-- Optionally render a detailed component -->
         <!-- <ProjectDetails :project="project" /> -->
       </div>

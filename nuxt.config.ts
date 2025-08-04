@@ -8,7 +8,9 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@nuxt/image',
     '@nuxt/content',
-    '@nuxt/scripts'
+    '@nuxt/scripts',
+    'nuxt-aos',
+    '@vueuse/motion/nuxt'
   ],
   head: {
     title: 'Vedunov',
@@ -16,7 +18,7 @@ export default defineNuxtConfig({
       { name: 'description', content: 'Design Portfolio'}
     ],
     link: [
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'}
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'},
     ]
   },
   googleFonts: {
@@ -32,6 +34,11 @@ export default defineNuxtConfig({
       mdc: true
     }
   },
+  aos: {
+    duration: 500,
+    easing: 'ease-out',
+    offset: 100,
+  },  
 
   compatibilityDate: '2025-04-01'
 });

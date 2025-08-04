@@ -1,13 +1,14 @@
 <template>
-  <div class="hero-wrapper rounded-xl">
+  <div class="hero-wrapper rounded-2xl image-animation">
     <NuxtImg
       :src="src.startsWith('/') ? src : `/${src}`"
       :alt="alt"
       class="hero-image object-cover"
       format="webp"
-      loading="lazy"
+      preload
     />
   </div>
+  
 </template>
 
 <script setup>
@@ -32,5 +33,19 @@ defineProps({
 .hero-image {
   width: 100%;
   height: 100%;
+}
+
+.image-animation{
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fade-in-up 0.8s forwards;
+  animation-delay: 0s;
+}
+
+@keyframes fade-in-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
