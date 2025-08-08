@@ -1,5 +1,5 @@
 <template>
-  <figure class="content-image" data-aos="fade-up">
+  <figure class="content-image">
     <NuxtImg
       :src="src"
       :alt="alt"

@@ -1,5 +1,5 @@
 <template>
-  <div class="min-md:mt-12 mb-12 project-intro">
+  <div class="min-md:mt-12 mb-12  project-intro">
     <h1 class="mb-4 title-animation">{{ props.title }}</h1>
     <div class="min-md:pt-16 intro-content">
       <div class="intro-meta">
