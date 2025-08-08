@@ -4,7 +4,7 @@
       v-for="tag in tags" 
       :key="tag.text"
       :text="tag.text"
-      :emoji="tag.emoji"
+      :iconName="tag.iconName"
     />
   </div>
 </template>
@@ -12,7 +12,7 @@
 <script setup lang="ts">
 interface Tag {
   text: string
-  emoji?: string
+  iconName?: string
 }
 
 interface Props {

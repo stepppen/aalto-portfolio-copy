@@ -1,20 +1,22 @@
 <template>
-    <span class="info-tag" v-if="text">
-        <span v-if="emoji" class="emoji"> {{ emoji }}</span>
-        {{ text }}
-        </span>
+    <div class="info-tag" v-if="text">
+        <MdiIcon v-if="iconName" :icon="iconName" />
+        <p>
+            {{ text }}
+        </p>
+    </div>
 </template>
 
 
 <script setup lang="ts">
-import { CubeTextureLoader } from 'three';
 
 interface Props {
   text: string
-  emoji?: string
+  iconName?: string
 }
+const props = defineProps<Props>()
 
-defineProps<Props>()
+
 </script>
 
 
@@ -27,14 +29,12 @@ defineProps<Props>()
     backdrop-filter: blur(4px);
     border-radius: 2rem;
     padding: 0.5rem 1rem;
-    font-size: 0.85rem;
     border: 1px solid rgba(255, 255, 255, 0.08);
     cursor: default;
 }
 
 .emoji {
     margin-right: 0.4rem;
-    font-size: 0.9rem;
 }
 
 @media (max-width: 480px) {

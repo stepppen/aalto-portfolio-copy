@@ -1,4 +1,7 @@
+
+
 @tailwind base;
+
 :root {
     --primary: black;
     --secondary: white;
@@ -188,7 +191,7 @@ body {
       font-family: "Lato", sans-serif;
       color:rgb(255, 255, 255);
       font-weight: 300;
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
 
   @media (max-width: 768px){
@@ -279,7 +282,7 @@ body {
 
   .contact-button{
     font-family: Roboto, sans-serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 300;
 
     padding: 4px 8px 4px 8px;

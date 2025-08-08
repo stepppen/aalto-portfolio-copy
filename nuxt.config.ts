@@ -10,7 +10,8 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/scripts',
     'nuxt-aos',
-    '@vueuse/motion/nuxt'
+    '@vueuse/motion/nuxt',
+    'nuxt-mdi'
   ],
   head: {
     title: 'Vedunov',

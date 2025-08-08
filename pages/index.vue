@@ -44,8 +44,8 @@ const showProjects = ref(false);
 
 const tags = [
   {text: "Stepan Vedunov"},
-  {text: "Zurich, Switzerland", emoji: "📍" },
-  {text: "Interaction Design", emoji: "⚡"},
+  {text: "Zurich, Switzerland", iconName: "mdiPin" },
+  {text: "Interaction Design", iconName: "mdiLightningBolt"},
 ]
 
 const { data: projects } = await useAsyncData('projects', () =>

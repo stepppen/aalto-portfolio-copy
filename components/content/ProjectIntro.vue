@@ -1,18 +1,19 @@
 <template>
-  <div class="min-md:mt-12 mb-12  project-intro">
+  <div class="min-md:mt-12 mb-12 project-intro">
     <h1 class="mb-4 title-animation">{{ props.title }}</h1>
     <div class="min-md:pt-16 intro-content">
       <div class="intro-meta">
         <TagsContainer 
-              :tags="tags"
-              :should-animate="true"
-              delay="0.2s"
-              justify="center"
-            />
+          :tags="tags"
+          :should-animate="true"
+          delay="0.2s"
+          justify="center"
+        />
       </div>
       <div class="intro-text text-animation">
+        <p class="title">About</p>
         <div>
-            <slot></slot>
+          <slot></slot>
         </div>
       </div>
     </div>
@@ -20,6 +21,8 @@
 </template>
 
 <script setup lang="ts">
+import { computed, onMounted } from 'vue'
+
 interface Props {
   title: string,
   year: string,
@@ -27,14 +30,13 @@ interface Props {
   team: string,
   roles: string
 }
-
 const props = defineProps<Props>()
 
 const tags = computed(() => [
-  { text: props.year, emoji: "📅" },
-  { text: props.context, emoji: "🎓" },
-  { text: props.team, emoji: "👥" },
-  { text: props.roles, emoji: "🛠️" },
+  { text: props.year, iconName: "mdiCalendar" },
+  { text: props.context, iconName: "mdiSchool" },
+  { text: props.team, iconName: "mdiAccountMultiple" },
+  { text: props.roles, iconName: "mdiPencilRulerOutline" },
 ])
 
 onMounted(() => {
@@ -53,9 +55,7 @@ onMounted(() => {
 .intro-content {
   display: flex;
   flex-direction: column;
-  /* grid-template-columns: 1fr 2fr; */
   gap: 2rem;
-
 }
 
 .intro-meta {
@@ -64,19 +64,26 @@ onMounted(() => {
   gap: 2rem;
 }
 
-.intro-text{
+.intro-text {
   display: inline-flex;
-  flex-direction: column;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(4px);
-    border-radius: 1.5rem;
-    padding: 1rem 1.5rem;
-    font-size: 0.85rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    cursor: default;
-  justify-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: start;  
+  gap: 6px;
+  max-width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(4px);
+  border-radius: 1.5rem;
+  padding: 1rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: default;
+}
 
+.intro-text .title {
+  display: inline-block;
+  min-width: 4rem;
+  margin: 0;
+  opacity: 0.5;
 }
 
 .meta-item h4 {
@@ -91,7 +98,6 @@ onMounted(() => {
   margin: 0;
 }
 
-
 /* Title Animation */
 .title-animation {
   opacity: 0;
@@ -99,8 +105,6 @@ onMounted(() => {
   animation: fade-in-up 0.8s forwards;
   animation-delay: 0s;
 }
-
-/* Tags animation has 0.2sec delay */
 
 /* Text Animation */
 .text-animation {
@@ -116,7 +120,6 @@ onMounted(() => {
     transform: translateY(0);
   }
 }
-
 
 @media (max-width: 768px) {
   .intro-content {
