@@ -102,6 +102,10 @@ body {
     h1{
       font-size: 3rem;
     }
+
+  }
+
+  @screen xl {
     .wrapper-container {
       max-width: 100%;
       overflow-x: hidden;
@@ -112,13 +116,11 @@ body {
       align-items: center;
     }
     .main-container {
-      max-width: 80%;
+      max-width: 100%;
+      padding: 0 2rem;
       overflow-x: hidden;
       position: relative;
     }
-  }
-
-  @screen xl {
     .icon{
       padding: 3px 4px 3px 4px;
     }
@@ -127,6 +129,13 @@ body {
       width: 10rem;
     }
 
+  }
+  @screen 2xl {
+    .main-container {
+      max-width: 70%;
+      overflow-x: hidden;
+      position: relative;
+    }
   }
 
   /* .text-grid{
@@ -214,6 +223,12 @@ body {
     font-variation-settings:
     "wdth" 100;
   }
+  p {
+    font-family: "Lato", sans-serif;
+    color:rgb(255, 255, 255);
+    font-weight: 300;
+    font-size: 1rem;
+  }
   }
 
   @media (max-width: 1536px){
@@ -248,7 +263,7 @@ body {
       "wdth" 100;
     }
     .main-container {
-      max-width: 70%;
+      max-width: 80%;
       overflow-x: hidden;
       position: relative;
     }

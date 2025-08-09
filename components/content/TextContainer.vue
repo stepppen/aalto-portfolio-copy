@@ -1,6 +1,6 @@
 <template>
-    <span class="info-tag" data-aos="fade-up">
-        <span v-if="title" class="title"> {{ title }}</span>
+    <span class="info-tag">
+        <p v-if="title" class="title"> {{ title }}</p>
         <div>
             <slot></slot>
         </div>
@@ -18,7 +18,7 @@ defineProps<Props>()
 .info-tag{
     display: inline-flex;
     gap: 6px;
-    max-width: 50%;
+    max-width: 100%;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(4px);
     border-radius: 1.5rem;
@@ -26,12 +26,11 @@ defineProps<Props>()
     border: 1px solid rgba(255, 255, 255, 0.08);
     cursor: default;
 }
-.title {
-    font: "Space Grotesk", sans-serif;
-    font-weight: 400;
-    margin-right: 0.4rem;
-    color: white;
-    opacity: 0.5;
+.info-tag .title {
+  display: inline-block;
+  min-width: 4.5rem;
+  margin: 0;
+  opacity: 0.5;
 }
 
 @media (max-width: 768px) {

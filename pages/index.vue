@@ -43,7 +43,7 @@ const showInfo = ref(false);
 const showProjects = ref(false);
 
 const tags = [
-  {text: "Stepan Vedunov"},
+  {text: "Stepan Vedunov", iconName: "mdiAccount" },
   {text: "Zurich, Switzerland", iconName: "mdiPin" },
   {text: "Interaction Design", iconName: "mdiLightningBolt"},
 ]

@@ -1,6 +1,6 @@
 <template>
     <div class="info-tag" v-if="text">
-        <MdiIcon v-if="iconName" :icon="iconName" />
+        <MdiIcon v-if="iconName" :icon="iconName" class="icon" size="1.5rem"/>
         <p>
             {{ text }}
         </p>
@@ -33,14 +33,11 @@ const props = defineProps<Props>()
     cursor: default;
 }
 
-.emoji {
-    margin-right: 0.4rem;
-}
-
-@media (max-width: 480px) {
-    .info-tag {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
+@media (max-width: 768px) {
+    .icon{
+        /* width: 1.5rem; */
+        margin: 0.25rem;
     }
+
 }
 </style>

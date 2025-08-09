@@ -86,6 +86,13 @@ onMounted(() => {
   opacity: 0.5;
 }
 
+@media (max-width: 768px) {
+    .intro-text{
+        flex-direction: column;
+        max-width: 100%;
+    }
+}
+
 .meta-item h4 {
   font-weight: 600;
   margin-bottom: 0.5rem;
