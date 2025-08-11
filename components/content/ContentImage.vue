@@ -40,7 +40,8 @@ defineProps({
 figcaption {
   margin-top: 0.5rem;
   text-align: center;
-  color: #666;
+  color: #ffffff;
+  opacity: 0.5;
   font-size: 0.9rem;
 }
 </style>

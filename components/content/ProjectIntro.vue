@@ -1,13 +1,13 @@
 <template>
   <div class="min-md:mt-12 mb-12 project-intro">
-    <h1 class="mb-4 title-animation">{{ props.title }}</h1>
+    <h1 class="mb-4 bigger-text title-animation">{{ props.title }}</h1>
     <div class="min-md:pt-16 intro-content">
       <div class="intro-meta">
         <TagsContainer 
           :tags="tags"
           :should-animate="true"
           delay="0.2s"
-          justify="center"
+          justify="start"
         />
       </div>
       <div class="intro-text text-animation">
@@ -86,13 +86,6 @@ onMounted(() => {
   opacity: 0.5;
 }
 
-@media (max-width: 768px) {
-    .intro-text{
-        flex-direction: column;
-        max-width: 100%;
-    }
-}
-
 .meta-item h4 {
   font-weight: 600;
   margin-bottom: 0.5rem;
@@ -132,6 +125,13 @@ onMounted(() => {
   .intro-content {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+  .intro-text{
+      flex-direction: column;
+      max-width: 100%;
+  }
+  h1 {
+    font-size: 2rem;
   }
 }
 </style>

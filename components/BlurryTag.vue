@@ -27,7 +27,7 @@ const props = defineProps<Props>()
     gap: 6px;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(4px);
-    border-radius: 2rem;
+    border-radius: 1.5rem;
     padding: 0.5rem 1rem;
     border: 1px solid rgba(255, 255, 255, 0.08);
     cursor: default;
@@ -35,8 +35,15 @@ const props = defineProps<Props>()
 
 @media (max-width: 768px) {
     .icon{
-        /* width: 1.5rem; */
-        margin: 0.25rem;
+        margin-right: 0.25rem;
+        width: 0.75rem;
+    }
+    .info-tag{
+        gap: 3px;
+        padding: 0.25rem 0.75rem;
+    }
+    p{
+        font-size: 0.8rem;
     }
 
 }

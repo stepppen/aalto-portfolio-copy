@@ -8,15 +8,16 @@
       <!-- <div class="hero-placeholder"></div> -->
   
       <transition name="fade-titles">
-        <div v-if="showTitles" id="typewriter" class="flex lg:pl-8 justify-start overflow-hidden p-4 h-min">
+        <div v-if="showTitles" id="typewriter" class="flex lg:pl-8 lg:justify-start overflow-hidden p-4 h-min">
           <div class="flex flex-col justify-center max-lg:text-center w-full lg:py-32">
             <div class="justify-self-center">
-              <h1 class="word text-stone-300 title-font"> I build human-centred interactions, environments, experiences - both in digital and physical form.</h1>
+              <h1 class="word text-stone-300 title-font max-md:text-center"> I build human-centred interactions, environments, experiences - both in digital and physical form.</h1>
             </div>
             <TagsContainer 
               :tags="tags"
               :should-animate="true"
               delay="0.2s"
+              :justify="isMobile ? 'center' : 'flex-start'"
             />
           </div>
         </div>
@@ -44,23 +45,33 @@ const showProjects = ref(false);
 
 const tags = [
   {text: "Stepan Vedunov", iconName: "mdiAccount" },
-  {text: "Zurich, Switzerland", iconName: "mdiPin" },
+  {text: "Zurich, Switzerland", iconName: "mdiMapMarkerRadius" },
   {text: "Interaction Design", iconName: "mdiLightningBolt"},
 ]
+
+const isMobile = ref(false)
+
+const checkScreenSize = () => {
+  isMobile.value = window.innerWidth <= 1024
+}
 
 const { data: projects } = await useAsyncData('projects', () =>
   queryCollection('projects').all()
 );
 
 onMounted(() => {
-  // Show the titles first
-  // console.log('Loaded projects:', projects.value)
+  checkScreenSize()
+  window.addEventListener('resize', checkScreenSize)
   setTimeout(() => {
     showInfo.value = true;
     showTitles.value = true;
     showProjects.value = true;
   }, 300);
 });
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', checkScreenSize)
+})
 
 // Animation function for text reveal
 function animateText() {

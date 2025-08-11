@@ -17,7 +17,8 @@ defineProps({
 .image-grid {
   display: grid;
   gap: 2rem;
-  margin: 4px 0;
+  margin: 12px 0;
+  align-items: start;
 }
 
 .cols-2 {

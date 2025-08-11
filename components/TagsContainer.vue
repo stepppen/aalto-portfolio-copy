@@ -1,5 +1,5 @@
 <template>
-      <div class="personal-tags" :class="{ 'animate-tags': shouldAnimate }" :style="{ '--animation-delay': delay, '--justify-content': justify }">
+  <div class="personal-tags" :class="{ 'animate-tags': shouldAnimate }" :style="{ '--animation-delay': delay, justifyContent: justify }">
     <BlurryTag 
       v-for="tag in tags" 
       :key="tag.text"
@@ -51,16 +51,10 @@ const props = withDefaults(defineProps<Props>(), {
   }
 }
 
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   .personal-tags {
+    display: flex;
     --justify-content: center;
-    width: 100%;
   }
-}
-
-@media (max-width: 480px) {
-  .personal-tags {
-    gap: 0.5rem;
-  }
-}
+} */
 </style>

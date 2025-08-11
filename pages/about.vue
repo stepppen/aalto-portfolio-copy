@@ -54,7 +54,6 @@ onMounted(() => {
 <style lang="scss" scoped>
 h2 {
   margin-bottom: 20px;
-  font-size: 36px;
 }
 
 @media (max-width: 700px){

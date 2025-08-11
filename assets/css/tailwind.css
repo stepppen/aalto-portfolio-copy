@@ -31,7 +31,7 @@
   }
 
   html {
-    scrollbar-gutter: stable both-edges; 
+    scrollbar-gutter: stable; 
   }
 @tailwind components;
 @tailwind utilities;
@@ -39,7 +39,7 @@
 body {
     @apply bg-black;
     @apply text-white;
-    @apply my-0;
+    @apply m-0;
     @apply box-border;
     /* @apply cursor-none */
     scrollbar-gutter: stable;
@@ -179,7 +179,7 @@ body {
       /* font-style: normal; */
       font-style: normal;
       margin-bottom: 10px;
-      font-size: 3.5rem;
+      font-size: 2.5rem;
       font-variation-settings:
       "wdth" 87.5;
   }
@@ -209,7 +209,7 @@ body {
       font-weight: 300;
       /* font-style: italic; */
       margin-bottom: 10px;
-      font-size: 42px;
+      font-size: 1.5rem;
     }
       h1{
     font-family: "Bricolage Grotesque", sans-serif;

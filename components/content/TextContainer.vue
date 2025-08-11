@@ -1,10 +1,10 @@
 <template>
-    <span class="info-tag">
+    <div class="info-tag">
         <p v-if="title" class="title"> {{ title }}</p>
         <div>
             <slot></slot>
         </div>
-    </span>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -18,7 +18,9 @@ defineProps<Props>()
 .info-tag{
     display: inline-flex;
     gap: 6px;
+    margin: 12px 0;
     max-width: 100%;
+    height: auto;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(4px);
     border-radius: 1.5rem;
@@ -28,9 +30,10 @@ defineProps<Props>()
 }
 .info-tag .title {
   display: inline-block;
-  min-width: 4.5rem;
-  margin: 0;
+  width: auto;
+  margin-right: 0.5rem;
   opacity: 0.5;
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {
