@@ -5,6 +5,7 @@
       :alt="alt"
       class="hero-image object-cover"
       format="webp"
+      width="1000px"
       preload
     />
   </div>
@@ -12,6 +13,7 @@
 </template>
 
 <script setup>
+
 defineProps({
   src: {
     type: String,
