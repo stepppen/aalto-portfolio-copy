@@ -1,8 +1,19 @@
 <template>
   <div class="flex flex-col lg:flex-row justify-center inset-0 px-4 overflow-hidden  max-lg:items-center max-lg:gap-8">
     <transition name="opacity-p5">
-      <div v-if="showThree" class="lg:my-auto max-md:flex max-md:scale-75 max-md:mt-12 max-md:justify-center max-md:h-72 max-md:-translate-y-16">
-        <ThreeNew />
+      <div>
+        <ClientOnly>
+          <div>
+            <div 
+              ref="threeContainer"
+              class="lg:my-auto max-md:flex max-md:scale-75 max-md:mt-12 max-md:justify-center max-md:h-72 max-md:-translate-y-16"
+            >
+              <!-- Always render placeholder to avoid CLS -->
+              <div v-if="!showThree" class="three-placeholder"></div>
+              <ThreeFace v-else />
+          </div>
+          </div>
+        </ClientOnly>
       </div>
     </transition>
 
@@ -35,20 +46,15 @@
 </template>
   
 <script setup>
-import { onMounted, ref } from 'vue';
+const ThreeFace = defineAsyncComponent(() => import('~/components/ThreeNew.vue'))
 let showThree = ref(false);
 let showTitles = ref(false);
+const threeContainer = ref(null)
 
 onMounted(() => {
-  showThree.value = true;
-  const threeScript = document.createElement('script');
-  threeScript.src = 'ThreeNew.vue';
-  threeScript.defer = true;
-  document.head.appendChild(threeScript);
-  setTimeout(() => {
-    showTitles.value = true;
-  }, 300);
-});
+  showThree.value = true
+  showTitles.value = true
+})
 </script>
   
 <style lang="scss" scoped>
@@ -126,6 +132,14 @@ p {
 
 .social-icon:active {
   transform: translateY(0);
+}
+
+.three-placeholder {
+  width: 300px; /* match model width */
+  height: 300px; /* match model height */
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
 }
 
 @media (max-width: 640px) {

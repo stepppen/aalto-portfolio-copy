@@ -65,8 +65,6 @@ function handleImageLoaded() {
 }
 
 function getImagePath(path) {
-  // Debug the path to see what's actually coming from your JSON
-  console.log("Original image path:", path);
   
   // If path is undefined or empty, use a fallback
   if (!path) {
@@ -90,7 +88,6 @@ function getHeightFromAspectRatio(aspectRatio, baseWidth = 400) {
 }
 
 onMounted(() => {
-  console.log('ProjectCard project:', props.project);
   setTimeout(() => {
     cardLoaded.value = true;
   }, 200);

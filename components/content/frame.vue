@@ -23,10 +23,6 @@ const props = defineProps({
     default: ''
   }
 });
-onMounted(() => {
-  console.log('Frame props:', props);
-  console.log('Resolved src:', resolvedSrc.value);
-});
 
 // Compute the resolved source path
 const resolvedSrc = computed(() => {

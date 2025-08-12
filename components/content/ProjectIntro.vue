@@ -38,13 +38,6 @@ const tags = computed(() => [
   { text: props.team, iconName: "mdiAccountMultiple" },
   { text: props.roles, iconName: "mdiPencilRulerOutline" },
 ])
-
-onMounted(() => {
-  console.log("Year:", props.year)
-  console.log("Context:", props.context)
-  console.log("Team:", props.team)
-  console.log("Roles:", props.roles)
-})
 </script>
 
 <style scoped>

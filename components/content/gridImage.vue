@@ -1,5 +1,5 @@
 <template>
-  <figure class="content-image">
+  <figure class="content-image" data-aos="fade-up">
     <img
       v-if="src.endsWith('.gif')"
       :src="src"

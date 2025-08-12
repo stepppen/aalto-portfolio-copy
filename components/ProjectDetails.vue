@@ -158,7 +158,6 @@ let imageDisplayed = ref(false);
 // project.meta.context = context;
 
 onMounted(() => {
-    console.log('ProjectCard project:', props.project);
     
       setTimeout(() => {
         imageDisplayed.value = true;

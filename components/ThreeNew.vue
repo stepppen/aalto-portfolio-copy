@@ -1,11 +1,29 @@
 <template>
-  <div ref="asciiEffectContainer"></div>
+    <div
+    ref="asciiEffectContainer"
+    class="ascii-placeholder"
+  ></div>
 </template>
 
 <script setup>
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { AsciiEffect } from 'three/examples/jsm/effects/AsciiEffect.js';
+import { AsciiEffect as OriginalAsciiEffect } from 'three/examples/jsm/effects/AsciiEffect.js';
+
+class PatchedAsciiEffect extends OriginalAsciiEffect {
+  constructor(renderer, characters, options) {
+    super(renderer, characters, options);
+
+    if (this.context && this.context.canvas) {
+      // Keep the original canvas but recreate its context
+      const oldCanvas = this.context.canvas;
+      const ctx = oldCanvas.getContext('2d', { willReadFrequently: true });
+      if (ctx) {
+        this.context = ctx;
+      }
+    }
+  }
+}
 
 const asciiEffectContainer = ref(null);
 let camera, scene, renderer, effect;
@@ -21,7 +39,6 @@ onMounted(() => {
 });
 
 function init() {
-
   camera = new THREE.PerspectiveCamera(30, width / height, 0.1, 2);
   camera.position.y = 1.2;
   camera.position.z = 1.2;
@@ -34,11 +51,13 @@ function init() {
 
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(width, height);
-  effect = new AsciiEffect(renderer, '   ...::', { invert: true , resolution: 0.15});
+
+  effect = new PatchedAsciiEffect(renderer, '   ...::', { invert: true, resolution: 0.15 });
   effect.setSize(width, height);
   effect.domElement.style.color = '#FFFFFF';
-  // effect.domElement.style.color = '#eed9c4';
 
+  // Replace placeholder content
+  asciiEffectContainer.value.innerHTML = ''; // clear placeholder
   asciiEffectContainer.value.appendChild(effect.domElement);
 }
 
@@ -83,3 +102,15 @@ function animate() {
 }
 
 </script>
+<style>
+.ascii-placeholder {
+  width: 500px;
+  height: 500px;
+  background: rgb(0,0,0,0); /* Or any placeholder color/image */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-family: monospace;
+}
+</style>
