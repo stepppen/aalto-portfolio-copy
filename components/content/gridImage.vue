@@ -1,6 +1,14 @@
 <template>
   <figure class="content-image">
+    <img
+      v-if="src.endsWith('.gif')"
+      :src="src"
+      :alt="alt"
+      :width="width || 1200"
+      class="image rounded-2xl"
+    />
     <NuxtImg
+      v-else
       :src="src"
       :alt="alt"
       :width="width || 1200"

@@ -30,7 +30,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="my-16">
+  <div class="my-4">
     <div class="flex items-center justify-center">
       <div class="relative aspect-w-16 aspect-h-9 overflow-hidden rounded-2xl w-full max-w-full mx-auto">
         <!-- YouTube player with native UI -->
