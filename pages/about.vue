@@ -135,8 +135,8 @@ p {
 }
 
 .three-placeholder {
-  width: 300px; /* match model width */
-  height: 300px; /* match model height */
+  width: 300px; 
+  height: 300px; 
   background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
   backdrop-filter: blur(4px);

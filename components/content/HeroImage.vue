@@ -1,18 +1,26 @@
 <template>
   <div class="hero-wrapper rounded-2xl image-animation">
+    <div v-if="!showImage" class="image-placeholder"></div>
     <NuxtImg
+      v-else
       :src="src.startsWith('/') ? src : `/${src}`"
       :alt="alt"
       class="hero-image object-cover"
       format="webp"
-      width="1000px"
+      width="1080px"
+      height="720px"
       preload
-    />
+    />  
   </div>
   
 </template>
 
 <script setup>
+let showImage = ref(false)
+
+onMounted(() => {
+  showImage.value = true
+})
 
 defineProps({
   src: {
@@ -42,6 +50,14 @@ defineProps({
   transform: translateY(10px);
   animation: fade-in-up 0.8s forwards;
   animation-delay: 0s;
+}
+
+.image-placeholder{
+  width: 1080px;
+  height: 720px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
 }
 
 @keyframes fade-in-up {

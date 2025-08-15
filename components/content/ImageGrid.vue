@@ -32,6 +32,8 @@ defineProps({
 @media (max-width: 768px) {
   .image-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 0;
   }
 }
 </style>

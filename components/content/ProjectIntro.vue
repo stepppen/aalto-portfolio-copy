@@ -1,5 +1,5 @@
 <template>
-  <div class="min-md:mt-12 mb-12 project-intro">
+  <div class="min-md:mt-12 min-md:mb-24 project-intro">
     <h1 class="mb-4 bigger-text title-animation">{{ props.title }}</h1>
     <div class="min-md:pt-16 intro-content">
       <div class="intro-meta">
@@ -117,7 +117,7 @@ const tags = computed(() => [
 @media (max-width: 768px) {
   .intro-content {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1rem;
   }
   .intro-text{
       flex-direction: column;
