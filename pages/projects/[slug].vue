@@ -4,14 +4,8 @@
       <Head>
         <Title>{{ project?.title || 'Project' }}</Title>
       </Head>
-    <!-- <ContentQuery :path="$route.path" find="one" v-slot="{ data }">
-      <ContentRenderer :value="data" />
-      
-    </ContentQuery> -->
       <div v-if="project">
         <ContentRenderer :value="project" class="overflow-hidden"/>
-        <!-- Optionally render a detailed component -->
-        <!-- <ProjectDetails :project="project" /> -->
       </div>
       <div v-else>
         <p class="text-white">Project not found.</p>
@@ -27,13 +21,11 @@ const { data: project } = await useAsyncData('project', () =>
   queryCollection('projects').path(`/projects/${route.params.slug}`).first()
 );
 
-// Optional: set SEO meta based on project
 useSeoMeta({
   title: project.value?.title,
-  description: project.value?.overview || ''
+  description: project.value?.oneLiner || 'Portfolio Project Description',
+  ogTitle: project.value?.title,
+  ogDescription: project.value?.oneLiner || 'Portfolio Project Description',
+
 });
 </script>
-
-<style scoped>
-/* Add custom styles if needed */
-</style>

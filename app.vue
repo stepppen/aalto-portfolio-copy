@@ -1,13 +1,16 @@
 <template>
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </template>
-  
-  <script setup>
-  // Add setup to make it a proper script setup block
-  </script>
-
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
+</template>
+<script setup lang="ts">
+useSeoMeta({
+  title: 'Design Portfolio',
+  ogTitle: 'Design Portfolio',
+  description: 'Interaction Design Portfolio by Stepan Vedunov 2025',
+  ogDescription: 'Interaction Design Portfolio by Stepan Vedunov 2025',
+})
+</script>
 <style>
 .nuxt-loading-indicator {
   background: linear-gradient(to right, #38b2ac, #1e4dd4) !important;

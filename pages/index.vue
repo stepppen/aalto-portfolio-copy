@@ -11,7 +11,7 @@
         <div v-if="showTitles" id="typewriter" class="flex lg:pl-8 lg:justify-start overflow-hidden p-4 h-min">
           <div class="flex flex-col justify-center max-lg:text-center w-full lg:py-32">
             <div class="justify-self-center">
-              <h1 class="word text-stone-300 title-font max-md:text-center"> I build human-centred interactions, environments, experiences - both in digital and physical form.</h1>
+              <h1 class="word text-stone-300 title-font max-md:text-center"> I build human-centred interactions, environments, and experiences in digital and physical form.</h1>
             </div>
             <TagsContainer 
               :tags="tags"

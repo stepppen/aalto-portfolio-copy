@@ -1,4 +1,7 @@
 <template>
+    <Head>
+    <Title>About</Title>
+  </Head>
   <div class="flex flex-col lg:flex-row justify-center inset-0 px-4 overflow-hidden  max-lg:items-center max-lg:gap-8">
     <transition name="opacity-p5">
       <div>
@@ -45,11 +48,20 @@
   </div>
 </template>
   
-<script setup>
+<script setup lang="ts">
 const ThreeFace = defineAsyncComponent(() => import('~/components/ThreeNew.vue'))
 let showThree = ref(false);
 let showTitles = ref(false);
 const threeContainer = ref(null)
+
+
+useSeoMeta({
+  title: 'About Me — Design Portfolio',
+  description: 'Learn more about Stepan Vedunov, an interaction designer focused on digital and physical product experiences.',
+  ogTitle: 'About Me — Design Portfolio',
+  ogDescription: 'Learn more about Stepan Vedunov, an interaction designer focused on digital and physical product experiences.',
+})
+
 
 onMounted(() => {
   showThree.value = true

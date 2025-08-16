@@ -28,7 +28,7 @@
           
           <!-- Text content -->
           <div class="project-info">
-            <h3 class="project-title">{{ project.title }}</h3>
+            <h2 class="project-title">{{ project.title }}</h2>
             <div class="flex justify-between">
               <p class="one-liner">{{ project.meta.oneLiner }}</p>
             </div>
@@ -175,7 +175,7 @@ onMounted(() => {
   .one-liner {
     margin: 0.2rem 0 0;
     font-size: 0.85rem;
-    opacity: 0.4;
+    opacity: 0.6;
     transition: opacity 0.2s ease;
   }
   
@@ -189,7 +189,7 @@ onMounted(() => {
   }
   
   .project-card:hover .one-liner {
-    opacity: 0.6;
+    opacity: 0.8;
   }
   
   /* Add a subtle border glow effect */

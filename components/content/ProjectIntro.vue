@@ -21,16 +21,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
 
 interface Props {
   title: string,
   year: string,
   context: string,
-  team: string,
+  team?: string,
   roles: string
 }
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  team: ''
+})
 
 const tags = computed(() => [
   { text: props.year, iconName: "mdiCalendar" },

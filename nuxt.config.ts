@@ -13,14 +13,19 @@ export default defineNuxtConfig({
     '@vueuse/motion/nuxt',
     'nuxt-mdi'
   ],
-  head: {
-    title: 'Vedunov',
-    meta: [
-      { name: 'description', content: 'Design Portfolio'}
-    ],
-    link: [
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'},
-    ]
+  app: {
+    head: {
+      title: 'Vedunov Portfolio',
+      htmlAttrs: {
+        lang: 'en'
+      },
+      meta: [
+        { name: 'Design Portfolio'}
+      ],
+      link: [
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'},
+      ]
+    }
   },
   googleFonts: {
     families: {
@@ -41,5 +46,5 @@ export default defineNuxtConfig({
     offset: 100,
   },  
 
-  compatibilityDate: '2025-04-01'
+  // compatibilityDate: '2025-04-01'
 });
