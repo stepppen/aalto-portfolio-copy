@@ -11,7 +11,6 @@
               ref="threeContainer"
               class="lg:my-auto max-md:flex max-md:scale-75 max-md:mt-12 max-md:justify-center max-md:h-72 max-md:-translate-y-16"
             >
-              <!-- Always render placeholder to avoid CLS -->
               <div v-if="!showThree" class="three-placeholder"></div>
               <ThreeFace v-else />
           </div>
