@@ -98,9 +98,9 @@ onMounted(() => {
 .project-card-container {
   margin-bottom: 1.5rem;
   break-inside: avoid;
-  isolation: isolate;
   position: relative;
-  z-index: 1;
+  /* Force new stacking context for Safari + CSS columns */
+  isolation: isolate;
 }
 
 .project-link {
@@ -116,8 +116,10 @@ onMounted(() => {
   overflow: hidden;
   transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
   pointer-events: auto;
-  will-change: transform;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Safari-friendly approach */
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 /* Image container with variable height */
@@ -144,11 +146,14 @@ onMounted(() => {
   object-fit: cover;
   transition: transform 0.3s ease;
   z-index: 2;
+  /* Safari-friendly scaling */
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
-/* Keep your existing hover and animation styles */
+/* Safari-friendly hover effects with zoom */
 .project-card:hover {
-  transform: translateY(-2px);
+  transform: translate3d(0, -2px, 0);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(2px);
@@ -156,67 +161,89 @@ onMounted(() => {
 }
 
 .project-card:hover .project-image {
-  transform: scale(1.03);
+  transform: translate3d(0, 0, 0) scale(1.03);
 }
-  /* Text content styling */
-  .project-info {
-    padding: 0.8rem;
-    transition: padding-left 0.2s ease, color 0.2s ease;
+
+/* Text content styling */
+.project-info {
+  padding: 0.8rem;
+  transition: padding-left 0.2s ease, color 0.2s ease;
+}
+
+.project-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 200;
+  line-height: 1.4;
+  transition: color 0.2s ease;
+}
+
+.one-liner {
+  margin: 0.2rem 0 0;
+  font-size: 0.85rem;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+/* Subtle text changes on hover */
+.project-card:hover .project-info {
+  padding-left: 1rem;
+}
+
+.project-card:hover .project-title {
+  color: rgba(255, 255, 255, 1);
+}
+
+.project-card:hover .one-liner {
+  opacity: 0.8;
+}
+
+/* Add a subtle border glow effect */
+.project-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Appearance animation */
+.card-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+.card-fade-enter-to {
+  opacity: 1;
+}
+.card-fade-enter-from {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+/* Active/pressed state for feedback */
+.project-card:active {
+  transform: translate3d(0, -1px, 0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+/* Safari-specific optimizations for CSS columns */
+@supports (-webkit-appearance: none) {
+  .project-card-container {
+    /* Prevent column breaks inside cards */
+    break-inside: avoid-column;
+    page-break-inside: avoid;
+    /* Force compositing layer */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
   }
   
-  .project-title {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 200;
-    line-height: 1.4;
-    transition: color 0.2s ease;
-  }
-  
-  .one-liner {
-    margin: 0.2rem 0 0;
-    font-size: 0.85rem;
-    opacity: 0.6;
-    transition: opacity 0.2s ease;
-  }
-  
-  /* Subtle text changes on hover */
-  .project-card:hover .project-info {
-    padding-left: 1rem;
-  }
-  
-  .project-card:hover .project-title {
-    color: rgba(255, 255, 255, 1);
-  }
-  
-  .project-card:hover .one-liner {
-    opacity: 0.8;
-  }
-  
-  /* Add a subtle border glow effect */
   .project-card {
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Optimize for Safari's rendering */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /* Prevent subpixel issues */
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
   }
-  
-  .project-card:hover {
-    border-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  /* Appearance animation */
-  .card-fade-enter-active {
-    transition: all 0.3s ease-out;
-  }
-  .card-fade-enter-to {
-    opacity: 1;
-  }
-  .card-fade-enter-from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  
-  /* Active/pressed state for feedback */
-  .project-card:active {
-    transform: translateY(-1px); /* Slightly less elevation when pressed */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-  }
-  </style>
+}
+</style>

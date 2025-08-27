@@ -26,8 +26,12 @@
       <div v-if="showProjects">
         <div class="overflow-hidden p-4">
           <div>
-            <div v-if="projects?.length" class="xl:w-full adaptive-grid max-md:grid lg:pr-[20px]">
-              <ProjectCard v-for="p in projects" :key="p.slug" :project="p" />
+            <div v-if="projects?.length" class="xl:w-full adaptive-grid-masonry max-md:grid lg:pr-[20px]">
+              <ProjectCard
+                v-for="p in projects"
+                :key="p.slug"
+                :project="p"
+              />
             </div>
           </div>
         </div>
@@ -105,17 +109,12 @@ function animateText() {
   opacity: 0;
 }
 
-
-
-
 @keyframes fade-in-up {
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-
-
 
 .hero-content {
   top: 0;
@@ -254,29 +253,80 @@ function animateText() {
   }
 }
 
-
-
-// Your existing styles...
-@media (max-width: 1500px) {
-  .adaptive-grid {
-    column-count: 2;
-    column-gap: 20px;
-  }
-}
-
 .custom-italics {
   font-style: italic;
 }
 
+/* FIXED: Safari-friendly adaptive grid */
 .adaptive-grid {
+  /* Use CSS Grid instead of columns for better Safari compatibility */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fade-in-up 0.8s forwards;
+  animation-delay: 0.8s;
+  /* Ensure proper stacking context */
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 1500px) {
+  .adaptive-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .adaptive-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+/* Alternative: If you prefer masonry, use this Safari-optimized version */
+.adaptive-grid-masonry {
   column-count: 3;
+  -moz-column-count: 3;
   column-gap: 20px;
   width: 100%;
   opacity: 0;
   transform: translateY(20px);
   animation: fade-in-up 0.8s forwards;
   animation-delay: 0.8s;
+  /* Safari optimizations for masonry */
+  -webkit-column-break-inside: avoid;
+  break-inside: avoid;
+  /* Force new stacking context */
+  position: relative;
+  z-index: 1;
+  /* Prevent transform issues in Safari */
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+@supports (hanging-punctuation: first) and (font: -apple-system-body) and (-webkit-appearance: none) {
+  /* Safari-only styles go here */
+  .adaptive-grid-masonry {
+    column-count: 2 !important;
+    column-gap: 20px;
+  }
+}
+// @media (max-width: 1500px) {
+//   .adaptive-grid-masonry {
+//     column-count: 3;
+//     -moz-column-count: 3;
+//     column-gap: 20px;
+//   }
+// }
 
+@media (max-width: 768px) {
+  .adaptive-grid-masonry {
+    column-count: 1;
+    column-gap: 0;
+  }
 }
 
 .fade-titles-enter-active {
