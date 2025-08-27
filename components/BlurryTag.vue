@@ -1,6 +1,6 @@
 <template>
     <div class="info-tag" v-if="text">
-        <MdiIcon v-if="iconName" :icon="iconName" class="icon" size="1.5rem"/>
+        <MdiIcon v-if="iconName" :icon="iconName" class="icon" size="24px"/>
         <p>
             {{ text }}
         </p>

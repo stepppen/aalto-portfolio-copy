@@ -13,6 +13,17 @@ export default defineNuxtConfig({
     '@vueuse/motion/nuxt',
     'nuxt-mdi'
   ],
+  mdi: {
+    imports: [
+      'mdiAccount',
+      'mdiMapMarkerRadius',
+      'mdiLightningBolt',
+      'mdiCalendar',
+      'mdiSchool',
+      'mdiAccountMultiple',
+      'mdiPencilRulerOutline'
+    ]
+  },
   app: {
     head: {
       title: 'Vedunov Portfolio',
@@ -23,18 +34,32 @@ export default defineNuxtConfig({
         { name: 'Design Portfolio'}
       ],
       link: [
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'},
+        // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'},
+        {
+          rel: 'preload',
+          href: '/fonts/Lato-Light.ttf',
+          as: 'font',
+          type: 'font/ttf',
+          crossorigin: 'anonymous'
+        },
+        {
+          rel: 'preload',
+          href: '/fonts/BricolageGrotesque.ttf',
+          as: 'font',
+          type: 'font/ttf',
+          crossorigin: 'anonymous'
+        }
       ]
     }
   },
-  googleFonts: {
-    families: {
-      Roboto: [300, 400, 700],
-      "Bricolage Grotesque": [200, 300, 400, 600], 
-      "Space Grotesk": [300, 400, 600],
-      Lato: [300, 400, 700]
-    }
-  },
+  // googleFonts: {
+  //   families: {
+  //     Roboto: [300, 400, 700],
+  //     "Bricolage Grotesque": [200, 300, 400, 600], 
+  //     "Space Grotesk": [300, 400, 600],
+  //     Lato: [300, 400, 700]
+  //   }
+  // },
   content: {
     markdown: {
       mdc: true
