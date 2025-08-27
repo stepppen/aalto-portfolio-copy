@@ -38,7 +38,7 @@
 
 @font-face {
   font-family: Lato;
-  src: url(/fonts/Lato-Light.ttf) format('truetype');
+  src: url(/fonts/Lato-Light.woff2) format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: block;
@@ -46,7 +46,7 @@
 
 @font-face {
   font-family: "Bricolage Grotesque";
-  src: url(/fonts/BricolageGrotesque.ttf) format('truetype');
+  src: url(/fonts/BricolageGrotesque.woff2) format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: block;

@@ -37,16 +37,16 @@ export default defineNuxtConfig({
         // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'},
         {
           rel: 'preload',
-          href: '/fonts/Lato-Light.ttf',
+          href: '/fonts/Lato-Light.woff2',
           as: 'font',
-          type: 'font/ttf',
+          type: 'font/woff2',
           crossorigin: 'anonymous'
         },
         {
           rel: 'preload',
-          href: '/fonts/BricolageGrotesque.ttf',
+          href: '/fonts/BricolageGrotesque.woff2',
           as: 'font',
-          type: 'font/ttf',
+          type: 'font/woff2',
           crossorigin: 'anonymous'
         }
       ]
