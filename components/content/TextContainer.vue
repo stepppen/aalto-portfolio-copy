@@ -1,11 +1,12 @@
 <template>
-    <div class="info-tag" data-aos="fade-up">
-        <p v-if="title" class="title"> {{ title }}</p>
-        <div>
-            <slot></slot>
-        </div>
+  <div class="info-tag" data-aos="fade-up">
+    <p v-if="title" class="title">{{ title }}</p>
+    <div class="flex flex-col">
+      <slot />
     </div>
+  </div>
 </template>
+
 
 <script setup lang="ts">
 interface Props {

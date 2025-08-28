@@ -132,7 +132,7 @@ body {
       align-items: center;
     }
     .main-container {
-      max-width: 100%;
+      max-width: 90%;
       padding: 0 2rem;
       overflow-x: hidden;
       position: relative;
