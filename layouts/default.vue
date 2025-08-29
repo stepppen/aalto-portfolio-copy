@@ -5,47 +5,35 @@
       <transition name="slide-fade">
         <header class="dynamic-header z-50 overflow-hidden" v-if="showHeader">
           <nav class="dynamic-nav">
-            <!-- Keep Tab component alive across route changes -->
             <keep-alive>
-              <Tab key="persistent-tab" />
+              <NewTab key="persistent-tab" />
             </keep-alive>
           </nav>
         </header>
       </transition>
       <div class="overflow-hidden lg:pt-32">
-        <!-- Simple slot without transitions to avoid component issues -->
         <slot />
       </div>
-      <!-- <footer>
-        <DefaultFooter />
-      </footer> -->
     </div>
   </div>
 </template>
 
 <script setup>
+import NewTab from '~/components/newTab.vue';
+
 let showHeader = ref(false);
 const router = useRouter();
 const cursor = ref(null);
 
 onMounted(() => {
-  // showHeader.value = true;
   setTimeout(() => {
     showHeader.value = true;
   }, 100);
 });
-
-// Remove or comment out the router.afterEach if you want persistent header
-// router.afterEach(() => {
-//   // Reset showHeader when navigating to a new route
-//   showHeader.value = false;
-// });
 </script>
 
 <style>
 .border-white {
-  /* border: 1px solid #f7f7f7; */
-  /* background-color: rgb(0, 0, 0); */
   border-radius: 5px;
 }
 .border-white:hover {
@@ -54,14 +42,8 @@ onMounted(() => {
 }
 .border-white:active {
   border: 1px solid rgb(240, 0, 0);
-  /* border: 1px solid rgb(125, 12, 41); */
-  /* background-color: rgb(10, 76, 127); */
+
 }
-/* p {
-  font-family: Roboto, sans-serif;
-  font-size: 1rem;
-  font-weight: 300;
-} */
 .slow-transition {
   transition: 0.2s ease-in-out;
 }
@@ -81,7 +63,6 @@ onMounted(() => {
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-  /* transform: translateX(-20px); */
   backdrop-filter: blur(4px);
   opacity: 0;
 }
