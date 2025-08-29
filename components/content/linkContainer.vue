@@ -4,35 +4,34 @@
     <div class="flex flex-col align-items-start p-0">
         <a :href="link1Src || '/'" class="w-full">
       <div v-if="link1" class="flex w-full p-0">
-        <p>
+        <MdiIcon icon="mdiArrowTopRight" size="20px"/>
+        <p class="flex-1 break-words">
             {{ link1 }}
         </p>
-        <MdiIcon icon="mdiArrowTopRight" size="24px"/>
       </div>
       </a>
       <a :href="link2Src || '/'" class="w-full">
       <div v-if="link2" class="flex w-full p-0">
-        <p>
+        <MdiIcon icon="mdiArrowTopRight" size="20px" class="shrink-0" />
+        <p class="flex-1 break-words">
             {{ link2 }}
         </p>
-        <MdiIcon icon="mdiArrowTopRight" size="24px"/>
       </div>
       </a>
       <a :href="link3Src || '/'" class="w-full">
       <div v-if="link3" class="flex w-full p-0">
-        <p >
+        <MdiIcon icon="mdiArrowTopRight" size="20px" class="shrink-0"/>
+        <p class="flex-1 break-words"> 
             {{ link3 }}
-
         </p>
-        <MdiIcon icon="mdiArrowTopRight" size="24px"/>
       </div>
       </a>
       <a :href="link4Src || '/'" class="w-full">
       <div v-if="link4" class="flex p-0">
-        <p >
+        <MdiIcon icon="mdiArrowTopRight" size="20px" class="shrink-0"/>
+        <p class="flex-1 break-words">
             {{ link4 }}
         </p>
-        <MdiIcon icon="mdiArrowTopRight" size="24px"/>
       </div>
       </a>
     </div>
