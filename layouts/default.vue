@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrapper">
-    <BGGradient />
+    <BackgroundGradient />
     <div class="page-wrapper relative z-10">
       <transition name="slide-fade">
         <header class="dynamic-header z-50 overflow-hidden" v-if="showHeader">
