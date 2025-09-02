@@ -1,5 +1,5 @@
 <template>
-  <div class="image-grid lg:py-12 2xl:py-24" :class="columns" >
+  <div class="image-grid" :class="columns">
     <slot></slot>
   </div>
 </template>
@@ -17,7 +17,8 @@ defineProps({
 .image-grid {
   display: grid;
   gap: 2rem;
-  margin: 4px 0;
+  margin: 12px 0;
+  align-items: start;
 }
 
 .cols-2 {
@@ -31,6 +32,8 @@ defineProps({
 @media (max-width: 768px) {
   .image-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 0;
   }
 }
 </style>

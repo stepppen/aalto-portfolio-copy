@@ -6,7 +6,6 @@ const isPlaying = ref(false)
 const video = ref<any>(null)
 
 function stateChange(event: any) {
-  // event.data "1" means the video is playing (per the YouTube API)
   isPlaying.value = event.data === 1
 }
 
@@ -33,7 +32,6 @@ onMounted(() => {
   <div class="my-4">
     <div class="flex items-center justify-center">
       <div class="relative aspect-w-16 aspect-h-9 overflow-hidden rounded-2xl w-full max-w-full mx-auto">
-        <!-- YouTube player with native UI -->
         <ScriptYouTubePlayer
           ref="video"
           :video-id="props.id"
@@ -51,7 +49,7 @@ onMounted(() => {
       </div>
       
     </div>
-    <!-- Display the caption if provided -->
+    <!-- caption -->
     <figcaption v-if="props.caption" class="mt-2 text-center text-gray-600 text-sm">
       {{ props.caption }}
     </figcaption>

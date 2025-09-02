@@ -6,7 +6,7 @@
           <div class="image-wrapper" :style="{ 
             paddingBottom: imageLoaded ? '0' : `${getAspectRatio(project.aspectRatio || '3:2')}%` 
           }">
-            <!-- Greyscale placeholder -->
+            <!-- placeholder -->
             <div 
               v-if="!imageLoaded" 
               class="image-placeholder"
@@ -23,10 +23,9 @@
               @load="handleImageLoaded"
               preload
             />
-            <!-- <img :src="getImagePath(project.preview)" :alt="project.title" /> -->
           </div>
           
-          <!-- Text content -->
+          <!-- Text -->
           <div class="project-info">
             <h2 class="project-title">{{ project.title }}</h2>
             <div class="flex justify-between">
@@ -49,14 +48,11 @@ const props = defineProps({
 const cardLoaded = ref(false);
 const imageLoaded = ref(false);
 
-// Convert aspect ratio string to percentage for padding-bottom
 function getAspectRatio(ratio) {
-  // Handle different formats: "3:2", "1:1", etc.
   if (typeof ratio === 'string' && ratio.includes(':')) {
     const [width, height] = ratio.split(':').map(Number);
     return (height / width) * 100;
   }
-  // Default to 2:3 (portrait) if not specified
   return 66.67;
 }
 
@@ -66,22 +62,18 @@ function handleImageLoaded() {
 
 function getImagePath(path) {
   
-  // If path is undefined or empty, use a fallback
   if (!path) {
     return '/images/placeholder.webp';
   }
   
-  // If the path already starts with /, return it as is
   if (path.startsWith('/')) {
     return path;
   }
-  
-  // Otherwise, add the leading /
   return `/${path}`;
 }
 
 function getHeightFromAspectRatio(aspectRatio, baseWidth = 400) {
-  if (!aspectRatio) return baseWidth; // Default to square if no ratio provided
+  if (!aspectRatio) return baseWidth;
   
   const [width, height] = aspectRatio.split(':').map(Number);
   return Math.round((baseWidth * height) / width);
@@ -99,7 +91,6 @@ onMounted(() => {
   margin-bottom: 1.5rem;
   break-inside: avoid;
   position: relative;
-  /* Force new stacking context for Safari + CSS columns */
   isolation: isolate;
 }
 
@@ -117,18 +108,16 @@ onMounted(() => {
   transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
   pointer-events: auto;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  /* Safari-friendly approach */
   will-change: transform;
   transform: translate3d(0, 0, 0);
 }
 
-/* Image container with variable height */
 .image-wrapper {
   position: relative;
   overflow: hidden;
   width: 100%;
   border-radius: 1rem 1rem 0 0;
-  background-color: #282828; /* Light grey placeholder */
+  background-color: #282828;
 }
 
 .image-placeholder {
@@ -146,12 +135,10 @@ onMounted(() => {
   object-fit: cover;
   transition: transform 0.3s ease;
   z-index: 2;
-  /* Safari-friendly scaling */
   will-change: transform;
   transform: translate3d(0, 0, 0);
 }
 
-/* Safari-friendly hover effects with zoom */
 .project-card:hover {
   transform: translate3d(0, -2px, 0);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
@@ -164,7 +151,6 @@ onMounted(() => {
   transform: translate3d(0, 0, 0) scale(1.03);
 }
 
-/* Text content styling */
 .project-info {
   padding: 0.8rem;
   transition: padding-left 0.2s ease, color 0.2s ease;
@@ -185,7 +171,6 @@ onMounted(() => {
   transition: opacity 0.2s ease;
 }
 
-/* Subtle text changes on hover */
 .project-card:hover .project-info {
   padding-left: 1rem;
 }
@@ -198,7 +183,6 @@ onMounted(() => {
   opacity: 0.8;
 }
 
-/* Add a subtle border glow effect */
 .project-card {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -207,7 +191,6 @@ onMounted(() => {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Appearance animation */
 .card-fade-enter-active {
   transition: all 0.3s ease-out;
 }
@@ -219,29 +202,24 @@ onMounted(() => {
   opacity: 0;
 }
 
-/* Active/pressed state for feedback */
 .project-card:active {
   transform: translate3d(0, -1px, 0);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-/* Safari-specific optimizations for CSS columns */
+/* Safari optimization */
 @supports (-webkit-appearance: none) {
   .project-card-container {
-    /* Prevent column breaks inside cards */
     break-inside: avoid-column;
     page-break-inside: avoid;
-    /* Force compositing layer */
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
   }
   
   .project-card {
-    /* Optimize for Safari's rendering */
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    /* Prevent subpixel issues */
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
   }

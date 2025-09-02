@@ -31,8 +31,6 @@ onMounted(() => {
   });
 });
 </script>
-
-<!-- ⛔️ REMOVE scoped so styles apply globally and layering works properly -->
 <style>
 .hero-bg {
     position: fixed;

@@ -1,12 +1,12 @@
 <template>
   <div class="page-wrapper">
-    <bgGradient />
+    <BGGradient />
     <div class="page-wrapper relative z-10">
       <transition name="slide-fade">
         <header class="dynamic-header z-50 overflow-hidden" v-if="showHeader">
           <nav class="dynamic-nav">
             <keep-alive>
-              <NewTab key="persistent-tab" />
+              <NavTab key="persistent-tab" />
             </keep-alive>
           </nav>
         </header>
@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import NewTab from '~/components/newTab.vue';
+import NavTab from '~/components/NavTab.vue';
 
 let showHeader = ref(false);
 const router = useRouter();

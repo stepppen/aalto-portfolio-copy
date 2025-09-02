@@ -4,7 +4,7 @@ export default defineContentConfig({
   collections: {
     projects: defineCollection({
       type: 'page',
-      source: 'projects/**/*.md' // allows for nested folders
+      source: 'projects/**/*.md'
     })
   }
 })

@@ -12,7 +12,7 @@
               class="lg:my-auto max-md:flex max-md:scale-75 max-md:mt-12 max-md:justify-center max-md:h-72 max-md:-translate-y-16"
             >
               <div v-if="!showThree" class="three-placeholder"></div>
-              <ThreeFace v-else />
+              <MyFace v-else />
           </div>
           </div>
         </ClientOnly>
@@ -48,7 +48,7 @@
 </template>
   
 <script setup lang="ts">
-const ThreeFace = defineAsyncComponent(() => import('~/components/ThreeNew.vue'))
+const MyFace = defineAsyncComponent(() => import('~/components/MyFace.vue'))
 let showThree = ref(false);
 let showTitles = ref(false);
 const threeContainer = ref(null)

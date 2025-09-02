@@ -92,7 +92,6 @@ const tags = computed(() => [
   margin: 0;
 }
 
-/* Title Animation */
 .title-animation {
   opacity: 0;
   transform: translateY(10px);
@@ -100,7 +99,6 @@ const tags = computed(() => [
   animation-delay: 0s;
 }
 
-/* Text Animation */
 .text-animation {
   opacity: 0;
   transform: translateY(10px);
