@@ -12,7 +12,7 @@
       </div>
       <div class="intro-text text-animation">
         <p class="title">About</p>
-        <div>
+        <div> 
           <slot></slot>
         </div>
       </div>
@@ -80,6 +80,24 @@ const tags = computed(() => [
   opacity: 0.5;
 }
 
+.intro-text :deep(ul) {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.intro-text :deep(li) {
+  margin-bottom: 0.5rem;
+  font-family: "Lato", sans-serif;
+  color:rgb(255, 255, 255);
+  font-weight: 300;
+  font-size: 1.1rem;
+}
+
+.intro-text :deep(p) {
+  margin-bottom: 0.75rem;
+}
+
 .meta-item h4 {
   font-weight: 600;
   margin-bottom: 0.5rem;
@@ -87,7 +105,7 @@ const tags = computed(() => [
 }
 
 .meta-item ul {
-  list-style: none;
+  /* list-style: none; */
   padding: 0;
   margin: 0;
 }

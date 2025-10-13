@@ -30,7 +30,7 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       Roboto: [300, 400, 700],
-      "Bricolage Grotesque": [200, 300, 400], 
+      "Bricolage Grotesque": [200, 300, 400, 500, 600, 700], 
       Lato: [300, 400]
     }
   },

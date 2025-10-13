@@ -23,7 +23,7 @@
     </div>
     <transition name="fade-titles">
       <div v-if="showTitles" class="flex flex-col md:w-2/3 lg:w-96 lg:my-auto lg:inset-0 max-lg:justify-center max-lg:items-center margin-handeler max-lg:text-center">
-        <h2>Stepan Vedunov</h2>
+        <h2>Hi, I'm Stepan</h2>
         <p lang="en" class=" lg:justify-center  max-md:max-w-sm">I’m an interaction designer with a strong foundation in UX/UI, going beyond conventional web design to shape experiences for emerging technologies such as VR, IoT and robotics. <br> </p>
         
         <!-- Updated contact section with icons -->
@@ -48,7 +48,7 @@
 </template>
   
 <script setup lang="ts">
-const MyFace = defineAsyncComponent(() => import('~/components/MyFace.vue'))
+import MyFace from '~/components/MyFace.vue'
 let showThree = ref(false);
 let showTitles = ref(false);
 const threeContainer = ref(null)
