@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-container">
+  <div class="wrapper-container ">
     <div class="main-container">
       <Head>
         <Title>Home</Title>
@@ -7,22 +7,28 @@
   
       <!-- <div class="hero-placeholder"></div> -->
   
+      
       <transition name="fade-titles">
-        <div v-if="showTitles" id="typewriter" class="flex lg:pl-8 lg:justify-start overflow-hidden p-4 h-min">
-          <div class="flex flex-col justify-center max-lg:text-center w-full lg:py-32">
+        <div v-if="showTitles" id="typewriter" class="flex lg:pl-8 lg:justify-start overflow-hidden p-4 h-min max-lg:h-60">
+          <div class="flex flex-col justify-center  max-lg:text-center w-full lg:py-32">
             <div class="justify-self-center">
-              <h1 class="word text-stone-300 title-font max-md:text-center"> Interaction designer based in Zurich, <br> 
-                happiest when building things that matter.</h1>
-            </div>
-            <TagsContainer 
+                <h1 class="word text-stone-300 title-font text-center my-0 py-0"> Stepan Vedunov </h1>
+                  <div class="flex gap-2 content-center items-center justify-center opacity-70 my-0 py-0 ">
+                    <p class="text-center">Interaction Designer</p>
+                    <div class="rounded-full bg-white opacity-100 bullet"></div>
+                    <p class="text-center">Zurich, CH</p>
+                  </div>
+              </div>
+              <!-- <TagsContainer 
               :tags="tags"
               :should-animate="true"
               delay="0.2s"
               :justify="isMobile ? 'center' : 'flex-start'"
-            />
+              /> -->
+            </div>
           </div>
-        </div>
-      </transition>
+        </transition>
+      
   
       <div v-if="showProjects">
         <div class="overflow-hidden p-4">
@@ -129,6 +135,12 @@ function animateText() {
 .hero-content h1, 
 .hero-content .word {
   pointer-events: auto;
+}
+
+.bullet {
+  width: 5px;
+  height: 5px;
+  transform: translateY(2px);
 }
 
 /* Base styles for text reveal */
@@ -380,9 +392,9 @@ function animateText() {
     height: auto;
   }
   
-  .word {
-    margin-right: 0.8rem !important;
-  }
+  // .word {
+  //   margin-right: 0.8rem !important;
+  // }
 }
 
 @media (max-width: 768px) {

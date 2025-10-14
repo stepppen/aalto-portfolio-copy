@@ -1,5 +1,5 @@
 <template>
-  <div class="image-grid lg:py-12 2xl:py-24" :class="columns" >
+  <div class="image-grid lg:py-12 2xl:py-24 max-lg:pt-8" :class="columns" >
     <slot></slot>
   </div>
 </template>

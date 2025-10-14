@@ -22,9 +22,9 @@
     <div class="w-16">
     </div>
     <transition name="fade-titles">
-      <div v-if="showTitles" class="flex flex-col md:w-2/3 lg:w-96 lg:my-auto lg:inset-0 max-lg:justify-center max-lg:items-center margin-handeler max-lg:text-center">
-        <h2>Hi, I'm Stepan</h2>
-        <p lang="en" class=" lg:justify-center  max-md:max-w-sm">I am an interaction designer and creative technologist based in Zurich. I focus on UX/UI and HCI, going beyond conventional web design to shape experiences for emerging technologies such as VR, IoT and robotics. <br> </p>
+      <div v-if="showTitles" class="flex flex-col max-lg:gap-0 md:w-2/3 lg:w-96 lg:my-auto lg:inset-0 max-lg:justify-center max-lg:items-center margin-handeler max-lg:text-center">
+        <h2 class="max-lg:m-0">About me</h2>
+        <p lang="en" class=" lg:justify-center  max-md:max-w-sm">Hi, I am an interaction designer and creative technologist based in Zurich. I focus on UX/UI and HCI, going beyond conventional web design to shape experiences for emerging technologies such as VR, IoT and robotics. <br> </p>
         
         <!-- Updated contact section with icons -->
         <div class="contact-info">
@@ -69,13 +69,15 @@ onMounted(() => {
 </script>
   
 <style lang="scss" scoped>
-h2 {
-  margin-bottom: 20px;
-}
+// h2 {
+//   margin-bottom: 20px;
+// }
 
 @media (max-width: 700px){
   .margin-handeler{
-    margin: auto;
+    // margin-top: 5rem;
+    // margin-bottom: 0rem;
+    padding: 1rem 0 0 0;
   }
 }
 
