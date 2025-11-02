@@ -12,7 +12,7 @@
       </div>
       <div class="intro-text text-animation">
         <p class="title">About</p>
-        <div> 
+        <div class="intro-text-content"> 
           <slot></slot>
         </div>
       </div>
@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-
 interface Props {
   title: string,
   year: string,
@@ -29,6 +28,7 @@ interface Props {
   team?: string,
   roles: string
 }
+
 const props = withDefaults(defineProps<Props>(), {
   team: ''
 })
@@ -44,6 +44,8 @@ const tags = computed(() => [
 <style scoped>
 .project-intro {
   gap: 2rem;
+  /* Optimize rendering */
+  contain: layout style;
 }
 
 .intro-content {
@@ -71,6 +73,8 @@ const tags = computed(() => [
   padding: 1rem 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
   cursor: default;
+  will-change: backdrop-filter;
+  transform: translate3d(0, 0, 0);
 }
 
 .intro-text .title {
@@ -78,6 +82,12 @@ const tags = computed(() => [
   min-width: 4rem;
   margin: 0;
   opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.intro-text-content {
+  flex: 1;
+  min-width: 0;
 }
 
 .intro-text :deep(ul) {
@@ -89,39 +99,33 @@ const tags = computed(() => [
 .intro-text :deep(li) {
   margin-bottom: 0.5rem;
   font-family: "Lato", sans-serif;
-  color:rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
   font-weight: 300;
   font-size: 1.1rem;
+  line-height: 1.6;
 }
 
 .intro-text :deep(p) {
   margin-bottom: 0.75rem;
+  line-height: 1.6;
 }
 
-.meta-item h4 {
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #666;
-}
-
-.meta-item ul {
-  /* list-style: none; */
-  padding: 0;
-  margin: 0;
+.intro-text :deep(p:last-child) {
+  margin-bottom: 0;
 }
 
 .title-animation {
   opacity: 0;
   transform: translateY(10px);
-  animation: fade-in-up 0.8s forwards;
+  animation: fade-in-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   animation-delay: 0s;
 }
 
 .text-animation {
   opacity: 0;
   transform: translateY(10px);
-  animation: fade-in-up 0.8s forwards;
-  animation-delay: 0.4s;
+  animation: fade-in-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: 0.2s;
 }
 
 @keyframes fade-in-up {
@@ -131,17 +135,39 @@ const tags = computed(() => [
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .title-animation,
+  .text-animation {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (max-width: 768px) {
   .intro-content {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  .intro-text{
-      flex-direction: column;
-      max-width: 100%;
+  
+  .intro-text {
+    flex-direction: column;
+    max-width: 100%;
+    padding: 1rem;
   }
+  
+  .intro-text .title {
+    min-width: auto;
+    margin-bottom: 0.5rem;
+  }
+  
   h1 {
     font-size: 2rem;
+  }
+  
+  .intro-text :deep(li),
+  .intro-text :deep(p) {
+    font-size: 1rem;
   }
 }
 </style>

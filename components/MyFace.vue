@@ -1,47 +1,57 @@
 <template>
-    <div
+  <div
     ref="asciiEffectContainer"
     class="ascii-placeholder"
-  ></div>
+    :class="{ 'is-loading': !modelLoaded }"
+  >
+    <div v-if="!modelLoaded" class="loading-text">Loading 3D...</div>
+  </div>
 </template>
 
 <script setup>
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { AsciiEffect as OriginalAsciiEffect } from 'three/examples/jsm/effects/AsciiEffect.js';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 
-class PatchedAsciiEffect extends OriginalAsciiEffect {
-  constructor(renderer, characters, options) {
-    super(renderer, characters, options);
+const asciiEffectContainer = ref(null);
+const modelLoaded = ref(false);
+let cleanup = null;
 
-    if (this.context && this.context.canvas) {
-      // Keep the original canvas but recreate its context
-      const oldCanvas = this.context.canvas;
-      const ctx = oldCanvas.getContext('2d', { willReadFrequently: true });
-      if (ctx) {
-        this.context = ctx;
+onMounted(async () => {
+  const [
+    ThreeModule,
+    { GLTFLoader: GLTFLoaderClass },
+    { AsciiEffect: OriginalAsciiEffectClass }
+  ] = await Promise.all([
+    import(/* webpackChunkName: "three" */ 'three'),
+    import(/* webpackChunkName: "three-gltf" */ 'three/examples/jsm/loaders/GLTFLoader.js'),
+    import(/* webpackChunkName: "three-ascii" */ 'three/examples/jsm/effects/AsciiEffect.js')
+  ]);
+
+  const THREE = ThreeModule.default || ThreeModule;
+  const GLTFLoader = GLTFLoaderClass;
+  const OriginalAsciiEffect = OriginalAsciiEffectClass;
+
+  class PatchedAsciiEffect extends OriginalAsciiEffect {
+    constructor(renderer, characters, options) {
+      super(renderer, characters, options);
+      if (this.context?.canvas) {
+        const oldCanvas = this.context.canvas;
+        const ctx = oldCanvas.getContext('2d', { willReadFrequently: true });
+        if (ctx) this.context = ctx;
       }
     }
   }
-}
 
-const asciiEffectContainer = ref(null);
-let camera, scene, renderer, effect;
-let rotationIncrement = 0.0009;
-let rotationDirection = 1;
-const width = 500;
-const height =  500;
+  let camera, scene, renderer, effect;
+  let rotationIncrement = 0.0009;
+  let rotationDirection = 1;
+  let animationFrameId = null;
+  let gltfModel = null;
+  const width = 500;
+  const height = 500;
 
-onMounted(() => {
-  init();
-  loadModel();
-  animate();
-});
-
-function init() {
+  // Init scene
   camera = new THREE.PerspectiveCamera(30, width / height, 0.1, 2);
-  camera.position.y = 1.2;
-  camera.position.z = 1.2;
+  camera.position.set(0, 1.2, 1.2);
 
   scene = new THREE.Scene();
 
@@ -49,19 +59,23 @@ function init() {
   pointLight1.position.set(3, 5, 5);
   scene.add(pointLight1);
 
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer({ 
+    antialias: false,
+    powerPreference: 'low-power' 
+  });
   renderer.setSize(width, height);
 
-  effect = new PatchedAsciiEffect(renderer, '   ...::', { invert: true, resolution: 0.15 });
+  effect = new PatchedAsciiEffect(renderer, '   ...::', { 
+    invert: true, 
+    resolution: 0.15 
+  });
   effect.setSize(width, height);
   effect.domElement.style.color = '#FFFFFF';
 
-  // Replace placeholder content
-  asciiEffectContainer.value.innerHTML = ''; // clear placeholder
+  asciiEffectContainer.value.innerHTML = '';
   asciiEffectContainer.value.appendChild(effect.domElement);
-}
 
-function loadModel() {
+  // Load model
   const gltfLoader = new GLTFLoader();
   gltfLoader.load('/three/poly2.glb', (gltf) => {
     const model = gltf.scene;
@@ -74,43 +88,77 @@ function loadModel() {
       }
     });
     scene.add(model);
-  }, undefined, (error) => {
-    console.error('Error loading model:', error);
+    gltfModel = model.children[0];
+    modelLoaded.value = true;
+    animate();
   });
-}
 
-function animate() {
-    setTimeout(function() {
-        requestAnimationFrame(animate);
-        
-        const gltfModelGroup = scene.getObjectByName('gltfModel');
-        if (gltfModelGroup) {
-            const gltfModel = gltfModelGroup.children[0];
-            // gltfModel.rotation.y += rotationIncrement;
-        
+  let lastTime = 0;
+  const targetFPS = 20;
+  const frameDelay = 1000 / targetFPS;
 
-        // Rotate the model back and forth
-        gltfModel.rotation.y += rotationIncrement * rotationDirection;
-        // Change rotation direction if reaching the limits
-        if (Math.abs(gltfModel.rotation.y) >= Math.PI / 8) {
-          rotationDirection *= -1;
-        }
-        
-        effect.render(scene, camera);
+  function animate(currentTime = 0) {
+    animationFrameId = requestAnimationFrame(animate);
+
+    const elapsed = currentTime - lastTime;
+    if (elapsed < frameDelay) return;
+    lastTime = currentTime - (elapsed % frameDelay);
+
+    if (gltfModel) {
+      gltfModel.rotation.y += rotationIncrement * rotationDirection;
+      if (Math.abs(gltfModel.rotation.y) >= Math.PI / 8) {
+        rotationDirection *= -1;
       }
-    }, 50);
-}
+      effect.render(scene, camera);
+    }
+  }
 
+  // Cleanup function
+  cleanup = () => {
+    if (animationFrameId) {
+      cancelAnimationFrame(animationFrameId);
+    }
+    if (renderer) {
+      renderer.dispose();
+    }
+    if (scene) {
+      scene.traverse((object) => {
+        if (object.geometry) object.geometry.dispose();
+        if (object.material) {
+          if (Array.isArray(object.material)) {
+            object.material.forEach(material => material.dispose());
+          } else {
+            object.material.dispose();
+          }
+        }
+      });
+    }
+  };
+});
+
+onBeforeUnmount(() => {
+  if (cleanup) cleanup();
+});
 </script>
-<style>
+
+<style scoped>
 .ascii-placeholder {
   width: 500px;
   height: 500px;
-  background: rgb(0,0,0,0); /* Or any placeholder color/image */
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #555;
-  font-family: monospace;
+  position: relative;
 }
+
+/* .ascii-placeholder.is-loading {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.loading-text {
+  font-family: monospace;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 14px;
+} */
 </style>

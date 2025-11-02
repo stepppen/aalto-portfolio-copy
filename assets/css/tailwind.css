@@ -1,48 +1,120 @@
+@font-face {
+  font-family: 'Bricolage Grotesque Fallback';
+  size-adjust: 100%;
+  ascent-override: 95%;
+  src: local('Arial');
+}
 
+@font-face {
+  font-family: 'Roboto Fallback';
+  size-adjust: 100%;
+  ascent-override: 92%;
+  src: local('Arial');
+}
+
+@font-face {
+  font-family: 'Lato Fallback';
+  size-adjust: 100%;
+  ascent-override: 95%;
+  src: local('Arial');
+}
+
+/* Critical CSS - loads before anything else */
+:root {
+  --primary: black;
+  --secondary: white;
+  --tertiary: blue;
+  --scrollbar-width: 15px;
+  
+  /* Font stack with fallbacks to prevent layout shift */
+  --font-heading: 'Bricolage Grotesque', 'Bricolage Grotesque Fallback', system-ui, -apple-system, sans-serif;
+  --font-body: 'Lato', 'Lato Fallback', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Roboto', 'Roboto Fallback', system-ui, -apple-system, sans-serif;
+}
+
+/* Prevent layout shift during font loading */
+body {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Optimize scrollbar rendering */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--primary);
+}
+
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 14px;
+  border: 3px solid var(--primary);
+}
+
+html {
+  scrollbar-gutter: stable;
+  /* Enable smooth scrolling with GPU acceleration */
+  scroll-behavior: smooth;
+}
 
 @tailwind base;
-
-:root {
-    --primary: black;
-    --secondary: white;
-    --tertiary: blue;
-    --scrollbar-width: 15px;
-  }
-
-* {
-    scrollbar-width: thin;
-    scrollbar-color: var(--secondary) var(--primary);
-  }
-  
-  *::-webkit-scrollbar {
-    width: 15px;
-  }
-  
-  *::-webkit-scrollbar-track {
-    background: var(--primary);
-    border-radius: 5px;
-  }
-  
-  *::-webkit-scrollbar-thumb {
-    background-color: var(--secondary);
-    border-radius: 14px;
-    border: 3px solid var(--primary);
-  }
-
-  html {
-    scrollbar-gutter: stable; 
-  }
 @tailwind components;
 @tailwind utilities;
 
 body {
-    @apply bg-black;
-    @apply text-white;
-    @apply m-0;
-    @apply box-border;
-    /* @apply cursor-none */
-    scrollbar-gutter: stable;
+  @apply bg-black;
+  @apply text-white;
+  @apply m-0;
+  @apply box-border;
+  scrollbar-gutter: stable;
+  /* Optimize font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
 
+hero-block,
+.project-card,
+.project-image {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimize blur effect with will-change */
+.hero-block {
+  will-change: filter, opacity;
+  /* Use backdrop-filter for better performance if blur is too heavy */
+  /* backdrop-filter: blur(var(--hero-blur, 0px)); */
+}
+
+/* Content visibility for off-screen content */
+.project-card-container {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 400px; /* Estimated height */
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 
@@ -150,7 +222,7 @@ body {
     }
 
   h2 {
-      font-family: "Bricolage Grotesque", sans-serif;
+      font-family: var(--font-heading);
       font-weight: 400;
       font-optical-sizing: auto;
       font-style: normal;
@@ -158,20 +230,20 @@ body {
       font-size: 2.5rem;
   }
   h3{
-    font-family: "Bricolage Grotesque", sans-serif;
+    font-family: var(--font-heading);
     font-weight: 400;
     color:white;
     margin-bottom: 10px;
   }
   
   .heading-4 {
-      font-family: "Roboto";
+      font-family: var(--font-heading);
       font-style: normal;
       font-weight: 400;
       font-size: 1rem;
   }
   p {
-      font-family: "Lato", sans-serif;
+      font-family: var(--font-body);
       color:rgb(255, 255, 255);
       font-weight: 300;
       font-size: 1.1rem;
@@ -179,21 +251,21 @@ body {
 
   @media (max-width: 768px){
     h2{
-      font-family: "Bricolage Grotesque", sans-serif;
+      font-family: var(--font-heading);
       font-weight: 400;
       /* font-style: italic; */
       margin-bottom: 10px;
       font-size: 1.5rem;
     }
       h1{
-    font-family: "Bricolage Grotesque", sans-serif;
+    font-family: var(--font-heading);
     font-weight: 400;
     margin-bottom: 10px;
     font-size: 1.5rem;
     text-align: center;
   }
   p {
-    font-family: "Lato", sans-serif;
+    font-family: var(--font-body);
     color:rgb(255, 255, 255);
     font-weight: 300;
     font-size: 1rem;
@@ -203,7 +275,7 @@ body {
   @media (max-width: 1536px){
 
     h1{
-      font-family: "Bricolage Grotesque", sans-serif;
+      font-family: var(--font-heading);
       font-weight: 500;
       color:white;
       margin-bottom: 10px;
@@ -215,7 +287,7 @@ body {
   /* Laptop size onwards */
   @media (min-width: 1537px){
     h1{
-      font-family: "Bricolage Grotesque", sans-serif;
+      font-family: var(--font-heading);
       font-weight: 500;
       font-optical-sizing: auto;
       text-align: left;
@@ -258,7 +330,7 @@ body {
   }
 
   .contact-button{
-    font-family: Roboto, sans-serif;
+    font-family: var(--font-body);
     font-size: 1.1rem;
     font-weight: 300;
 

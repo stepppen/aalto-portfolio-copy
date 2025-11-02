@@ -3,29 +3,38 @@
     <div v-if="cardLoaded" class="project-card-container">
       <nuxt-link :to="`/projects/${project.meta.slug}`" class="project-link">
         <div class="project-card">
-          <div class="image-wrapper" :style="{ 
-            paddingBottom: imageLoaded ? '0' : `${getAspectRatio(project.aspectRatio || '3:2')}%` 
-          }">
-            <!-- placeholder -->
+          <div 
+            class="image-wrapper" 
+            :style="{ 
+              aspectRatio: getAspectRatioValue(project.meta.aspectRatio || '3:2')
+            }"
+          >
             <div 
               v-if="!imageLoaded" 
               class="image-placeholder"
-            ></div>
-            
+              :style="{
+                backgroundColor: '#282828'
+              }"
+            >
+              <div class="skeleton-loader"></div>
+            </div>
+
             <NuxtImg
               :src="getImagePath(project.meta.preview)"
               :alt="project.title"
               class="project-image"
+              :class="{ 'loaded': imageLoaded }"
               :width="400"
               :height="getHeightFromAspectRatio(project.meta.aspectRatio)"
-              :style="{ height: imageLoaded ? 'auto' : '0' }"
               format="webp"
+              quality="85"
+              loading="lazy"
+              decoding="async"
               @load="handleImageLoaded"
-              preload
+              preset="project"
+              sizes="sm:100vw md:50vw lg:33vw"
             />
           </div>
-          
-          <!-- Text -->
           <div class="project-info">
             <h2 class="project-title">{{ project.title }}</h2>
             <div class="flex justify-between">
@@ -39,7 +48,6 @@
 </template>
   
 <script setup>
-import { ref, onMounted } from 'vue';
 
 const props = defineProps({
   project: { type: Object, required: true }
@@ -47,6 +55,14 @@ const props = defineProps({
 
 const cardLoaded = ref(false);
 const imageLoaded = ref(false);
+
+function getAspectRatioValue(ratio) {
+  if (typeof ratio === 'string' && ratio.includes(':')) {
+    const [width, height] = ratio.split(':').map(Number);
+    return `${width}/${height}`;
+  }
+  return '3/2';
+}
 
 function getAspectRatio(ratio) {
   if (typeof ratio === 'string' && ratio.includes(':')) {
@@ -61,11 +77,9 @@ function handleImageLoaded() {
 }
 
 function getImagePath(path) {
-  
   if (!path) {
     return '/images/placeholder.webp';
   }
-  
   if (path.startsWith('/')) {
     return path;
   }
@@ -80,9 +94,7 @@ function getHeightFromAspectRatio(aspectRatio, baseWidth = 400) {
 }
 
 onMounted(() => {
-  setTimeout(() => {
-    cardLoaded.value = true;
-  }, 200);
+  cardLoaded.value = true;
 });
 </script>
   
@@ -92,6 +104,8 @@ onMounted(() => {
   break-inside: avoid;
   position: relative;
   isolation: isolate;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
 }
 
 .project-link {
@@ -108,8 +122,8 @@ onMounted(() => {
   transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
   pointer-events: auto;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  will-change: transform;
   transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
 .image-wrapper {
@@ -118,6 +132,7 @@ onMounted(() => {
   width: 100%;
   border-radius: 1rem 1rem 0 0;
   background-color: #282828;
+  contain: layout;
 }
 
 .image-placeholder {
@@ -127,23 +142,54 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skeleton-loader {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .project-image {
   width: 100%;
+  height: 100%;
   display: block;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   z-index: 2;
-  will-change: transform;
+  position: relative;
   transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  opacity: 0;
+}
+
+.project-image.loaded {
+  opacity: 1;
 }
 
 .project-card:hover {
   transform: translate3d(0, -2px, 0);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   background-color: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(2px);
   border-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -153,7 +199,8 @@ onMounted(() => {
 
 .project-info {
   padding: 0.8rem;
-  transition: padding-left 0.2s ease, color 0.2s ease;
+  transition: padding-left 0.2s ease;
+  contain: layout style;
 }
 
 .project-title {
@@ -162,6 +209,8 @@ onMounted(() => {
   font-weight: 400;
   line-height: 1.4;
   transition: color 0.2s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .one-liner {
@@ -169,6 +218,8 @@ onMounted(() => {
   font-size: 0.85rem;
   opacity: 0.6;
   transition: opacity 0.2s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .project-card:hover .project-info {
@@ -183,20 +234,14 @@ onMounted(() => {
   opacity: 0.8;
 }
 
-.project-card {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.project-card:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
 .card-fade-enter-active {
   transition: all 0.3s ease-out;
 }
+
 .card-fade-enter-to {
   opacity: 1;
 }
+
 .card-fade-enter-from {
   transform: translateY(20px);
   opacity: 0;
@@ -208,20 +253,10 @@ onMounted(() => {
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-/* Safari optimization */
 @supports (-webkit-appearance: none) {
   .project-card-container {
     break-inside: avoid-column;
     page-break-inside: avoid;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-  }
-  
-  .project-card {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
   }
 }
 </style>

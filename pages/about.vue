@@ -26,7 +26,6 @@
         <h2 class="max-lg:m-0">About me</h2>
         <p lang="en" class=" lg:justify-center  max-md:max-w-sm">Hi, I am an interaction designer and creative technologist based in Zurich. I focus on UX/UI and HCI, going beyond conventional web design to shape experiences for emerging technologies such as VR, IoT and robotics. <br> </p>
         
-        <!-- Updated contact section with icons -->
         <div class="contact-info">
   <a href="mailto:stepan.vedunov@outlook.com" class="contact-tag email-tag">
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

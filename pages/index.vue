@@ -5,7 +5,6 @@
         <Title>Home</Title>
       </Head>
   
-      <!-- Spacer to prevent layout jump when hero becomes fixed -->
       <div v-if="showTitles" class="hero-spacer"></div>
       
       <transition name="fade-titles">
@@ -53,7 +52,6 @@
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from 'vue';
 const showTitles = ref(false);
 const showInfo = ref(false);
 const showProjects = ref(false);
@@ -74,91 +72,79 @@ const { data: projects } = await useAsyncData('projects', () =>
   queryCollection('projects').all()
 );
 
-const typewriter = ref(null)
-const projectsRoot = ref(null)
+const typewriter = ref(null);
+const projectsRoot = ref(null);
+let ticking = false;
 
-let rafId = 0
-
-function clamp(v, a = 0, b = 1) { return Math.min(Math.max(v, a), b) }
-
-function onScroll() {
-  if (!typewriter.value || !projectsRoot.value) return
-  const projRect = projectsRoot.value.getBoundingClientRect()
-  const vh = window.innerHeight || document.documentElement.clientHeight
-  const vw = window.innerWidth || document.documentElement.clientWidth
-
-  // Adjust blur trigger points based on screen size
-  let start, end
-  
-  if (vw <= 768) {
-    // Mobile phones - blur earlier since content is taller
-    start = vh * 0.4
-    end = vh * 0.2
-  } else if (vw <= 1024) {
-    // Tablets/iPad - medium trigger
-    start = vh * 0.3
-    end = vh * 0.1
-  } else if (vw <= 1440) {
-    // 13-inch laptops - your preferred setting
-    start = vh * 0.5
-    end = vh * 0.3
-  } else {
-    // Large screens - trigger later since more vertical space
-    start = vh * 0.35
-    end = vh * 0.15
-  }
-
-  const t = clamp((start - projRect.top) / (start - end), 0, 1)
-
-  // Apply blur effect
-  const blur = (t * 10).toFixed(2)
-  const opacity = (1 - t * 0.7).toFixed(2)
-
-  typewriter.value.style.setProperty('--hero-blur', `${blur}px`)
-  typewriter.value.style.setProperty('--hero-opacity', `${opacity}`)
+function clamp(v, a = 0, b = 1) { 
+  return Math.min(Math.max(v, a), b); 
 }
 
-function loop() {
-  rafId = requestAnimationFrame(() => {
-    onScroll()
-    loop()
-  })
+function onScroll() {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      updateHeroBlur();
+      ticking = false;
+    });
+    ticking = true;
+  }
+}
+
+function updateHeroBlur() {
+  if (!typewriter.value || !projectsRoot.value) return;
+  
+  const projRect = projectsRoot.value.getBoundingClientRect();
+  const vh = window.innerHeight || document.documentElement.clientHeight;
+  const vw = window.innerWidth || document.documentElement.clientWidth;
+
+  let start, end;
+  
+  if (vw <= 768) {
+    start = vh * 0.4;
+    end = vh * 0.2;
+  } else if (vw <= 1024) {
+    start = vh * 0.3;
+    end = vh * 0.1;
+  } else if (vw <= 1440) {
+    start = vh * 0.5;
+    end = vh * 0.3;
+  } else {
+    start = vh * 0.35;
+    end = vh * 0.15;
+  }
+
+  const t = clamp((start - projRect.top) / (start - end), 0, 1);
+  const blur = (t * 10).toFixed(2);
+  const opacity = (1 - t * 0.7).toFixed(2);
+
+  typewriter.value.style.setProperty('--hero-blur', `${blur}px`);
+  typewriter.value.style.setProperty('--hero-opacity', `${opacity}`);
 }
 
 onMounted(() => {
-  checkScreenSize()
-
-  window.addEventListener('resize', checkScreenSize)
-
   setTimeout(async () => {
     showInfo.value = true;
     showTitles.value = true;
     showProjects.value = true;
 
-    await nextTick()
+    await nextTick();
 
-    // Ensure initial state is sharp (no blur)
     if (typewriter.value?.style) {
-      typewriter.value.style.setProperty('--hero-blur', '0px')
-      typewriter.value.style.setProperty('--hero-opacity', '1')
-      typewriter.value.style.setProperty('--hero-translate', '0px')
+      typewriter.value.style.setProperty('--hero-blur', '0px');
+      typewriter.value.style.setProperty('--hero-opacity', '1');
     }
-
-    window.addEventListener('scroll', onScroll, { passive: true })
-    onScroll()
-    loop()
+    window.addEventListener('scroll', onScroll, { passive: true });
+    updateHeroBlur(); 
   }, 300);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener('resize', checkScreenSize)
-  window.removeEventListener('scroll', onScroll)
-  cancelAnimationFrame(rafId)
-})
+  window.removeEventListener('scroll', onScroll);
+});
+
 </script>
 
 <style lang="scss" scoped>
-/* Spacer to maintain layout when hero becomes fixed */
 .hero-spacer {
   height: 250px;
   width: 100%;
@@ -166,19 +152,19 @@ onBeforeUnmount(() => {
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .hero-spacer {
-    height: 320px; /* Tablets */
+    height: 320px; 
   }
 }
 
 @media (min-width: 1024px) and (max-width: 1439px) {
   .hero-spacer {
-    height: 350px; /* 13-inch laptops */
+    height: 350px;
   }
 }
 
 @media (min-width: 1440px) {
   .hero-spacer {
-    height: 380px; /* Large screens */
+    height: 380px; 
   }
 }
 
@@ -210,7 +196,6 @@ onBeforeUnmount(() => {
 }
 
 .hero-block {
-  /* Fixed positioning from the start */
   position: fixed;
   top: 8vh;
   left: 0;
@@ -219,16 +204,14 @@ onBeforeUnmount(() => {
   width: 100%;
   max-width: 1100px;
   z-index: 10;
-  
-  /* Blur transition */
+
   transition: filter 300ms ease, opacity 300ms ease;
   filter: blur(var(--hero-blur, 0px));
   opacity: var(--hero-opacity, 1);
   will-change: filter, opacity;
-  pointer-events: none; /* Let projects scroll through */
+  pointer-events: none; 
 }
 
-/* Allow interaction with the text itself if needed */
 .hero-block h1,
 .hero-block p {
   pointer-events: auto;
@@ -391,7 +374,7 @@ onBeforeUnmount(() => {
   animation: fade-in-up 0.8s forwards;
   animation-delay: 0.8s;
   position: relative;
-  z-index: 20; /* Higher than hero so it scrolls over it */
+  z-index: 20;
 }
 
 @media (max-width: 1500px) {
@@ -419,7 +402,7 @@ onBeforeUnmount(() => {
   -webkit-column-break-inside: avoid;
   break-inside: avoid;
   position: relative;
-  z-index: 20; /* Higher than hero so it scrolls over it */
+  z-index: 20; 
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
 }
@@ -486,14 +469,10 @@ onBeforeUnmount(() => {
     right: 0;
     height: auto;
   }
-  
-  /* Keep hero fixed on mobile/tablet too */
   .hero-block {
     position: fixed;
     top: 4vh;
   }
-  
-  /* Keep spacer on mobile/tablet */
   .hero-spacer {
     display: block;
   }

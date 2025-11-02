@@ -3,7 +3,7 @@
     <BackgroundGradient />
     <div class="page-wrapper relative z-10">
       <transition name="slide-fade">
-        <header class="dynamic-header z-50 overflow-hidden" v-if="showHeader">
+        <header class="dynamic-header fixed top-0 left-0 right-0 z-50 overflow-hidden" v-if="showHeader">
           <nav class="dynamic-nav">
             <keep-alive>
               <NavTab key="persistent-tab" />
@@ -11,7 +11,7 @@
           </nav>
         </header>
       </transition>
-      <div class="overflow-hidden lg:pt-32">
+      <div class="overflow-hidden lg:pt-32 pt-[var(--header-height)]">
         <slot />
       </div>
     </div>
@@ -19,11 +19,7 @@
 </template>
 
 <script setup>
-import NavTab from '~/components/NavTab.vue';
-
 let showHeader = ref(false);
-const router = useRouter();
-const cursor = ref(null);
 
 onMounted(() => {
   setTimeout(() => {
@@ -33,6 +29,10 @@ onMounted(() => {
 </script>
 
 <style>
+:root {
+  --header-height: 80px; 
+}
+
 .border-white {
   border-radius: 5px;
 }
@@ -41,8 +41,7 @@ onMounted(() => {
   transition: 0.2s ease-in-out;
 }
 .border-white:active {
-  border: 1px solid rgb(240, 0, 0);
-
+  border: 1px solid rgb(240, 0, 0); 
 }
 .slow-transition {
   transition: 0.2s ease-in-out;
@@ -56,13 +55,11 @@ onMounted(() => {
   transition: all 0.1s ease-out;
 }
 
-.slide-fade-enter-to,
-.slide-fade-leave-from {
+.slide-fade-enter-to, .slide-fade-leave-from {
   opacity: 1;
 }
 
-.slide-fade-enter-from,
-.slide-fade-leave-to {
+.slide-fade-enter-from, .slide-fade-leave-to {
   backdrop-filter: blur(4px);
   opacity: 0;
 }
