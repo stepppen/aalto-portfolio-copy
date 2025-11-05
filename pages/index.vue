@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-container ">
+  <div class="wrapper-container">
     <div class="main-container">
       <Head>
         <Title>Home</Title>
@@ -33,15 +33,17 @@
       </transition>
       
   
-      <div v-if="showProjects" ref="projectsRoot">
-        <div class="overflow-hidden p-4">
-          <div>
-            <div v-if="projects?.length" class="xl:w-full adaptive-grid-masonry max-md:grid lg:pr-[20px]">
-              <ProjectCard
-                v-for="p in projects"
-                :key="p.slug"
-                :project="p"
-              />
+      <div class="projects-container" :class="{ 'projects-loading': !showProjects }">
+        <div v-if="showProjects" ref="projectsRoot">
+          <div class="overflow-hidden p-4">
+            <div>
+              <div v-if="projects?.length" class="xl:w-full adaptive-grid-masonry max-md:grid lg:pr-[20px]">
+                <ProjectCard
+                  v-for="p in projects"
+                  :key="p.slug"
+                  :project="p"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -145,6 +147,15 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss" scoped>
+.projects-container {
+  min-height: 60vh;
+  position: relative;
+}
+
+.projects-container.projects-loading {
+  min-height: 80vh;
+}
+
 .hero-spacer {
   height: 250px;
   width: 100%;
@@ -346,6 +357,9 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 768px) {
+  .word {
+    font-size: 1.7rem;
+  }
   .digital-word, .physical-word {
     .word-fx {
       height: 2.5px;

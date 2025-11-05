@@ -101,7 +101,7 @@ const tags = computed(() => [
   font-family: "Lato", sans-serif;
   color: rgb(255, 255, 255);
   font-weight: 300;
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.6;
 }
 

@@ -14,18 +14,25 @@
       <main class="main-content">
         <slot />
       </main>
-      <Footer />
+      <transition name="slide-fade">
+        <Footer v-if="showFooter" />
+      </transition>
     </div>
   </div>
 </template>
 
 <script setup>
 let showHeader = ref(false);
+let showFooter = ref(false);
 
 onMounted(() => {
   setTimeout(() => {
     showHeader.value = true;
   }, 100);
+  
+  setTimeout(() => {
+    showFooter.value = true;
+  }, 500);
 });
 </script>
 

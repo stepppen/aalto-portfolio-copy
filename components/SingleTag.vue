@@ -36,7 +36,7 @@ defineProps<Props>()
 @media (max-width: 768px) {
     .icon{
         margin-right: 0.25rem;
-        width: 0.75rem;
+        width: 0.95rem;
     }
     .info-tag{
         gap: 3px;

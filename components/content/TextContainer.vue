@@ -33,7 +33,7 @@ defineProps<Props>()
   display: inline-block;
   width: auto;
   margin-right: 0.5rem;
-  opacity: 0.5;
+  opacity: 0.6;
   white-space: nowrap;
 }
 
