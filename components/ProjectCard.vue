@@ -215,8 +215,8 @@ onMounted(() => {
 
 .one-liner {
   margin: 0.2rem 0 0;
-  font-size: 0.85rem;
-  opacity: 0.6;
+  font-size: 1rem;
+  opacity: 0.7;
   transition: opacity 0.2s ease;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -231,7 +231,7 @@ onMounted(() => {
 }
 
 .project-card:hover .one-liner {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .card-fade-enter-active {

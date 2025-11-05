@@ -43,7 +43,7 @@ defineProps<Props>()
         padding: 0.25rem 0.75rem;
     }
     p{
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
 
 }

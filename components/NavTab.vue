@@ -81,10 +81,10 @@ watch (
     display: flex;
     position: relative;
     background-color: rgb(255,255,255,0.08);
-    border: rgb(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 30px;
     padding: 4px;
-    height: 40px;
+    height: 44px;
     cursor: pointer;
     user-select: none;
     max-width: 250px;
@@ -117,7 +117,7 @@ watch (
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     opacity: 1;
     transform: scaleX(1);
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: 300;
 }
 
@@ -185,10 +185,10 @@ watch (
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1280px) {
   .nav-button {
     padding: 0 1.5rem;
-    font-size: 13px;
+    /* font-size: 13px; */
   }
   
   .tab-toggle.projects-mode {

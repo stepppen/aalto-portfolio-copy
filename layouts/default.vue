@@ -1,7 +1,7 @@
 <template>
   <div class="page-wrapper">
     <BackgroundGradient />
-    <div class="page-wrapper relative z-10">
+    <div class="page-container">
       <transition name="slide-fade">
         <header class="dynamic-header fixed top-0 left-0 right-0 z-50 overflow-hidden" v-if="showHeader">
           <nav class="dynamic-nav">
@@ -11,9 +11,10 @@
           </nav>
         </header>
       </transition>
-      <div class="overflow-hidden lg:pt-32 pt-[var(--header-height)]">
+      <main class="main-content">
         <slot />
-      </div>
+      </main>
+      <Footer />
     </div>
   </div>
 </template>
@@ -31,6 +32,31 @@ onMounted(() => {
 <style>
 :root {
   --header-height: 80px; 
+}
+
+.page-wrapper {
+  position: relative;
+  min-height: 100vh;
+}
+
+.page-container {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  overflow: hidden;
+  padding-top: var(--header-height);
+}
+
+@media (min-width: 1024px) {
+  .main-content {
+    padding-top: 8rem;
+  }
 }
 
 .border-white {
