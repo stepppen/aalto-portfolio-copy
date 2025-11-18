@@ -47,14 +47,21 @@ onMounted(() => {
     #161f36 80%,
     #061b34
   ); */
-background: linear-gradient(
+    background: linear-gradient(
+    135deg,
+    #06060c,
+    #090f19 50%,
+    #0f1523 80%,
+    #071527
+  );
+/* background: linear-gradient(
   135deg,
   #0f0b09,
-  #1d1512 30%,
-  #271818 60%,
-  #302021 85%,
-  #1f1814
-);
+  #16100e 30%,
+  #1f1313 60%,
+  #271a1b 85%,
+  #1b1511
+); */
   overflow: hidden;
 }
 
@@ -64,8 +71,8 @@ background: linear-gradient(
   opacity: 0.8;
   background: radial-gradient(
     circle at center,
-    rgba(190, 130, 90, 0.13),
-    rgba(145, 100, 70, 0.07)
+    rgba(190, 130, 90, 0.05),
+    rgba(145, 100, 70, 0.05)
   );
   filter: blur(50px);
   transition: all 0.2s ease;
