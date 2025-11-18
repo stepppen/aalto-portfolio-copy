@@ -40,13 +40,21 @@ onMounted(() => {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  background: linear-gradient(
+  /* background: linear-gradient(
     135deg,
     #05040e,
     #110625 50%,
     #161f36 80%,
     #061b34
-  );
+  ); */
+background: linear-gradient(
+  135deg,
+  #0f0b09,
+  #1d1512 30%,
+  #271818 60%,
+  #302021 85%,
+  #1f1814
+);
   overflow: hidden;
 }
 
@@ -54,7 +62,11 @@ onMounted(() => {
   position: absolute;
   border-radius: 50%;
   opacity: 0.8;
-  background: rgba(35, 71, 91, 0.4);
+  background: radial-gradient(
+    circle at center,
+    rgba(190, 130, 90, 0.13),
+    rgba(145, 100, 70, 0.07)
+  );
   filter: blur(50px);
   transition: all 0.2s ease;
   pointer-events: none;
