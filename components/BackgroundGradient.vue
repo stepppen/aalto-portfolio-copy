@@ -71,8 +71,8 @@ onMounted(() => {
   opacity: 0.8;
   background: radial-gradient(
     circle at center,
-    rgba(190, 130, 90, 0.05),
-    rgba(145, 100, 70, 0.05)
+    rgba(90, 125, 190, 0.05),
+    rgba(70, 99, 145, 0.05)
   );
   filter: blur(50px);
   transition: all 0.2s ease;
