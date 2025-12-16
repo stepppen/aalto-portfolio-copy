@@ -1,26 +1,15 @@
 <template>
     <div class="toggle-container">
-        <div class="tab-toggle" :class="{'projects-mode': currentPath === 'projects'}">
-            <div class="nav-button" 
-            @click="navigateTo('/')" 
-            :class="{active: currentPath === 'home'
-            }">
-                Home
-            </div>
-             <div 
-             class="nav-button projects-button" 
-             :class="{active: currentPath === 'projects', 
-             visible : currentPath === 'projects'
-             }">
-                Projects
-            </div>
-             <div 
-             class="nav-button" 
-             @click="navigateTo('/about')" 
-             :class="{active: currentPath === 'about'
-
-             }">
-                About
+        <div class="tab-toggle">
+            <div 
+                v-for="(tab, index) in TABS"
+                :key="tab.key"
+                class="nav-button" 
+                @click="navigateTo(tab.path)" 
+                :class="{ active: currentTab === tab.key }"
+                :style="{ 'min-width': tabWidth }"
+            >
+                {{ tab.label }}
             </div>
             <div class="active-button" :style="sliderPos"></div>
         </div>
@@ -28,66 +17,93 @@
 </template>
 
 <script setup>
-const route = useRoute()
-const router = useRouter()
-const currentPath = ref('home')
+import { computed, watch, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+
+const route = useRoute();
+const router = useRouter();
+
+// 1. Fixed Tabs Array and Mapping (UPDATED)
+const TABS = [
+    { key: 'work', label: 'Work', path: '/' },
+    { key: 'about', label: 'About', path: '/about' },
+    // Removed Playground tab
+];
+
+// Reactive state for the currently active tab key ('work', 'about')
+const currentTab = ref('work');
 
 const navigateTo = (path) => {
-    router.push(path)
-}
+    router.push(path);
+};
 
-
-
-const sliderPos = computed (() => {
-    const isProjectsVisible = currentPath.value === "projects";
-    let tabCount = 2;
-    let visibleIndex = 0;
-
-    if(isProjectsVisible){
-        tabCount = 3
-        if (currentPath.value === 'home') visibleIndex = 0
-        else if (currentPath.value === 'projects') visibleIndex = 1
-        else if (currentPath.value === 'about') visibleIndex = 2
-    }else{
-        if (currentPath.value === 'home') visibleIndex = 0
-        else if (currentPath.value === 'about') visibleIndex = 1
+// Map the route path to a tab key (UPDATED)
+const mapPathToTab = (path) => {
+    if (path === '/') {
+        return 'work';
+    } else if (path.startsWith('/about')) {
+        return 'about';
     }
-    return{
-        width: `calc(${100/tabCount}% - 4px)`,
-        transform: `translateX(${visibleIndex * 100}%)`
-    }
-})
+    // Default fallback
+    return 'work';
+};
 
-watch (
+// 2. Simplified Path Watcher (NO CHANGE)
+watch(
     () => route.path,
     (newPath) => {
-        if (newPath === '/'){
-            currentPath.value = "home"
-        } else if (newPath.startsWith("/projects/")){
-            currentPath.value = "projects"
-        } else {
-            currentPath.value = "about"
-        }
-    }, { immediate: true }
-)
+        currentTab.value = mapPathToTab(newPath);
+    }, 
+    { immediate: true }
+);
+
+// Helper for consistent width calculation (NO CHANGE, relies on TABS.length)
+const tabWidth = computed(() => `calc(100% / ${TABS.length})`);
+
+
+// 3. Simplified Slider Logic (NO CHANGE, relies on TABS.length and index)
+const sliderPos = computed(() => {
+    // Find the index of the currently active tab
+    const activeIndex = TABS.findIndex(tab => tab.key === currentTab.value);
+    
+    // Safety check, should always be >= 0
+    const visibleIndex = Math.max(0, activeIndex);
+
+    return {
+        // TABS.length is now 2, so width is calc(50% - 4px)
+        width: `calc(${100 / TABS.length}% - 4px)`, 
+        transform: `translateX(${visibleIndex * 100}%)`, 
+    };
+});
 </script>
+
 <style scoped>
-.toggle-container{
+/*
+  --- Styles ---
+  The CSS remains the same and will automatically adapt to the 2-tab structure
+  because 'TABS.length' in the JavaScript now resolves to 2, correctly calculating
+  the 'width' and 'transform' for two equal sections.
+*/
+
+.toggle-container {
     display: flex;
-    position: center;
+    justify-content: center;
     margin: 0 1rem;
 }
-.tab-toggle{
+
+.tab-toggle {
     display: flex;
     position: relative;
-    background-color: rgb(255,255,255,0.08);
+    background-color: rgb(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 30px;
     padding: 4px;
     height: 44px;
     cursor: pointer;
     user-select: none;
-    max-width: 250px;
+    min-width: 200px;
+    max-width: 400px;
+    width: 100%;
     backdrop-filter: blur(4px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     overflow: hidden;
@@ -95,18 +111,16 @@ watch (
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.tab-toggle:hover{
-    background-color: rgb(255,255,255,0.1);
+.tab-toggle:hover {
+    background-color: rgb(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.15);
-    transform: translateY(-1px); 
+    transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-
-
-.nav-button{
+.nav-button {
     display: flex;
-    flex: 1;
+    flex: 1 1 0%; 
     align-items: center;
     z-index: 1;
     justify-content: center;
@@ -115,45 +129,24 @@ watch (
     border-radius: 25px;
     white-space: nowrap;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    opacity: 1;
-    transform: scaleX(1);
     font-size: 1rem;
     font-weight: 300;
 }
 
-.nav-button.projects-button{
-    flex: 0;
-    padding: 0;
-    opacity: 0;
-    transform: scaleX(0);
-    overflow: hidden;
-}
-
-.nav-button.projects-button.visible{
-    flex: 1;
-    padding: 0 1rem;
-    opacity: 1;
-    transform: scaleX(1);
-}
-
-.tab-toggle .nav-button.active {
+.nav-button.active {
     color: #111;
     font-weight: 600;
 }
 
-.nav-button:hover{
-    color: white;
+.nav-button:hover {
+    color: rgb(112, 112, 112);
 }
 
-
-.nav-button:not(.active):hover{
+.nav-button:not(.active):hover {
     background-color: rgb(255, 255, 255, 0.05);
 }
 
-
-
-
-.active-button{
+.active-button {
     position: absolute;
     z-index: 0;
     left: 4px;
@@ -164,36 +157,20 @@ watch (
     box-shadow: 
         0 2px 8px rgba(0, 0, 0, 0.15),
         0 1px 3px rgba(0, 0, 0, 0.1);
+    
     transition: 
         transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
         width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.tab-toggle.projects-mode{
-    min-width: 140px;
-    max-width: 400px;
-}
-
-
-@keyframes smoothFadeIn{
-    from{
-        opacity: 0;
-        transform: translateY(-10px) scale(0.95);
-    } to{
-        opacity: 1;
-        transform: translateY(0) scale(1);
+@media (max-width: 768px) {
+    .tab-toggle {
+        max-width: 90vw;
+        min-width: 200px;
+        height: 40px;
     }
-}
-
-@media (max-width: 1280px) {
-  .nav-button {
-    padding: 0 1.5rem;
-    /* font-size: 13px; */
-  }
-  
-  .tab-toggle.projects-mode {
-    min-width: 300px;
-    max-width: 400px;
-  }
+    .nav-button {
+        font-size: 0.9rem;
+    }
 }
 </style>

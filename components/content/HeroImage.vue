@@ -1,29 +1,31 @@
 <template>
-  <div class="hero-wrapper rounded-2xl">
-    <div 
-      v-if="!imageLoaded" 
-      class="image-placeholder"
-      :style="{ aspectRatio: '3/2' }"
-    >
-      <div class="shimmer"></div>
+  <div class="w-full flex justify-center py-12">
+    <div class="hero-wrapper rounded-2xl">
+      <div 
+        v-if="!imageLoaded" 
+        class="image-placeholder"
+        :style="{ aspectRatio: '3/2' }"
+      >
+        <div class="shimmer"></div>
+      </div>
+      
+      <NuxtImg
+        :src="src.startsWith('/') ? src : `/${src}`"
+        :alt="alt"
+        class="hero-image object-cover"
+        :class="{ 'loaded': imageLoaded }"
+        format="webp"
+        quality="90"
+        width="1080"
+        height="720"
+        sizes="sm:100vw md:100vw lg:70vw"
+        preload
+        fetchpriority="high"
+        decoding="async"
+        @load="handleImageLoad"
+        @error="handleImageError"
+      />
     </div>
-    
-    <NuxtImg
-      :src="src.startsWith('/') ? src : `/${src}`"
-      :alt="alt"
-      class="hero-image object-cover"
-      :class="{ 'loaded': imageLoaded }"
-      format="webp"
-      quality="90"
-      width="1080"
-      height="720"
-      sizes="sm:100vw md:100vw lg:90vw"
-      preload
-      fetchpriority="high"
-      decoding="async"
-      @load="handleImageLoad"
-      @error="handleImageError"
-    />
   </div>
 </template>
 
@@ -136,6 +138,7 @@ onMounted(() => {
 
 @media (max-width: 768px) {
   .hero-wrapper {
+    width: 100%;
     aspect-ratio: 4 / 3;
   }
 }

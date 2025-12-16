@@ -184,7 +184,7 @@ hero-block,
       align-items: center;
     }
     .main-container {
-      max-width: 90%;
+      max-width: 80%;
       padding: 0 2rem;
       overflow-x: hidden;
       position: relative;
@@ -200,7 +200,7 @@ hero-block,
   }
   @screen 2xl {
     .main-container {
-      max-width: 70%;
+      max-width: 60%;
       overflow-x: hidden;
       position: relative;
     }
@@ -297,7 +297,7 @@ hero-block,
       font-size: 3rem;
     }
     .main-container {
-      max-width: 80%;
+      max-width: 70%;
       overflow-x: hidden;
       position: relative;
     }

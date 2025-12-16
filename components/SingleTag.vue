@@ -40,7 +40,8 @@ defineProps<Props>()
     }
     .info-tag{
         gap: 3px;
-        padding: 0.25rem 0.75rem;
+        padding: 0.5rem 0.75rem;
+        width: 100%;
     }
     p{
         font-size: 1rem;

@@ -1,21 +1,21 @@
 <template>
-  <div class="min-md:mt-12 min-md:mb-24 project-intro">
-    <h1 class="mb-4 bigger-text title-animation">{{ props.title }}</h1>
+  <div class="min-md:mt-12 min-md:mb-24 project-intro w-full pt-8 justify-center flex flex-col items-center">
+    <h1 class="lg:mb-4 bigger-text title-animation">{{ props.title }}</h1>
     <div class="min-md:pt-16 intro-content">
       <div class="intro-meta">
         <TagsContainer 
           :tags="tags"
           :should-animate="true"
           delay="0.2s"
-          justify="start"
+          justify="center"
         />
       </div>
-      <div class="intro-text text-animation">
+      <!-- <div class="intro-text text-animation">
         <p class="title">About</p>
         <div class="intro-text-content"> 
           <slot></slot>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -50,6 +50,9 @@ const tags = computed(() => [
 
 .intro-content {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
   flex-direction: column;
   gap: 2rem;
 }
@@ -147,7 +150,8 @@ const tags = computed(() => [
 @media (max-width: 768px) {
   .intro-content {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    width: 100%;
+    /* gap: 1rem; */
   }
   
   .intro-text {
@@ -155,10 +159,13 @@ const tags = computed(() => [
     max-width: 100%;
     padding: 1rem;
   }
+  .project-intro {
+    gap: 1rem;
+  }
   
   .intro-text .title {
     min-width: auto;
-    margin-bottom: 0.5rem;
+    /* margin-bottom: 0.5rem; */
   }
   
   h1 {

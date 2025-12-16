@@ -25,7 +25,7 @@
       <transition name="fade-titles">
         <div v-if="showTitles" class="flex flex-col max-lg:gap-0 md:w-2/3 lg:w-96 lg:my-auto lg:inset-0 max-lg:justify-center max-lg:items-center margin-handeler max-lg:text-center max-w-full">
           <h2 class="max-lg:m-0">About me</h2>
-          <p lang="en" class=" lg:justify-center  max-md:max-w-sm">Hi, I am an interaction designer and creative technologist based in Zurich. I focus on UX/UI and HCI, going beyond conventional web design to shape experiences for emerging technologies such as VR, IoT and robotics. <br> </p>
+          <p lang="en" class=" lg:justify-center  max-md:max-w-sm">Hi, I am an interaction and end-to-end product designer based in Zurich. I focus on UX/UI and HCI, going beyond conventional web design to shape experiences for emerging technologies such as VR, IoT and robotics. <br> </p>
           <div class="py-8">
             <div class="skills-container">
               <div class="skills-line">
