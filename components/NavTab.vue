@@ -7,7 +7,6 @@
                 class="nav-button" 
                 @click="navigateTo(tab.path)" 
                 :class="{ active: currentTab === tab.key }"
-                :style="{ 'min-width': tabWidth }"
             >
                 {{ tab.label }}
             </div>
@@ -23,32 +22,26 @@ import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
 
-// 1. Fixed Tabs Array and Mapping (UPDATED)
 const TABS = [
     { key: 'work', label: 'Work', path: '/' },
     { key: 'about', label: 'About', path: '/about' },
-    // Removed Playground tab
 ];
 
-// Reactive state for the currently active tab key ('work', 'about')
 const currentTab = ref('work');
 
 const navigateTo = (path) => {
     router.push(path);
 };
 
-// Map the route path to a tab key (UPDATED)
 const mapPathToTab = (path) => {
     if (path === '/') {
         return 'work';
     } else if (path.startsWith('/about')) {
         return 'about';
     }
-    // Default fallback
     return 'work';
 };
 
-// 2. Simplified Path Watcher (NO CHANGE)
 watch(
     () => route.path,
     (newPath) => {
@@ -57,20 +50,11 @@ watch(
     { immediate: true }
 );
 
-// Helper for consistent width calculation (NO CHANGE, relies on TABS.length)
-const tabWidth = computed(() => `calc(100% / ${TABS.length})`);
-
-
-// 3. Simplified Slider Logic (NO CHANGE, relies on TABS.length and index)
 const sliderPos = computed(() => {
-    // Find the index of the currently active tab
     const activeIndex = TABS.findIndex(tab => tab.key === currentTab.value);
-    
-    // Safety check, should always be >= 0
     const visibleIndex = Math.max(0, activeIndex);
 
     return {
-        // TABS.length is now 2, so width is calc(50% - 4px)
         width: `calc(${100 / TABS.length}% - 4px)`, 
         transform: `translateX(${visibleIndex * 100}%)`, 
     };
@@ -78,13 +62,6 @@ const sliderPos = computed(() => {
 </script>
 
 <style scoped>
-/*
-  --- Styles ---
-  The CSS remains the same and will automatically adapt to the 2-tab structure
-  because 'TABS.length' in the JavaScript now resolves to 2, correctly calculating
-  the 'width' and 'transform' for two equal sections.
-*/
-
 .toggle-container {
     display: flex;
     justify-content: center;
@@ -94,7 +71,7 @@ const sliderPos = computed(() => {
 .tab-toggle {
     display: flex;
     position: relative;
-    background-color: rgb(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 30px;
     padding: 4px;
@@ -104,7 +81,7 @@ const sliderPos = computed(() => {
     min-width: 200px;
     max-width: 400px;
     width: 100%;
-    backdrop-filter: blur(4px);
+    /* Removed backdrop-filter - this causes iOS flickering */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     overflow: hidden;
     animation: smoothFadeIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -112,7 +89,7 @@ const sliderPos = computed(() => {
 }
 
 .tab-toggle:hover {
-    background-color: rgb(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.15);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -125,7 +102,7 @@ const sliderPos = computed(() => {
     z-index: 1;
     justify-content: center;
     height: 100%;
-    color: rgb(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.7);
     border-radius: 25px;
     white-space: nowrap;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -143,7 +120,7 @@ const sliderPos = computed(() => {
 }
 
 .nav-button:not(.active):hover {
-    background-color: rgb(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .active-button {
@@ -161,6 +138,17 @@ const sliderPos = computed(() => {
     transition: 
         transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
         width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes smoothFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @media (max-width: 768px) {
