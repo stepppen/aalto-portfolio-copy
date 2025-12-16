@@ -318,11 +318,11 @@ hero-block,
       scrollbar-width: none; 
     }
   .h-95 {
-      height: 95vh
+      height: 95dvh
   }
 
   .h-custom-80 {
-    height: 80vh;
+    height: 80dvh;
   }
 
   .translate-x-26 {
@@ -350,7 +350,7 @@ hero-block,
   }
 
   .h-custom-90 {
-    height: 90vh
+    height: 90dvh
 }
   .w-custom-80 {
       width: 80vw

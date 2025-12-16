@@ -43,13 +43,14 @@ onMounted(() => {
 
 .page-wrapper {
   position: relative;
+  min-height: 100dvh;
   min-height: 100vh;
 }
 
 .page-container {
   position: relative;
   z-index: 10;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
 }
