@@ -21,7 +21,7 @@
 
 /* Critical CSS - loads before anything else */
 :root {
-  --primary: black;
+  --primary: #06060c;
   --secondary: white;
   --tertiary: blue;
   --scrollbar-width: 15px;
@@ -73,7 +73,7 @@ html {
 @tailwind utilities;
 
 body {
-  @apply bg-black;
+  background-color: #06060c;
   @apply text-white;
   @apply m-0;
   @apply box-border;
@@ -101,7 +101,7 @@ hero-block,
 
 /* Content visibility for off-screen content */
 .project-card-container {
-  content-visibility: auto;
+  /* content-visibility: auto; */
   contain-intrinsic-size: 0 400px; /* Estimated height */
 }
 

@@ -93,7 +93,7 @@ onMounted(() => {
 }
 
 .slide-fade-enter-from, .slide-fade-leave-to {
-  backdrop-filter: blur(4px);
+  /* backdrop-filter: blur(4px); */
   opacity: 0;
 }
 
