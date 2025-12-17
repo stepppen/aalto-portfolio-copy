@@ -20,7 +20,8 @@ export default defineNuxtConfig({
       },
       meta: [
         { name: 'description', content: 'Design Portfolio' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' }
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
+        { name: 'theme-color', content: '#06060c' }
       ],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
