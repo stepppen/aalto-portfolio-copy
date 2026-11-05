@@ -37,6 +37,16 @@ for (const w of widthsArg.split(',').map(Number)) {
   await send('Emulation.setDeviceMetricsOverride', { width: w, height: mobile ? 844 : 900, deviceScaleFactor: 1, mobile })
   await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: process.env.FRAMES ? 'no-preference' : 'reduce' }] })
   await send('Page.navigate', { url })
+  if (process.env.SCROLLTEXT) {
+    // SCROLLTEXT="Personal projects" scrolls the first element with that exact text to the top, then captures.
+    await send('Runtime.evaluate', { expression: `(() => { const t = [...document.querySelectorAll('*')].find((e) => e.children.length === 0 && e.textContent.trim() === ${JSON.stringify(process.env.SCROLLTEXT)}); t?.scrollIntoView({ block: 'start' }); window.scrollBy(0, -40) })()` })
+    await sleep(1500)
+    const { data } = await send('Page.captureScreenshot', { format: 'png' })
+    const file = `${outDir}/${name}-${w}-section.png`
+    await writeFile(file, Buffer.from(data, 'base64'))
+    console.log(file)
+    continue
+  }
   if (process.env.KEY) {
     // KEY=Delete presses a key on the page, then captures the viewport (e.g. to check a dialog).
     await send('Runtime.evaluate', { expression: `window.dispatchEvent(new KeyboardEvent('keydown', { key: ${JSON.stringify(process.env.KEY)}, bubbles: true }))` })

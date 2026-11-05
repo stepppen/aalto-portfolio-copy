@@ -15,7 +15,8 @@
     "lint:css": "stylelint \"app/**/*.{css,vue}\"",
     "postinstall": "nuxt prepare",
     "og": "node scripts/og.mjs",
-    "postgenerate": "node scripts/sitemap.mjs"
+    "postgenerate": "node scripts/sitemap.mjs",
+    "posters": "node scripts/tile-posters.mjs"
   },
   "engines": {
     "node": ">=22.5"
@@ -24,9 +25,11 @@
     "@nuxt/content": "^3.16.2",
     "@nuxt/fonts": "^1.2.0",
     "@nuxt/image": "^2.2.1",
-    "nuxt": "^4.6.4"
+    "nuxt": "^4.6.4",
+    "three": "^0.186.1"
   },
   "devDependencies": {
+    "@types/three": "^0.186.0",
     "axe-core": "^4.14.0",
     "lighthouse": "^12.8.2",
     "postcss-html": "^2.0.0",

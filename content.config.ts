@@ -41,6 +41,22 @@ export default defineContentConfig({
 
 
 
+    // Side projects and things I make: square tiles on /work. One YAML file per tile.
+    tiles: defineCollection({
+      type: 'data',
+      source: 'tiles/*.yml',
+      schema: z.object({
+        title: z.string(),
+        category: z.string(),
+        description: z.string(),
+        instructions: z.string(),
+        scene: z.enum(['print', 'macropad', 'books', 'drawing', 'robot']).optional(),
+        poster: z.string().optional(),
+        href: z.string().optional(),
+        placeholder: z.string().optional(),
+      }),
+    }),
+
     // Notes: simple writing. The nav shows "Notes" only once at least one exists.
     notes: defineCollection({
       type: 'page',

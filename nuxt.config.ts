@@ -40,7 +40,8 @@ export default defineNuxtConfig({
 
   image: {
     // Pre-render every image size at build time: the site is static, no image server.
-    provider: 'ipxStatic',
+    // (In dev there's nothing pre-rendered, so use the live ipx server.)
+    provider: process.env.NODE_ENV === 'production' ? 'ipxStatic' : 'ipx',
     format: ['avif', 'webp'],
     quality: 80,
   },
@@ -63,6 +64,16 @@ export default defineNuxtConfig({
       },
     },
     '/_ipx/**': { headers: { 'Cache-Control': 'public, max-age=604800, stale-while-revalidate=86400' } },
+  },
+
+  hooks: {
+    // three.js and the tile scenes download only when a tile actually starts, never as a
+    // page-load prefetch: on a phone that prefetch competed with the first image for bandwidth.
+    'build:manifest'(manifest) {
+      for (const [key, chunk] of Object.entries(manifest)) {
+        if (/node_modules\/three\/|(^|\/)tiles\//.test(key)) { chunk.prefetch = false; chunk.preload = false }
+      }
+    },
   },
 
   nitro: {
