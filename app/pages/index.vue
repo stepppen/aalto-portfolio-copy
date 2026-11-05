@@ -1,8 +1,15 @@
 <script setup lang="ts">
-// Phase 2 shell: the top of the home page (eyebrow, headline, proof, contact) to set type and layout.
-// Cards, about teaser, how I work and the contact composer arrive in Phase 3.
+// Home: who (headline + proof + contact above the fold) → what he's shipped (cards) →
+// who he is (about teaser) → how he works → how to reach him (composer).
 const { data } = await useSite()
 const site = computed(() => data.value!.site)
+const { data: page } = await useAsyncData('home', async () => {
+  const [home, work] = await Promise.all([
+    queryCollection('home').first(),
+    queryCollection('work').where('tier', '=', 'featured').order('stem', 'ASC').all(),
+  ])
+  return { home: home!, featured: work }
+})
 useSeoMeta({ description: () => `${site.value.name}. ${site.value.positioning} ${site.value.proof.join(' · ')}.` })
 </script>
 
@@ -12,17 +19,20 @@ useSeoMeta({ description: () => `${site.value.name}. ${site.value.positioning} $
     <h1 id="hero-title" class="t-display hero__title">{{ site.positioning }}</h1>
     <p class="hero__proof">
       <span class="muted">{{ site.proof.join(' · ') }}</span>
-      <a :href="`mailto:${site.email}`" class="hero__mail">Email me<span aria-hidden="true">&nbsp;›</span></a>
+      <a href="#contact" class="hero__mail">Email me<span aria-hidden="true">&nbsp;›</span></a>
     </p>
   </section>
 
-  <section class="container section" aria-label="Coming in Phase 3">
-    <p class="todo">Phase 3: project cards, about teaser, how I work, contact composer</p>
-  </section>
+  <template v-if="page">
+    <HomeProjectCards :projects="page.featured" />
+    <HomeAboutTeaser :about="page.home.about" />
+    <HomeHowIWork :items="page.home.howIWork" />
+    <HomeContactComposer :email="site.email" :heading="site.contactIntro" />
+  </template>
 </template>
 
 <style scoped>
-.hero { padding-block: var(--space-8) var(--space-12); display: grid; gap: var(--space-6); }
+.hero { padding-block: var(--space-8) var(--space-8); display: grid; gap: var(--space-6); }
 
 .hero__title { max-width: 21ch; }
 
@@ -33,6 +43,6 @@ useSeoMeta({ description: () => `${site.value.name}. ${site.value.positioning} $
 .hero__mail:hover { text-decoration: underline; }
 
 @media (width >= 64rem) {
-  .hero { padding-block: var(--space-16) var(--space-16); }
+  .hero { padding-block: var(--space-16) var(--space-12); }
 }
 </style>

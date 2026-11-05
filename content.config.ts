@@ -22,6 +22,9 @@ export default defineContentConfig({
         confidential: z.boolean().default(false),
         cover: cover.optional(),
         links: z.array(z.object({ label: z.string(), href: z.string() })).optional(),
+        // Home card: sentence-case tags and a collaborator quote (placeholders until real).
+        tags: z.array(z.string()).optional(),
+        quote: z.object({ text: z.string(), name: z.string(), role: z.string().optional() }).optional(),
         // Case-study template (Phase 4). The body holds only the numbered sections.
         hero: cover.optional(),
         team: z.string().optional(),
@@ -83,6 +86,20 @@ export default defineContentConfig({
         certifications: z.array(z.string()),
         workingWithMe: z.string(),
         photos: z.array(cover),
+      }),
+    }),
+
+    // Home page copy: about teaser and "How I work".
+    home: defineCollection({
+      type: 'data',
+      source: 'home.yml',
+      schema: z.object({
+        about: z.object({
+          photo: z.object({ src: z.string(), alt: z.string() }),
+          statement: z.string(),
+          paragraphs: z.array(z.string()),
+        }),
+        howIWork: z.array(z.object({ title: z.string(), text: z.string() })),
       }),
     }),
 

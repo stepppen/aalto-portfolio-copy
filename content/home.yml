@@ -1,0 +1,18 @@
+# Home page copy. Drafted from CV facts only; rewrite anything that doesn't sound like you.
+about:
+  photo:
+    src: /photos/stepan-1.jpg
+    alt: Stepan, arms crossed, in a navy jumper in front of a white wall and a plant.
+  statement: I design software for health and enterprise, and I make sure it survives the trip to code.
+  paragraphs:
+    - I'm a UX/UI designer at OWT in Zurich, working on 0-to-1 products, medical software and the pipeline that gets design into code. The other 20% of my week goes to Kymu, home physiotherapy for children that started as my bachelor thesis.
+    - Before that I designed and built Calmea at ETH, a sleep-tracking platform that is now a spin-off, and worked on driver displays at Volkswagen. I test with real users, build design systems, and prototype in code.
+howIWork:
+  - title: Research with real users
+    text: I test with the people who'll use the thing. Patients and physiotherapists at Lucerne Cantonal Hospital for Kymu, and ISO-based summative usability tests for medical software at OWT.
+  - title: Systems and tokens
+    text: Design systems for Calmea and for Volkswagen's next infotainment platform, and a versioned token package with component contracts at OWT, so design and code stop drifting.
+  - title: Prototyping in code
+    text: I built Calmea full-stack myself, in Vue, FastAPI and PostgreSQL, and set up a pipeline that lets designers prototype in code. This site is built the same way.
+  - title: Shipping in regulated fields
+    text: Medical software at OWT, summative tests for software as a medical device, and a clinical pilot with Lucerne Cantonal Hospital for Kymu. Evidence matters as much as screens.
