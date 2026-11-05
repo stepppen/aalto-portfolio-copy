@@ -27,7 +27,14 @@ export default defineContentConfig({
         quote: z.object({ text: z.string(), name: z.string(), role: z.string().optional() }).optional(),
         // Case-study template (Phase 4). The body holds only the numbered sections.
         hero: cover.optional(),
-        team: z.string().optional(),
+        team: z.union([z.string(), z.array(z.string())]).optional(),
+        // Case-study spec and quick read.
+        services: z.array(z.string()).optional(),
+        date: z.string().optional(),
+        tldr: z.object({ problem: z.string(), role: z.string(), did: z.string(), outcome: z.string() }).optional(),
+        keyVisuals: z.array(cover.extend({ caption: z.string().optional() })).optional(),
+        // When set, cards link here instead of /work/<slug> (e.g. the pipeline essay in Notes).
+        href: z.string().optional(),
         timeframe: z.string().optional(),
         tools: z.array(z.string()).optional(),
         status: z.string().optional(),
@@ -80,12 +87,12 @@ export default defineContentConfig({
       schema: z.object({
         description: z.string(),
         intro: z.string(),
-        facts: z.array(z.object({ label: z.string(), value: z.string() })),
+        photo: z.object({ src: z.string(), alt: z.string() }),
+        experience: z.array(z.object({ when: z.string(), what: z.string(), where: z.string() })),
+        recognition: z.array(z.string()),
         languages: z.array(z.object({ name: z.string(), level: z.string() })),
-        toolbox: z.array(z.object({ group: z.string(), items: z.array(z.string()) })),
-        certifications: z.array(z.string()),
+        outside: z.object({ text: z.string(), photos: z.array(cover) }),
         workingWithMe: z.string(),
-        photos: z.array(cover),
       }),
     }),
 

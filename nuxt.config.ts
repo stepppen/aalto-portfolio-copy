@@ -1,3 +1,7 @@
+// Runs before first paint: applies the remembered read mode so case studies never jump.
+// Without JS there's no attribute, and nothing is collapsed.
+const readModeBootstrap = `(function(){var m='quick';try{var s=localStorage.getItem('readMode');if(s==='full'||s==='quick')m=s}catch(e){}document.documentElement.setAttribute('data-read',m)})()`
+
 export default defineNuxtConfig({
   compatibilityDate: '2026-11-01',
   devtools: { enabled: false },
@@ -15,6 +19,7 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#FFFFFF' },
       ],
       link: [{ rel: 'icon', href: '/favicon.ico' }],
+      script: [{ innerHTML: readModeBootstrap, tagPosition: 'head', tagPriority: 'critical' }],
     },
   },
 
@@ -24,7 +29,7 @@ export default defineNuxtConfig({
     defaults: { subsets: ['latin'], preload: false },
     families: [
       // Only the weights the design uses: static files are about half the size of the variable ones.
-      { name: 'Inter', provider: 'google', weights: [400, 500] },
+      { name: 'Inter', provider: 'google', weights: [400] }, // one weight → a small static file instead of the 48 KB variable one
       { name: 'Inter Tight', provider: 'google', weights: [400] },
       { name: 'Geist Mono', provider: 'google', weights: [400] },
     ],
@@ -55,6 +60,7 @@ export default defineNuxtConfig({
     '/projects/**': { redirect: { to: '/work/**', statusCode: 301 } },
     '/playground': { redirect: { to: '/', statusCode: 301 } },
     '/cv.pdf': { redirect: { to: '/Stepan_Vedunov_CV.pdf', statusCode: 301 } },
+    '/work/design-to-code': { redirect: { to: '/notes/design-to-code', statusCode: 301 } },
     '/**': {
       headers: {
         'X-Content-Type-Options': 'nosniff',

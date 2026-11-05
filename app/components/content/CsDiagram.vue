@@ -32,7 +32,7 @@ defineProps<{ steps: Step[]; caption?: string; label?: string }>()
 </template>
 
 <style scoped>
-.diagram { display: grid; gap: var(--space-4); margin: 0; }
+.diagram { display: grid; gap: var(--space-4); margin: 0; container-type: inline-size; }
 
 .diagram__steps {
   display: grid;
@@ -70,7 +70,7 @@ defineProps<{ steps: Step[]; caption?: string; label?: string }>()
   font-family: var(--font-mono);
 }
 
-.diagram__title { font-weight: 600; }
+.diagram__title { font-family: var(--font-display); font-size: var(--text-heading); letter-spacing: var(--tracking-heading); }
 
 .diagram__items { display: flex; flex-wrap: wrap; gap: var(--space-2); padding: 0; margin-top: var(--space-2); list-style: none; }
 
@@ -82,7 +82,8 @@ defineProps<{ steps: Step[]; caption?: string; label?: string }>()
   letter-spacing: 0;
 }
 
-@media (width >= 64rem) {
+/* Horizontal only when the diagram itself has room (it may sit in a narrow note column). */
+@container (width >= 56rem) {
   .diagram__steps { grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--space-8); }
 
   .diagram__step:not(:last-child)::after {

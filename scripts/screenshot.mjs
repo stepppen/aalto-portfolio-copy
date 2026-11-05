@@ -31,6 +31,8 @@ ws.addEventListener('message', (e) => {
 const send = (method, params = {}) => new Promise((r) => { pending.set(++id, r); ws.send(JSON.stringify({ id, method, params })) })
 
 await mkdir(outDir, { recursive: true })
+// INITJS="localStorage.setItem('readMode','full')" runs before any page script (e.g. to capture Full story).
+if (process.env.INITJS) { await send('Page.enable'); await send('Page.addScriptToEvaluateOnNewDocument', { source: process.env.INITJS }) }
 if (process.env.PROBE) await send('Runtime.enable')
 for (const w of widthsArg.split(',').map(Number)) {
   const mobile = w < 768

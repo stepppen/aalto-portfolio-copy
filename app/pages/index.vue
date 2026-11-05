@@ -38,7 +38,7 @@ useSeoMeta({ description: () => `${site.value.name}. ${site.value.positioning} $
 
 .hero__proof { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2) var(--space-6); font-size: var(--text-small); }
 
-.hero__mail { display: inline-flex; align-items: center; min-height: var(--layout-tap); text-decoration: none; font-weight: 500; }
+.hero__mail { display: inline-flex; align-items: center; min-height: var(--layout-tap); text-decoration: none; }
 
 .hero__mail:hover { text-decoration: underline; }
 

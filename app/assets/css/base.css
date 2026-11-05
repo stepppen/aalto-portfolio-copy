@@ -165,3 +165,33 @@ a:hover { text-decoration-color: var(--ink-muted); }
   padding: 0.1em 0.45em;
   border-radius: var(--radius-control);
 }
+
+/* Read mode, before JS takes over: the head script sets data-read, CSS collapses the extras.
+   Once the page is ready they use hidden="until-found" instead (findable with Ctrl+F). */
+html[data-read="quick"]:not([data-rm-ready]) .cs--quick .rm-extra { display: none; }
+
+html[data-read="full"] .rm-quick-only { display: none; }
+
+/* Case-study media (global so case pages need no extra render-blocking stylesheet). */
+/* Media sits on a light-grey panel, like a product page. */
+.cs-media { display: grid; gap: var(--space-3); margin: 0; }
+
+.cs-media img {
+  width: 100%;
+  border-radius: var(--radius-media);
+  background: var(--panel);
+}
+
+.cs-media img.contain { object-fit: contain; padding: var(--space-6); }
+
+.cs-media__todo {
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+  border-radius: var(--radius-media);
+  background: var(--panel);
+  text-align: center;
+}
+
+.cs-media figcaption { max-width: 60ch; }
+

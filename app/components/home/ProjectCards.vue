@@ -36,7 +36,7 @@ onMounted(update)
     <h2 id="cards-title" class="sr-only">Selected work</h2>
     <ul ref="row" class="cards__row" role="list" @scroll.passive="update">
       <li v-for="p in projects" :key="p.path" class="card" :class="`card--${variant(p)}`">
-        <NuxtLink :to="`/work/${slug(p)}`" class="card__link">
+        <NuxtLink :to="p.href ?? `/work/${slug(p)}`" class="card__link">
           <NuxtImg
             v-if="variant(p) === 'photo'"
             :src="p.cover!.src"

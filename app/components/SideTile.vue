@@ -149,7 +149,7 @@ onMounted(() => {
   pointer-events: none;
 }
 
-.tile__title { font-size: var(--text-small); font-weight: 500; line-height: 1.3; }
+.tile__title { font-size: var(--text-small); line-height: 1.3; }
 
 .tile__link { text-decoration: none; }
 

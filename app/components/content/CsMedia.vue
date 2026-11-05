@@ -24,26 +24,3 @@ const external = computed(() => props.src?.startsWith('http'))
     <figcaption v-if="caption" class="t-small muted">{{ caption }}</figcaption>
   </figure>
 </template>
-
-<style scoped>
-.cs-media { display: grid; gap: var(--space-3); margin: 0; }
-
-.cs-media :deep(img) {
-  width: 100%;
-  border-radius: var(--radius-media);
-  background: var(--panel);
-}
-
-.cs-media :deep(img.contain) { object-fit: contain; }
-
-.cs-media__todo {
-  display: grid;
-  place-items: center;
-  padding: var(--space-6);
-  border-radius: var(--radius-media);
-  background: var(--panel);
-  text-align: center;
-}
-
-figcaption { max-width: 60ch; }
-</style>

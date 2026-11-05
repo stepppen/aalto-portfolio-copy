@@ -124,7 +124,7 @@ textarea.composer__input { resize: vertical; padding-block: var(--space-1); min-
   border-radius: var(--radius-pill);
   background: var(--ink);
   color: var(--bg);
-  font-weight: 500;
+ 
 }
 
 .composer__send:hover { opacity: 0.88; }

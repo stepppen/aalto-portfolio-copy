@@ -24,4 +24,13 @@ for (const [p, mode] of runs) {
 }
 const md = ['| Page | Mode | Performance | Accessibility | Best Practices | SEO | LCP | CLS |', '|---|---|---|---|---|---|---|---|',
   ...rows.map((r) => `| ${r.page} | ${r.mode} | ${r.performance} | ${r.accessibility} | ${r['best-practices']} | ${r.seo} | ${r.lcp} | ${r.cls} |`)].join('\n')
+if (!process.env.PAGES) {
+  // Lowest score per category across all pages → the Setup panel (app/assets/qa.json).
+  const qaFile = new URL('../app/assets/qa.json', import.meta.url)
+  const qa = JSON.parse(await readFile(qaFile, 'utf8'))
+  const min = (k) => Math.min(...rows.map((r) => r[k]))
+  qa.lighthouse = { performance: min('performance'), accessibility: min('accessibility'), 'best-practices': min('best-practices'), seo: min('seo'), pages: rows.length }
+  qa.measured = new Date().toISOString().slice(0, 10)
+  await writeFile(qaFile, JSON.stringify(qa, null, 2) + '\n')
+}
 if (!process.env.PAGES) await writeFile(new URL('../docs/qa/lighthouse/README.md', import.meta.url), `# Lighthouse (mobile)\n\nLocal run against the static build. Full HTML reports are next to this file.\n\n${md}\n`)
