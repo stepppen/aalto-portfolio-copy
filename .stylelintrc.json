@@ -1,0 +1,43 @@
+{
+  "$comment": "The component contract: components read semantic tokens only (no raw colours, font stacks or px type sizes), and nothing is set in all caps.",
+  "ignoreFiles": [
+    "app/assets/css/tokens.css",
+    ".output/**",
+    ".nuxt/**",
+    "dist/**"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "**/*.vue"
+      ],
+      "customSyntax": "postcss-html"
+    }
+  ],
+  "rules": {
+    "color-no-hex": true,
+    "color-named": "never",
+    "function-disallowed-list": [
+      "rgb",
+      "rgba",
+      "hsl",
+      "hsla",
+      "oklch",
+      "lab"
+    ],
+    "declaration-property-value-disallowed-list": {
+      "font-family": [
+        "/^(?!var\\(|inherit)/"
+      ],
+      "font-size": [
+        "/\\d+px/"
+      ],
+      "text-transform": [
+        "uppercase"
+      ],
+      "font-variant-caps": [
+        "/caps/"
+      ]
+    }
+  }
+}

@@ -1,49 +1,38 @@
 {
-  "name": "nuxt-app",
+  "name": "vedunov-com",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
+    "tokens": "node tokens/build.mjs",
+    "tokens:check": "node scripts/check-contrast.mjs",
+    "predev": "npm run tokens",
     "dev": "nuxt dev",
+    "prebuild": "npm run tokens && npm run tokens:check && node scripts/check-content.mjs && node scripts/image-sizes.mjs",
+    "build": "nuxt build",
+    "pregenerate": "npm run tokens && npm run tokens:check && node scripts/check-content.mjs && node scripts/image-sizes.mjs",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "lint:css": "stylelint \"app/**/*.{css,vue}\"",
+    "postinstall": "nuxt prepare",
+    "og": "node scripts/og.mjs",
+    "postgenerate": "node scripts/sitemap.mjs"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.5"
   },
   "dependencies": {
-    "@nuxt/content": "^3.6.3",
-    "@nuxt/image": "^1.10.0",
-    "@nuxt/scripts": "^0.11.10",
-    "@nuxt/ui": "^3.3.0",
-    "@splinetool/loader": "^1.0.91",
-    "@splinetool/runtime": "^1.0.91",
-    "@tresjs/nuxt": "^2.1.1",
-    "@unhead/vue": "^2.0.12",
-    "@vueuse/motion": "^3.0.3",
-    "better-sqlite3": "^12.2.0",
-    "ccapture.js": "^1.1.0",
-    "gif-encoder-2": "^1.0.5",
-    "gif.js": "^0.2.0",
-    "gif.js.optimized": "^1.0.1",
-    "json-server": "^1.0.0-alpha.23",
-    "nuxt": "^3.16.1",
-    "nuxt-aos": "^1.2.5",
-    "nuxt-helmet": "^2.1.1",
-    "nuxt-mdi": "^2.1.1",
-    "p5": "^1.9.2",
-    "vue": "^3.4.19",
-    "vue-router": "^4.3.0"
+    "@nuxt/content": "^3.16.2",
+    "@nuxt/fonts": "^1.2.0",
+    "@nuxt/image": "^2.2.1",
+    "nuxt": "^4.6.4"
   },
   "devDependencies": {
-    "@nuxtjs/google-fonts": "^3.1.3",
-    "@nuxtjs/tailwindcss": "^6.11.4",
-    "@types/three": "^0.161.2",
-    "@types/youtube": "^0.1.2",
-    "@vueuse/core": "^10.9.0",
-    "nuxt-p5": "^1.0.1",
-    "sass": "^1.71.1",
-    "three": "^0.162.0"
+    "axe-core": "^4.14.0",
+    "lighthouse": "^12.8.2",
+    "postcss-html": "^2.0.0",
+    "serve": "^14.2.6",
+    "sharp": "^0.35.5",
+    "style-dictionary": "^5.8.0",
+    "stylelint": "^18.0.0"
   }
 }

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" font-family="ui-monospace, Menlo, monospace">
+  <defs>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1.2" fill="#14141322"/></pattern>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 10 5 0 10z" fill="#B42B1A"/></marker>
+  </defs>
+  <rect width="1600" height="1000" fill="#EAE7E0"/>
+  <rect width="1600" height="1000" fill="url(#dots)"/>
+  <g font-size="30" fill="#141413">
+    <rect x="110" y="420" width="260" height="160" rx="6" fill="#F4F2ED" stroke="#7D7A75" stroke-width="2"/>
+    <text x="140" y="490">Figma</text><text x="140" y="535" fill="#5E5C57" font-size="24">variables</text>
+    <rect x="490" y="420" width="260" height="160" rx="6" fill="#F4F2ED" stroke="#7D7A75" stroke-width="2"/>
+    <text x="520" y="490">tokens</text><text x="520" y="535" fill="#5E5C57" font-size="24">.json</text>
+    <rect x="870" y="400" width="300" height="200" rx="6" fill="#F4F2ED" stroke="#B42B1A" stroke-width="4"/>
+    <text x="900" y="480">package</text><text x="900" y="525" fill="#B42B1A" font-size="24">vX.Y.Z</text><text x="900" y="565" fill="#5E5C57" font-size="24">+ contracts</text>
+    <rect x="1290" y="240" width="220" height="110" rx="6" fill="#F4F2ED" stroke="#7D7A75" stroke-width="2"/><text x="1315" y="305" font-size="26">app</text>
+    <rect x="1290" y="445" width="220" height="110" rx="6" fill="#F4F2ED" stroke="#7D7A75" stroke-width="2"/><text x="1315" y="510" font-size="26">app</text>
+    <rect x="1290" y="650" width="220" height="110" rx="6" fill="#F4F2ED" stroke="#7D7A75" stroke-width="2"/><text x="1315" y="715" font-size="26">prototype</text>
+  </g>
+  <g stroke="#B42B1A" stroke-width="3" fill="none" marker-end="url(#a)">
+    <path d="M375 500H480"/><path d="M755 500H860"/>
+    <path d="M1175 470C1230 470 1230 295 1282 295"/><path d="M1175 500H1282"/><path d="M1175 530C1230 530 1230 705 1282 705"/>
+  </g>
+  <text x="110" y="160" font-size="28" fill="#5E5C57">one source → every app</text>
+</svg>

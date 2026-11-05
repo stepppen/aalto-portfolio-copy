@@ -1,146 +1,77 @@
 export default defineNuxtConfig({
+  compatibilityDate: '2026-11-01',
   devtools: { enabled: false },
-  ssr: true,
-  
-  modules: [
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/google-fonts',
-    '@nuxt/image',
-    '@nuxt/content',
-    '@nuxt/scripts',
-    '@vueuse/motion/nuxt',
-    'nuxt-mdi'
-  ],
+
+  modules: ['@nuxt/content', '@nuxt/image', '@nuxt/fonts'],
+
+  css: ['~/assets/css/tokens.css', '~/assets/css/base.css'],
 
   app: {
     head: {
-      title: 'Vedunov Portfolio',
-      htmlAttrs: {
-        lang: 'en'
-      },
+      htmlAttrs: { lang: 'en' },
       meta: [
-        { name: 'description', content: 'Design Portfolio' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
-        { name: 'theme-color', content: '#06060c' }
+        { name: 'description', content: 'Stepan Vedunov, product designer in Zurich who builds the bridge to code. Health and enterprise software at OWT and Kymu.' },
+        { name: 'theme-color', content: '#FFFFFF' },
       ],
-      link: [
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'preconnect', href: 'https://www.youtube.com' },
-        { rel: 'preconnect', href: 'https://img.youtube.com' },
-        { 
-          rel: 'stylesheet', 
-          href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
-          media: 'print',
-          onload: "this.media='all'"
-        }
-      ]
-    }
+      link: [{ rel: 'icon', href: '/favicon.ico' }],
+    },
   },
 
-  googleFonts: {
-    families: {
-      Roboto: [300, 400],
-      "Bricolage Grotesque": [400, 500],
-      Lato: [300, 400]
-    },
-    display: 'swap',
-    preload: true,
-    prefetch: true,
-    preconnect: true,
-    download: false,
-    inject: true,
-    useStylesheet: true
+  // No font preloads: text paints at once in a metric-matched fallback, then swaps.
+  // Latin covers German, French and Spanish; rare glyphs (e.g. Š) fall back per character.
+  fonts: {
+    defaults: { subsets: ['latin'], preload: false },
+    families: [
+      // Only the weights the design uses: static files are about half the size of the variable ones.
+      { name: 'Inter', provider: 'google', weights: [400, 500] },
+      { name: 'Inter Tight', provider: 'google', weights: [400] },
+      { name: 'Geist Mono', provider: 'google', weights: [400] },
+    ],
+  },
+
+  // Inline component CSS into the HTML instead of separate render-blocking stylesheets.
+  features: { inlineStyles: true },
+
+  experimental: {
+    // Prefetch other pages on hover/focus, not as soon as a link scrolls into view.
+    defaults: { nuxtLink: { prefetchOn: { interaction: true, visibility: false } } },
   },
 
   image: {
-    format: ['webp', 'avif'],
-    quality: 85,
-    screens: {
-      xs: 320,
-      sm: 640,
-      md: 768,
-      lg: 1024,
-      xl: 1280,
-      xxl: 1536,
-    },
-    presets: {
-      project: {
-        modifiers: {
-          format: 'webp',
-          quality: 85,
-          loading: 'lazy'
-        }
-      }
-    }
+    // Pre-render every image size at build time: the site is static, no image server.
+    provider: 'ipxStatic',
+    format: ['avif', 'webp'],
+    quality: 80,
   },
 
   content: {
-    highlight: {
-      theme: 'github-dark',
-      preload: ['vue', 'javascript', 'typescript']
-    },
-    markdown: {
-      anchorLinks: false,
-    },
-    experimental: {
-      clientDB: false, 
-      stripQueryParameters: true
-    }
+    experimental: { sqliteConnector: 'native' },
   },
 
+  // With the netlify-static preset these become real 301s (_redirects) and headers (_headers).
   routeRules: {
-    '/': { swr: 3600 },
-    '/projects/**': { swr: 3600 },
-    '/about': { prerender: true }
-  },
-
-  experimental: {
-    payloadExtraction: true,
-    renderJsonPayloads: true,
-    viewTransition: false
-  },
-  vite: {
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks: (id) => {
-            if (id.includes('node_modules/three/')) {
-              if (id.includes('examples/jsm')) {
-                return 'three-addons'; 
-              }
-              return 'three-core'; 
-            }
-            
-            if (id.includes('node_modules/vue') || 
-                id.includes('node_modules/@vue')) {
-              return 'vue-vendor';
-            }
-            
-            if (id.includes('node_modules/@nuxt') || 
-                id.includes('node_modules/nuxt')) {
-              return 'nuxt-vendor';
-            }
-            
-            if (id.includes('node_modules')) {
-              return 'vendor';
-            }
-          }
-        }
+    '/projects/**': { redirect: { to: '/work/**', statusCode: 301 } },
+    '/playground': { redirect: { to: '/', statusCode: 301 } },
+    '/cv.pdf': { redirect: { to: '/Stepan_Vedunov_CV.pdf', statusCode: 301 } },
+    '/**': {
+      headers: {
+        'X-Content-Type-Options': 'nosniff',
+        'Referrer-Policy': 'strict-origin-when-cross-origin',
+        'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+        'X-Frame-Options': 'SAMEORIGIN',
       },
-      chunkSizeWarningLimit: 600, 
-      cssCodeSplit: true,
-      minify: 'esbuild', 
-      target: 'es2020' 
     },
-    optimizeDeps: {
-      include: [
-        'three',
-        'three/examples/jsm/loaders/GLTFLoader.js',
-        'three/examples/jsm/effects/AsciiEffect.js'
-      ]
-    }
+    '/_ipx/**': { headers: { 'Cache-Control': 'public, max-age=604800, stale-while-revalidate=86400' } },
   },
 
-  compatibilityDate: '2025-08-27'
-});
+  nitro: {
+    preset: 'netlify-static',
+    // Old /projects/* URLs and the archive pages aren't linked from the new home yet,
+    // so list them explicitly: this emits the redirect pages for every old URL.
+    prerender: {
+      crawlLinks: true,
+      routes: ['/', ...['kymu', 'vr-learning-tool', 'volkswagen-hmi', 'llm-drawing-robot', 'ticket-machine-zvv'].flatMap((s) => [`/projects/${s}`, `/work/${s}`])],
+    },
+  },
+})

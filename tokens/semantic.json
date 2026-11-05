@@ -1,0 +1,64 @@
+{
+  "$description": "The only set (light theme). Components read these and nothing else.",
+  "bg":          { "$type": "color", "$value": "{white}" },
+  "panel":       { "$type": "color", "$value": "{neutral.50}" },
+  "tile":        { "$type": "color", "$value": "{neutral.100}" },
+  "ink":         { "$type": "color", "$value": "{neutral.950}" },
+  "ink-muted":   { "$type": "color", "$value": "{neutral.600}" },
+  "line":        { "$type": "color", "$value": "{neutral.200}" },
+  "line-strong": { "$type": "color", "$value": "{neutral.500}" },
+  "signal":      { "$type": "color", "$value": "{orange.600}" },
+  "on-media":    { "$type": "color", "$value": "{white}" },
+  "scrim":       { "$type": "color", "$value": "{black-45}" },
+
+  "font": {
+    "$type": "fontFamily",
+    "display": { "$value": "{family.display}" },
+    "text":    { "$value": "{family.text}" },
+    "mono":    { "$value": "{family.mono}" }
+  },
+  "text": {
+    "$type": "dimension",
+    "mono":      { "$value": "0.8125rem" },
+    "small":     { "$value": "0.9375rem" },
+    "body":      { "$value": "1.0625rem" },
+    "heading":   { "$value": "clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem)" },
+    "statement": { "$value": "clamp(1.625rem, 1.3rem + 1.3vw, 2.25rem)" },
+    "display":   { "$value": "clamp(2.75rem, 1.6rem + 4.9vw, 6.5rem)" },
+    "title":     { "$value": "clamp(3.5rem, 1.8rem + 7.3vw, 10rem)" }
+  },
+  "tracking": {
+    "$type": "dimension",
+    "display": { "$value": "-0.035em" },
+    "heading": { "$value": "-0.015em" }
+  },
+  "space": {
+    "$type": "dimension",
+    "1": { "$value": "{scale.1}" }, "2": { "$value": "{scale.2}" }, "3": { "$value": "{scale.3}" },
+    "4": { "$value": "{scale.4}" }, "6": { "$value": "{scale.6}" }, "8": { "$value": "{scale.8}" },
+    "12": { "$value": "{scale.12}" }, "16": { "$value": "{scale.16}" }, "24": { "$value": "{scale.24}" },
+    "section": { "$value": "clamp(4rem, 2.5rem + 6vw, 8rem)" }
+  },
+  "layout": {
+    "$type": "dimension",
+    "max":    { "$value": "90rem" },
+    "margin": { "$value": "clamp(1.25rem, 0.6rem + 2.8vw, 3rem)" },
+    "gutter": { "$value": "clamp(1rem, 0.75rem + 1vw, 1.5rem)" },
+    "tap":    { "$value": "2.75rem" }
+  },
+  "radius": {
+    "$type": "dimension",
+    "card": { "$value": "16px" },
+    "tile": { "$value": "20px" },
+    "media": { "$value": "12px" },
+    "pill": { "$value": "999px" },
+    "control": { "$value": "6px" }
+  },
+  "motion": {
+    "spring":   { "$type": "cubicBezier", "$value": "cubic-bezier(0.34, 1.56, 0.64, 1)" },
+    "ease":     { "$type": "cubicBezier", "$value": "cubic-bezier(0.2, 0.7, 0.2, 1)" },
+    "dur-fast": { "$type": "duration", "$value": "150ms" },
+    "dur-switch": { "$type": "duration", "$value": "220ms" }
+  },
+  "focus": { "$type": "dimension", "$value": "2px" }
+}
