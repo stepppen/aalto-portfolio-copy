@@ -5,7 +5,7 @@ import {
   CircleGeometry, DataTexture, DoubleSide, LatheGeometry, LinearFilter, LinearMipmapLinearFilter, Mesh,
   MeshPhysicalMaterial, Plane, RepeatWrapping, Vector2, Vector3,
 } from 'three'
-import { mountTile } from './runtime'
+import { mountTile, type MountOptions } from './runtime'
 
 const HEIGHT = 2.1
 const LAYERS = 120 // visual layer count: exaggerated on purpose so the lines read at tile size
@@ -32,7 +32,7 @@ function layerNormalMap() {
   return tex
 }
 
-export function mountPrint(host: HTMLElement, opts: { poster?: boolean; onStatus?: (t: string) => void; onReady?: () => void } = {}) {
+export function mountPrint(host: HTMLElement, opts: MountOptions = {}) {
   return mountTile(host, { camera: [0, 2.5, 8.6], target: [0, 1.02, 0], ...opts }, (ctx) => {
     const { pivot, shadow, renderer, reducedMotion, signal } = ctx
     renderer.localClippingEnabled = true

@@ -4,13 +4,20 @@
 import type { TilesCollectionItem } from '@nuxt/content'
 
 const props = defineProps<{ tile: TilesCollectionItem; posterMode?: boolean; eager?: boolean }>()
-const scenes: Record<string, () => Promise<{ mount: (el: HTMLElement, o: { poster?: boolean; onStatus?: (t: string) => void; onReady?: () => void }) => () => void }>> = {
-  print: () => import('~/tiles/print').then((m) => ({ mount: m.mountPrint })),
+import type { MountOptions } from '~/tiles/runtime'
+
+type Mount = (el: HTMLElement, o: MountOptions) => () => void
+// Each scene is its own chunk; three.js is shared between them and loads with the first one.
+const scenes: Record<string, () => Promise<Mount>> = {
+  print: () => import('~/tiles/print').then((m) => m.mountPrint),
+  macropad: () => import('~/tiles/macropad').then((m) => m.mountMacropad),
+  books: () => import('~/tiles/books').then((m) => m.mountBooks),
 }
 
 const stage = ref<HTMLElement>()
 const live = ref(false)
 const status = ref('')
+const caption = ref<string | null>(null)
 const id = useId()
 let unmount = () => {}
 let stopWatching = () => {}
@@ -31,8 +38,14 @@ onMounted(() => {
     if (started || !onScreen || !engaged) return
     started = true
     stopWatching()
-    const { mount } = await load()
-    unmount = mount(stage.value!, { poster: props.posterMode, onStatus: (t) => (status.value = t), onReady: () => (live.value = true) })
+    const mount = await load()
+    unmount = mount(stage.value!, {
+      poster: props.posterMode,
+      data: props.tile as unknown as Record<string, unknown>,
+      onStatus: (t) => (status.value = t),
+      onCaption: (t) => { caption.value = t; if (t) status.value = t },
+      onReady: () => (live.value = true),
+    })
   }
   const engage = () => { engaged = true; start() }
   const events = ['scroll', 'pointerdown', 'keydown', 'touchstart', 'wheel'] as const
@@ -72,6 +85,7 @@ onMounted(() => {
         :preload="eager ? { fetchPriority: 'high' } : undefined"
       />
       <span v-if="tile.placeholder && tile.scene" class="tile__flag t-mono">placeholder model</span>
+      <p v-if="caption" class="tile__caption" aria-hidden="true">{{ caption }}</p>
     </component>
     <figcaption>
       <p class="tile__title">
@@ -87,7 +101,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.tile { margin: 0; display: grid; gap: var(--space-3); }
+.tile { margin: 0; display: grid; align-content: start; gap: var(--space-3); }
 
 .tile__stage {
   position: relative;
@@ -119,6 +133,20 @@ onMounted(() => {
   border-radius: var(--radius-pill);
   background: var(--bg);
   color: var(--ink-muted);
+}
+
+.tile__caption {
+  position: absolute;
+  left: var(--space-3);
+  right: var(--space-3);
+  bottom: var(--space-3);
+  z-index: 1;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-media);
+  background: var(--bg);
+  font-size: var(--text-small);
+  line-height: 1.35;
+  pointer-events: none;
 }
 
 .tile__title { font-size: var(--text-small); font-weight: 500; line-height: 1.3; }

@@ -70,8 +70,16 @@ export default defineNuxtConfig({
     // three.js and the tile scenes download only when a tile actually starts, never as a
     // page-load prefetch: on a phone that prefetch competed with the first image for bandwidth.
     'build:manifest'(manifest) {
+      const isTile = (key: string) => /node_modules\/three\/|(^|\/)tiles\//.test(key)
+      const tileKeys = Object.keys(manifest).filter(isTile)
+      // Shared chunks (e.g. three.js once several scenes use it) that only tile scenes import.
+      const tileOnly = new Set(tileKeys.flatMap((k) => manifest[k]?.imports ?? []))
       for (const [key, chunk] of Object.entries(manifest)) {
-        if (/node_modules\/three\/|(^|\/)tiles\//.test(key)) { chunk.prefetch = false; chunk.preload = false }
+        if (!isTile(key) && !tileOnly.has(key)) (chunk.imports ?? []).forEach((d) => tileOnly.delete(d))
+      }
+      for (const key of [...tileKeys, ...tileOnly]) {
+        const chunk = manifest[key]
+        if (chunk) { chunk.prefetch = false; chunk.preload = false }
       }
     },
   },

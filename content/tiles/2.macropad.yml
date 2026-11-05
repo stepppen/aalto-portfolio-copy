@@ -1,0 +1,7 @@
+title: Macro pad
+category: Electronics
+description: A three-key macro pad with an LED and a toggle switch, built at home.
+instructions: "Click or tap a key to press it, and the toggle to switch the light. Drag sideways to turn it. With a keyboard: 1, 2 and 3 press the keys, Enter flips the toggle, arrow keys turn it."
+scene: macropad
+poster: /tiles/macropad.webp
+placeholder: "[TODO: my real board as a Blender or KiCad export, plus a photo for colour reference]"

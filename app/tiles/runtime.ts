@@ -33,6 +33,16 @@ export interface TileScene extends TileInput {
   dispose?: () => void
 }
 
+/** What a tile component passes to a scene's mount function. */
+export interface MountOptions {
+  poster?: boolean
+  onStatus?: (text: string) => void
+  onReady?: () => void
+  onCaption?: (text: string | null) => void
+  /** Scene data from the tile's YAML (e.g. the list of books). */
+  data?: Record<string, unknown>
+}
+
 export interface TileContext {
   scene: Scene
   camera: PerspectiveCamera
@@ -43,6 +53,8 @@ export interface TileContext {
   signal: Color
   /** Ask for a frame (after input or a state change). */
   invalidate: () => void
+  /** Visible caption inside the tile (e.g. a book's title), or null to hide it. */
+  setCaption: (text: string | null) => void
   pick: (ndc: Vector2, objects: Object3D[]) => Intersection | undefined
 }
 
@@ -68,7 +80,7 @@ const nextTask = () => new Promise<void>((r) => setTimeout(r, 0))
 
 export function mountTile(
   host: HTMLElement,
-  opts: { camera: [number, number, number]; target: [number, number, number]; poster?: boolean; onStatus?: (text: string) => void; onReady?: () => void },
+  opts: MountOptions & { camera: [number, number, number]; target: [number, number, number] },
   build: (ctx: TileContext) => TileScene,
 ): () => void {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -115,6 +127,7 @@ export function mountTile(
   const ctx: TileContext = {
     scene, camera, pivot, shadow, renderer, reducedMotion, signal,
     invalidate: () => { dirty = true; wake() },
+    setCaption: (text) => opts.onCaption?.(text),
     pick: (ndc, objects) => { ray.setFromCamera(ndc, camera); return ray.intersectObjects(objects, true)[0] },
   }
   const tile = build(ctx)

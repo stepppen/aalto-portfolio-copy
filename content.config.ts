@@ -54,6 +54,8 @@ export default defineContentConfig({
         poster: z.string().optional(),
         href: z.string().optional(),
         placeholder: z.string().optional(),
+        // Reading tile only: the stack, bottom first.
+        books: z.array(z.object({ title: z.string(), author: z.string().optional(), why: z.string().optional() })).optional(),
       }),
     }),
 

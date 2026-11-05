@@ -1,0 +1,17 @@
+title: On my desk
+category: Reading
+description: The books currently on my desk, stacked, and one line on why each one is there.
+instructions: "Hover or tap a book to slide it out and read why it's there. Drag sideways to turn the stack. With a keyboard: up and down arrows pick a book, Escape puts it back."
+scene: books
+poster: /tiles/books.webp
+# Edit these. Up to five books, top of the list = bottom of the stack.
+books:
+  - title: "[TODO: book title]"
+    author: "[TODO: author]"
+    why: "[TODO: one line on why I liked it]"
+  - title: "[TODO: book title]"
+    author: "[TODO: author]"
+    why: "[TODO: one line on why I liked it]"
+  - title: "[TODO: book title]"
+    author: "[TODO: author]"
+    why: "[TODO: one line on why I liked it]"
