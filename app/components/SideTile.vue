@@ -12,6 +12,8 @@ const scenes: Record<string, () => Promise<Mount>> = {
   print: () => import('~/tiles/print').then((m) => m.mountPrint),
   macropad: () => import('~/tiles/macropad').then((m) => m.mountMacropad),
   books: () => import('~/tiles/books').then((m) => m.mountBooks),
+  drawing: () => import('~/tiles/sketchbook').then((m) => m.mountSketchbook),
+  posters: () => import('~/tiles/posters').then((m) => m.mountPosters),
 }
 
 const { t, lp, lang } = useLang()

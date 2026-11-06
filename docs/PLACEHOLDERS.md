@@ -23,13 +23,16 @@ Each has a "What I'd do differently" line waiting for your words.
 ## About: `content/pages/about.md`
 - [ ] Photos for the photo stack (talks, pitches, presentations): two slots
 - [ ] Recognition photos: KMU Innovationstag (you presenting), Creative Economies Forum; links for both if there are pages
-- [ ] Two personal photos for Outside work
 
-## Side-project tiles: `content/tiles/`
+## Side projects on Work: `content/work/side/`
+- [ ] **AI to Eye:** a photo of the installation or the robots (I didn't take Scientifica's photo without asking); team credits; tools; what the robots do and how you built them.
+
+## 3D tiles on About: `content/tiles/`
 - [ ] Your real 3D print (STL/glTF) and its filament colour
 - [ ] Your macro pad / board model (Blender or KiCad export) and a reference photo
 - [ ] Books in `3.books.yml`: title, author, one line each
-- [ ] 2–3 drawing scans (for the drawing tile)
+- [ ] 2–3 sketchbook scans (the sketchbook tile draws stand-in pages until then)
+- [ ] Plakativ: 3–5 posters you're happy to show (the crate has drawn stand-ins until then)
 - [ ] LLM drawing robot CAD export (for its live tile)
 
 ## Done

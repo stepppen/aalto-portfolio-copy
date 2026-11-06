@@ -53,10 +53,8 @@ recognition:
       src: /Kymu/thumbnail.webp
       alt: A child raises both arms in front of a TV running a Kymu exercise.
 outside:
-  text: Outside work I build electronics at home, 3D print things, draw and read. A few of them are on the Work page, as small 3D things you can play with.
-  photos:
-    - todo: "[TODO: a personal photo, e.g. something you built or printed]"
-    - todo: "[TODO: another one: a drawing, a place, a stack of books]"
+  text: Outside work I build electronics at home, 3D print things, draw in a sketchbook with watercolour and fineliner, read, and run Plakativ, my poster business. A few of them, in 3D, to play with:
+  photos: []
 ---
 
 Most of my work sits where design meets code. I care about what actually ships, so I prototype early, test with real people and stay close to the engineers.

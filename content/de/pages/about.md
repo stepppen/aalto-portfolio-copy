@@ -52,10 +52,8 @@ recognition:
       src: /Kymu/thumbnail.webp
       alt: Ein Kind hebt vor einem Fernseher mit einer Kymu-Übung beide Arme.
 outside:
-  text: Neben der Arbeit baue ich zu Hause Elektronik, drucke Dinge in 3D, zeichne und lese. Ein paar davon sind auf der Seite «Arbeiten», als kleine 3D-Objekte zum Ausprobieren.
-  photos:
-    - todo: "[TODO: a personal photo, e.g. something you built or printed]"
-    - todo: "[TODO: another one: a drawing, a place, a stack of books]"
+  text: Neben der Arbeit baue ich zu Hause Elektronik, drucke Dinge in 3D, zeichne mit Aquarell und Fineliner in mein Skizzenbuch, lese und führe Plakativ, mein Plakat-Business. Ein paar davon, in 3D, zum Ausprobieren:
+  photos: []
 ---
 
 Die meisten meiner Arbeiten liegen dort, wo Design auf Code trifft. Mir ist wichtig, was am Ende wirklich live geht. Darum baue ich früh Prototypen, teste mit echten Menschen und bleibe nah an der Entwicklung.

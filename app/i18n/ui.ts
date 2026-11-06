@@ -38,7 +38,7 @@ export const ui = {
     'work.title': 'Work',
     'work.description': 'Case studies, side projects and earlier work by Stepan Vedunov, product designer in Zurich.',
     'work.cases': 'Case studies',
-    'work.side': 'Side projects and things I make',
+    'work.side': 'Side projects',
     'work.earlier': 'Earlier work',
 
     'cs.team': 'Team',
@@ -118,7 +118,7 @@ export const ui = {
     'work.title': 'Arbeiten',
     'work.description': 'Case Studies, Nebenprojekte und frühere Arbeiten von Stepan Vedunov, Produktdesigner in Zürich.',
     'work.cases': 'Case Studies',
-    'work.side': 'Nebenprojekte und Dinge, die ich baue',
+    'work.side': 'Nebenprojekte',
     'work.earlier': 'Frühere Arbeiten',
 
     'cs.team': 'Team',

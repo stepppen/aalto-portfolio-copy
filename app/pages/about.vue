@@ -3,6 +3,9 @@
 // with photos and links) and what I do outside work.
 const { t, lp, lang, col } = useLang()
 const { data: page } = await useAsyncData(`about-${lang.value}`, () => queryCollection(col('pages')).path(lang.value === 'de' ? '/de/pages/about' : '/pages/about').first())
+// The things I make outside work, as interactive 3D tiles.
+const { data: tiles } = await useAsyncData(`tiles-${lang.value}`, () => queryCollection(col('tiles')).order('stem', 'ASC').all())
+const posterMode = computed(() => useRoute().query.poster === '1')
 if (!page.value) throw createError({ statusCode: 404, statusMessage: 'Not found', fatal: true })
 useSeoMeta({ title: () => t('about.title'), description: () => page.value!.description, ogDescription: () => page.value!.description })
 </script>
@@ -22,7 +25,7 @@ useSeoMeta({ title: () => t('about.title'), description: () => page.value!.descr
 
     <section class="split about__block reveal" aria-labelledby="a-exp">
       <h2 id="a-exp" class="t-heading">{{ t('about.experience') }}</h2>
-      <ol class="about__list about__list--exp hover-dim" role="list">
+      <ol class="about__list about__list--exp" role="list">
         <li v-for="e in page.experience" :key="e.what + e.when">
           <span class="t-mono muted about__when">{{ e.when }}</span>
           <span>{{ e.what }}<span class="muted">, {{ e.where }}</span></span>
@@ -49,16 +52,14 @@ useSeoMeta({ title: () => t('about.title'), description: () => page.value!.descr
       </ul>
     </section>
 
-    <section class="split about__block reveal" aria-labelledby="a-out">
-      <h2 id="a-out" class="t-heading">{{ t('about.outside') }}</h2>
-      <div class="about__out">
-        <p>{{ page.outside.text }} <NuxtLink :to="lp('/work') + '#w-side'">{{ t('about.play') }}<span aria-hidden="true">&nbsp;›</span></NuxtLink></p>
-        <div class="about__photos">
-          <figure v-for="(p, i) in page.outside.photos" :key="i">
-            <NuxtImg v-if="p.src" :src="p.src" :alt="p.alt ?? ''" sizes="sm:50vw xl:320px" densities="x1 x2" format="webp" loading="lazy" />
-            <div v-else class="about__photo-todo"><Txt :text="p.todo" /></div>
-          </figure>
-        </div>
+    <!-- No scroll reveal on the tiles themselves: a blur filter over live WebGL canvases is costly. -->
+    <section class="about__block about__block--out" aria-labelledby="a-out">
+      <div class="split reveal">
+        <h2 id="a-out" class="t-heading">{{ t('about.outside') }}</h2>
+        <p class="about__out-text">{{ page.outside.text }}</p>
+      </div>
+      <div class="about__tiles">
+        <SideTile v-for="tile in tiles" :key="tile.id" :tile="tile" :poster-mode="posterMode" />
       </div>
     </section>
   </article>
@@ -80,6 +81,13 @@ useSeoMeta({ title: () => t('about.title'), description: () => page.value!.descr
 .about__block { margin-top: var(--space-section); padding-top: var(--space-6); border-top: 1px solid var(--line); }
 
 .about__block--wide { display: grid; gap: var(--space-8); }
+
+.about__block--out { display: grid; gap: var(--space-12); }
+
+.about__out-text { max-width: 46ch; }
+
+/* The 3D tiles: two across on phones, three on desktop. */
+.about__tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8) var(--space-3); }
 
 .about__list { display: grid; gap: var(--space-3); padding: 0; list-style: none; }
 
@@ -121,21 +129,10 @@ a.rec__card:hover img { transform: scale(1.04); }
 
 a.rec__card:hover .rec__arrow { transform: translate(2px, -2px); }
 
-.about__out { display: grid; gap: var(--space-6); }
 
-.about__photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--layout-gutter); }
 
-.about__photos figure { margin: 0; }
 
-.about__photos img, .about__photo-todo {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  border-radius: var(--radius-card);
-  background: var(--panel);
-}
 
-.about__photo-todo { display: grid; place-items: center; padding: var(--space-4); text-align: center; }
 
 @media (width >= 40rem) {
   .rec { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--space-8); }
@@ -151,6 +148,8 @@ a.rec__card:hover .rec__arrow { transform: translate(2px, -2px); }
   .about__block--wide { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: var(--layout-gutter); align-items: start; }
 
   .rec { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .about__tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-12) var(--layout-gutter); }
 }
 
 @media (width >= 90rem) {

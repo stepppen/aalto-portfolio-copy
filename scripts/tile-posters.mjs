@@ -1,4 +1,4 @@
-// Renders each live tile's poster from its own scene (/work?poster=1), at 2× for retina,
+// Renders each live tile's poster from its own scene (/about?poster=1), at 2× for retina,
 // into public/tiles/<scene>.webp. Run after changing a tile scene: `npm run posters`
 // (needs the dev server on :3000 and Google Chrome). Posters are committed.
 import { spawn } from 'node:child_process'
@@ -22,9 +22,9 @@ const evaluate = async (expression) => (await send('Runtime.evaluate', { express
 
 await send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 2, mobile: false })
 await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] })
-await send('Page.navigate', { url: `${BASE}/work?poster=1` })
+await send('Page.navigate', { url: `${BASE}/about?poster=1` })
 await sleep(2500)
-await evaluate(`document.querySelector('.work__tiles').scrollIntoView({ block: 'center' })`)
+await evaluate(`document.querySelector('.about__tiles').scrollIntoView({ block: 'center' })`)
 for (let i = 0; i < 40; i++) { if (await evaluate(`[...document.querySelectorAll('.tile__stage.is-interactive')].every((t) => t.dataset.posterReady)`)) break; await sleep(250) }
 const shots = await evaluate(`[...document.querySelectorAll('.tile__stage.is-interactive')].map((t) => [t.closest('figure').dataset.scene, t.querySelector('canvas')?.toDataURL('image/png')])`)
 await mkdir(new URL('../public/tiles', import.meta.url), { recursive: true })

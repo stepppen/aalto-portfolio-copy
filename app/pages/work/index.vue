@@ -1,22 +1,16 @@
 <script setup lang="ts">
-// Work: case studies as large cards → side projects and things I make (tiles) → earlier work.
+// Work: case studies as large cards → earlier work → side projects (concrete projects, as cards).
 const { t, lp, lang, col } = useLang()
 useSeoMeta({ title: () => t('work.title'), description: () => t('work.description') })
-const route = useRoute()
-const posterMode = computed(() => route.query.poster === '1')
 const { data } = await useAsyncData(`work-page-${lang.value}`, async () => {
-  const [work, tiles] = await Promise.all([
-    queryCollection(col('work')).order('stem', 'ASC').all(),
-    queryCollection(col('tiles')).order('stem', 'ASC').all(),
-  ])
-  return { work, tiles }
+  const work = await queryCollection(col('work')).order('stem', 'ASC').all()
+  return { work }
 })
 const slug = (p: { path: string }) => p.path.split('/').pop()
 const hrefOf = (p: { path: string; href?: string }) => lp(p.href ?? `/work/${slug(p)}`)
 const featured = computed(() => data.value?.work.filter((p) => p.tier === 'featured') ?? [])
-// Side projects without a tile yet (e.g. the drawing robot until its model exists) stay listed here.
-const tiled = computed(() => new Set(data.value?.tiles.map((t) => t.href).filter(Boolean)))
-const earlier = computed(() => data.value?.work.filter((p) => p.tier === 'archive' || (p.tier === 'side' && !tiled.value.has(`/work/${slug(p)}`))) ?? [])
+const earlier = computed(() => data.value?.work.filter((p) => p.tier === 'archive') ?? [])
+const side = computed(() => data.value?.work.filter((p) => p.tier === 'side') ?? [])
 const media = (p: { cover?: { src?: string } }) => (p.cover?.src && !p.cover.src.endsWith('.svg') ? p.cover.src : undefined)
 </script>
 
@@ -55,12 +49,6 @@ const media = (p: { cover?: { src?: string } }) => (p.cover?.src && !p.cover.src
       </ul>
     </section>
 
-    <section class="work__section" aria-labelledby="w-side">
-      <h2 id="w-side" class="t-statement reveal">{{ t('work.side') }}</h2>
-      <div class="work__tiles">
-        <SideTile v-for="t in data?.tiles" :key="t.id" :tile="t" :poster-mode="posterMode" />
-      </div>
-    </section>
 
     <section class="work__section" aria-labelledby="w-earlier">
       <h2 id="w-earlier" class="t-statement reveal">{{ t('work.earlier') }}</h2>
@@ -73,6 +61,24 @@ const media = (p: { cover?: { src?: string } }) => (p.cover?.src && !p.cover.src
           <span class="earlier__line muted">{{ p.outcome }}</span>
           <span class="earlier__role muted">{{ p.role }}</span>
           <span class="earlier__year t-mono muted">{{ p.year }}</span>
+        </li>
+      </ul>
+    </section>
+    <section class="work__section" aria-labelledby="w-side">
+      <h2 id="w-side" class="t-statement reveal">{{ t('work.side') }}</h2>
+      <ul class="work__cases work__cases--side hover-dim reveal" role="list">
+        <li v-for="p in side" :key="p.path" class="case" :class="{ 'case--light': !media(p) }">
+          <NuxtLink :to="hrefOf(p)" class="case__link">
+            <span class="case__media">
+              <NuxtImg v-if="media(p)" :src="media(p)!" :alt="p.cover?.alt ?? ''" sizes="sm:100vw md:50vw lg:33vw xl:440px" densities="x1 x2" format="webp" loading="lazy" />
+              <span v-else class="case__note"><Txt :text="p.cover?.todo" /></span>
+            </span>
+            <span class="case__text">
+              <span class="t-heading">{{ p.title }}<span class="sr-only">. </span></span>
+              <span class="muted">{{ p.outcome }}</span>
+              <span class="case__tags"><span class="pill">{{ p.year }}</span><span v-for="tg in p.tags ?? []" :key="tg" class="pill">{{ tg }}</span></span>
+            </span>
+          </NuxtLink>
         </li>
       </ul>
     </section>
@@ -116,11 +122,6 @@ const media = (p: { cover?: { src?: string } }) => (p.cover?.src && !p.cover.src
 
 .case__tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2); }
 
-.work__tiles {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-8) var(--space-3);
-}
 
 .earlier { padding: 0; list-style: none; border-bottom: 1px solid var(--line); }
 
@@ -155,7 +156,8 @@ const media = (p: { cover?: { src?: string } }) => (p.cover?.src && !p.cover.src
 @media (width >= 64rem) {
   .work__cases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
-  .work__tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-12) var(--layout-gutter); }
+  .work__cases--side { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
 
   .earlier__row {
     grid-template-columns: 4.5rem minmax(0, 1.2fr) minmax(0, 2fr) minmax(0, 1fr) auto;

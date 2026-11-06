@@ -67,7 +67,7 @@ export default defineContentConfig({
         category: z.string(),
         description: z.string(),
         instructions: z.string(),
-        scene: z.enum(['print', 'macropad', 'books', 'drawing', 'robot']).optional(),
+        scene: z.enum(['print', 'macropad', 'books', 'drawing', 'posters', 'robot']).optional(),
         poster: z.string().optional(),
         href: z.string().optional(),
         placeholder: z.string().optional(),
