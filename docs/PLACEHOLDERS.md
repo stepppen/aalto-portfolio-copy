@@ -13,7 +13,7 @@ Each has a "What I'd do differently" line waiting for your words.
 - **Kymu:** beta/pilot numbers you can share; how you designed the exergames.
 - **Calmea:** who used the platform you built; team; design-system scope; dashboard views and the hardest data-vis problem; confirm the data comes from the bed sensor; one lesson from building it. Product facts come from calmea.com; there are no screens, the cover is an illustration.
 - **Medical software:** outcome you can share; team; timeframe; tools; the standard(s) followed; an anonymised critical task; user groups and recruiting; session setup and scoring; what made the report useful.
-- **Alpha Factory:** team; the idea behind the glyph; confirm the Aiko and Medgate pages are yours to show. Visuals are from the Figma brand book and the live sub-site.
+- **Alpha Factory:** team; the idea behind the glyph. (Aiko and Medgate pages: confirmed OK to show.) Visuals are from the Figma brand book and the live sub-site.
 
 ## Notes: `content/notes/design-to-code.md`
 - [ ] Token tooling; what you built yourself vs. with developers; an anonymised contract example; what a Claude skill does in practice; workshop takeaways; numbers; "What I'd do differently".
