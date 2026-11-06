@@ -46,6 +46,7 @@ onMounted(update)
             sizes="sm:90vw md:90vw xl:1240px"
             densities="x1 x2"
             format="webp"
+            :quality="p === projects[0] ? 65 : undefined"
             :loading="p === projects[0] ? 'eager' : 'lazy'"
             :fetchpriority="p === projects[0] ? 'high' : undefined"
           />

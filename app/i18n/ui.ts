@@ -22,6 +22,7 @@ export const ui = {
     'confidential': 'confidential · no screens',
     'teaser.more': 'Read more',
     'how.title': 'How I work',
+    'highlights.title': 'a few highlights',
 
     'contact.to': 'To',
     'contact.name': 'Your name',
@@ -101,6 +102,7 @@ export const ui = {
     'confidential': 'vertraulich · keine Screens',
     'teaser.more': 'Mehr über mich',
     'how.title': 'Wie ich arbeite',
+    'highlights.title': 'ein paar Highlights',
 
     'contact.to': 'An',
     'contact.name': 'Dein Name',

@@ -27,6 +27,7 @@ useSeoMeta({ description: () => `${site.value.name}, ${t('site.tagline')}. ${sit
   <template v-if="page">
     <HomeProjectCards :projects="page.featured" />
     <HomeAboutTeaser :about="page.home.about" />
+    <HomeHighlights v-if="page.home.highlights?.length" :items="page.home.highlights" />
     <HomeHowIWork :items="page.home.howIWork" />
     <HomeContactComposer :email="site.email" :heading="site.contactIntro" />
   </template>

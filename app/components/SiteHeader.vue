@@ -23,6 +23,7 @@ const current = (to: string) => (route.path === lp(to) || route.path.startsWith(
             :lang="lang === 'de' ? 'en' : 'de-CH'"
           >
             <span class="lang__opt" :class="{ 'is-on': lang === 'en' }">en</span>
+            <span class="lang__slot keyslot" aria-hidden="true"><span class="lang__cap keycap" /></span>
             <span class="lang__opt" :class="{ 'is-on': lang === 'de' }">de</span>
             <span class="sr-only">: {{ t('lang.other') }}</span>
           </NuxtLink>
@@ -69,54 +70,44 @@ const current = (to: string) => (route.path === lp(to) || route.path.startsWith(
 
 .header__link:hover, .header__link[aria-current="page"] { color: var(--ink); }
 
-.header__nav { font-size: var(--text-small); align-items: center; }
+.header__nav { font-size: var(--text-small); align-items: center; white-space: nowrap; }
+
+@media (width < 30rem) {
+  .header__nav { font-size: var(--text-mono); gap: 0; }
+
+  .header__link { padding-inline: var(--space-1); }
+
+  .header__lang-item { margin-left: var(--space-1); }
+}
 
 .header__lang-item { margin-left: var(--space-2); }
 
-/* Language switch: a small pill with a sliding highlight under the current language. */
+/* Language switch: the same red-orange keycap as the read-mode switch, smaller.
+   The header stays mounted across pages, so the cap slides over when the language changes. */
 .lang {
-  position: relative;
-  display: inline-grid;
-  grid-template-columns: 1fr 1fr;
+  display: inline-flex;
   align-items: center;
+  gap: var(--space-2);
   min-height: var(--layout-tap);
-  padding: 0 var(--space-1);
   text-decoration: none;
-  isolation: isolate;
+  user-select: none;
 }
 
-.lang::before {
-  content: "";
-  position: absolute;
-  inset: 0.55rem var(--space-1);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-pill);
-  z-index: -2;
-}
+.lang__opt { color: var(--ink-muted); transition: color 200ms var(--motion-ease); }
 
-.lang::after {
-  content: "";
-  position: absolute;
-  top: 0.55rem;
-  bottom: 0.55rem;
-  left: var(--space-1);
-  width: calc(50% - var(--space-1));
-  border-radius: var(--radius-pill);
-  background: var(--ink);
-  z-index: -1;
-  transition: transform 320ms var(--motion-spring);
-}
+.lang__opt.is-on { color: var(--ink); }
 
-.lang--de::after { transform: translateX(100%); }
+.lang__slot { --slot-inset: 0; display: block; width: 2.6rem; height: 1.5rem; }
 
-.lang__opt {
-  padding: 0 0.7em;
-  color: var(--ink-muted);
-  text-align: center;
-  transition: color 200ms var(--motion-ease);
-}
+.lang__cap { top: 0.2rem; left: 0.2rem; width: 1.3rem; height: 0.95rem; }
 
-.lang__opt.is-on { color: var(--bg); }
+.lang--de .lang__cap { transform: translateX(0.9rem); }
+
+.lang:active .lang__cap { transform: translateY(1.5px); }
+
+.lang--de:active .lang__cap { transform: translate(0.9rem, 1.5px); }
 
 .lang:hover .lang__opt:not(.is-on) { color: var(--ink); }
+
+.lang:focus-visible { border-radius: var(--radius-pill); }
 </style>

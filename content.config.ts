@@ -120,6 +120,13 @@ export default defineContentConfig({
           paragraphs: z.array(z.string()),
         }),
         howIWork: z.array(z.object({ title: z.string(), text: z.string() })),
+        // Achievements under the about teaser: a big value, what it is, one line of detail.
+        highlights: z.array(z.object({
+          value: z.string(),
+          label: z.string(),
+          detail: z.string().optional(),
+          href: z.string().optional(),
+        })).optional(),
       }),
     }),
 

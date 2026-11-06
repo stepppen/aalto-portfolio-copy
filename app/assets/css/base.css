@@ -258,3 +258,47 @@ html:not([data-read="full"]) .rm-full-only { display: none; }
 
   .page-enter-from, .page-leave-to { filter: none; transform: none; }
 }
+
+/* ---------- Keycap toggles ---------- */
+/* A recessed pill-shaped slot with a red-orange keycap riding in it: lit top, shaded side
+   underneath, grip ridges. Used by the read-mode switch and the language switch.
+   The component positions and sizes the cap; the slot inset is set with --slot-inset. */
+.keyslot { position: relative; }
+
+.keyslot::before {
+  content: "";
+  position: absolute;
+  inset: var(--slot-inset, 0.3rem 0);
+  border-radius: var(--radius-pill);
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--ink) 14%, var(--panel)), var(--panel));
+  box-shadow:
+    inset 0 2px 3px color-mix(in srgb, var(--ink) 35%, transparent),
+    inset 0 -1px 0 var(--bg),
+    0 1px 0 var(--bg);
+}
+
+.keycap {
+  position: absolute;
+  border-radius: var(--radius-pill);
+  background:
+    repeating-linear-gradient(to right, transparent 0 3px, color-mix(in srgb, var(--switch-edge) 55%, transparent) 3px 4px) center / 0.7rem 45% no-repeat,
+    linear-gradient(to bottom, var(--switch-hi), var(--switch) 55%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--bg) 55%, transparent),
+    0 3px 0 var(--switch-edge),
+    0 5px 8px color-mix(in srgb, var(--ink) 30%, transparent);
+  transition:
+    transform var(--motion-dur-switch) var(--motion-spring),
+    box-shadow 90ms linear;
+}
+
+.keyslot:active .keycap {
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--bg) 40%, transparent),
+    0 1px 0 var(--switch-edge),
+    0 2px 3px color-mix(in srgb, var(--ink) 30%, transparent);
+}
+
+@media (forced-colors: active) {
+  .keycap { background: ButtonText; }
+}

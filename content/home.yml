@@ -6,6 +6,31 @@ about:
   statement: I design software for health and enterprise, and I like to build it too.
   paragraphs:
     - I work at OWT in Zurich and spend the rest of my week on Kymu, home physio for kids. In between I'm usually building something with my hands.
+# Achievements under the about teaser. Facts only; internal links get /de added automatically.
+highlights:
+  - value: CHF 160k+
+    label: raised for Kymu
+    detail: Non-dilutive funding from DIZH, Z-Kubator and Pro Helvetia.
+    href: /work/kymu
+  - value: SDA Award
+    label: Bachelor Design Award 2025
+    detail: For Kymu, my thesis with Elia Salerno at ZHdK.
+    href: https://www.zhdk.ch/en/news/sda-bachelor-award-2025-8549
+  - value: Dezeen
+    label: School Shows 2025
+    detail: Kymu featured in the ZHdK show.
+    href: https://www.dezeen.com/2025/06/15/emotions-installation-zurich-university-of-the-arts-schoolshows/
+  - value: Clinical pilot
+    label: with Lucerne Cantonal Hospital
+    detail: Kymu, tested with patients and physiotherapists.
+    href: /work/kymu
+  - value: ETH spin-off
+    label: Calmea
+    detail: The sleep platform I designed and then built full-stack.
+    href: /work/calmea
+  - value: On stage
+    label: KMU Innovationstag and Creative Economies Forum
+    detail: Pitched Kymu at both in 2026.
 # General, no real projects. Opinions, not facts.
 howIWork:
   - title: Watch, don't guess

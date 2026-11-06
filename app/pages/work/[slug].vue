@@ -25,7 +25,6 @@ const team = computed(() => {
   // A placeholder like "[TODO: team, e.g. …]" is one entry, not a comma-separated list.
   return !t ? [] : Array.isArray(t) ? t : /^\[TODO/i.test(t) ? [t] : t.split(/,\s*/)
 })
-const initials = (name: string) => name.replace(/\[.*?\]/g, '').trim().split(/\s+/).map((w) => w[0]).join('').slice(0, 2) || '?'
 const hasQuick = computed(() => !!entry.value.tldr)
 const intro = computed(() => entry.value.context?.split(/\n\s*\n/)[0] ?? entry.value.outcome)
 // The first context paragraph is already the intro at the top; Context continues from there.
@@ -55,11 +54,7 @@ useSeoMeta({
           <div v-if="team.length">
             <dt class="t-mono muted">{{ t('cs.team') }}</dt>
             <dd class="cs__team">
-              <span v-for="n in team" :key="n" class="cs__person">
-                <NuxtImg v-if="n === 'Stepan Vedunov'" src="/photos/stepan-1.jpg" alt="" class="cs__avatar" width="64" height="64" format="webp" />
-                <span v-else class="cs__avatar cs__avatar--initials" aria-hidden="true">{{ initials(n) }}</span>
-                <Txt :text="n" />
-              </span>
+              <span v-for="n in team" :key="n" class="cs__person"><Txt :text="n" /></span>
             </dd>
           </div>
           <div v-if="entry.services?.length">
@@ -185,16 +180,7 @@ useSeoMeta({
 
 .cs__person { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-small); }
 
-.cs__avatar { width: 2rem; height: 2rem; border-radius: 50%; object-fit: cover; }
 
-.cs__avatar--initials {
-  display: inline-grid;
-  place-items: center;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  font-family: var(--font-mono);
-  font-size: var(--text-mono);
-}
 
 .cs__pills { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 
