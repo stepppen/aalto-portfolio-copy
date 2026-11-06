@@ -202,11 +202,28 @@ html:not([data-read="full"]) .rm-full-only { display: none; }
 
 
 /* ---------- Motion ---------- */
-/* Hover: the thing under the pointer stays sharp, its neighbours fade and soften a little. */
+/* Hover: the thing under the pointer stays sharp, its neighbours fade and soften a little.
+   Timing is asymmetric so moving quickly from one card to the next never flickers:
+   - un-dimming waits 180ms, so crossing the gap between two cards doesn't brighten everything;
+   - the newly hovered item sharpens quickly, the others fade out slowly. */
 @media (hover: hover) {
-  .hover-dim > * { transition: opacity 240ms var(--motion-ease), filter 240ms var(--motion-ease); }
+  .hover-dim > * {
+    transition:
+      opacity 600ms var(--motion-soft) 180ms,
+      filter 600ms var(--motion-soft) 180ms;
+  }
 
-  .hover-dim:has(> :hover) > :not(:hover) { opacity: 0.45; filter: blur(1.5px); }
+  .hover-dim:has(> :hover) > :not(:hover) {
+    opacity: 0.45;
+    filter: blur(2px);
+    transition-duration: 450ms;
+    transition-delay: 0ms;
+  }
+
+  .hover-dim:has(> :hover) > :hover {
+    transition-duration: 260ms;
+    transition-delay: 0ms;
+  }
 }
 
 /* Scroll reveal: sections fade up out of a slight blur as they enter the viewport.
@@ -214,16 +231,18 @@ html:not([data-read="full"]) .rm-full-only { display: none; }
    on screen at load is drawn in its final state. Browsers without support just show it. */
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
+    /* Starts once the top edge is 10% of the screen above the bottom, done when it's halfway
+       up. Measured from the top edge, so tall lists and short headings feel the same. */
     .reveal {
-      animation: reveal linear both;
+      animation: reveal var(--motion-reveal) both;
       animation-timeline: view();
-      animation-range: entry 0% entry 55%;
+      animation-range: cover 10vh cover 50vh;
     }
   }
 }
 
 @keyframes reveal {
-  from { opacity: 0; filter: blur(8px); transform: translateY(1.5rem); }
+  from { opacity: 0; filter: blur(14px); transform: translateY(3rem) scale(0.98); }
   to { opacity: 1; filter: none; transform: none; }
 }
 
