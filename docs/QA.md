@@ -74,3 +74,10 @@ Stylelint fails on `text-transform: uppercase` and small caps. A scan of the bui
 ## Remaining placeholders
 
 See [PLACEHOLDERS.md](PLACEHOLDERS.md).
+
+## German version (`/de`)
+
+- Every page also exists under `/de` (Swiss High German, `lang="de-CH"`), with `hreflang` links between the two and 26 URLs in the sitemap.
+- axe: 0 issues on every German page at 390 and 1440 px.
+- Lighthouse mobile, median of 5: `/de` 95, `/de/about` 95 (same as `/about`). Other German pages, single run: 95–98.
+- Client-side switching checked headlessly: the header switch keeps you on the same page in the other language, and the nav, titles, `lang` and `hreflang` all follow.

@@ -1,11 +1,12 @@
 <script setup lang="ts">
 // Simple writing layout: a narrow reading column, giant title, date in mono.
 const slug = String(useRoute().params.slug)
-const { data: note } = await useAsyncData(`note-${slug}`, () => queryCollection('notes').path(`/notes/${slug}`).first())
+const { t, lp, lang, col } = useLang()
+const { data: note } = await useAsyncData(`note-${lang.value}-${slug}`, () => queryCollection(col('notes')).path(lp(`/notes/${slug}`)).first())
 if (!note.value) throw createError({ statusCode: 404, statusMessage: 'Not found', fatal: true })
 const date = computed(() => {
   const [y, m] = note.value!.date.split('-')
-  return m ? new Date(Date.UTC(+y, +m - 1)).toLocaleString('en-GB', { month: 'long', year: 'numeric', timeZone: 'UTC' }) : y
+  return m ? new Date(Date.UTC(+y, +m - 1)).toLocaleString(t('date.locale'), { month: 'long', year: 'numeric', timeZone: 'UTC' }) : y
 })
 useSeoMeta({
   title: () => note.value!.title,
@@ -18,7 +19,7 @@ useSeoMeta({
 <template>
   <article v-if="note" class="container note">
     <header class="note__head">
-      <p class="t-mono muted"><NuxtLink to="/notes" class="link-quiet">Notes</NuxtLink> · <time :datetime="note.date">{{ date }}</time></p>
+      <p class="t-mono muted"><NuxtLink :to="lp('/notes')" class="link-quiet">{{ t('notes.title') }}</NuxtLink> · <time :datetime="note.date">{{ date }}</time></p>
       <h1 class="t-title note__title">{{ note.title }}</h1>
       <p class="t-statement note__lead">{{ note.description }}</p>
     </header>

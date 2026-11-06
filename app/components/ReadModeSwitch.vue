@@ -6,6 +6,7 @@
 import type { ReadMode } from '~/composables/useReadMode'
 
 const { mode, set } = useReadMode()
+const { t } = useLang()
 const id = useId()
 const root = ref<HTMLElement>()
 
@@ -23,7 +24,7 @@ function choose(next: ReadMode) {
 
 <template>
   <div ref="root" class="rm">
-    <span :id="`${id}-quick`" class="rm__label" :class="{ 'is-on': mode === 'quick' }" @click="choose('quick')">Quick read</span>
+    <span :id="`${id}-quick`" class="rm__label" :class="{ 'is-on': mode === 'quick' }" @click="choose('quick')">{{ t('rm.quick') }}</span>
     <button
       type="button"
       role="switch"
@@ -34,7 +35,7 @@ function choose(next: ReadMode) {
     >
       <span class="rm__cap" aria-hidden="true" />
     </button>
-    <span :id="`${id}-full`" class="rm__label" :class="{ 'is-on': mode === 'full' }" @click="choose('full')">Full story</span>
+    <span :id="`${id}-full`" class="rm__label" :class="{ 'is-on': mode === 'full' }" @click="choose('full')">{{ t('rm.full') }}</span>
   </div>
 </template>
 

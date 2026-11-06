@@ -118,7 +118,9 @@ export function mountMacropad(host: HTMLElement, opts: MountOptions = {}) {
         else return false
         return true
       },
-      status: () => `LED ${on ? 'on' : 'off'}, ${['green', 'blue', 'yellow', 'pink'][hue]}`,
+      status: () => opts.lang === 'de'
+        ? `LED ${on ? 'an' : 'aus'}, ${['grün', 'blau', 'gelb', 'pink'][hue]}`
+        : `LED ${on ? 'on' : 'off'}, ${['green', 'blue', 'yellow', 'pink'][hue]}`,
       update(dt, idle) {
         t += dt
         let moving = false

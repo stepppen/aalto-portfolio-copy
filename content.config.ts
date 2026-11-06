@@ -7,10 +7,17 @@ const cover = z.object({
   todo: z.string().optional(),
 })
 
+// Every collection has a German twin (<name>_de) read from content/de/, same schema.
+type Def = Parameters<typeof defineCollection>[0]
+const pair = <N extends string>(name: N, def: Def) => ({
+  [name]: defineCollection(def),
+  [`${name}_de`]: defineCollection({ ...def, source: `de/${def.source as string}` } as Def),
+}) as Record<N | `${N}_de`, ReturnType<typeof defineCollection>>
+
 export default defineContentConfig({
   collections: {
     // Case studies. Featured ones are listed in file order (1., 2., …); archive ones come after.
-    work: defineCollection({
+    ...pair('work', {
       type: 'page',
       source: 'work/**/*.md',
       schema: z.object({
@@ -52,7 +59,7 @@ export default defineContentConfig({
 
 
     // Side projects and things I make: square tiles on /work. One YAML file per tile.
-    tiles: defineCollection({
+    ...pair('tiles', {
       type: 'data',
       source: 'tiles/*.yml',
       schema: z.object({
@@ -70,7 +77,7 @@ export default defineContentConfig({
     }),
 
     // Notes: simple writing. The nav shows "Notes" only once at least one exists.
-    notes: defineCollection({
+    ...pair('notes', {
       type: 'page',
       source: 'notes/*.md',
       schema: z.object({
@@ -81,7 +88,7 @@ export default defineContentConfig({
     }),
 
     // Standalone pages with an editable body (about).
-    pages: defineCollection({
+    ...pair('pages', {
       type: 'page',
       source: 'pages/*.md',
       schema: z.object({
@@ -103,7 +110,7 @@ export default defineContentConfig({
     }),
 
     // Home page copy: about teaser and "How I work".
-    home: defineCollection({
+    ...pair('home', {
       type: 'data',
       source: 'home.yml',
       schema: z.object({
@@ -116,7 +123,7 @@ export default defineContentConfig({
       }),
     }),
 
-    site: defineCollection({
+    ...pair('site', {
       type: 'data',
       source: 'site.yml',
       schema: z.object({

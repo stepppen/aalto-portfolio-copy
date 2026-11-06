@@ -3,14 +3,25 @@
 // one slides off and tucks in at the back. Placeholders render as blank prints with a todo.
 type Photo = { src?: string; alt?: string; todo?: string }
 const props = defineProps<{ photos: Photo[] }>()
+const { t } = useLang()
 
 const order = ref(props.photos.map((_, i) => i))
 const leaving = ref<number | null>(null)
 // Fixed, hand-picked tilts so the stack looks the same on every load (and on the server).
 const tilt = [-2.5, 3, -4, 2, -1.5, 4]
 const pos = (i: number) => order.value.indexOf(i)
+// Only the front photo loads with the page. The ones behind show as blank prints until the
+// page is idle or someone reaches for the stack, so they never compete with the first paint.
+const warm = ref(false)
+const warmUp = () => (warm.value = true)
+onMounted(() => {
+  const later = () => setTimeout(warmUp, 1500)
+  if (document.readyState === 'complete') later()
+  else window.addEventListener('load', later, { once: true })
+})
 
 function next() {
+  warmUp()
   if (leaving.value !== null || props.photos.length < 2) return
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches
   const top = order.value[0]
@@ -24,7 +35,7 @@ function next() {
 
 <template>
   <div class="stack">
-    <div class="stack__deck" @click="next">
+    <div class="stack__deck" @click="next" @pointerenter="warmUp" @focusin="warmUp">
       <figure
         v-for="(p, i) in photos"
         :key="i"
@@ -34,7 +45,7 @@ function next() {
         :aria-hidden="pos(i) === 0 ? undefined : 'true'"
       >
         <NuxtImg
-          v-if="p.src"
+          v-if="p.src && (i === 0 || warm)"
           :src="p.src"
           :alt="p.alt ?? ''"
           sizes="sm:80vw md:40vw xl:420px"
@@ -43,12 +54,12 @@ function next() {
           :preload="i === 0"
           :loading="i === 0 ? 'eager' : 'lazy'"
         />
-        <div v-else class="stack__todo"><Txt :text="p.todo" /></div>
+        <div v-else-if="!p.src" class="stack__todo"><Txt :text="p.todo" /></div>
       </figure>
     </div>
     <div class="stack__bar t-mono muted">
       <span aria-live="polite">{{ order[0] + 1 }} / {{ photos.length }}</span>
-      <button type="button" class="stack__next" @click="next">next photo<span aria-hidden="true">&nbsp;↻</span></button>
+      <button type="button" class="stack__next" @click="next">{{ t('photos.next') }}<span aria-hidden="true">&nbsp;↻</span></button>
     </div>
   </div>
 </template>

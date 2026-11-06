@@ -14,6 +14,7 @@ const scenes: Record<string, () => Promise<Mount>> = {
   books: () => import('~/tiles/books').then((m) => m.mountBooks),
 }
 
+const { t, lp, lang } = useLang()
 const stage = ref<HTMLElement>()
 const live = ref(false)
 const status = ref('')
@@ -42,6 +43,7 @@ onMounted(() => {
     unmount = mount(stage.value!, {
       poster: props.posterMode,
       data: props.tile as unknown as Record<string, unknown>,
+      lang: lang.value,
       onStatus: (t) => (status.value = t),
       onCaption: (t) => { caption.value = t; if (t) status.value = t },
       onReady: () => (live.value = true),
@@ -64,12 +66,12 @@ onMounted(() => {
     <component
       :is="tile.href && !tile.scene ? resolveComponent('NuxtLink') : 'div'"
       ref="stage"
-      :to="tile.href && !tile.scene ? tile.href : undefined"
+      :to="tile.href && !tile.scene ? lp(tile.href) : undefined"
       class="tile__stage"
       :class="{ 'is-live': live, 'is-interactive': !!tile.scene }"
       :tabindex="tile.scene ? 0 : undefined"
       :role="tile.scene ? 'group' : undefined"
-      :aria-label="tile.scene ? `${tile.title}, interactive 3D` : undefined"
+      :aria-label="tile.scene ? `${tile.title}, ${t('tile.interactive')}` : undefined"
       :aria-describedby="`${id}-desc`"
     >
       <NuxtImg
@@ -84,12 +86,12 @@ onMounted(() => {
         :fetchpriority="eager ? 'high' : undefined"
         :preload="eager ? { fetchPriority: 'high' } : undefined"
       />
-      <span v-if="tile.placeholder && tile.scene" class="tile__flag t-mono">placeholder model</span>
+      <span v-if="tile.placeholder && tile.scene" class="tile__flag t-mono">{{ t('tile.placeholder') }}</span>
       <p v-if="caption" class="tile__caption" aria-hidden="true">{{ caption }}</p>
     </component>
     <figcaption>
       <p class="tile__title">
-        <NuxtLink v-if="tile.href" :to="tile.href" class="tile__link">{{ tile.title }}</NuxtLink>
+        <NuxtLink v-if="tile.href" :to="lp(tile.href)" class="tile__link">{{ tile.title }}</NuxtLink>
         <template v-else>{{ tile.title }}</template>
       </p>
       <p class="tile__category">{{ tile.category }}</p>

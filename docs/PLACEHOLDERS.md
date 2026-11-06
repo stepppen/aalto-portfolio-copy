@@ -4,6 +4,8 @@ Everything below shows on the site as a dashed `todo:` tag. Edit the file named,
 In YAML, wrap any value containing `: ` or starting with `[` in quotes (`node scripts/check-content.mjs` checks this before every build).
 In Markdown bodies, a placeholder is written `:todo[what's missing]`.
 
+**Two languages:** every file has a German twin under `content/de/` (same name, same path). When you fill a placeholder, fill it in both. Placeholders stay in English in the German files on purpose.
+
 ## Home: `content/home.yml`, `content/work/*.md` (quote)
 - [ ] Check the slogan (`content/site.yml`), the about teaser and the five "How I work" texts. They're my drafts: general opinions, no project facts.
 - [ ] Collaborator quotes on the three featured cards: Kymu (Elia, and Elia's role), Calmea (someone at the lab), Alpha Factory (someone at OWT)

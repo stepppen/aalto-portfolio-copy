@@ -1,9 +1,10 @@
 /** Site settings (content/site.yml) and whether any note is published, shared by header/footer/pages. */
 export function useSite() {
-  return useAsyncData('site', async () => {
+  const { lang, col } = useLang()
+  return useAsyncData(() => `site-${lang.value}`, async () => {
     const [site, notes] = await Promise.all([
-      queryCollection('site').first(),
-      queryCollection('notes').where('draft', '=', false).count(),
+      queryCollection(col('site')).first(),
+      queryCollection(col('notes')).where('draft', '=', false).count(),
     ])
     return { site: site!, hasNotes: notes > 0 }
   })

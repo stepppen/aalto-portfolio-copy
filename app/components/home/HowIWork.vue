@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import type { HomeCollectionItem } from '@nuxt/content'
 defineProps<{ items: HomeCollectionItem['howIWork'] }>()
+const { t } = useLang()
 </script>
 
 <template>
   <section class="container section how" aria-labelledby="how-title">
-    <h2 id="how-title" class="t-statement reveal">How I work</h2>
+    <h2 id="how-title" class="t-statement reveal">{{ t('how.title') }}</h2>
     <ol class="how__list hover-dim reveal" role="list">
       <li v-for="(it, i) in items" :key="it.title" class="how__item">
         <span class="how__n t-mono muted" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>

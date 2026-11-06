@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { data } = await useSite()
+const { t } = useLang()
 const year = new Date().getFullYear()
 </script>
 
@@ -9,9 +10,9 @@ const year = new Date().getFullYear()
     <div class="footer__row">
       <p class="t-mono muted">© {{ year }} Stepan Vedunov</p>
 
-      <ul class="footer__icons" role="list" aria-label="Elsewhere">
+      <ul class="footer__icons" role="list" :aria-label="t('footer.elsewhere')">
         <li>
-          <a :href="`mailto:${data?.site.email}`" aria-label="Email">
+          <a :href="`mailto:${data?.site.email}`" :aria-label="t('footer.email')">
             <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3.5 6 8.5 7 8.5-7" /></svg>
           </a>
         </li>

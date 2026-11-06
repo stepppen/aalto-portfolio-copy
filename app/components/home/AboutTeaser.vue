@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { HomeCollectionItem } from '@nuxt/content'
 defineProps<{ about: HomeCollectionItem['about'] }>()
+const { t, lp } = useLang()
 </script>
 
 <template>
@@ -18,7 +19,7 @@ defineProps<{ about: HomeCollectionItem['about'] }>()
     <div class="about__text">
       <h2 id="about-title" class="t-statement">{{ about.statement }}</h2>
       <p v-for="(para, i) in about.paragraphs" :key="i">{{ para }}</p>
-      <NuxtLink to="/about" class="about__more link-quiet">Read more<span aria-hidden="true">&nbsp;›</span></NuxtLink>
+      <NuxtLink :to="lp('/about')" class="about__more link-quiet">{{ t('teaser.more') }}<span aria-hidden="true">&nbsp;›</span></NuxtLink>
     </div>
   </section>
 </template>

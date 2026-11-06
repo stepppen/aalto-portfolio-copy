@@ -5,15 +5,16 @@
 // outcome, quote, what I'd do differently] → next project.
 const slug = String(useRoute().params.slug)
 const slugOf = (p: { path: string }) => p.path.split('/').pop()
+const { t, lp, lang, col } = useLang()
 
-const { data } = await useAsyncData(`work-${slug}`, async () => {
-  const all = await queryCollection('work').order('stem', 'ASC').all()
+const { data } = await useAsyncData(`work-${lang.value}-${slug}`, async () => {
+  const all = await queryCollection(col('work')).order('stem', 'ASC').all()
   // Featured first (file order), then earlier work, then side projects.
   const ordered = ['featured', 'archive', 'side'].flatMap((t) => all.filter((p) => p.tier === t))
   const i = ordered.findIndex((p) => slugOf(p) === slug)
   if (i < 0) return null
   const next = ordered[(i + 1) % ordered.length]
-  return { entry: ordered[i], next: { title: next.title, href: next.href ?? `/work/${slugOf(next)}` } }
+  return { entry: ordered[i], next: { title: next.title, href: lp(next.href ?? `/work/${slugOf(next)}`) } }
 })
 if (!data.value) throw createError({ statusCode: 404, statusMessage: 'Not found', fatal: true })
 
@@ -21,7 +22,8 @@ const entry = computed(() => data.value!.entry)
 const hero = computed(() => (entry.value.confidential ? undefined : entry.value.hero ?? entry.value.cover))
 const team = computed(() => {
   const t = entry.value.team
-  return !t ? [] : Array.isArray(t) ? t : t.split(/,\s*/)
+  // A placeholder like "[TODO: team, e.g. …]" is one entry, not a comma-separated list.
+  return !t ? [] : Array.isArray(t) ? t : /^\[TODO/i.test(t) ? [t] : t.split(/,\s*/)
 })
 const initials = (name: string) => name.replace(/\[.*?\]/g, '').trim().split(/\s+/).map((w) => w[0]).join('').slice(0, 2) || '?'
 const hasQuick = computed(() => !!entry.value.tldr)
@@ -51,7 +53,7 @@ useSeoMeta({
         <p class="cs__lead"><Txt :text="intro" /></p>
         <dl class="cs__spec">
           <div v-if="team.length">
-            <dt class="t-mono muted">Team</dt>
+            <dt class="t-mono muted">{{ t('cs.team') }}</dt>
             <dd class="cs__team">
               <span v-for="n in team" :key="n" class="cs__person">
                 <NuxtImg v-if="n === 'Stepan Vedunov'" src="/photos/stepan-1.jpg" alt="" class="cs__avatar" width="64" height="64" format="webp" />
@@ -61,15 +63,15 @@ useSeoMeta({
             </dd>
           </div>
           <div v-if="entry.services?.length">
-            <dt class="t-mono muted">Services</dt>
+            <dt class="t-mono muted">{{ t('cs.services') }}</dt>
             <dd class="cs__pills"><span v-for="s in entry.services" :key="s" class="pill">{{ s }}</span></dd>
           </div>
           <div>
-            <dt class="t-mono muted">Date</dt>
+            <dt class="t-mono muted">{{ t('cs.date') }}</dt>
             <dd><Txt :text="entry.date ?? entry.timeframe ?? entry.year" /></dd>
           </div>
           <div>
-            <dt class="t-mono muted">Role</dt>
+            <dt class="t-mono muted">{{ t('cs.role') }}</dt>
             <dd>{{ entry.role }}<template v-if="entry.org">, {{ entry.org }}</template></dd>
           </div>
         </dl>
@@ -81,12 +83,12 @@ useSeoMeta({
     </header>
 
     <section v-if="entry.tldr" class="container cs__tldr" aria-labelledby="cs-tldr">
-      <h2 id="cs-tldr" class="t-heading">TL;DR</h2>
+      <h2 id="cs-tldr" class="t-heading">{{ t('cs.tldr') }}</h2>
       <dl>
-        <div><dt class="muted">Problem</dt><dd><Txt :text="entry.tldr.problem" /></dd></div>
-        <div><dt class="muted">My role</dt><dd><Txt :text="entry.tldr.role" /></dd></div>
-        <div><dt class="muted">What I did</dt><dd><Txt :text="entry.tldr.did" /></dd></div>
-        <div><dt class="muted">Outcome</dt><dd><Txt :text="entry.tldr.outcome" /></dd></div>
+        <div><dt class="muted">{{ t('cs.problem') }}</dt><dd><Txt :text="entry.tldr.problem" /></dd></div>
+        <div><dt class="muted">{{ t('cs.myRole') }}</dt><dd><Txt :text="entry.tldr.role" /></dd></div>
+        <div><dt class="muted">{{ t('cs.did') }}</dt><dd><Txt :text="entry.tldr.did" /></dd></div>
+        <div><dt class="muted">{{ t('cs.outcome') }}</dt><dd><Txt :text="entry.tldr.outcome" /></dd></div>
       </dl>
     </section>
 
@@ -103,32 +105,32 @@ useSeoMeta({
     </div>
 
     <!-- Quick read: the 2–3 visuals that matter, then a way into the full story. -->
-    <section v-if="hasQuick" class="container cs__key rm-quick-only" aria-label="Key visuals">
+    <section v-if="hasQuick" class="container cs__key rm-quick-only" :aria-label="t('cs.keyVisuals')">
       <CsMedia v-for="(v, i) in entry.keyVisuals ?? []" :key="i" :src="v.src" :alt="v.alt" :caption="v.caption" :todo="clean(v.todo)" />
     </section>
 
     <!-- Between the two versions, in both modes: the switch stays put when flipped, and the
          full story opens below it. -->
     <div v-if="hasQuick" class="container cs__more">
-      <p class="t-mono muted"><span class="rm-quick-only">that's the short version</span><span class="rm-full-only">the full story, from here</span></p>
+      <p class="t-mono muted"><span class="rm-quick-only">{{ t('cs.short') }}</span><span class="rm-full-only">{{ t('cs.fromHere') }}</span></p>
       <ReadModeSwitch />
     </div>
 
     <!-- Full story -->
     <div class="container cs__full">
       <section v-if="moreContext.length" class="cs-section rm-extra" aria-labelledby="cs-context">
-        <h2 id="cs-context" class="t-heading">Context</h2>
+        <h2 id="cs-context" class="t-heading">{{ t('cs.context') }}</h2>
         <div class="cs__prose"><p v-for="(para, i) in moreContext" :key="i"><Txt :text="para" /></p></div>
       </section>
       <section v-if="entry.myRole?.length" class="cs-section rm-extra" aria-labelledby="cs-role">
-        <h2 id="cs-role" class="t-heading">My role</h2>
+        <h2 id="cs-role" class="t-heading">{{ t('cs.myRole') }}</h2>
         <ul class="cs__prose cs__role"><li v-for="(r, i) in entry.myRole" :key="i"><Txt :text="r" /></li></ul>
       </section>
 
       <ContentRenderer :value="entry" class="cs__body" />
 
       <section v-if="entry.results" class="cs-section rm-extra" aria-labelledby="cs-outcome">
-        <h2 id="cs-outcome" class="t-heading">Outcome</h2>
+        <h2 id="cs-outcome" class="t-heading">{{ t('cs.outcome') }}</h2>
         <div class="cs__prose">
           <dl v-if="entry.results.stats?.length" class="cs__stats">
             <div v-for="s in entry.results.stats" :key="s.label">
@@ -141,7 +143,7 @@ useSeoMeta({
       </section>
 
       <section v-if="entry.quote" class="cs-section rm-extra" aria-labelledby="cs-quote">
-        <h2 id="cs-quote" class="t-heading">In their words</h2>
+        <h2 id="cs-quote" class="t-heading">{{ t('cs.quote') }}</h2>
         <figure class="cs__quote">
           <blockquote class="t-statement"><Txt :text="isTodo(entry.quote.text) ? entry.quote.text : `“${entry.quote.text}”`" /></blockquote>
           <figcaption class="muted"><Txt :text="entry.quote.name" /><template v-if="entry.quote.role">, <Txt :text="entry.quote.role" /></template></figcaption>
@@ -149,15 +151,15 @@ useSeoMeta({
       </section>
 
       <section v-if="entry.reflection" class="cs-section rm-extra" aria-labelledby="cs-reflection">
-        <h2 id="cs-reflection" class="t-heading">What I'd do differently</h2>
+        <h2 id="cs-reflection" class="t-heading">{{ t('cs.reflection') }}</h2>
         <p class="cs__prose t-heading"><Txt :text="entry.reflection" /></p>
       </section>
     </div>
 
-    <nav class="container cs__next" aria-label="Next project">
+    <nav class="container cs__next" :aria-label="t('cs.nextNav')">
       <hr class="hairline">
       <NuxtLink :to="data.next.href" class="cs__next-link">
-        <span class="muted">Next<span class="sr-only">: </span></span>
+        <span class="muted">{{ t('cs.next') }}<span class="sr-only">: </span></span>
         <span class="t-statement">{{ data.next.title }}<span aria-hidden="true">&nbsp;→</span></span>
       </NuxtLink>
     </nav>

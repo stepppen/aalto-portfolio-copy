@@ -41,6 +41,8 @@ export interface MountOptions {
   onCaption?: (text: string | null) => void
   /** Scene data from the tile's YAML (e.g. the list of books). */
   data?: Record<string, unknown>
+  /** Page language, for screen-reader status text. */
+  lang?: 'en' | 'de'
 }
 
 export interface TileContext {

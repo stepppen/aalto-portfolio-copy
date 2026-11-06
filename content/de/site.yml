@@ -1,0 +1,16 @@
+# Seitenweite Texte, deutsch. E-Mail und Links wie in content/site.yml.
+name: Stepan Vedunov
+positioning: Ich gestalte Produkte und bleibe, bis sie gebaut sind.
+currently:
+  - label: OWT
+    detail: 80%
+    href: https://owt.swiss
+  - label: Kymu
+    detail: 20%
+    href: https://kymu.ch
+education: BA Interaction Design, ZHdK
+email: stepan.vedunov@outlook.com
+linkedin: https://www.linkedin.com/in/stepan-v-0242b2226/
+github: https://github.com/stepppen
+cv: /Stepan_Vedunov_CV.pdf
+contactIntro: Ein kniffliges Problem? Schick es mir.

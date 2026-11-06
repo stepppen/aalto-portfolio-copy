@@ -1,0 +1,7 @@
+title: Spiralvase
+category: 3D-Druck
+description: Eine Vase, in einer einzigen durchgehenden Spirale gedruckt, die sich Schicht für Schicht aufbaut.
+instructions: "Nach oben oder unten ziehen fährt durch die Schichten, seitwärts ziehen dreht sie. Auf dem Handy: gedrückt halten, dann ziehen. Mit der Tastatur: Pfeiltasten; Pos1 und Ende leeren oder füllen sie."
+scene: print
+poster: /tiles/print.webp
+placeholder: "[TODO: my real print as STL or glTF, and its filament colour]"

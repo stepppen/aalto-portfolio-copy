@@ -1,0 +1,19 @@
+# Startseite, deutsch. Entwürfe: umschreiben, was nicht nach dir klingt.
+about:
+  photo:
+    src: /photos/stepan-1.jpg
+    alt: Stepan mit verschränkten Armen, in einem dunkelblauen Pullover vor einer weissen Wand und einer Pflanze.
+  statement: Ich gestalte Software für Gesundheit und Unternehmen, und ich baue sie gern auch selbst.
+  paragraphs:
+    - Ich arbeite bei OWT in Zürich und verbringe den Rest meiner Woche mit Kymu, Physiotherapie für Kinder zu Hause. Dazwischen baue ich meistens irgendetwas mit den Händen.
+howIWork:
+  - title: Hinschauen statt raten
+    text: Fünf Leute mit einem groben Prototyp schlagen fünf Meetings über einen perfekten. Ich lasse mich lieber früh überraschen, als in einem Slide-Deck recht zu haben.
+  - title: Echte Prototypen
+    text: Etwas Klickbares schlägt ein schönes Bild. Braucht die Idee echte Daten, ein echtes Gerät oder ein bisschen Code, dann baue ich es.
+  - title: Der Handoff ist nicht die Ziellinie
+    text: Design ist fertig, wenn es live ist. Ich bleibe nah an der Entwicklung, bis das, was live ist, dem entspricht, was wir gemeint haben, bis zum letzten Pixel und Sonderfall.
+  - title: Langweilig in der Wartung
+    text: Tokens, Komponenten und Namen, die auch die nächste Person versteht. Mein zukünftiges Ich sagt danke, und die Entwicklerin, die die Datei um 18 Uhr öffnet, auch.
+  - title: Platz zum Spielen
+    text: Gute Ideen tauchen oft auf, während ich löte, drucke oder etwas Nutzloses skizziere. Darum nehme ich mir Zeit für nutzlose Dinge.

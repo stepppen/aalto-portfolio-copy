@@ -1,14 +1,15 @@
 <script setup lang="ts">
 // About: a stack of photos left, a short story right, then experience, recognition (as cards
 // with photos and links) and what I do outside work.
-const { data: page } = await useAsyncData('about', () => queryCollection('pages').path('/pages/about').first())
+const { t, lp, lang, col } = useLang()
+const { data: page } = await useAsyncData(`about-${lang.value}`, () => queryCollection(col('pages')).path(lang.value === 'de' ? '/de/pages/about' : '/pages/about').first())
 if (!page.value) throw createError({ statusCode: 404, statusMessage: 'Not found', fatal: true })
-useSeoMeta({ title: 'About', description: () => page.value!.description, ogDescription: () => page.value!.description })
+useSeoMeta({ title: () => t('about.title'), description: () => page.value!.description, ogDescription: () => page.value!.description })
 </script>
 
 <template>
   <article v-if="page" class="container about">
-    <h1 class="t-title">About</h1>
+    <h1 class="t-title">{{ t('about.title') }}</h1>
 
     <div class="about__top">
       <PhotoStack :photos="page.photos" />
@@ -20,7 +21,7 @@ useSeoMeta({ title: 'About', description: () => page.value!.description, ogDescr
     </div>
 
     <section class="split about__block reveal" aria-labelledby="a-exp">
-      <h2 id="a-exp" class="t-heading">Experience</h2>
+      <h2 id="a-exp" class="t-heading">{{ t('about.experience') }}</h2>
       <ol class="about__list about__list--exp hover-dim" role="list">
         <li v-for="e in page.experience" :key="e.what + e.when">
           <span class="t-mono muted about__when">{{ e.when }}</span>
@@ -30,7 +31,7 @@ useSeoMeta({ title: 'About', description: () => page.value!.description, ogDescr
     </section>
 
     <section class="about__block about__block--wide reveal" aria-labelledby="a-rec">
-      <h2 id="a-rec" class="t-heading">Recognition</h2>
+      <h2 id="a-rec" class="t-heading">{{ t('about.recognition') }}</h2>
       <ul class="rec hover-dim" role="list">
         <li v-for="r in page.recognition" :key="r.title" class="rec__item">
           <component :is="r.href ? 'a' : 'div'" :href="r.href" :rel="r.href ? 'noopener' : undefined" class="rec__card">
@@ -49,9 +50,9 @@ useSeoMeta({ title: 'About', description: () => page.value!.description, ogDescr
     </section>
 
     <section class="split about__block reveal" aria-labelledby="a-out">
-      <h2 id="a-out" class="t-heading">Outside work</h2>
+      <h2 id="a-out" class="t-heading">{{ t('about.outside') }}</h2>
       <div class="about__out">
-        <p>{{ page.outside.text }} <NuxtLink to="/work#w-side">Play with them<span aria-hidden="true">&nbsp;›</span></NuxtLink></p>
+        <p>{{ page.outside.text }} <NuxtLink :to="lp('/work') + '#w-side'">{{ t('about.play') }}<span aria-hidden="true">&nbsp;›</span></NuxtLink></p>
         <div class="about__photos">
           <figure v-for="(p, i) in page.outside.photos" :key="i">
             <NuxtImg v-if="p.src" :src="p.src" :alt="p.alt ?? ''" sizes="sm:50vw xl:320px" densities="x1 x2" format="webp" loading="lazy" />

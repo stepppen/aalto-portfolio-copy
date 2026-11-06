@@ -74,6 +74,12 @@ export default defineNuxtConfig({
   },
 
   hooks: {
+    // German pages: every route also exists under /de, rendered by the same page component.
+    // Pages read the language from the URL (useLang) and query the *_de content collections.
+    'pages:extend'(pages) {
+      const de = pages.map((p) => ({ ...p, name: `de-${String(p.name)}`, path: p.path === '/' ? '/de' : `/de${p.path}` }))
+      pages.push(...de)
+    },
     // three.js and the tile scenes download only when a tile actually starts, never as a
     // page-load prefetch: on a phone that prefetch competed with the first image for bandwidth.
     'build:manifest'(manifest) {
@@ -97,7 +103,7 @@ export default defineNuxtConfig({
     // so list them explicitly: this emits the redirect pages for every old URL.
     prerender: {
       crawlLinks: true,
-      routes: ['/', ...['kymu', 'vr-learning-tool', 'volkswagen-hmi', 'llm-drawing-robot', 'ticket-machine-zvv'].flatMap((s) => [`/projects/${s}`, `/work/${s}`])],
+      routes: ['/', '/de', ...['kymu', 'vr-learning-tool', 'volkswagen-hmi', 'llm-drawing-robot', 'ticket-machine-zvv'].flatMap((s) => [`/projects/${s}`, `/work/${s}`])],
     },
   },
 })

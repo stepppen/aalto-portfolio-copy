@@ -3,23 +3,24 @@
 // who he is (about teaser) → how he works → how to reach him (composer).
 const { data } = await useSite()
 const site = computed(() => data.value!.site)
-const { data: page } = await useAsyncData('home', async () => {
+const { t, lp, lang, col } = useLang()
+const { data: page } = await useAsyncData(`home-${lang.value}`, async () => {
   const [home, work] = await Promise.all([
-    queryCollection('home').first(),
-    queryCollection('work').where('tier', '=', 'featured').order('stem', 'ASC').all(),
+    queryCollection(col('home')).first(),
+    queryCollection(col('work')).where('tier', '=', 'featured').order('stem', 'ASC').all(),
   ])
   return { home: home!, featured: work }
 })
-useSeoMeta({ description: () => `${site.value.name}, product designer in Zurich. ${site.value.positioning}` })
+useSeoMeta({ description: () => `${site.value.name}, ${t('site.tagline')}. ${site.value.positioning}` })
 </script>
 
 <template>
   <section class="container hero" aria-labelledby="hero-title">
-    <p class="t-mono muted">product designer · Zurich</p>
+    <p class="t-mono muted">{{ t('hero.role') }}</p>
     <h1 id="hero-title" class="t-display hero__title">{{ site.positioning }}<span class="hero__cursor" aria-hidden="true" /></h1>
     <p class="hero__proof t-mono">
-      <a href="#contact" class="hero__mail">email me<span aria-hidden="true">&nbsp;›</span></a>
-      <NuxtLink to="/work" class="hero__mail link-quiet">see the work<span aria-hidden="true">&nbsp;›</span></NuxtLink>
+      <a href="#contact" class="hero__mail">{{ t('hero.email') }}<span aria-hidden="true">&nbsp;›</span></a>
+      <NuxtLink :to="lp('/work')" class="hero__mail link-quiet">{{ t('hero.work') }}<span aria-hidden="true">&nbsp;›</span></NuxtLink>
     </p>
   </section>
 

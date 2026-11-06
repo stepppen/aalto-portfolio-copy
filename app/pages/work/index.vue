@@ -1,17 +1,18 @@
 <script setup lang="ts">
 // Work: case studies as large cards → side projects and things I make (tiles) → earlier work.
-useSeoMeta({ title: 'Work', description: 'Case studies, side projects and earlier work by Stepan Vedunov, product designer in Zurich.' })
+const { t, lp, lang, col } = useLang()
+useSeoMeta({ title: () => t('work.title'), description: () => t('work.description') })
 const route = useRoute()
 const posterMode = computed(() => route.query.poster === '1')
-const { data } = await useAsyncData('work-page', async () => {
+const { data } = await useAsyncData(`work-page-${lang.value}`, async () => {
   const [work, tiles] = await Promise.all([
-    queryCollection('work').order('stem', 'ASC').all(),
-    queryCollection('tiles').order('stem', 'ASC').all(),
+    queryCollection(col('work')).order('stem', 'ASC').all(),
+    queryCollection(col('tiles')).order('stem', 'ASC').all(),
   ])
   return { work, tiles }
 })
 const slug = (p: { path: string }) => p.path.split('/').pop()
-const hrefOf = (p: { path: string; href?: string }) => p.href ?? `/work/${slug(p)}`
+const hrefOf = (p: { path: string; href?: string }) => lp(p.href ?? `/work/${slug(p)}`)
 const featured = computed(() => data.value?.work.filter((p) => p.tier === 'featured') ?? [])
 // Side projects without a tile yet (e.g. the drawing robot until its model exists) stay listed here.
 const tiled = computed(() => new Set(data.value?.tiles.map((t) => t.href).filter(Boolean)))
@@ -21,10 +22,10 @@ const media = (p: { cover?: { src?: string } }) => (p.cover?.src && !p.cover.src
 
 <template>
   <div class="container work">
-    <h1 class="t-title">Work</h1>
+    <h1 class="t-title">{{ t('work.title') }}</h1>
 
     <section class="work__section" aria-labelledby="w-cases">
-      <h2 id="w-cases" class="t-statement">Case studies</h2>
+      <h2 id="w-cases" class="t-statement">{{ t('work.cases') }}</h2>
       <ul class="work__cases hover-dim reveal" role="list">
         <li v-for="(p, i) in featured" :key="p.path" class="case" :class="{ 'case--dark': p.confidential, 'case--light': !p.confidential && !media(p) }">
           <NuxtLink :to="hrefOf(p)" class="case__link">
@@ -41,7 +42,7 @@ const media = (p: { cover?: { src?: string } }) => (p.cover?.src && !p.cover.src
                 :preload="i === 0 ? { fetchPriority: 'high' } : undefined"
               />
               <img v-else-if="p.cover?.src" :src="p.cover.src" :alt="p.cover.alt ?? ''" class="case__svg" loading="lazy">
-              <span v-else-if="p.confidential" class="case__note t-mono">confidential · no screens</span>
+              <span v-else-if="p.confidential" class="case__note t-mono">{{ t('confidential') }}</span>
               <span v-else class="case__note"><Txt :text="p.cover?.todo" /></span>
             </span>
             <span class="case__text">
@@ -55,14 +56,14 @@ const media = (p: { cover?: { src?: string } }) => (p.cover?.src && !p.cover.src
     </section>
 
     <section class="work__section" aria-labelledby="w-side">
-      <h2 id="w-side" class="t-statement reveal">Side projects and things I make</h2>
+      <h2 id="w-side" class="t-statement reveal">{{ t('work.side') }}</h2>
       <div class="work__tiles">
         <SideTile v-for="t in data?.tiles" :key="t.id" :tile="t" :poster-mode="posterMode" />
       </div>
     </section>
 
     <section class="work__section" aria-labelledby="w-earlier">
-      <h2 id="w-earlier" class="t-statement reveal">Earlier work</h2>
+      <h2 id="w-earlier" class="t-statement reveal">{{ t('work.earlier') }}</h2>
       <ul class="earlier hover-dim reveal" role="list">
         <li v-for="p in earlier" :key="p.path" class="earlier__row">
           <span class="earlier__thumb">

@@ -7,6 +7,7 @@ import type { WorkCollectionItem } from '@nuxt/content'
 
 defineProps<{ projects: WorkCollectionItem[] }>()
 const slug = (p: WorkCollectionItem) => p.path.split('/').pop()
+const { t, lp } = useLang()
 const isTodo = (s?: string) => !s || /^\[TODO/i.test(s)
 // Cards with a photo get white text on a scrim; confidential/missing/svg media get the light variant.
 const variant = (p: WorkCollectionItem) =>
@@ -33,10 +34,10 @@ onMounted(update)
 
 <template>
   <section class="cards" aria-labelledby="cards-title">
-    <h2 id="cards-title" class="sr-only">Selected work</h2>
+    <h2 id="cards-title" class="sr-only">{{ t('cards.title') }}</h2>
     <ul ref="row" class="cards__row hover-dim" role="list" @scroll.passive="update">
       <li v-for="p in projects" :key="p.path" class="card" :class="`card--${variant(p)}`">
-        <NuxtLink :to="p.href ?? `/work/${slug(p)}`" class="card__link">
+        <NuxtLink :to="lp(p.href ?? `/work/${slug(p)}`)" class="card__link">
           <NuxtImg
             v-if="variant(p) === 'photo'"
             :src="p.cover!.src"
@@ -55,7 +56,7 @@ onMounted(update)
             class="card__media card__media--contain"
             loading="lazy"
           >
-          <p v-else-if="p.confidential" class="card__confidential t-mono">confidential · no screens</p>
+          <p v-else-if="p.confidential" class="card__confidential t-mono">{{ t('confidential') }}</p>
           <p v-else class="card__missing"><Txt :text="p.cover?.todo" /></p>
 
           <span class="card__body">
@@ -73,10 +74,10 @@ onMounted(update)
       </li>
     </ul>
     <div class="cards__nav">
-      <button type="button" class="cards__btn" :disabled="atStart" aria-label="Previous project" @click="step(-1)">
+      <button type="button" class="cards__btn" :disabled="atStart" :aria-label="t('cards.prev')" @click="step(-1)">
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m14.5 6-6 6 6 6" /></svg>
       </button>
-      <button type="button" class="cards__btn" :disabled="atEnd" aria-label="Next project" @click="step(1)">
+      <button type="button" class="cards__btn" :disabled="atEnd" :aria-label="t('cards.next')" @click="step(1)">
         <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m9.5 6 6 6-6 6" /></svg>
       </button>
     </div>

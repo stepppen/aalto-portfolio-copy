@@ -1,15 +1,16 @@
 <script setup lang="ts">
-useSeoMeta({ title: 'Notes', description: 'Writing by Stepan Vedunov on design, systems and code.' })
-const { data: notes } = await useAsyncData('notes', () => queryCollection('notes').where('draft', '=', false).order('date', 'DESC').all())
+const { t, lang, col } = useLang()
+useSeoMeta({ title: () => t('notes.title'), description: () => t('notes.description') })
+const { data: notes } = await useAsyncData(`notes-${lang.value}`, () => queryCollection(col('notes')).where('draft', '=', false).order('date', 'DESC').all())
 const fmt = (d: string) => {
   const [y, m] = d.split('-')
-  return m ? new Date(Date.UTC(+y, +m - 1)).toLocaleString('en-GB', { month: 'long', year: 'numeric', timeZone: 'UTC' }) : y
+  return m ? new Date(Date.UTC(+y, +m - 1)).toLocaleString(t('date.locale'), { month: 'long', year: 'numeric', timeZone: 'UTC' }) : y
 }
 </script>
 
 <template>
   <section class="container section notes">
-    <h1 class="t-title">Notes</h1>
+    <h1 class="t-title">{{ t('notes.title') }}</h1>
     <ol class="notes__list" role="list">
       <li v-for="n in notes" :key="n.path" class="notes__item">
         <NuxtLink :to="n.path" class="notes__link">

@@ -3,6 +3,7 @@
 // filled in (mailto:), no backend. "From" became "Your name": a mailto link can't set the sender.
 // Without JS the form still submits to mailto: with subject and body.
 const props = defineProps<{ email: string; heading: string }>()
+const { t } = useLang()
 const name = ref('')
 const subject = ref('')
 const message = ref('')
@@ -20,15 +21,15 @@ const href = computed(() => {
 function send(e: Event) {
   e.preventDefault()
   window.location.href = href.value
-  status.value = 'Opening your mail app…'
+  status.value = t('contact.opening')
 }
 
 async function copy() {
   try {
     await navigator.clipboard.writeText(props.email)
-    status.value = 'Address copied.'
+    status.value = t('contact.copied')
   } catch {
-    status.value = "Couldn't copy. Select the address instead."
+    status.value = t('contact.copyFail')
   }
   setTimeout(() => (status.value = ''), 2500)
 }
@@ -39,25 +40,25 @@ async function copy() {
     <h2 id="contact-title" class="t-display contact__title reveal">{{ heading }}</h2>
     <form class="composer reveal" :action="`mailto:${email}`" method="get" enctype="text/plain" @submit="send">
       <div class="composer__row">
-        <span class="composer__label t-mono muted" aria-hidden="true">To</span>
+        <span class="composer__label t-mono muted" aria-hidden="true">{{ t('contact.to') }}</span>
         <a :href="`mailto:${email}`" class="composer__to">{{ email }}</a>
-        <button type="button" class="composer__copy t-mono" @click="copy">Copy<span class="sr-only"> email address</span></button>
+        <button type="button" class="composer__copy t-mono" @click="copy">{{ t('contact.copy') }}<span class="sr-only">{{ t('contact.copyLabel') }}</span></button>
       </div>
       <div class="composer__row">
-        <label for="c-name" class="composer__label t-mono muted">Your name</label>
+        <label for="c-name" class="composer__label t-mono muted">{{ t('contact.name') }}</label>
         <input id="c-name" v-model="name" name="name" autocomplete="name" class="composer__input">
       </div>
       <div class="composer__row">
-        <label for="c-subject" class="composer__label t-mono muted">Subject</label>
+        <label for="c-subject" class="composer__label t-mono muted">{{ t('contact.subject') }}</label>
         <input id="c-subject" v-model="subject" name="subject" class="composer__input">
       </div>
       <div class="composer__row composer__row--msg">
-        <label for="c-message" class="composer__label t-mono muted">Message</label>
+        <label for="c-message" class="composer__label t-mono muted">{{ t('contact.message') }}</label>
         <textarea id="c-message" v-model="message" name="body" rows="5" class="composer__input"></textarea>
       </div>
       <div class="composer__foot">
         <p class="t-mono muted" role="status">{{ status }}</p>
-        <button type="submit" class="composer__send">Send</button>
+        <button type="submit" class="composer__send">{{ t('contact.send') }}</button>
       </div>
     </form>
   </section>

@@ -86,7 +86,7 @@ export function mountBooks(host: HTMLElement, opts: MountOptions = {}) {
       if (i < 0) setCaption(null)
       else {
         const b = stack[i].userData.book as Book
-        setCaption(`${clean(b.title)}${b.author && !isTodo(b.author) ? ` by ${b.author}` : ''}. ${clean(b.why)}`)
+        setCaption(`${clean(b.title)}${b.author && !isTodo(b.author) ? `${opts.lang === 'de' ? ' von' : ' by'} ${b.author}` : ''}. ${clean(b.why)}`)
       }
       invalidate()
     }
@@ -105,7 +105,9 @@ export function mountBooks(host: HTMLElement, opts: MountOptions = {}) {
         else return false
         return true
       },
-      status: () => (selected < 0 ? 'No book selected' : `Book ${selected + 1} of ${stack.length}`),
+      status: () => opts.lang === 'de'
+        ? (selected < 0 ? 'Kein Buch ausgewählt' : `Buch ${selected + 1} von ${stack.length}`)
+        : (selected < 0 ? 'No book selected' : `Book ${selected + 1} of ${stack.length}`),
       update(dt, idle) {
         t += dt
         let moving = false

@@ -86,7 +86,7 @@ export function mountPrint(host: HTMLElement, opts: MountOptions = {}) {
         else return false
         return true
       },
-      status: () => `Layer ${Math.round((h / HEIGHT) * LAYERS)} of ${LAYERS}`,
+      status: () => `${opts.lang === 'de' ? 'Schicht' : 'Layer'} ${Math.round((h / HEIGHT) * LAYERS)} ${opts.lang === 'de' ? 'von' : 'of'} ${LAYERS}`,
       update(dt, idle) {
         t += dt
         let moving = false

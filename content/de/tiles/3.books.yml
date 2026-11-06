@@ -1,0 +1,17 @@
+title: Auf meinem Tisch
+category: Lesen
+description: Die Bücher, die gerade auf meinem Tisch liegen, gestapelt, und zu jedem ein Satz, warum es dort liegt.
+instructions: "Fahr mit der Maus über ein Buch oder tipp es an, dann rutscht es heraus und du liest, warum es dort liegt. Seitwärts ziehen dreht den Stapel. Mit der Tastatur: Pfeil hoch und runter wählen ein Buch, Escape legt es zurück."
+scene: books
+poster: /tiles/books.webp
+# Gleiche Bücher wie in content/tiles/3.books.yml, Titel bleiben im Original. Nur «why» übersetzen.
+books:
+  - title: "[TODO: book title]"
+    author: "[TODO: author]"
+    why: "[TODO: one line on why I liked it]"
+  - title: "[TODO: book title]"
+    author: "[TODO: author]"
+    why: "[TODO: one line on why I liked it]"
+  - title: "[TODO: book title]"
+    author: "[TODO: author]"
+    why: "[TODO: one line on why I liked it]"
