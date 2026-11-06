@@ -34,7 +34,7 @@ onMounted(update)
 <template>
   <section class="cards" aria-labelledby="cards-title">
     <h2 id="cards-title" class="sr-only">Selected work</h2>
-    <ul ref="row" class="cards__row" role="list" @scroll.passive="update">
+    <ul ref="row" class="cards__row hover-dim" role="list" @scroll.passive="update">
       <li v-for="p in projects" :key="p.path" class="card" :class="`card--${variant(p)}`">
         <NuxtLink :to="p.href ?? `/work/${slug(p)}`" class="card__link">
           <NuxtImg

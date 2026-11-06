@@ -4,7 +4,7 @@ defineProps<{ about: HomeCollectionItem['about'] }>()
 </script>
 
 <template>
-  <section class="container section about" aria-labelledby="about-title">
+  <section class="container section about reveal" aria-labelledby="about-title">
     <NuxtImg
       :src="about.photo.src"
       :alt="about.photo.alt"

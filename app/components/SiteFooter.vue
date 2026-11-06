@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { data } = await useSite()
-const open = useSetupPanel()
 const year = new Date().getFullYear()
 </script>
 
@@ -8,7 +7,7 @@ const year = new Date().getFullYear()
   <footer class="footer container">
     <hr class="hairline">
     <div class="footer__row">
-      <p class="t-mono muted">© {{ year }} · all content loaded</p>
+      <p class="t-mono muted">© {{ year }} Stepan Vedunov</p>
 
       <ul class="footer__icons" role="list" aria-label="Elsewhere">
         <li>
@@ -28,10 +27,6 @@ const year = new Date().getFullYear()
         </li>
       </ul>
 
-      <ul class="footer__links t-mono" role="list">
-        <li><a :href="data?.site.cv" class="link-quiet" download="Stepan_Vedunov_CV.pdf">cv.pdf</a></li>
-        <li><button type="button" class="footer__setup link-quiet" aria-haspopup="dialog" @click="open = true">setup</button></li>
-      </ul>
     </div>
   </footer>
 </template>
@@ -47,7 +42,7 @@ const year = new Date().getFullYear()
   padding-top: var(--space-4);
 }
 
-.footer__icons, .footer__links { display: flex; padding: 0; list-style: none; }
+.footer__icons { display: flex; padding: 0; list-style: none; }
 
 .footer__icons { gap: var(--space-1); margin-left: calc(-1 * var(--space-3)); }
 
@@ -62,21 +57,10 @@ const year = new Date().getFullYear()
 
 .footer__icons a:hover { color: var(--ink); }
 
-.footer__links { gap: var(--space-4); }
-
-.footer__links a, .footer__setup {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--layout-tap);
-}
-
-.footer__setup { padding: 0; border: 0; background: none; font: inherit; }
 
 @media (width >= 48rem) {
-  .footer__row { grid-template-columns: 1fr auto 1fr; align-items: center; }
+  .footer__row { grid-template-columns: 1fr auto; align-items: center; }
 
-  .footer__icons { margin-left: 0; justify-self: center; }
-
-  .footer__links { justify-self: end; }
+  .footer__icons { margin-left: 0; margin-right: calc(-1 * var(--space-3)); justify-self: end; }
 }
 </style>

@@ -25,7 +25,7 @@ const media = (p: { cover?: { src?: string } }) => (p.cover?.src && !p.cover.src
 
     <section class="work__section" aria-labelledby="w-cases">
       <h2 id="w-cases" class="t-statement">Case studies</h2>
-      <ul class="work__cases" role="list">
+      <ul class="work__cases hover-dim reveal" role="list">
         <li v-for="(p, i) in featured" :key="p.path" class="case" :class="{ 'case--dark': p.confidential, 'case--light': !p.confidential && !media(p) }">
           <NuxtLink :to="hrefOf(p)" class="case__link">
             <span class="case__media">
@@ -55,15 +55,15 @@ const media = (p: { cover?: { src?: string } }) => (p.cover?.src && !p.cover.src
     </section>
 
     <section class="work__section" aria-labelledby="w-side">
-      <h2 id="w-side" class="t-statement">Side projects and things I make</h2>
+      <h2 id="w-side" class="t-statement reveal">Side projects and things I make</h2>
       <div class="work__tiles">
         <SideTile v-for="t in data?.tiles" :key="t.id" :tile="t" :poster-mode="posterMode" />
       </div>
     </section>
 
     <section class="work__section" aria-labelledby="w-earlier">
-      <h2 id="w-earlier" class="t-statement">Earlier work</h2>
-      <ul class="earlier" role="list">
+      <h2 id="w-earlier" class="t-statement reveal">Earlier work</h2>
+      <ul class="earlier hover-dim reveal" role="list">
         <li v-for="p in earlier" :key="p.path" class="earlier__row">
           <span class="earlier__thumb">
             <NuxtImg v-if="media(p)" :src="media(p)!" alt="" sizes="sm:96px" densities="x1 x2" format="webp" loading="lazy" />

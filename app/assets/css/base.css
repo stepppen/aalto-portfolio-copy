@@ -172,6 +172,11 @@ html[data-read="quick"]:not([data-rm-ready]) .cs--quick .rm-extra { display: non
 
 html[data-read="full"] .rm-quick-only { display: none; }
 
+html:not([data-read="full"]) .rm-full-only { display: none; }
+
+/* hidden="until-found" only hides the content, the box (padding, rule on top) would stay. */
+.cs--quick .rm-extra[hidden] { padding-block: 0; margin-block: 0; border: 0; }
+
 /* Case-study media (global so case pages need no extra render-blocking stylesheet). */
 /* Media sits on a light-grey panel, like a product page. */
 .cs-media { display: grid; gap: var(--space-3); margin: 0; }
@@ -195,3 +200,42 @@ html[data-read="full"] .rm-quick-only { display: none; }
 
 .cs-media figcaption { max-width: 60ch; }
 
+
+/* ---------- Motion ---------- */
+/* Hover: the thing under the pointer stays sharp, its neighbours fade and soften a little. */
+@media (hover: hover) {
+  .hover-dim > * { transition: opacity 240ms var(--motion-ease), filter 240ms var(--motion-ease); }
+
+  .hover-dim:has(> :hover) > :not(:hover) { opacity: 0.45; filter: blur(1.5px); }
+}
+
+/* Scroll reveal: sections fade up out of a slight blur as they enter the viewport.
+   Pure CSS (scroll-driven animations), so nothing is hidden before JS runs, and anything already
+   on screen at load is drawn in its final state. Browsers without support just show it. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+}
+
+@keyframes reveal {
+  from { opacity: 0; filter: blur(8px); transform: translateY(1.5rem); }
+  to { opacity: 1; filter: none; transform: none; }
+}
+
+/* Page change: the old page blurs out, the new one sharpens in. */
+.page-enter-active, .page-leave-active { transition: opacity 220ms var(--motion-ease), filter 220ms var(--motion-ease), transform 220ms var(--motion-ease); }
+
+.page-enter-from { opacity: 0; filter: blur(6px); transform: translateY(0.5rem); }
+
+.page-leave-to { opacity: 0; filter: blur(6px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter-active, .page-leave-active { transition: opacity 120ms linear; }
+
+  .page-enter-from, .page-leave-to { filter: none; transform: none; }
+}

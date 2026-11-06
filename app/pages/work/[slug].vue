@@ -105,11 +105,14 @@ useSeoMeta({
     <!-- Quick read: the 2–3 visuals that matter, then a way into the full story. -->
     <section v-if="hasQuick" class="container cs__key rm-quick-only" aria-label="Key visuals">
       <CsMedia v-for="(v, i) in entry.keyVisuals ?? []" :key="i" :src="v.src" :alt="v.alt" :caption="v.caption" :todo="clean(v.todo)" />
-      <div class="cs__more">
-        <p class="muted">That's the short version.</p>
-        <ReadModeSwitch />
-      </div>
     </section>
+
+    <!-- Between the two versions, in both modes: the switch stays put when flipped, and the
+         full story opens below it. -->
+    <div v-if="hasQuick" class="container cs__more">
+      <p class="t-mono muted"><span class="rm-quick-only">that's the short version</span><span class="rm-full-only">the full story, from here</span></p>
+      <ReadModeSwitch />
+    </div>
 
     <!-- Full story -->
     <div class="container cs__full">
@@ -211,7 +214,11 @@ useSeoMeta({
 
 .cs__key { display: grid; gap: var(--space-8); padding-bottom: var(--space-8); }
 
-.cs__more { display: grid; justify-items: start; gap: var(--space-3); padding-top: var(--space-4); }
+.cs__more { display: grid; justify-items: start; gap: var(--space-2); padding-block: var(--space-4) var(--space-8); }
+
+/* Quick read is one calm column: no rules between the parts. */
+html[data-read="quick"] .cs--quick .cs__tldr,
+html[data-read="quick"] .cs--quick .cs__next .hairline { border-top-color: transparent; }
 
 .cs__prose { max-width: 62ch; }
 
@@ -245,8 +252,6 @@ useSeoMeta({
   .cs__key { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--layout-gutter); }
 
   .cs__key > :first-child { grid-column: 1 / -1; }
-
-  .cs__more { grid-column: 1 / -1; }
 
   .cs__stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }

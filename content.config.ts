@@ -87,12 +87,18 @@ export default defineContentConfig({
       schema: z.object({
         description: z.string(),
         intro: z.string(),
-        photo: z.object({ src: z.string(), alt: z.string() }),
+        // A small stack of photos of me (portraits, talks, presentations). Placeholders allowed.
+        photos: z.array(cover),
         experience: z.array(z.object({ when: z.string(), what: z.string(), where: z.string() })),
-        recognition: z.array(z.string()),
-        languages: z.array(z.object({ name: z.string(), level: z.string() })),
+        // Recognition as cards: a photo (or placeholder), what it was, when, and a link.
+        recognition: z.array(z.object({
+          title: z.string(),
+          detail: z.string(),
+          year: z.string(),
+          href: z.string().optional(),
+          image: cover.optional(),
+        })),
         outside: z.object({ text: z.string(), photos: z.array(cover) }),
-        workingWithMe: z.string(),
       }),
     }),
 
@@ -116,8 +122,6 @@ export default defineContentConfig({
       schema: z.object({
         name: z.string(),
         positioning: z.string(),
-        status: z.string(),
-        proof: z.array(z.string()),
         currently: z.array(z.object({ label: z.string(), detail: z.string(), href: z.string() })),
         education: z.string(),
         email: z.string(),

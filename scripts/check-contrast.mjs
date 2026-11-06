@@ -14,6 +14,8 @@ const PAIRS = [
   ['line-strong', 'panel', 3, 'borders on panels'],
   ['signal', 'bg', 3, 'switch cap, focus ring'],
   ['signal', 'panel', 3, 'focus ring on panels'],
+  ['switch', 'bg', 3, 'read-mode switch keycap'],
+  ['switch', 'panel', 3, 'switch keycap in its slot'],
   ['ink', 'tile', 4.5, 'text on side-project tiles'],
   ['signal', 'tile', 3, 'orange parts and focus ring on tiles'],
   ['on-media', '#737373', 4.5, 'card text on the scrim, worst case (55% black over white)'],

@@ -50,9 +50,8 @@ Measured frame by frame:
 ## 30-second test (390 × 844)
 
 The first viewport shows:
-- **who:** the name and the headline "Product designer who builds the bridge to code."
-- **proof:** SDA award · Dezeen · CHF 160k+ · BA ZHdK
-- **contact:** "Email me ›", which jumps to the composer
+- **who:** the name, "product designer · Zurich" and the headline "I design products and stay for the build."
+- **next steps:** "email me ›" (jumps to the composer) and "see the work ›"
 - the top of the first project card
 
 No grades, age or birth date anywhere on the site, in its metadata, the Setup panel or the CV.

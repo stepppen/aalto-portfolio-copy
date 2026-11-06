@@ -7,7 +7,7 @@ defineProps<{ title: string; n?: string }>()
 <template>
   <section class="cs-section rm-extra" :aria-label="title">
     <h2 class="t-heading">{{ title }}</h2>
-    <div class="cs-flow">
+    <div class="cs-flow reveal">
       <slot />
     </div>
   </section>

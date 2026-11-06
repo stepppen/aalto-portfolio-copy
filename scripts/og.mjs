@@ -39,15 +39,14 @@ function card({ eyebrow, title, body, withPortrait }) {
   ${ascii}
   <line x1="72" y1="548" x2="1128" y2="548" stroke="${C.ink}" stroke-width="2"/>
   <circle cx="80" cy="585" r="6" fill="${C.accent}"/>
-  <text x="98" y="593" font-family="Menlo, monospace" font-size="22" fill="${C.ink}">status: ok</text>
+  <text x="98" y="593" font-family="Menlo, monospace" font-size="22" fill="${C.ink}">product designer · Zurich</text>
   <text x="1128" y="593" text-anchor="end" font-family="Menlo, monospace" font-size="22" fill="${C.ink}">vedunov.com</text>
 </svg>`)
 }
 
 const pages = [
-  { slug: 'home', eyebrow: 'Stepan Vedunov · Zurich', title: 'Product designer who builds the bridge to code.', body: 'SDA Bachelor Design Award 2025 · Dezeen School Shows · CHF 160k+ raised for Kymu', withPortrait: true },
-  { slug: 'about', eyebrow: 'About', title: "Hi, I'm Stepan.", body: 'Product designer in Zurich. OWT 80% · Kymu 20%.', withPortrait: true },
-  { slug: 'colophon', eyebrow: 'Colophon', title: 'How this works', body: 'The status: ok switch swaps one set of design tokens for another. Nothing else.' },
+  { slug: 'home', eyebrow: 'Stepan Vedunov · Zurich', title: 'I design products and stay for the build.', body: 'Health and enterprise software, prototypes in code, and the odd 3D print.', withPortrait: true },
+  { slug: 'about', eyebrow: 'About', title: "Hi, I'm Stepan.", body: 'Product designer in Zurich. Design, code, and things I build at home.', withPortrait: true },
 ]
 const files = []
 const walk = async (d) => { for (const e of await readdir(d, { withFileTypes: true })) e.isDirectory() ? await walk(join(d, e.name)) : e.name.endsWith('.md') && files.push(join(d, e.name)) }

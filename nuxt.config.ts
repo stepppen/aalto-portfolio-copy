@@ -11,11 +11,12 @@ export default defineNuxtConfig({
   css: ['~/assets/css/tokens.css', '~/assets/css/base.css'],
 
   app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
     head: {
       htmlAttrs: { lang: 'en' },
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
-        { name: 'description', content: 'Stepan Vedunov, product designer in Zurich who builds the bridge to code. Health and enterprise software at OWT and Kymu.' },
+        { name: 'description', content: 'Stepan Vedunov, product designer in Zurich. I design products and stay for the build: health and enterprise software at OWT and Kymu.' },
         { name: 'theme-color', content: '#FFFFFF' },
       ],
       link: [{ rel: 'icon', href: '/favicon.ico' }],

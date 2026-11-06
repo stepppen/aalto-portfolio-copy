@@ -8,7 +8,7 @@ const current = (to: string) => (route.path === to || route.path.startsWith(`${t
   <header class="header container">
     <NuxtLink to="/" class="header__name">Stepan Vedunov</NuxtLink>
     <nav aria-label="Main">
-      <ul class="header__nav" role="list">
+      <ul class="header__nav hover-dim t-mono" role="list">
         <li><NuxtLink to="/about" class="header__link" :aria-current="current('/about')">About</NuxtLink></li>
         <li><NuxtLink to="/work" class="header__link" :aria-current="current('/work')">Work</NuxtLink></li>
         <li v-if="data?.hasNotes"><NuxtLink to="/notes" class="header__link" :aria-current="current('/notes')">Notes</NuxtLink></li>
@@ -56,4 +56,6 @@ const current = (to: string) => (route.path === to || route.path.startsWith(`${t
 }
 
 .header__link:hover, .header__link[aria-current="page"] { color: var(--ink); }
+
+.header__nav { font-size: var(--text-small); }
 </style>

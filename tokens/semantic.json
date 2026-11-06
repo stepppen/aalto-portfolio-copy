@@ -8,6 +8,10 @@
   "line":        { "$type": "color", "$value": "{neutral.200}" },
   "line-strong": { "$type": "color", "$value": "{neutral.500}" },
   "signal":      { "$type": "color", "$value": "{orange.600}" },
+  "$comment-switch": "The read-mode switch: a red-orange keycap (face, lit top edge, shaded side).",
+  "switch":      { "$type": "color", "$value": "{red-orange.500}" },
+  "switch-hi":   { "$type": "color", "$value": "{red-orange.300}" },
+  "switch-edge": { "$type": "color", "$value": "{red-orange.800}" },
   "on-media":    { "$type": "color", "$value": "{white}" },
   "scrim":       { "$type": "color", "$value": "{black-45}" },
 

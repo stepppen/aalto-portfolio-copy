@@ -36,8 +36,8 @@ async function copy() {
 
 <template>
   <section id="contact" class="container section contact" aria-labelledby="contact-title">
-    <h2 id="contact-title" class="t-display contact__title">{{ heading }}</h2>
-    <form class="composer" :action="`mailto:${email}`" method="get" enctype="text/plain" @submit="send">
+    <h2 id="contact-title" class="t-display contact__title reveal">{{ heading }}</h2>
+    <form class="composer reveal" :action="`mailto:${email}`" method="get" enctype="text/plain" @submit="send">
       <div class="composer__row">
         <span class="composer__label t-mono muted" aria-hidden="true">To</span>
         <a :href="`mailto:${email}`" class="composer__to">{{ email }}</a>

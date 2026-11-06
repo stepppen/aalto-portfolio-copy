@@ -11,6 +11,7 @@
     "950": { "$value": "#111111" }
   },
   "orange": { "$type": "color", "600": { "$value": "#E8540C" } },
+  "red-orange": { "$type": "color", "300": { "$value": "#F57A52" }, "500": { "$value": "#E2421B" }, "800": { "$value": "#A12A0C" } },
   "black-45": { "$type": "color", "$value": "#00000073" },
   "family": {
     "$type": "fontFamily",

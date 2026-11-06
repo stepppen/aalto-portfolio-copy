@@ -1,16 +1,22 @@
 ---
 title: About
-description: About Stepan Vedunov, product designer in Zurich who builds the bridge to code. Experience, recognition, languages and life outside work.
-intro: I design health and enterprise software, and I like to build it, too.
-photo:
-  src: /photos/stepan-2.jpg
-  alt: Stepan smiling in a navy jumper and white collar, next to a plant.
+description: About Stepan Vedunov, product designer in Zurich. Where design meets code, a few things I've been recognised for, and what I do outside work.
+intro: I design software for health and enterprise, and I like to build it too.
+# The photo stack at the top. The first one is shown on load; replace the placeholders with
+# photos from talks, pitches or presentations (strip location metadata first, the repo is public).
+photos:
+  - src: /photos/stepan-2.jpg
+    alt: Stepan smiling in a navy jumper and white collar, next to a plant.
+  - src: /photos/stepan-1.jpg
+    alt: Stepan, arms crossed, in a navy jumper in front of a white wall and a plant.
+  - todo: "[TODO: a photo of you presenting, e.g. KMU Innovationstag 2026]"
+  - todo: "[TODO: another one: a pitch, a workshop, the degree show]"
 experience:
   - when: Since 2026
-    what: UX/UI Designer, 80%
+    what: UX/UI Designer
     where: OWT (Swisscom Digital Technology), Zurich
   - when: Since 2026
-    what: Research Associate and Design Lead, 20%
+    what: Research Associate and Design Lead
     where: Kymu, Zurich
   - when: 2025–26
     what: UX Engineer (civil service)
@@ -18,47 +24,41 @@ experience:
   - when: "2024"
     what: HMI Designer, internship
     where: Volkswagen, Wolfsburg
-  - when: "2024"
-    what: Erasmus semester, design and computer science
-    where: Aalto University, Helsinki
   - when: 2022–25
     what: BA Interaction Design
     where: Zurich University of the Arts (ZHdK)
-  - when: "2026"
-    what: CPUX-F, Certified Professional for Usability and User Experience
-    where: UXQB
 recognition:
-  - SDA Bachelor Design Award 2025, for Kymu
-  - Featured in Dezeen School Shows, 2025
-  - CHF 160k+ non-dilutive funding for Kymu (DIZH, Z-Kubator, Pro Helvetia)
-  - Pitched Kymu at KMU Innovationstag 2026 and Creative Economies Forum 2026
-languages:
-  - name: German
-    level: Native
-  - name: Russian
-    level: Native
-  - name: English
-    level: Fluent
-  - name: French
-    level: B1
-  - name: Spanish
-    level: B1
+  - title: KMU Innovationstag
+    detail: Pitched Kymu on stage
+    year: "2026"
+    image:
+      todo: "[TODO: the photo of you presenting]"
+  - title: Creative Economies Forum
+    detail: Pitched Kymu
+    year: "2026"
+    image:
+      todo: "[TODO: a photo from the forum, if you have one]"
+  - title: SDA Bachelor Design Award
+    detail: For Kymu, my thesis with Elia Salerno
+    year: "2025"
+    href: https://www.zhdk.ch/en/news/sda-bachelor-award-2025-8549
+    image:
+      src: /Kymu/teaser.webp
+      alt: A child in a wheelchair doing an exercise in front of a TV running Kymu.
+  - title: Dezeen School Shows
+    detail: Kymu featured in the ZHdK show
+    year: "2025"
+    href: https://www.dezeen.com/2025/06/15/emotions-installation-zurich-university-of-the-arts-schoolshows/
+    image:
+      src: /Kymu/thumbnail.webp
+      alt: A child raises both arms in front of a TV running a Kymu exercise.
 outside:
-  text: Outside work I build electronics at home, 3D print things, draw and read. A few of them are on the Work page, as small 3D tiles you can play with.
+  text: Outside work I build electronics at home, 3D print things, draw and read. A few of them are on the Work page, as small 3D things you can play with.
   photos:
     - todo: "[TODO: a personal photo, e.g. something you built or printed]"
     - todo: "[TODO: another one: a drawing, a place, a stack of books]"
-workingWithMe: "[TODO: in your words, 3–5 short lines. How you work, what people can count on you for, what you're bad at.]"
 ---
 
-Most of my work sits where design meets code: design systems, tokens, and making sure what ships is what we designed.
+Most of my work sits where design meets code. I care about what actually ships, so I prototype early, test with real people and stay close to the engineers.
 
-I studied Interaction Design at ZHdK from 2022 to 2025. My thesis was Kymu, with Elia Salerno. It won the SDA Bachelor Design Award, got featured in Dezeen, and didn't stop when the degree did.
-
-Along the way I spent a semester at Aalto University in Helsinki, taking design plus computer science (software engineering, web development, Rust). I also spent a summer at Volkswagen in Wolfsburg, designing driver displays and working on the design system for the next infotainment platform.
-
-After graduating I did my civil service at ETH's Sensory-Motor Systems Lab. There I designed Calmea, a medical sleep-tracking platform, and then built it. It's an ETH spin-off now.
-
-Since March 2026 I've been a UX/UI Designer at OWT (Swisscom Digital Technology). I work on 0-to-1 products, medical software, usability testing, and the pipeline that gets design into code. The other 20% of my week goes to Kymu.
-
-:todo[a paragraph that isn't about work. Where you grew up, what you do on a Sunday, anything you'd tell someone over coffee.]
+Right now that means 0-to-1 and medical products at OWT, and Kymu, a home-physio game for kids that started as my thesis and refused to stop.

@@ -1,18 +1,20 @@
-# Home page copy. Drafted from CV facts only; rewrite anything that doesn't sound like you.
+# Home page copy. Drafts: rewrite anything that doesn't sound like you.
 about:
   photo:
     src: /photos/stepan-1.jpg
     alt: Stepan, arms crossed, in a navy jumper in front of a white wall and a plant.
-  statement: I design software for health and enterprise, and I make sure it survives the trip to code.
+  statement: I design software for health and enterprise, and I like to build it too.
   paragraphs:
-    - I'm a UX/UI designer at OWT in Zurich, working on 0-to-1 products, medical software and the pipeline that gets design into code. The other 20% of my week goes to Kymu, home physiotherapy for children that started as my bachelor thesis.
-    - Before that I designed and built Calmea at ETH, a sleep-tracking platform that is now a spin-off, and worked on driver displays at Volkswagen. I test with real users, build design systems, and prototype in code.
+    - I work at OWT in Zurich and spend the rest of my week on Kymu, home physio for kids. In between I'm usually building something with my hands.
+# General, no real projects. Opinions, not facts.
 howIWork:
-  - title: Research with real users
-    text: I test with the people who'll use the thing. Patients and physiotherapists at Lucerne Cantonal Hospital for Kymu, and ISO-based summative usability tests for medical software at OWT.
-  - title: Systems and tokens
-    text: Design systems for Calmea and for Volkswagen's next infotainment platform, and a versioned token package with component contracts at OWT, so design and code stop drifting.
-  - title: Prototyping in code
-    text: I built Calmea full-stack myself, in Vue, FastAPI and PostgreSQL, and set up a pipeline that lets designers prototype in code. This site is built the same way.
-  - title: Shipping in regulated fields
-    text: Medical software at OWT, summative tests for software as a medical device, and a clinical pilot with Lucerne Cantonal Hospital for Kymu. Evidence matters as much as screens.
+  - title: Watch, don't guess
+    text: Five people using a rough prototype beat five meetings about a perfect one. I'd rather be surprised early than right in a slide deck.
+  - title: Prototype for real
+    text: A clickable thing beats a beautiful picture. If the idea needs real data, a real device or a bit of code, I'll go and build it.
+  - title: The handoff isn't the finish line
+    text: Design is done when it ships. I stay close to engineering until what's live matches what we meant, down to the last pixel and edge case.
+  - title: Make it boring to maintain
+    text: Tokens, components and names that make sense to the next person. Future me says thanks, and so does the developer who opens the file at 6 pm.
+  - title: Leave room for play
+    text: Good ideas tend to turn up while I'm soldering, printing or sketching something useless. So I keep time for useless things.

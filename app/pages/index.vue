@@ -10,16 +10,16 @@ const { data: page } = await useAsyncData('home', async () => {
   ])
   return { home: home!, featured: work }
 })
-useSeoMeta({ description: () => `${site.value.name}. ${site.value.positioning} ${site.value.proof.join(' · ')}.` })
+useSeoMeta({ description: () => `${site.value.name}, product designer in Zurich. ${site.value.positioning}` })
 </script>
 
 <template>
   <section class="container hero" aria-labelledby="hero-title">
-    <p class="t-mono muted">{{ site.status }}</p>
-    <h1 id="hero-title" class="t-display hero__title">{{ site.positioning }}</h1>
-    <p class="hero__proof">
-      <span class="muted">{{ site.proof.join(' · ') }}</span>
-      <a href="#contact" class="hero__mail">Email me<span aria-hidden="true">&nbsp;›</span></a>
+    <p class="t-mono muted">product designer · Zurich</p>
+    <h1 id="hero-title" class="t-display hero__title">{{ site.positioning }}<span class="hero__cursor" aria-hidden="true" /></h1>
+    <p class="hero__proof t-mono">
+      <a href="#contact" class="hero__mail">email me<span aria-hidden="true">&nbsp;›</span></a>
+      <NuxtLink to="/work" class="hero__mail link-quiet">see the work<span aria-hidden="true">&nbsp;›</span></NuxtLink>
     </p>
   </section>
 
@@ -41,6 +41,22 @@ useSeoMeta({ description: () => `${site.value.name}. ${site.value.positioning} $
 .hero__mail { display: inline-flex; align-items: center; min-height: var(--layout-tap); text-decoration: none; }
 
 .hero__mail:hover { text-decoration: underline; }
+
+/* A blinking block cursor, a nod to the setup screen. Still when motion is reduced. */
+.hero__cursor {
+  display: inline-block;
+  width: 0.08em;
+  height: 0.8em;
+  margin-left: 0.08em;
+  vertical-align: -0.05em;
+  background: var(--ink);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__cursor { animation: blink 1.1s steps(1) infinite; }
+}
+
+@keyframes blink { 50% { opacity: 0; } }
 
 @media (width >= 64rem) {
   .hero { padding-block: var(--space-16) var(--space-12); }

@@ -1,14 +1,6 @@
 # Site-wide copy. Edit here, not in components.
 name: Stepan Vedunov
-positioning: Product designer who builds the bridge to code.
-# The quiet "system" eyebrow above the headline. Lowercase on purpose.
-status: "status: ok · Zurich · OWT + Kymu"
-# The proof line under the headline: facts a recruiter can check. No grades, no age.
-proof:
-  - SDA Bachelor Design Award 2025
-  - Dezeen School Shows
-  - CHF 160k+ raised for Kymu
-  - BA Interaction Design, ZHdK
+positioning: I design products and stay for the build.
 currently:
   - label: OWT
     detail: 80%
@@ -21,4 +13,4 @@ email: stepan.vedunov@outlook.com
 linkedin: https://www.linkedin.com/in/stepan-v-0242b2226/
 github: https://github.com/stepppen
 cv: /Stepan_Vedunov_CV.pdf
-contactIntro: "Building something? Let's talk."
+contactIntro: Got a tricky problem? Send it my way.
