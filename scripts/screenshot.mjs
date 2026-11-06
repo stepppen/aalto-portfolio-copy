@@ -37,7 +37,7 @@ if (process.env.PROBE) await send('Runtime.enable')
 for (const w of widthsArg.split(',').map(Number)) {
   const mobile = w < 768
   await send('Emulation.setDeviceMetricsOverride', { width: w, height: mobile ? 844 : 900, deviceScaleFactor: 1, mobile })
-  await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: process.env.FRAMES ? 'no-preference' : 'reduce' }] })
+  await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: process.env.REDUCED ? 'reduce' : process.env.FRAMES ? 'no-preference' : 'reduce' }] })
   await send('Page.navigate', { url })
   if (process.env.SCROLLTEXT) {
     // SCROLLTEXT="Personal projects" scrolls the first element with that exact text to the top, then captures.

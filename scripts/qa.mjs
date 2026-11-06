@@ -48,9 +48,10 @@ if (task === 'axe') {
 }
 
 if (task === 'keyboard') {
-  for (const width of [390, 1440]) {
-    await open(`${BASE}/`, width)
-    console.log(`\nTab order, home, ${width}px:`)
+  for (const width of (process.env.WIDTHS ?? '390,1440').split(',').map(Number)) {
+    const page = process.env.PAGE ?? '/'
+    await open(`${BASE}${page}`, width)
+    console.log(`\nTab order, ${page}, ${width}px:`)
     const seen = []
     for (let i = 0; i < 40; i++) {
       await send('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Tab', code: 'Tab', windowsVirtualKeyCode: 9 })
@@ -62,9 +63,36 @@ if (task === 'keyboard') {
       if (!f.visibleFocus || small) failures++
       seen.push(f)
       console.log(`  ${String(i + 1).padStart(2)} ${f.visibleFocus ? '✓' : '✗ no visible focus'} ${small ? `✗ target ${f.w}×${f.h}` : ''} ${f.tag}${f.role ? `[${f.role}]` : ''} "${f.text}"`)
-      if (f.tag === 'BODY') break
+      if (f.tag === 'BODY' || (i > 3 && f.text === seen[0]?.text)) break
     }
     // The read-mode switch lives on case studies (Phase 4); checked there.
+  }
+}
+
+if (task === 'ax') {
+  // What a screen reader gets: landmarks, heading outline, and every control's role, name and state.
+  for (const p of (process.env.PATHS ?? '/,/work,/work/kymu,/about,/notes/design-to-code').split(',')) {
+    await open(`${BASE}${p}`, 1440)
+    const out = await evaluate(`(() => {
+      const vis = (e) => !!(e.offsetParent || e.getClientRects().length) && !e.closest('[hidden],[aria-hidden=true]')
+      const name = (e) => (e.getAttribute('aria-label') || (e.getAttribute('aria-labelledby') || '').split(' ').map((id) => document.getElementById(id)?.textContent).join(' ') || e.textContent || e.getAttribute('alt') || e.title || '').trim().replace(/\\s+/g, ' ').slice(0, 60)
+      const landmarks = [...document.querySelectorAll('header,nav,main,footer,aside,[role=region],section[aria-labelledby],section[aria-label]')].filter(vis).map((e) => (e.getAttribute('role') || e.tagName.toLowerCase()) + (name(e) && (e.getAttribute('aria-label') || e.getAttribute('aria-labelledby')) ? ' "' + name(e) + '"' : ''))
+      const headings = [...document.querySelectorAll('h1,h2,h3')].filter(vis).map((h) => h.tagName[1] + ' ' + h.textContent.trim().replace(/\\s+/g, ' ').slice(0, 50))
+      const controls = [...document.querySelectorAll('a[href],button,input,textarea,[role=switch],[tabindex="0"]')].filter(vis)
+      const unnamed = controls.filter((c) => !name(c) && !(c.labels && c.labels.length)).map((c) => c.outerHTML.slice(0, 80))
+      const switches = [...document.querySelectorAll('[role=switch]')].filter(vis).map((s) => 'switch "' + name(s) + '" checked=' + s.getAttribute('aria-checked'))
+      const imgs = [...document.querySelectorAll('img')].filter(vis).filter((i) => !i.hasAttribute('alt')).length
+      return { landmarks, headings, switches, controls: controls.length, unnamed, imgsMissingAlt: imgs, lang: document.documentElement.lang, title: document.title }
+    })()`)
+    console.log(`\n${p}  ·  "${out.title}"  ·  lang=${out.lang}`)
+    console.log('  landmarks:', out.landmarks.join(' | '))
+    console.log('  headings:', out.headings.join(' | '))
+    if (out.switches.length) console.log('  ' + out.switches.join(' | '))
+    console.log(`  ${out.controls} focusable controls, ${out.unnamed.length} without a name, ${out.imgsMissingAlt} images without alt`)
+    out.unnamed.forEach((u) => { failures++; console.log('   ✗', u) })
+    if (out.imgsMissingAlt) failures++
+    const levels = out.headings.map((h) => +h[0])
+    if (levels[0] !== 1 || levels.some((l, i) => i && l - levels[i - 1] > 1)) { failures++; console.log('   ✗ heading levels skip') }
   }
 }
 

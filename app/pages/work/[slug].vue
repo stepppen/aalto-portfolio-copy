@@ -154,7 +154,7 @@ useSeoMeta({
     <nav class="container cs__next" aria-label="Next project">
       <hr class="hairline">
       <NuxtLink :to="data.next.href" class="cs__next-link">
-        <span class="muted">Next</span>
+        <span class="muted">Next<span class="sr-only">: </span></span>
         <span class="t-statement">{{ data.next.title }}<span aria-hidden="true">&nbsp;→</span></span>
       </NuxtLink>
     </nav>
