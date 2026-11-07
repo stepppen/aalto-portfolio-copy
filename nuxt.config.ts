@@ -31,7 +31,6 @@ export default defineNuxtConfig({
     families: [
       // Only the weights the design uses: static files are about half the size of the variable ones.
       { name: 'Inter', provider: 'google', weights: [400] }, // one weight → a small static file instead of the 48 KB variable one
-      { name: 'Inter Tight', provider: 'google', weights: [400] },
       { name: 'Geist Mono', provider: 'google', weights: [400] },
     ],
   },

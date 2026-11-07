@@ -43,7 +43,7 @@ onMounted(update)
             :src="p.cover!.src"
             :alt="p.cover!.alt ?? ''"
             class="card__media"
-            sizes="sm:90vw md:90vw xl:1240px"
+            sizes="sm:76vw md:90vw xl:1240px"
             densities="x1 x2"
             format="webp"
             :quality="p === projects[0] ? 65 : undefined"

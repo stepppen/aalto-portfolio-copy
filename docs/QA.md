@@ -81,3 +81,7 @@ See [PLACEHOLDERS.md](PLACEHOLDERS.md).
 - axe: 0 issues on every German page at 390 and 1440 px.
 - Lighthouse mobile, median of 5: `/de` 95, `/de/about` 95 (same as `/about`). Other German pages, single run: 95–98.
 - Client-side switching checked headlessly: the header switch keeps you on the same page in the other language, and the nav, titles, `lang` and `hreflang` all follow.
+
+## Performance fix (2026-11-07)
+
+Home and Work had slipped to 94 after the German version and the highlights. Measured cause: the three web fonts (56 KB at top priority) were competing with the first image; with fonts stripped both pages scored 97. Fix: titles now use Inter with tighter tracking (`--tracking-display: -0.075em`) instead of loading Inter Tight as a third font, and the first card image on Home and Work is sized for phones at WebP quality 65. After: every page 95–97 (median of 3), both languages.

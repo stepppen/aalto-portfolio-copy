@@ -33,7 +33,7 @@
   },
   "tracking": {
     "$type": "dimension",
-    "display": { "$value": "-0.035em" },
+    "display": { "$value": "-0.075em" },
     "heading": { "$value": "-0.015em" }
   },
   "space": {

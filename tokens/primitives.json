@@ -15,7 +15,7 @@
   "black-45": { "$type": "color", "$value": "#00000073" },
   "family": {
     "$type": "fontFamily",
-    "display": { "$value": "'Inter Tight', 'Inter Tight Fallback', system-ui, sans-serif" },
+    "display": { "$value": "'Inter', 'Inter Fallback', system-ui, sans-serif" },
     "text":    { "$value": "'Inter', 'Inter Fallback', system-ui, sans-serif" },
     "mono":    { "$value": "'Geist Mono', 'Geist Mono Fallback', ui-monospace, monospace" }
   },
