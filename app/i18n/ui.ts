@@ -13,9 +13,8 @@ export const ui = {
     'footer.elsewhere': 'Elsewhere',
     'footer.email': 'Email',
 
-    'hero.role': 'product designer · Zurich',
+    'hero.role': 'interaction designer · Zurich',
     'hero.email': 'email me',
-    'hero.work': 'see the work',
     'cards.title': 'Selected work',
     'cards.prev': 'Previous project',
     'cards.next': 'Next project',
@@ -93,9 +92,8 @@ export const ui = {
     'footer.elsewhere': 'Anderswo',
     'footer.email': 'E-Mail',
 
-    'hero.role': 'Produktdesigner · Zürich',
+    'hero.role': 'Interaction Designer · Zürich',
     'hero.email': 'schreib mir',
-    'hero.work': 'zu den Arbeiten',
     'cards.title': 'Ausgewählte Arbeiten',
     'cards.prev': 'Vorheriges Projekt',
     'cards.next': 'Nächstes Projekt',

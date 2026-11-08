@@ -45,7 +45,7 @@ function card({ eyebrow, title, body, withPortrait }) {
 }
 
 const pages = [
-  { slug: 'home', eyebrow: 'Stepan Vedunov · Zurich', title: 'I design products and stay for the build.', body: 'Health and enterprise software, prototypes in code, and the odd 3D print.', withPortrait: true },
+  { slug: 'home', eyebrow: 'Stepan Vedunov · Zurich', title: 'I design health and enterprise software, from research to code.', body: 'Health and enterprise software, prototypes in code, and the odd 3D print.', withPortrait: true },
   { slug: 'about', eyebrow: 'About', title: "Hi, I'm Stepan.", body: 'Product designer in Zurich. Design, code, and things I build at home.', withPortrait: true },
 ]
 const files = []

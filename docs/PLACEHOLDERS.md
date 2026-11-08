@@ -8,7 +8,7 @@ In Markdown bodies, a placeholder is written `:todo[what's missing]`.
 
 ## Home: `content/home.yml`, `content/work/*.md` (quote)
 - [ ] Check the slogan (`content/site.yml`), the about teaser and the five "How I work" texts. They're my drafts: general opinions, no project facts.
-- [ ] Collaborator quotes on the three featured cards: Kymu (Elia, and Elia's role), Calmea (someone at the lab), Alpha Factory (someone at OWT)
+- [ ] Collaborator quotes: removed for launch. To bring them back, add a `quote:` block (text, name, role) to a work file; the card and the case page show it automatically.
 
 ## Case studies: `content/work/`
 Each has a "What I'd do differently" line waiting for your words.

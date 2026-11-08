@@ -43,7 +43,7 @@ onMounted(update)
             :src="p.cover!.src"
             :alt="p.cover!.alt ?? ''"
             class="card__media"
-            sizes="sm:76vw md:90vw xl:1240px"
+            sizes="sm:70vw md:68vw xl:930px"
             densities="x1 x2"
             format="webp"
             :quality="p === projects[0] ? 65 : undefined"
@@ -105,7 +105,7 @@ onMounted(update)
 
 .card {
   position: relative;
-  flex: 0 0 86%;
+  flex: 0 0 78%;
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
@@ -120,14 +120,14 @@ onMounted(update)
 
 .card__link:focus-visible { outline-offset: -4px; border-radius: var(--radius-card); }
 
-.card__media { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.card__media { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
 
 .card__media--contain { object-fit: contain; padding: var(--space-6); background: var(--panel); }
 
 .card__confidential, .card__missing {
   display: grid;
   place-items: center;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 2;
   padding: var(--space-6);
   text-align: center;
 }
@@ -168,7 +168,7 @@ onMounted(update)
 
 @media (width >= 64rem) {
   /* Desktop: one big media card; text overlays bottom-left, the quote bottom-right. */
-  .card { flex-basis: calc(100% - 2 * var(--layout-margin) - 7.5rem); aspect-ratio: 3 / 2; display: block; }
+  .card { flex-basis: min(58rem, 68%); aspect-ratio: 16 / 10; display: block; }
 
   .card__link { position: absolute; inset: 0; display: block; }
 
@@ -178,9 +178,9 @@ onMounted(update)
 
   .card__confidential, .card__missing { position: absolute; inset: 0 0 35%; aspect-ratio: auto; }
 
-  .card__body { position: absolute; inset: auto 45% 0 0; z-index: 1; padding: var(--space-8); }
+  .card__body { position: absolute; inset: auto 30% 0 0; z-index: 1; padding: var(--space-8); }
 
-  .card--photo .card__body { padding-top: 30%; background: linear-gradient(to top, var(--scrim) 0%, var(--scrim) 50%, transparent 100%); inset-inline-end: 0; padding-inline-end: 45%; }
+  .card--photo .card__body { padding-top: 30%; background: linear-gradient(to top, var(--scrim) 0%, var(--scrim) 50%, transparent 100%); inset-inline-end: 0; padding-inline-end: 30%; }
 
   .card__quote {
     position: absolute;

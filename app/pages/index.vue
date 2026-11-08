@@ -20,7 +20,6 @@ useSeoMeta({ description: () => `${site.value.name}, ${t('site.tagline')}. ${sit
     <h1 id="hero-title" class="t-display hero__title">{{ site.positioning }}<span class="hero__cursor" aria-hidden="true" /></h1>
     <p class="hero__proof t-mono">
       <a href="#contact" class="hero__mail">{{ t('hero.email') }}<span aria-hidden="true">&nbsp;›</span></a>
-      <NuxtLink :to="lp('/work')" class="hero__mail link-quiet">{{ t('hero.work') }}<span aria-hidden="true">&nbsp;›</span></NuxtLink>
     </p>
   </section>
 

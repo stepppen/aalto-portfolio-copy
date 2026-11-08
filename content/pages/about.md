@@ -16,7 +16,7 @@ experience:
     what: UX/UI Designer
     where: OWT (Swisscom Digital Technology), Zurich
   - when: Since 2026
-    what: Research Associate and Design Lead
+    what: Product Designer and Research Associate
     where: Kymu, Zurich
   - when: 2025–26
     what: UX Engineer (civil service)
