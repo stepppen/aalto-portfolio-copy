@@ -14,19 +14,19 @@ highlights:
     label: SDA Bachelor Design Award 2025 and a New One merit award (China)
   - value: Pitched on stage
     label: in front of 200+ people
-  - value: Constantly iterating
+  - value: Close to the users
     label: Tested Kymu with 20+ people, from patients to therapists
   - value: ETH spin-off
     label: Helped Calmea become an ETH spin-off
 # General, no real projects. Opinions, not facts.
 howIWork:
-  - title: Watch, don't guess
-    text: Five people using a rough prototype beat five meetings about a perfect one. I'd rather be surprised early than right in a slide deck.
-  - title: Prototype for real
-    text: A clickable thing beats a beautiful picture. If the idea needs real data, a real device or a bit of code, I'll go and build it.
-  - title: The handoff isn't the finish line
-    text: Design is done when it ships. I stay close to engineering until what's live matches what we meant, down to the last pixel and edge case.
+  - title: No guessing
+    text: Five people using a rough prototype beat five meetings about a perfect one. I love to go out there and get as much feedback as possible.
+  - title: Interactive prototypes
+    text: A clickable thing beats a beautiful picture. If the idea needs real data, a real device or a bit of code, one should build it.
+  - title: Handoff drift
+    text: Design is only done when the product ships. I stay close to engineering until what's live matches what we meant.
   - title: Make it boring to maintain
-    text: Tokens, components and names that make sense to the next person. Future me says thanks, and so does the developer who opens the file at 6 pm.
+    text: "Keep the tokens, components and names clear and consistent. Future me says thanks :)"
   - title: Leave room for play
-    text: Good ideas tend to turn up while I'm soldering, printing or sketching something useless. So I keep time for useless things.
+    text: Good ideas tend to turn up while I'm building, printing or sketching something useless. So I keep time for useless things.

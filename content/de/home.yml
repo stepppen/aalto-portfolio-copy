@@ -13,19 +13,19 @@ highlights:
   - value: 2 Designpreise
     label: SDA Bachelor Design Award 2025 und ein New One Merit Award (China)
   - value: Auf der Bühne gepitcht
-    label: vor über 200 Personen
-  - value: Ständig am Iterieren
-    label: Kymu mit über 20 Personen getestet, von Betroffenen bis zu Fachpersonen
+    label: vor 200+ Personen
+  - value: Nah an den Nutzenden
+    label: Kymu mit 20+ Personen getestet
   - value: ETH-Spin-off
     label: Mitgeholfen, Calmea zum ETH-Spin-off zu machen
 howIWork:
-  - title: Hinschauen statt raten
-    text: Fünf Leute mit einem groben Prototyp schlagen fünf Meetings über einen perfekten. Ich lasse mich lieber früh überraschen, als in einem Slide-Deck recht zu haben.
-  - title: Echte Prototypen
-    text: Etwas Klickbares schlägt ein schönes Bild. Braucht die Idee echte Daten, ein echtes Gerät oder ein bisschen Code, dann baue ich es.
-  - title: Der Handoff ist nicht die Ziellinie
-    text: Design ist fertig, wenn es live ist. Ich bleibe nah an der Entwicklung, bis das, was live ist, dem entspricht, was wir gemeint haben, bis zum letzten Pixel und Sonderfall.
+  - title: Nicht raten
+    text: Fünf Leute mit einem groben Prototyp schlagen fünf Meetings über einen perfekten. Ich gehe gern raus und hole mir so viel Feedback wie möglich.
+  - title: Interaktive Prototypen
+    text: Etwas Klickbares schlägt ein schönes Bild. Braucht die Idee echte Daten, ein echtes Gerät oder ein bisschen Code, sollte man sie bauen.
+  - title: Handoff-Drift
+    text: Design ist erst fertig, wenn das Produkt live ist. Ich bleibe nah an der Entwicklung, bis das, was live ist, dem entspricht, was wir gemeint haben.
   - title: Langweilig in der Wartung
-    text: Tokens, Komponenten und Namen, die auch die nächste Person versteht. Mein zukünftiges Ich sagt danke, und die Entwicklerin, die die Datei um 18 Uhr öffnet, auch.
+    text: "Tokens, Komponenten und Namen klar und einheitlich halten. Mein zukünftiges Ich sagt danke :)"
   - title: Platz zum Spielen
-    text: Gute Ideen tauchen oft auf, während ich löte, drucke oder etwas Nutzloses skizziere. Darum nehme ich mir Zeit für nutzlose Dinge.
+    text: Gute Ideen tauchen oft auf, während ich baue, drucke oder etwas Nutzloses skizziere. Darum nehme ich mir Zeit für nutzlose Dinge.
