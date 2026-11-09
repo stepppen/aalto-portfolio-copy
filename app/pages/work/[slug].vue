@@ -36,16 +36,29 @@ const clean = (s?: string) => s?.replace(/^\[TODO:\s*|\]$/g, '')
 const { init, set } = useReadMode()
 // End of the quick read: "Read the full story" opens it right where the button was, and moves
 // focus to its first heading so keyboard and screen-reader users land in the new content.
+// The swap above the button (key visuals out, hero back in) cross-fades as a view transition,
+// and the full story rises in, so nothing snaps. Reduced motion: an instant switch.
 const fullStart = ref<HTMLElement>()
 function readFull(e: MouseEvent) {
   const before = (e.currentTarget as HTMLElement).getBoundingClientRect().top
-  document.documentElement.style.overflowAnchor = 'none'
-  set('full')
-  const after = fullStart.value?.getBoundingClientRect().top ?? before
-  window.scrollBy({ top: after - before, behavior: 'instant' })
-  document.documentElement.style.overflowAnchor = ''
-  const heading = fullStart.value?.querySelector<HTMLElement>('h2')
-  if (heading) { heading.tabIndex = -1; heading.focus({ preventScroll: true }) }
+  const html = document.documentElement
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches
+  const open = () => {
+    html.style.overflowAnchor = 'none'
+    set('full')
+    const after = fullStart.value?.getBoundingClientRect().top ?? before
+    window.scrollBy({ top: after - before, behavior: 'instant' })
+    html.style.overflowAnchor = ''
+    if (!calm) {
+      fullStart.value?.classList.add('is-opening')
+      setTimeout(() => fullStart.value?.classList.remove('is-opening'), 900)
+    }
+    const heading = fullStart.value?.querySelector<HTMLElement>('h2')
+    if (heading) { heading.tabIndex = -1; heading.focus({ preventScroll: true }) }
+  }
+  if (calm || !document.startViewTransition) return open()
+  html.classList.add('rm-vt')
+  document.startViewTransition(open).finished.finally(() => html.classList.remove('rm-vt'))
 }
 // Only case studies with a TL;DR have a quick read; earlier work always shows everything.
 onMounted(() => { if (hasQuick.value) init() })
@@ -235,6 +248,14 @@ html:not([data-rm-ready]) .cs__more { display: none; }
   .cs__readmore-arrow { transition: none; }
 }
 
+/* The full story rising in after "Read the full story". */
+.cs__full.is-opening { animation: cs-open 600ms var(--motion-ease) both; }
+
+@keyframes cs-open {
+  from { opacity: 0; transform: translateY(1.5rem); }
+  to { opacity: 1; transform: none; }
+}
+
 .cs__prose { max-width: 62ch; }
 
 .cs__prose p + p { margin-top: var(--space-4); }
@@ -267,6 +288,16 @@ html:not([data-rm-ready]) .cs__more { display: none; }
 </style>
 
 <style>
+/* "Read the full story": a short cross-fade of the page while the quick read swaps for the full
+   story. Scoped to that one transition with the rm-vt class. */
+html.rm-vt::view-transition-old(root) { animation: 160ms var(--motion-soft) both rm-vt-out; }
+
+html.rm-vt::view-transition-new(root) { animation: 280ms var(--motion-soft) both rm-vt-in; }
+
+@keyframes rm-vt-out { to { opacity: 0; } }
+
+@keyframes rm-vt-in { from { opacity: 0; } }
+
 /* Case studies only: sections from Markdown and the template share one grid (heading left, text right, media full width). */
 .cs .cs-section { padding-block: var(--space-12); border-top: 1px solid var(--line); }
 
