@@ -46,8 +46,8 @@ recognition:
     year: "2025"
     href: https://www.zhdk.ch/en/news/sda-bachelor-award-2025-8549
     image:
-      src: /Kymu/teaser.webp
-      alt: Ein Kind im Rollstuhl macht vor einem Fernseher mit Kymu eine Übung.
+      src: /photos/sda-award.jpg
+      alt: Stepan auf der Bühne an der Verleihung des SDA Bachelor Design Award, mit der Auszeichnung in der Hand, neben ihm die anderen Personen auf der Bühne.
   - title: Dezeen School Shows
     detail: Kymu in der Ausstellung der ZHdK
     year: "2025"
@@ -60,6 +60,6 @@ outside:
   photos: []
 ---
 
-Die meisten meiner Arbeiten liegen dort, wo Design auf Code trifft. Mir ist wichtig, was am Ende wirklich live geht. Darum baue ich früh Prototypen, teste mit echten Menschen und bleibe nah an der Entwicklung.
+UX/UI Designer mit Erfahrung in Beratung, Forschung und grossen Unternehmen. Ich gestalte komplexe Anwendungen, von der Nutzerforschung und Ideenfindung bis zu interaktiven Prototypen in Figma und im Browser.
 
-Im Moment heisst das: 0-to-1- und Medizinprodukte bei OWT, und Kymu, Physiotherapie, die man am Fernseher spielt. Sie begann als meine Bachelorarbeit und wollte einfach nicht aufhören.
+Ich mag Probleme, die anfangs chaotisch aussehen, und teste lieber einen groben Prototyp mit echten Menschen, als die falsche Idee zu polieren.

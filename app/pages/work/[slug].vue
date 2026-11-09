@@ -40,7 +40,7 @@ onMounted(() => { if (hasQuick.value) init() })
 useSeoMeta({
   title: () => entry.value.title,
   description: () => entry.value.outcome,
-  ogTitle: () => `${entry.value.title} · Stepan Vedunov`,
+  ogTitle: () => `${entry.value.title} – Stepan Vedunov`,
   ogDescription: () => entry.value.outcome,
 })
 </script>
@@ -106,7 +106,6 @@ useSeoMeta({
     <!-- Between the two versions, in both modes: the switch stays put when flipped, and the
          full story opens below it. -->
     <div v-if="hasQuick" class="container cs__more">
-      <p class="t-mono muted rm-quick-only">{{ t('cs.short') }}</p>
       <ReadModeSwitch />
     </div>
 

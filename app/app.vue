@@ -16,7 +16,7 @@ const ogSlug = computed(() => {
 useHead({
   // Functions can't live in nuxt.config's app.head (it's serialised), so the template is set here.
   htmlAttrs: { lang: () => (lang.value === 'de' ? 'de-CH' : 'en') },
-  titleTemplate: (title?: string) => (title ? `${title} · Stepan Vedunov` : `Stepan Vedunov · ${t('site.tagline')}`),
+  titleTemplate: (title?: string) => (title ? `${title} – Stepan Vedunov` : `Stepan Vedunov – ${t('site.tagline')}`),
   link: [
     { rel: 'canonical', href: () => SITE + path.value },
     { rel: 'alternate', hreflang: 'en', href: () => SITE + base.value },

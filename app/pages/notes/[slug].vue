@@ -19,7 +19,7 @@ useSeoMeta({
 <template>
   <article v-if="note" class="container note">
     <header class="note__head">
-      <p class="t-mono muted"><NuxtLink :to="lp('/notes')" class="link-quiet">{{ t('notes.title') }}</NuxtLink> · <time :datetime="note.date">{{ date }}</time></p>
+      <p class="t-mono muted"><NuxtLink :to="lp('/notes')" class="link-quiet">{{ t('notes.title') }}</NuxtLink> – <time :datetime="note.date">{{ date }}</time></p>
       <h1 class="t-title note__title">{{ note.title }}</h1>
       <p class="t-statement note__lead">{{ note.description }}</p>
     </header>

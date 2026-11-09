@@ -11,7 +11,7 @@ In Markdown bodies, a placeholder is written `:todo[what's missing]`.
 - [ ] Collaborator quotes: removed for launch. To bring them back, add a `quote:` block (text, name, role) to a work file; the card and the case page show it automatically.
 
 ## Case studies: `content/work/`
-- **Kymu:** anything from the LUKS pilot you can share. Facts from the 2026 grant deck (adult rehab, grants shown as CHF 100k+, 30+ protocols, five physios at LUKS). The closed beta is no longer mentioned.
+- **Kymu:** anything from the LUKS pilot you can share. Facts from the 2026 grant deck (adult rehab, grants shown as CHF 100k+, 30+ protocols, 20+ testers); which exercises each of the three games trains. The closed beta is no longer mentioned.
 - **Calmea:** who used the platform you built; the hardest data-vis problem; one lesson from building it. The architecture is drawn from your board (the first, MVP option).
 - **Alpha Factory:** the idea behind the glyph. (Aiko and Medgate pages: confirmed OK to show.) Brand-book visuals are the clean versions you sent; type and icons are cropped from the Figma export.
 
