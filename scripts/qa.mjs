@@ -71,7 +71,7 @@ if (task === 'keyboard') {
 
 if (task === 'ax') {
   // What a screen reader gets: landmarks, heading outline, and every control's role, name and state.
-  for (const p of (process.env.PATHS ?? '/,/work,/work/kymu,/about,/notes/design-to-code').split(',')) {
+  for (const p of (process.env.PATHS ?? '/,/work,/work/kymu,/about,/notes').split(',')) {
     await open(`${BASE}${p}`, 1440)
     const out = await evaluate(`(() => {
       const vis = (e) => !!(e.offsetParent || e.getClientRects().length) && !e.closest('[hidden],[aria-hidden=true]')

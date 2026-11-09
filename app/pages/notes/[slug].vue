@@ -3,7 +3,7 @@
 const slug = String(useRoute().params.slug)
 const { t, lp, lang, col } = useLang()
 const { data: note } = await useAsyncData(`note-${lang.value}-${slug}`, () => queryCollection(col('notes')).path(lp(`/notes/${slug}`)).first())
-if (!note.value) throw createError({ statusCode: 404, statusMessage: 'Not found', fatal: true })
+if (!note.value || note.value.draft) throw createError({ statusCode: 404, statusMessage: 'Not found', fatal: true })
 const date = computed(() => {
   const [y, m] = note.value!.date.split('-')
   return m ? new Date(Date.UTC(+y, +m - 1)).toLocaleString(t('date.locale'), { month: 'long', year: 'numeric', timeZone: 'UTC' }) : y

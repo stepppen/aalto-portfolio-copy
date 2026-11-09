@@ -64,7 +64,7 @@ export default defineNuxtConfig({
     '/projects/**': { redirect: { to: '/work/**', statusCode: 301 } },
     '/playground': { redirect: { to: '/', statusCode: 301 } },
     '/cv.pdf': { redirect: { to: '/Stepan_Vedunov_CV.pdf', statusCode: 301 } },
-    '/work/design-to-code': { redirect: { to: '/notes/design-to-code', statusCode: 301 } },
+    '/work/design-to-code': { redirect: { to: '/notes', statusCode: 302 } },
     '/**': {
       headers: {
         'X-Content-Type-Options': 'nosniff',

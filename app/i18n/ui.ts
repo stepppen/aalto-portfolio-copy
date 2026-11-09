@@ -76,6 +76,7 @@ export const ui = {
 
     'notes.title': 'Notes',
     'notes.description': 'Writing by Stepan Vedunov on design, systems and code.',
+    'notes.wip': 'Work in progress. The first notes are on their way.',
     'date.locale': 'en-GB',
 
     'tile.interactive': 'interactive 3D',
@@ -161,6 +162,7 @@ export const ui = {
 
     'notes.title': 'Notizen',
     'notes.description': 'Texte von Stepan Vedunov über Design, Systeme und Code.',
+    'notes.wip': 'Noch in Arbeit. Die ersten Notizen sind unterwegs.',
     'date.locale': 'de-CH',
 
     'tile.interactive': 'interaktives 3D-Modell',

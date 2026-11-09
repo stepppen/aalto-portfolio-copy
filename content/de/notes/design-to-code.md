@@ -2,6 +2,8 @@
 title: Design-to-Code-Pipeline
 description: Wie ein versioniertes Token-Paket und Komponenten-Contracts verhindern, dass Design und Code auseinanderdriften, und wie Designer damit im Code prototypen können.
 date: "2026-11"
+# Hidden for now: not listed, not built, not in the sitemap. Set to false to publish.
+draft: true
 ---
 
 Hier geht es darum, wie Design bei OWT in den Code kommt, und was ich daran geändert habe. Keine Kundennamen und keine Kunden-Screens. Es geht um die Ideen.

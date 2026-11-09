@@ -10,8 +10,11 @@ const fmt = (d: string) => {
 
 <template>
   <section class="container section notes">
-    <h1 class="t-title">{{ t('notes.title') }}</h1>
-    <ol class="notes__list" role="list">
+    <div class="notes__head">
+      <h1 class="t-title">{{ t('notes.title') }}</h1>
+      <p class="t-statement muted">{{ t('notes.wip') }}</p>
+    </div>
+    <ol v-if="notes?.length" class="notes__list" role="list">
       <li v-for="n in notes" :key="n.path" class="notes__item">
         <NuxtLink :to="n.path" class="notes__link">
           <span class="t-heading">{{ n.title }}</span>
@@ -25,6 +28,8 @@ const fmt = (d: string) => {
 
 <style scoped>
 .notes { display: grid; gap: var(--space-12); }
+
+.notes__head { display: grid; gap: var(--space-4); }
 
 .notes__list { padding: 0; list-style: none; border-bottom: 1px solid var(--line); }
 
