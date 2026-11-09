@@ -12,7 +12,7 @@ In Markdown bodies, a placeholder is written `:todo[what's missing]`.
 
 ## Case studies: `content/work/`
 Each has a "What I'd do differently" line waiting for your words.
-- **Kymu:** anything from the LUKS pilot you can share. Facts updated from the 2026 grant deck (adult rehab, CHF 105k grants, 30+ protocols, five physios at LUKS). Check: the old figure was CHF 160k+, and the closed beta is no longer mentioned.
+- **Kymu:** anything from the LUKS pilot you can share. Facts updated from the 2026 grant deck (adult rehab, CHF 105k grants, 30+ protocols, five physios at LUKS). CHF 105k confirmed; the closed beta is no longer mentioned.
 - **Calmea:** who used the platform you built; team; design-system scope; the hardest data-vis problem; which hosting architecture was chosen and why; one lesson from building it. Screens, photos, logo and the architecture board are yours.
 - **Medical software:** outcome you can share; team; timeframe; tools; the standard(s) followed; an anonymised critical task; user groups and recruiting; session setup and scoring; what made the report useful.
 - **Alpha Factory:** team; the idea behind the glyph. (Aiko and Medgate pages: confirmed OK to show.) Brand-book visuals are the clean versions you sent; type and icons are cropped from the Figma export.
