@@ -28,35 +28,31 @@ experience:
     where: Zürcher Hochschule der Künste (ZHdK)
 recognition:
   - title: KMU Innovationstag
-    detail: Kymu auf der Bühne gepitcht
     year: "2026"
     href: https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/wirtschaft-arbeit/zuercher-kmu-innovationstag-2026.html
     image:
       src: /photos/kmu-innovationstag.jpg
       alt: Stepan und Elia Salerno auf der Bühne beim Pitch von Kymu, hinter ihnen die Folie «Was kann Kymu?».
   - title: Creative Economies Forum
-    detail: Kymu gepitcht
     year: "2026"
     href: https://www.zhdk.ch/en/zcce/creative-economies-forum-cef-27632/cef
     image:
       src: /photos/stepan-stage.jpg
       alt: Stepan auf der Bühne mit Mikrofon und Presenter, beim Pitch von Kymu.
   - title: SDA Bachelor Design Award
-    detail: Für Kymu, meine Bachelorarbeit mit Elia Salerno
     year: "2025"
     href: https://www.zhdk.ch/en/news/sda-bachelor-award-2025-8549
     image:
       src: /photos/sda-award.jpg
       alt: Stepan auf der Bühne an der Verleihung des SDA Bachelor Design Award, mit der Auszeichnung in der Hand, neben ihm die anderen Personen auf der Bühne.
   - title: Dezeen School Shows
-    detail: Kymu in der Ausstellung der ZHdK
     year: "2025"
     href: https://www.dezeen.com/2025/06/15/emotions-installation-zurich-university-of-the-arts-schoolshows/
     image:
       src: /Kymu/thumbnail.webp
       alt: Ein Kind hebt vor einem Fernseher mit einer Kymu-Übung beide Arme.
 outside:
-  text: "Neben der Arbeit baue ich zu Hause Elektronik, drucke Dinge in 3D, zeichne mit Aquarell und Fineliner in mein Skizzenbuch, lese und führe Plakativ, mein Plakat-Business. Ein paar davon, in 3D, zum Ausprobieren:"
+  text: "Neben der Arbeit baue ich zu Hause Dinge, drucke in 3D, zeichne in mein Skizzenbuch und lese gern. Einiges, womit ich mich zuletzt beschäftigt habe:"
   photos: []
 ---
 

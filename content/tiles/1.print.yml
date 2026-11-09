@@ -1,6 +1,6 @@
-title: Spiral vase
-category: 3D printing
-description: A vase printed in one continuous spiral, building itself layer by layer.
+title: Another vase
+category: "The printer is always running, sometimes for rather useless stuff."
+description: "Another vase, printed in one continuous spiral, building itself layer by layer."
 instructions: "Drag up or down to scrub the layers, sideways to turn it. On a phone, press and hold, then drag. With a keyboard, use the arrow keys; Home and End empty or fill it."
 scene: print
 poster: /tiles/print.webp

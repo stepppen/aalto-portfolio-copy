@@ -29,35 +29,31 @@ experience:
     where: Zurich University of the Arts (ZHdK)
 recognition:
   - title: KMU Innovationstag
-    detail: Pitched Kymu on stage
     year: "2026"
     href: https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/wirtschaft-arbeit/zuercher-kmu-innovationstag-2026.html
     image:
       src: /photos/kmu-innovationstag.jpg
       alt: Stepan and Elia Salerno on stage presenting Kymu, with the slide "Was kann Kymu?" behind them.
   - title: Creative Economies Forum
-    detail: Pitched Kymu
     year: "2026"
     href: https://www.zhdk.ch/en/zcce/creative-economies-forum-cef-27632/cef
     image:
       src: /photos/stepan-stage.jpg
       alt: Stepan on stage with a microphone and a clicker, pitching Kymu.
   - title: SDA Bachelor Design Award
-    detail: For Kymu, my thesis with Elia Salerno
     year: "2025"
     href: https://www.zhdk.ch/en/news/sda-bachelor-award-2025-8549
     image:
       src: /photos/sda-award.jpg
       alt: Stepan on stage at the SDA Bachelor Design Award ceremony, holding the award, with the other people on stage beside him.
   - title: Dezeen School Shows
-    detail: Kymu featured in the ZHdK show
     year: "2025"
     href: https://www.dezeen.com/2025/06/15/emotions-installation-zurich-university-of-the-arts-schoolshows/
     image:
       src: /Kymu/thumbnail.webp
       alt: A child raises both arms in front of a TV running a Kymu exercise.
 outside:
-  text: "Outside work I build electronics at home, 3D print things, draw in a sketchbook with watercolour and fineliner, read, and run Plakativ, my poster business. A few of them, in 3D, to play with:"
+  text: "Outside work I build things at home, 3D print, draw in a sketchbook and enjoy reading. Some of my recent activities:"
   photos: []
 ---
 

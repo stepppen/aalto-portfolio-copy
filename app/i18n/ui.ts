@@ -68,8 +68,8 @@ export const ui = {
 
     'about.title': 'About',
     'about.experience': 'Experience',
-    'about.recognition': 'Recognition',
-    'about.outside': 'Outside work',
+    'about.recognition': 'Milestones',
+    'about.outside': 'How I spend my time',
     'about.play': 'Play with them',
     'photos.next': 'next photo',
 
@@ -78,7 +78,6 @@ export const ui = {
     'date.locale': 'en-GB',
 
     'tile.interactive': 'interactive 3D',
-    'tile.placeholder': 'placeholder model',
 
     'error.notFound': 'Not found',
     'error.error': 'Error',
@@ -153,8 +152,8 @@ export const ui = {
 
     'about.title': 'Über mich',
     'about.experience': 'Erfahrung',
-    'about.recognition': 'Auszeichnungen',
-    'about.outside': 'Neben der Arbeit',
+    'about.recognition': 'Meilensteine',
+    'about.outside': 'Wie ich meine Zeit verbringe',
     'about.play': 'Zum Ausprobieren',
     'photos.next': 'nächstes Foto',
 
@@ -163,7 +162,6 @@ export const ui = {
     'date.locale': 'de-CH',
 
     'tile.interactive': 'interaktives 3D-Modell',
-    'tile.placeholder': 'Platzhaltermodell',
 
     'error.notFound': 'Nicht gefunden',
     'error.error': 'Fehler',

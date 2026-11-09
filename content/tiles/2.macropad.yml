@@ -1,6 +1,6 @@
-title: Macro pad
-category: Electronics
-description: A three-key macro pad with an LED and a toggle switch, built at home.
+title: Custom keyboard
+category: "Currently designing and building a custom keyboard."
+description: "A custom keyboard I'm designing and building, shown here as a three-key stand-in with an LED and a toggle switch."
 instructions: "Click or tap a key to press it, and the toggle to switch the light. Drag sideways to turn it. With a keyboard: 1, 2 and 3 press the keys, Enter flips the toggle, arrow keys turn it."
 scene: macropad
 poster: /tiles/macropad.webp

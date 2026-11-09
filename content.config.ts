@@ -97,10 +97,9 @@ export default defineContentConfig({
         // A small stack of photos of me (portraits, talks, presentations). Placeholders allowed.
         photos: z.array(cover),
         experience: z.array(z.object({ when: z.string(), what: z.string(), where: z.string() })),
-        // Recognition as cards: a photo (or placeholder), what it was, when, and a link.
+        // Milestones as cards: a photo (or placeholder), what it was, when, and a link.
         recognition: z.array(z.object({
           title: z.string(),
-          detail: z.string(),
           year: z.string(),
           href: z.string().optional(),
           image: cover.optional(),

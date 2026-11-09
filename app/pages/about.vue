@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// About: a stack of photos left, a short story right, then experience, recognition (as cards
+// About: a stack of photos left, a short story right, then experience, milestones (as cards
 // with photos and links) and what I do outside work.
 const { t, lp, lang, col } = useLang()
 const { data: page } = await useAsyncData(`about-${lang.value}`, () => queryCollection(col('pages')).path(lang.value === 'de' ? '/de/pages/about' : '/pages/about').first())
@@ -45,7 +45,6 @@ useSeoMeta({ title: () => t('about.title'), description: () => page.value!.descr
             <span class="rec__text">
               <span class="t-mono muted">{{ r.year }}</span>
               <span class="rec__title">{{ r.title }}<span v-if="r.href" class="rec__arrow" aria-hidden="true">&nbsp;↗</span></span>
-              <span class="muted rec__detail">{{ r.detail }}</span>
             </span>
           </component>
         </li>
@@ -122,8 +121,6 @@ useSeoMeta({ title: () => t('about.title'), description: () => page.value!.descr
 .rec__title { font-size: var(--text-heading); letter-spacing: var(--tracking-heading); line-height: 1.25; }
 
 .rec__arrow { display: inline-block; transition: transform var(--motion-dur-fast) var(--motion-ease); }
-
-.rec__detail { font-size: var(--text-small); }
 
 a.rec__card:hover img { transform: scale(1.04); }
 

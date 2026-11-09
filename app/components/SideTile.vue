@@ -88,7 +88,6 @@ onMounted(() => {
         :fetchpriority="eager ? 'high' : undefined"
         :preload="eager ? { fetchPriority: 'high' } : undefined"
       />
-      <span v-if="tile.placeholder && tile.scene" class="tile__flag t-mono">{{ t('tile.placeholder') }}</span>
       <p v-if="caption" class="tile__caption" aria-hidden="true">{{ caption }}</p>
     </component>
     <figcaption>
@@ -128,16 +127,6 @@ onMounted(() => {
 /* The live canvas sits on the poster; the poster stays underneath as the fallback. */
 .tile__stage :deep(.tile__canvas) { position: absolute; inset: 0; width: 100%; height: 100%; }
 
-.tile__flag {
-  position: absolute;
-  top: var(--space-3);
-  left: var(--space-3);
-  z-index: 1;
-  padding: 0.1em 0.6em;
-  border-radius: var(--radius-pill);
-  background: var(--bg);
-  color: var(--ink-muted);
-}
 
 .tile__caption {
   position: absolute;

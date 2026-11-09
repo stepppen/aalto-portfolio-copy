@@ -25,15 +25,20 @@ function spineTexture(book: Book, w: number, h: number, bg: string, ink: string)
   g.fillStyle = ink
   g.textBaseline = 'middle'
   const title = isTodo(book.title) ? 'todo: title' : book.title
+  const author = book.author && !isTodo(book.author) ? book.author : ''
+  // Author first, right-aligned; the title then shrinks to fit the space left of it.
+  const authorFont = `400 ${c.height * 0.28}px Inter, system-ui, sans-serif`
+  g.font = authorFont
+  const aw = author ? g.measureText(author).width : 0
+  const room = c.width * 0.88 - (author ? aw + c.width * 0.05 : 0)
   let size = c.height * 0.42
   g.font = `500 ${size}px Inter, system-ui, sans-serif`
-  while (g.measureText(title).width > c.width * 0.62 && size > 10) { size -= 2; g.font = `500 ${size}px Inter, system-ui, sans-serif` }
+  while (g.measureText(title).width > room && size > 10) { size -= 2; g.font = `500 ${size}px Inter, system-ui, sans-serif` }
   g.fillText(title, c.width * 0.06, c.height / 2)
-  if (book.author && !isTodo(book.author)) {
+  if (author) {
     g.globalAlpha = 0.7
-    g.font = `400 ${c.height * 0.28}px Inter, system-ui, sans-serif`
-    const aw = g.measureText(book.author).width
-    g.fillText(book.author, c.width * 0.94 - aw, c.height / 2)
+    g.font = authorFont
+    g.fillText(author, c.width * 0.94 - aw, c.height / 2)
   }
   const t = new CanvasTexture(c)
   t.colorSpace = SRGBColorSpace
