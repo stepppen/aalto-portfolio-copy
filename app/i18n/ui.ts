@@ -138,7 +138,7 @@ export const ui = {
     'cs.services': 'Leistungen',
     'cs.date': 'Zeitraum',
     'cs.role': 'Rolle',
-    'cs.tldr': 'Das Wichtigste',
+    'cs.tldr': 'TL;DR',
     'cs.problem': 'Problem',
     'cs.myRole': 'Meine Rolle',
     'cs.did': 'Was ich gemacht habe',
