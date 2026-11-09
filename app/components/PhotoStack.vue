@@ -10,8 +10,7 @@ const leaving = ref<number | null>(null)
 // Fixed, hand-picked tilts so the stack looks the same on every load (and on the server).
 const tilt = [-2.5, 3, -4, 2, -1.5, 4]
 const pos = (i: number) => order.value.indexOf(i)
-// Only the front photo loads with the page. The ones behind show as blank prints until the
-// page is idle or someone reaches for the stack, so they never compete with the first paint.
+// Only the front photo loads with the page. The ones behind show as blank prints until then.
 const warm = ref(false)
 const warmUp = () => (warm.value = true)
 // They're rendered only in the browser, so ask the static build to generate their sizes
@@ -21,11 +20,13 @@ if (import.meta.server) {
   const img = useImage()
   props.photos.slice(1).forEach((p) => p.src && img.getSizes(p.src, { sizes: SIZES, densities: 'x1 x2', modifiers: { width: undefined, format: 'webp', quality: 80 } }))
 }
-onMounted(() => {
-  const later = () => setTimeout(warmUp, 1500)
-  if (document.readyState === 'complete') later()
-  else window.addEventListener('load', later, { once: true })
-})
+// They load on the first scroll, tap or key press, not on a timer: tilted, the back photos have a
+// bigger outline than the front one, so if they painted on their own the browser would count one of
+// them as the page's largest paint (LCP) seconds after the real one. Input ends LCP measurement.
+const INPUTS = ['scroll', 'pointerdown', 'keydown'] as const
+const onInput = () => { warmUp(); INPUTS.forEach((e) => window.removeEventListener(e, onInput)) }
+onMounted(() => INPUTS.forEach((e) => window.addEventListener(e, onInput, { once: true, passive: true })))
+onBeforeUnmount(() => INPUTS.forEach((e) => window.removeEventListener(e, onInput)))
 
 function next() {
   warmUp()
@@ -42,7 +43,7 @@ function next() {
 
 <template>
   <div class="stack">
-    <div class="stack__deck" @click="next" @pointerenter="warmUp" @focusin="warmUp">
+    <div class="stack__deck" @click="next">
       <figure
         v-for="(p, i) in photos"
         :key="i"

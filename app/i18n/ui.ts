@@ -68,7 +68,7 @@ export const ui = {
 
     'about.title': 'About',
     'about.experience': 'Experience',
-    'about.recognition': 'Milestones',
+    'about.recognition': 'Recent milestones',
     'about.outside': 'How I spend my time',
     'about.play': 'Play with them',
     'photos.next': 'next photo',
@@ -152,7 +152,7 @@ export const ui = {
 
     'about.title': 'Über mich',
     'about.experience': 'Erfahrung',
-    'about.recognition': 'Meilensteine',
+    'about.recognition': 'Aktuelle Meilensteine',
     'about.outside': 'Wie ich meine Zeit verbringe',
     'about.play': 'Zum Ausprobieren',
     'photos.next': 'nächstes Foto',
