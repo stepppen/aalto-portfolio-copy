@@ -2,15 +2,15 @@
 title: About
 description: About Stepan Vedunov, product designer in Zurich. Where design meets code, a few things I've been recognised for, and what I do outside work.
 intro: I design software for health and enterprise, and I like to build it too.
-# The photo stack at the top. The first one is shown on load; replace the placeholders with
-# photos from talks, pitches or presentations (strip location metadata first, the repo is public).
+# The photo stack at the top: three photos of me. The first one is shown on load
+# (strip location metadata from new photos first, the repo is public).
 photos:
   - src: /photos/stepan-2.jpg
     alt: Stepan smiling in a navy jumper and white collar, next to a plant.
   - src: /photos/stepan-1.jpg
     alt: Stepan, arms crossed, in a navy jumper in front of a white wall and a plant.
-  - todo: "[TODO: a photo of you presenting, e.g. KMU Innovationstag 2026]"
-  - todo: "[TODO: another one: a pitch, a workshop, the degree show]"
+  - src: /photos/stepan-stage.jpg
+    alt: Stepan on stage with a microphone and a clicker, pitching Kymu in front of a projected slide.
 experience:
   - when: Since 2026
     what: UX/UI Designer
@@ -37,7 +37,8 @@ recognition:
     detail: Pitched Kymu
     year: "2026"
     image:
-      todo: "[TODO: a photo from the forum, if you have one]"
+      src: /photos/stepan-stage.jpg
+      alt: Stepan on stage with a microphone and a clicker, pitching Kymu.
   - title: SDA Bachelor Design Award
     detail: For Kymu, my thesis with Elia Salerno
     year: "2025"
@@ -59,4 +60,4 @@ outside:
 
 Most of my work sits where design meets code. I care about what actually ships, so I prototype early, test with real people and stay close to the engineers.
 
-Right now that means 0-to-1 and medical products at OWT, and Kymu, a home-physio game for kids that started as my thesis and refused to stop.
+Right now that means 0-to-1 and medical products at OWT, and Kymu, physiotherapy you play on your TV, which started as my thesis and refused to stop.

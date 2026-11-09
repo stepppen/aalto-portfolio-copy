@@ -8,8 +8,8 @@ photos:
     alt: Stepan lächelnd, in einem dunkelblauen Pullover mit weissem Kragen, neben einer Pflanze.
   - src: /photos/stepan-1.jpg
     alt: Stepan mit verschränkten Armen, in einem dunkelblauen Pullover vor einer weissen Wand und einer Pflanze.
-  - todo: "[TODO: a photo of you presenting, e.g. KMU Innovationstag 2026]"
-  - todo: "[TODO: another one: a pitch, a workshop, the degree show]"
+  - src: /photos/stepan-stage.jpg
+    alt: Stepan auf der Bühne mit Mikrofon und Presenter, beim Pitch von Kymu vor einer projizierten Folie.
 experience:
   - when: Seit 2026
     what: UX/UI Designer
@@ -36,7 +36,8 @@ recognition:
     detail: Kymu gepitcht
     year: "2026"
     image:
-      todo: "[TODO: a photo from the forum, if you have one]"
+      src: /photos/stepan-stage.jpg
+      alt: Stepan auf der Bühne mit Mikrofon und Presenter, beim Pitch von Kymu.
   - title: SDA Bachelor Design Award
     detail: Für Kymu, meine Bachelorarbeit mit Elia Salerno
     year: "2025"
@@ -58,4 +59,4 @@ outside:
 
 Die meisten meiner Arbeiten liegen dort, wo Design auf Code trifft. Mir ist wichtig, was am Ende wirklich live geht. Darum baue ich früh Prototypen, teste mit echten Menschen und bleibe nah an der Entwicklung.
 
-Im Moment heisst das: 0-to-1- und Medizinprodukte bei OWT, und Kymu, ein Physiotherapie-Spiel für Kinder zu Hause, das als meine Bachelorarbeit begann und einfach nicht aufhören wollte.
+Im Moment heisst das: 0-to-1- und Medizinprodukte bei OWT, und Kymu, Physiotherapie, die man am Fernseher spielt. Sie begann als meine Bachelorarbeit und wollte einfach nicht aufhören.

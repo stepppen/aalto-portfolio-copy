@@ -12,17 +12,16 @@ In Markdown bodies, a placeholder is written `:todo[what's missing]`.
 
 ## Case studies: `content/work/`
 Each has a "What I'd do differently" line waiting for your words.
-- **Kymu:** beta/pilot numbers you can share; how you designed the exergames.
-- **Calmea:** who used the platform you built; team; design-system scope; dashboard views and the hardest data-vis problem; confirm the data comes from the bed sensor; one lesson from building it. Product facts come from calmea.com; there are no screens, the cover is an illustration.
+- **Kymu:** anything from the LUKS pilot you can share. Facts updated from the 2026 grant deck (adult rehab, CHF 105k grants, 30+ protocols, five physios at LUKS). Check: the old figure was CHF 160k+, and the closed beta is no longer mentioned.
+- **Calmea:** who used the platform you built; team; design-system scope; the hardest data-vis problem; which hosting architecture was chosen and why; one lesson from building it. Screens, photos, logo and the architecture board are yours.
 - **Medical software:** outcome you can share; team; timeframe; tools; the standard(s) followed; an anonymised critical task; user groups and recruiting; session setup and scoring; what made the report useful.
-- **Alpha Factory:** team; the idea behind the glyph. (Aiko and Medgate pages: confirmed OK to show.) Visuals are from the Figma brand book and the live sub-site.
+- **Alpha Factory:** team; the idea behind the glyph. (Aiko and Medgate pages: confirmed OK to show.) Brand-book visuals are the clean versions you sent; type and icons are cropped from the Figma export.
 
 ## Notes: `content/notes/design-to-code.md`
 - [ ] Token tooling; what you built yourself vs. with developers; an anonymised contract example; what a Claude skill does in practice; workshop takeaways; numbers; "What I'd do differently".
 
 ## About: `content/pages/about.md`
-- [ ] Photos for the photo stack (talks, pitches, presentations): two slots
-- [ ] Recognition photos: KMU Innovationstag (you presenting), Creative Economies Forum; links for both if there are pages
+- [ ] Recognition photo for KMU Innovationstag; links for KMU Innovationstag and Creative Economies Forum if there are pages
 
 ## Side projects on Work: `content/work/side/`
 - [ ] **AI to Eye:** a photo of the installation or the robots (I didn't take Scientifica's photo without asking); team credits; tools; what the robots do and how you built them.
@@ -37,4 +36,4 @@ Each has a "What I'd do differently" line waiting for your words.
 
 ## Done
 - [x] CV: web version without phone, date of birth or grades at `public/Stepan_Vedunov_CV.pdf`. Source: `~/Documents/Private/Stepan_Vedunov_CV_2026_EN_web.docx`.
-- [x] Portrait photos (metadata stripped).
+- [x] Portrait photos and the stage photo (metadata stripped). About shows three photos of you.

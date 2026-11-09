@@ -13,7 +13,7 @@ export const ui = {
     'footer.elsewhere': 'Elsewhere',
     'footer.email': 'Email',
 
-    'hero.role': 'interaction designer · Zurich',
+    'hero.role': 'interaction designer',
     'hero.email': 'email me',
     'cards.title': 'Selected work',
     'cards.prev': 'Previous project',
@@ -92,7 +92,7 @@ export const ui = {
     'footer.elsewhere': 'Anderswo',
     'footer.email': 'E-Mail',
 
-    'hero.role': 'Interaction Designer · Zürich',
+    'hero.role': 'Interaction Designer',
     'hero.email': 'schreib mir',
     'cards.title': 'Ausgewählte Arbeiten',
     'cards.prev': 'Vorheriges Projekt',

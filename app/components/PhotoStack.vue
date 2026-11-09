@@ -14,6 +14,13 @@ const pos = (i: number) => order.value.indexOf(i)
 // page is idle or someone reaches for the stack, so they never compete with the first paint.
 const warm = ref(false)
 const warmUp = () => (warm.value = true)
+// They're rendered only in the browser, so ask the static build to generate their sizes
+// (width first, so the URLs match the ones NuxtImg builds).
+const SIZES = 'sm:80vw md:40vw xl:420px'
+if (import.meta.server) {
+  const img = useImage()
+  props.photos.slice(1).forEach((p) => p.src && img.getSizes(p.src, { sizes: SIZES, densities: 'x1 x2', modifiers: { width: undefined, format: 'webp', quality: 80 } }))
+}
 onMounted(() => {
   const later = () => setTimeout(warmUp, 1500)
   if (document.readyState === 'complete') later()
@@ -48,7 +55,7 @@ function next() {
           v-if="p.src && (i === 0 || warm)"
           :src="p.src"
           :alt="p.alt ?? ''"
-          sizes="sm:80vw md:40vw xl:420px"
+          :sizes="SIZES"
           densities="x1 x2"
           format="webp"
           :preload="i === 0"

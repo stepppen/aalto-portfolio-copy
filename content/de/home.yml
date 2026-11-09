@@ -5,10 +5,10 @@ about:
     alt: Stepan mit verschränkten Armen, in einem dunkelblauen Pullover vor einer weissen Wand und einer Pflanze.
   statement: Ich gestalte Software für Gesundheit und Unternehmen, und ich baue sie gern auch selbst.
   paragraphs:
-    - Ich arbeite bei OWT in Zürich und verbringe den Rest meiner Woche mit Kymu, Physiotherapie für Kinder zu Hause. Dazwischen baue ich meistens irgendetwas mit den Händen.
+    - Ich arbeite bei OWT in Zürich und verbringe den Rest meiner Woche mit Kymu, Physiotherapie, die man am Fernseher spielt. Dazwischen baue ich meistens irgendetwas mit den Händen.
 # Erfolge unter dem Über-mich-Teaser. Nur Fakten; interne Links bekommen /de automatisch.
 highlights:
-  - value: CHF 160k+
+  - value: CHF 105k
     label: für Kymu eingeworben
     detail: Nicht rückzahlbare Fördergelder von DIZH, Z-Kubator und Pro Helvetia.
     href: /work/kymu
@@ -22,7 +22,7 @@ highlights:
     href: https://www.dezeen.com/2025/06/15/emotions-installation-zurich-university-of-the-arts-schoolshows/
   - value: Klinischer Pilot
     label: mit dem Luzerner Kantonsspital
-    detail: Kymu, getestet mit Patientinnen, Patienten und Physiotherapie.
+    detail: Der Prototyp von Kymu, getestet von fünf Physiotherapeutinnen und Physiotherapeuten dort.
     href: /work/kymu
   - value: ETH-Spin-off
     label: Calmea

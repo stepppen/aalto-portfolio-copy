@@ -1,7 +1,7 @@
 // Screenshots with real device emulation (headless Chrome won't shrink a window below ~500px).
 // Usage: node scripts/screenshot.mjs <outDir> <url> <width>[,<width>...] [name]
 // Needs Google Chrome installed; no npm dependency (Chrome DevTools Protocol over WebSocket).
-// Env: HOVER=<css selector> hovers that element and captures the viewport around it.
+// Env: MAXH=<px> raises the full-page height cap (default 2400). HOVER=<css selector> hovers that element and captures the viewport around it.
 // Stills are taken with prefers-reduced-motion so no transition is caught half-way.
 // FRAMES=150,350,800 (ms) keeps motion on and captures the viewport at those times after load.
 import { spawn } from 'node:child_process'
@@ -92,7 +92,7 @@ for (const w of widthsArg.split(',').map(Number)) {
   }
   const { result } = await send('Runtime.evaluate', { expression: 'JSON.stringify([document.documentElement.scrollWidth, innerWidth, document.documentElement.scrollHeight])', returnByValue: true })
   const [sw, iw, sh] = JSON.parse(result.value)
-  const { data } = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, clip: { x: 0, y: 0, width: w, height: Math.min(sh, 2400), scale: 1 } })
+  const { data } = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, clip: { x: 0, y: 0, width: w, height: Math.min(sh, Number(process.env.MAXH || 2400)), scale: 1 } })
   const file = `${outDir}/${name}-${w}.png`
   await writeFile(file, Buffer.from(data, 'base64'))
   console.log(`${file}  viewport ${iw}px, scrollWidth ${sw}px${sw > iw ? '  ✗ HORIZONTAL OVERFLOW' : ''}`)

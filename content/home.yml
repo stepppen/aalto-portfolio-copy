@@ -5,12 +5,12 @@ about:
     alt: Stepan, arms crossed, in a navy jumper in front of a white wall and a plant.
   statement: I design software for health and enterprise, and I like to build it too.
   paragraphs:
-    - I work at OWT in Zurich and spend the rest of my week on Kymu, home physio for kids. In between I'm usually building something with my hands.
+    - I work at OWT in Zurich and spend the rest of my week on Kymu, physiotherapy you play on your TV. In between I'm usually building something with my hands.
 # Achievements under the about teaser. Facts only; internal links get /de added automatically.
 highlights:
-  - value: CHF 160k+
+  - value: CHF 105k
     label: raised for Kymu
-    detail: Non-dilutive funding from DIZH, Z-Kubator and Pro Helvetia.
+    detail: Non-dilutive grants from DIZH, Z-Kubator and Pro Helvetia.
     href: /work/kymu
   - value: SDA Award
     label: Bachelor Design Award 2025
@@ -22,7 +22,7 @@ highlights:
     href: https://www.dezeen.com/2025/06/15/emotions-installation-zurich-university-of-the-arts-schoolshows/
   - value: Clinical pilot
     label: with Lucerne Cantonal Hospital
-    detail: Kymu, tested with patients and physiotherapists.
+    detail: Kymu's prototype, tested by five physiotherapists there.
     href: /work/kymu
   - value: ETH spin-off
     label: Calmea
