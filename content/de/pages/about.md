@@ -1,7 +1,7 @@
 ---
 title: Über mich
 description: Über Stepan Vedunov, Interaction Designer in Zürich. Wo Design auf Code trifft, ein paar Auszeichnungen und was ich neben der Arbeit mache.
-intro: Ich gestalte Software für Gesundheit und Unternehmen, und ich baue sie gern auch selbst.
+intro: Ich gestalte digitale Produkte für Gesundheit und Unternehmen und schreibe oft auch den Code dafür.
 # Der Fotostapel oben. Gleiche Fotos wie in content/pages/about.md.
 photos:
   - src: /photos/stepan-2.jpg

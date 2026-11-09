@@ -3,7 +3,7 @@ about:
   photo:
     src: /photos/stepan-1.jpg
     alt: Stepan, arms crossed, in a navy jumper in front of a white wall and a plant.
-  statement: I design software for health and enterprise, and I like to build it too.
+  statement: I design digital products for health and business, and I often write the code for them too.
   paragraphs:
     - I work at OWT in Zurich and spend the rest of my week on Kymu, physiotherapy you play on your TV. In between I'm usually building something with my hands.
 # Achievements under the about teaser. Facts only; internal links get /de added automatically.

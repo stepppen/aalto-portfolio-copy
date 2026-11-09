@@ -1,7 +1,7 @@
 ---
 title: About
 description: About Stepan Vedunov, interaction designer in Zurich. Where design meets code, a few things I've been recognised for, and what I do outside work.
-intro: I design software for health and enterprise, and I like to build it too.
+intro: I design digital products for health and business, and I often write the code for them too.
 # The photo stack at the top: three photos of me. The first one is shown on load
 # (strip location metadata from new photos first, the repo is public).
 photos:
