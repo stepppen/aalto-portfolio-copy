@@ -65,6 +65,7 @@ export const ui = {
     'cs.nextNav': 'Next project',
     'rm.quick': 'Quick read',
     'rm.full': 'Full story',
+    'rm.readFull': 'Read the full story',
 
     'about.title': 'About',
     'about.experience': 'Experience',
@@ -149,6 +150,7 @@ export const ui = {
     'cs.nextNav': 'Nächstes Projekt',
     'rm.quick': 'Kurzfassung',
     'rm.full': 'Ganze Geschichte',
+    'rm.readFull': 'Die ganze Geschichte lesen',
 
     'about.title': 'Über mich',
     'about.experience': 'Erfahrung',

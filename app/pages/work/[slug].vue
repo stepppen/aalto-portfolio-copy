@@ -33,7 +33,20 @@ const moreContext = computed(() => entry.value.context?.split(/\n\s*\n/).slice(1
 const isTodo = (s?: string) => !s || /^\[TODO/i.test(s)
 const clean = (s?: string) => s?.replace(/^\[TODO:\s*|\]$/g, '')
 
-const { init } = useReadMode()
+const { init, set } = useReadMode()
+// End of the quick read: "Read the full story" opens it right where the button was, and moves
+// focus to its first heading so keyboard and screen-reader users land in the new content.
+const fullStart = ref<HTMLElement>()
+function readFull(e: MouseEvent) {
+  const before = (e.currentTarget as HTMLElement).getBoundingClientRect().top
+  document.documentElement.style.overflowAnchor = 'none'
+  set('full')
+  const after = fullStart.value?.getBoundingClientRect().top ?? before
+  window.scrollBy({ top: after - before, behavior: 'instant' })
+  document.documentElement.style.overflowAnchor = ''
+  const heading = fullStart.value?.querySelector<HTMLElement>('h2')
+  if (heading) { heading.tabIndex = -1; heading.focus({ preventScroll: true }) }
+}
 // Only case studies with a TL;DR have a quick read; earlier work always shows everything.
 onMounted(() => { if (hasQuick.value) init() })
 
@@ -103,14 +116,16 @@ useSeoMeta({
       <CsMedia v-for="(v, i) in entry.keyVisuals ?? []" :key="i" :src="v.src" :alt="v.alt" :caption="v.caption" :todo="clean(v.todo)" />
     </section>
 
-    <!-- Between the two versions, in both modes: the switch stays put when flipped, and the
-         full story opens below it. -->
-    <div v-if="hasQuick" class="container cs__more">
-      <ReadModeSwitch />
+    <!-- End of the quick read: an invitation into the full story. Gone in Full story, where the
+         page runs straight on; the switch at the top is the one place to change the mode. -->
+    <div v-if="hasQuick" class="container cs__more rm-quick-only">
+      <button type="button" class="cs__readmore" @click="readFull">
+        <span>{{ t('rm.readFull') }}</span><span class="cs__readmore-arrow" aria-hidden="true">↓</span>
+      </button>
     </div>
 
     <!-- Full story -->
-    <div class="container cs__full">
+    <div ref="fullStart" class="container cs__full">
       <section v-if="moreContext.length" class="cs-section rm-extra" aria-labelledby="cs-context">
         <h2 id="cs-context" class="t-heading">{{ t('cs.context') }}</h2>
         <div class="cs__prose"><p v-for="(para, i) in moreContext" :key="i"><Txt :text="para" /></p></div>
@@ -185,7 +200,40 @@ useSeoMeta({
 
 .cs__key { display: grid; gap: var(--space-8); padding-bottom: var(--space-8); }
 
-.cs__more { display: grid; justify-items: start; gap: var(--space-2); padding-block: var(--space-4) var(--space-8); }
+.cs__more { padding-block: var(--space-4) var(--space-8); }
+
+/* Without JS everything is already open, so the button has nothing to do. */
+html:not([data-rm-ready]) .cs__more { display: none; }
+
+.cs__readmore {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  min-height: var(--layout-tap);
+  padding: var(--space-6);
+  border: 0;
+  border-radius: var(--radius-card);
+  background: var(--panel);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: var(--text-heading);
+  letter-spacing: var(--tracking-heading);
+  text-align: start;
+  cursor: pointer;
+  transition: background-color 200ms var(--motion-ease);
+}
+
+.cs__readmore:hover { background: color-mix(in srgb, var(--ink) 6%, var(--panel)); }
+
+.cs__readmore-arrow { transition: transform var(--motion-dur-fast) var(--motion-ease); }
+
+.cs__readmore:hover .cs__readmore-arrow { transform: translateY(3px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cs__readmore-arrow { transition: none; }
+}
 
 .cs__prose { max-width: 62ch; }
 
