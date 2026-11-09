@@ -226,7 +226,7 @@ html:not([data-read="full"]) .rm-full-only { display: none; }
   }
 }
 
-/* Scroll reveal: sections fade up out of a slight blur as they enter the viewport.
+/* Scroll reveal: sections fade and rise into place as they enter the viewport.
    Pure CSS (scroll-driven animations), so nothing is hidden before JS runs, and anything already
    on screen at load is drawn in its final state. Browsers without support just show it. */
 @media (prefers-reduced-motion: no-preference) {
@@ -242,8 +242,10 @@ html:not([data-read="full"]) .rm-full-only { display: none; }
 }
 
 @keyframes reveal {
-  from { opacity: 0; filter: blur(14px); transform: translateY(3rem) scale(0.98); }
-  to { opacity: 1; filter: none; transform: none; }
+  /* No blur here: a blur that changes on every scroll frame, under the frosted menu button,
+     made Chrome and Safari on macOS repaint the whole window, and the page flickered. */
+  from { opacity: 0; transform: translateY(3rem) scale(0.98); }
+  to { opacity: 1; transform: none; }
 }
 
 /* Page change: the old page blurs out, the new one sharpens in. */

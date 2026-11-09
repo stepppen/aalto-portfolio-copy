@@ -181,7 +181,6 @@ onBeforeUnmount(() => {
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
   background: color-mix(in srgb, var(--bg) 72%, transparent);
-  backdrop-filter: blur(20px) saturate(1.4);
   box-shadow: 0 1rem 2.5rem color-mix(in srgb, var(--ink) 12%, transparent);
   transform-origin: top right;
   opacity: 0;
@@ -196,6 +195,8 @@ onBeforeUnmount(() => {
   visibility: visible;
   transform: none;
   filter: none;
+  /* Frosted only while open: a hidden card with a backdrop blur still costs a repaint per scroll frame. */
+  backdrop-filter: blur(20px) saturate(1.4);
   transition: opacity 200ms var(--motion-ease), transform 250ms var(--motion-ease), filter 250ms var(--motion-ease), visibility 0s;
 }
 
