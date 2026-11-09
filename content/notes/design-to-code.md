@@ -2,7 +2,7 @@
 title: Design-to-code pipeline
 description: How a versioned token package and component contracts stop design and code from drifting apart, and let designers prototype in code.
 date: "2026-11"
-# Hidden for now: not listed, not built, not in the sitemap. Set to false to publish.
+# Hidden for now, like the whole Notes section. To publish: set to false here and in the German file, and delete the ignore line for /notes in nuxt.config.ts.
 draft: true
 ---
 

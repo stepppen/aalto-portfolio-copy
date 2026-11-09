@@ -64,7 +64,7 @@ export default defineNuxtConfig({
     '/projects/**': { redirect: { to: '/work/**', statusCode: 301 } },
     '/playground': { redirect: { to: '/', statusCode: 301 } },
     '/cv.pdf': { redirect: { to: '/Stepan_Vedunov_CV.pdf', statusCode: 301 } },
-    '/work/design-to-code': { redirect: { to: '/notes', statusCode: 302 } },
+    '/work/design-to-code': { redirect: { to: '/work', statusCode: 302 } },
     '/**': {
       headers: {
         'X-Content-Type-Options': 'nosniff',
@@ -107,6 +107,10 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       routes: ['/', '/de', ...['kymu', 'vr-learning-tool', 'volkswagen-hmi', 'llm-drawing-robot', 'ticket-machine-zvv'].flatMap((s) => [`/projects/${s}`, `/work/${s}`])],
+      // Notes is hidden for now (no published notes, no nav link). Nuxt builds every static page
+      // on its own, so skip it here. To bring Notes back: publish a note (draft: false) and
+      // delete this line.
+      ignore: ['/notes', '/de/notes'],
     },
   },
 })
