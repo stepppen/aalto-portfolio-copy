@@ -3,34 +3,21 @@ about:
   photo:
     src: /photos/stepan-1.jpg
     alt: Stepan mit verschränkten Armen, in einem dunkelblauen Pullover vor einer weissen Wand und einer Pflanze.
-  statement: Ich gestalte digitale Produkte für Gesundheit und Unternehmen und schreibe oft auch den Code dafür.
+  statement: Ich gestalte, teste und baue (meistens in dieser Reihenfolge)
   paragraphs:
-    - Ich arbeite bei OWT in Zürich und verbringe den Rest meiner Woche mit Kymu, Physiotherapie, die man am Fernseher spielt. Dazwischen baue ich meistens irgendetwas mit den Händen.
+    - UX/UI Designer mit Erfahrung in Beratung, Forschung und grossen Unternehmen. Ich gestalte komplexe Anwendungen, von der Nutzerforschung und Ideenfindung bis zu interaktiven Prototypen in Figma und im Browser.
 # Erfolge unter dem Über-mich-Teaser. Nur Fakten; interne Links bekommen /de automatisch.
 highlights:
   - value: CHF 100k+
-    label: für Kymu eingeworben
-    detail: Nicht rückzahlbare Fördergelder von DIZH, Z-Kubator und Pro Helvetia.
-    href: /work/kymu
-  - value: SDA Award
-    label: Bachelor Design Award 2025
-    detail: Für Kymu, meine Bachelorarbeit mit Elia Salerno an der ZHdK.
-    href: https://www.zhdk.ch/en/news/sda-bachelor-award-2025-8549
-  - value: Dezeen
-    label: School Shows 2025
-    detail: Kymu in der Ausstellung der ZHdK.
-    href: https://www.dezeen.com/2025/06/15/emotions-installation-zurich-university-of-the-arts-schoolshows/
-  - value: Klinischer Pilot
-    label: mit dem Luzerner Kantonsspital
-    detail: Kymu, getestet mit über 20 Personen, von Betroffenen bis zu Fachpersonen.
-    href: /work/kymu
+    label: für Forschung und Entwicklung von Kymu eingeworben
+  - value: 2 Designpreise
+    label: SDA Bachelor Design Award 2025 und ein New One Merit Award (China)
+  - value: Auf der Bühne gepitcht
+    label: vor über 200 Personen
+  - value: Ständig am Iterieren
+    label: Kymu mit über 20 Personen getestet, von Betroffenen bis zu Fachpersonen
   - value: ETH-Spin-off
-    label: Calmea
-    detail: Die Schlafplattform, die ich gestaltet und danach full-stack gebaut habe.
-    href: /work/calmea
-  - value: Auf der Bühne
-    label: KMU Innovationstag und Creative Economies Forum
-    detail: Kymu an beiden 2026 gepitcht.
+    label: Mitgeholfen, Calmea zum ETH-Spin-off zu machen
 howIWork:
   - title: Hinschauen statt raten
     text: Fünf Leute mit einem groben Prototyp schlagen fünf Meetings über einen perfekten. Ich lasse mich lieber früh überraschen, als in einem Slide-Deck recht zu haben.

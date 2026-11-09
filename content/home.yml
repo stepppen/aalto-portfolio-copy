@@ -3,34 +3,21 @@ about:
   photo:
     src: /photos/stepan-1.jpg
     alt: Stepan, arms crossed, in a navy jumper in front of a white wall and a plant.
-  statement: I design digital products for health and business, and I often write the code for them too.
+  statement: I design, test and build (mostly in that order)
   paragraphs:
-    - I work at OWT in Zurich and spend the rest of my week on Kymu, physiotherapy you play on your TV. In between I'm usually building something with my hands.
-# Achievements under the about teaser. Facts only; internal links get /de added automatically.
+    - UX/UI designer with experience in consulting, research and enterprise settings. I design complex applications, from user research and ideation to interactive prototypes in Figma and in the browser.
+# Achievements under the about teaser. Facts only: a big value and one short line.
 highlights:
   - value: CHF 100k+
-    label: raised for Kymu
-    detail: Non-dilutive grants from DIZH, Z-Kubator and Pro Helvetia.
-    href: /work/kymu
-  - value: SDA Award
-    label: Bachelor Design Award 2025
-    detail: For Kymu, my thesis with Elia Salerno at ZHdK.
-    href: https://www.zhdk.ch/en/news/sda-bachelor-award-2025-8549
-  - value: Dezeen
-    label: School Shows 2025
-    detail: Kymu featured in the ZHdK show.
-    href: https://www.dezeen.com/2025/06/15/emotions-installation-zurich-university-of-the-arts-schoolshows/
-  - value: Clinical pilot
-    label: with Lucerne Cantonal Hospital
-    detail: Kymu, tested with more than 20 people, from patients to therapists.
-    href: /work/kymu
+    label: raised for Kymu R&D
+  - value: 2 design awards
+    label: SDA Bachelor Design Award 2025 and a New One merit award (China)
+  - value: Pitched on stage
+    label: in front of 200+ people
+  - value: Constantly iterating
+    label: Tested Kymu with 20+ people, from patients to therapists
   - value: ETH spin-off
-    label: Calmea
-    detail: The sleep platform I designed and then built full-stack.
-    href: /work/calmea
-  - value: On stage
-    label: KMU Innovationstag and Creative Economies Forum
-    detail: Pitched Kymu at both in 2026.
+    label: Helped Calmea become an ETH spin-off
 # General, no real projects. Opinions, not facts.
 howIWork:
   - title: Watch, don't guess

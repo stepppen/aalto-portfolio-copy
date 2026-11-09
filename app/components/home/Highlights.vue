@@ -8,7 +8,7 @@ const { t } = useLang()
 <template>
   <section class="container hl" aria-labelledby="hl-title">
     <h2 id="hl-title" class="t-mono muted reveal">{{ t('highlights.title') }}</h2>
-    <StatGrid :items="items" class="hover-dim reveal" />
+    <StatGrid :items="items" class="reveal" />
   </section>
 </template>
 
