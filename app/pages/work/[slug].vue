@@ -76,7 +76,7 @@ useSeoMeta({
       <ReadModeSwitch v-if="hasQuick" class="cs__switch" />
     </header>
 
-    <section v-if="entry.tldr" class="container cs__tldr" aria-labelledby="cs-tldr">
+    <section v-if="entry.tldr" class="container cs__tldr rm-quick-only" aria-labelledby="cs-tldr">
       <h2 id="cs-tldr" class="t-heading">{{ t('cs.tldr') }}</h2>
       <dl>
         <div><dt class="muted">{{ t('cs.problem') }}</dt><dd><Txt :text="entry.tldr.problem" /></dd></div>
@@ -150,7 +150,8 @@ useSeoMeta({
 </template>
 
 <style scoped>
-.cs__head { display: grid; gap: var(--space-8); padding-block: var(--space-8); }
+/* The line under the header stays in both read modes (the TL;DR below it is quick read only). */
+.cs__head { display: grid; gap: var(--space-8); padding-block: var(--space-8); border-bottom: 1px solid var(--line); }
 
 .cs__title { max-width: 12ch; }
 
@@ -172,7 +173,7 @@ useSeoMeta({
 
 .cs__switch { justify-self: start; }
 
-.cs__tldr { display: grid; gap: var(--space-4); padding-block: var(--space-8); border-top: 1px solid var(--line); }
+.cs__tldr { display: grid; gap: var(--space-4); padding-block: var(--space-8); }
 
 .cs__tldr dl { display: grid; gap: var(--space-4); }
 
