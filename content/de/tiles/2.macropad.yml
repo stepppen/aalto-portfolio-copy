@@ -4,4 +4,3 @@ description: "Eine eigene Tastatur, die ich gerade entwerfe und baue, hier als P
 instructions: "Klick oder tipp auf eine Taste, um sie zu drücken, und auf den Kippschalter für das Licht. Seitwärts ziehen dreht es. Mit der Tastatur: 1, 2 und 3 drücken die Tasten, Enter legt den Schalter um, die Pfeiltasten drehen es."
 scene: macropad
 poster: /tiles/macropad.webp
-placeholder: "[TODO: my real board as a Blender or KiCad export, plus a photo for colour reference]"

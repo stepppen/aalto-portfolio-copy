@@ -4,4 +4,3 @@ description: "Some graphic design: a crate of posters from my poster series. Fli
 instructions: "Hover or tap a poster to lift it out of the crate. Drag sideways to turn the crate. With a keyboard: up and down arrows pick a poster, Escape puts it back."
 scene: posters
 poster: /tiles/posters.webp
-placeholder: "[TODO: photos or files of 3–5 Plakativ posters you're happy to show, to replace the drawn stand-ins]"
