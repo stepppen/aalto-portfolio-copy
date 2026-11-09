@@ -1,0 +1,7 @@
+# Static deploy (decision D7). Only takes effect once redesign-2026 is merged.
+[build]
+  command = "npm run generate"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"

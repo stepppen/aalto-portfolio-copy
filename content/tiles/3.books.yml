@@ -1,0 +1,17 @@
+title: On my desk
+category: "Some of my favourite novels I read in the last few years."
+description: "Some of my favourite novels from the last few years, stacked, each with my rating."
+instructions: "Hover or tap a book to slide it out and see my rating. Drag sideways to turn the stack. With a keyboard: up and down arrows pick a book, Escape puts it back."
+scene: books
+poster: /tiles/books.webp
+# Edit these. Up to five books, top of the list = bottom of the stack.
+books:
+  - title: The Count of Monte Cristo
+    author: Alexandre Dumas
+    why: 10/10
+  - title: Ready Player One
+    author: Ernest Cline
+    why: 9.5/10
+  - title: "1984"
+    author: George Orwell
+    why: 9.2/10

@@ -1,0 +1,98 @@
+---
+title: Design-to-code pipeline
+description: How a versioned token package and component contracts stop design and code from drifting apart, and let designers prototype in code.
+date: "2026-11"
+# Hidden for now, like the whole Notes section. To publish: set to false here and in the German file, and delete the ignore line for /notes in nuxt.config.ts.
+draft: true
+---
+
+This is about how design gets into code at OWT, and what I changed about it. No client names and no client screens. The ideas are the point.
+
+The short version: I introduced a pipeline with a versioned token package and component contracts. It stops design and code from drifting apart, and it lets designers prototype in code.
+
+::cs-section{n="01" title="Drift"}
+Every product team knows this one. The design file says one thing, production says another, and nobody can say when they parted. A colour gets hard-coded "just for now". A component grows a prop that design never heard of. A spacing value gets eyeballed.
+
+None of it is anyone's fault. It happens because design and code have two sources of truth, and the hand-off between them is a person reading a screen. The fix isn't a better hand-off. It's having only one source.
+::
+
+::cs-section{n="02" title="One source: a versioned token package"}
+Design decisions live as tokens: colours, type, spacing, radii, motion. They start in Figma, get exported as data, and are compiled into a package that every app installs like any other dependency.
+
+:::cs-diagram
+---
+label: How a design decision travels from Figma to every app
+caption: Tokens leave Figma as data, get compiled once, and ship as a versioned package. A change is a release, with a changelog, not a message in a chat.
+steps:
+  - title: Figma variables
+    detail: Designers change decisions where they already work.
+  - title: Token data (JSON)
+    detail: Primitives, then semantic tokens that point at them.
+  - title: Build
+    detail: Compiled to CSS variables and typed constants.
+  - title: Versioned package
+    detail: Semantic versioning, a changelog, a review.
+    accent: true
+  - title: Apps
+    detail: Each one installs and updates like any dependency.
+    items: [Product A, Product B, Prototype]
+---
+:::
+
+Two layers matter. **Primitives** are the raw palette and scales. **Semantic tokens** say what a value is for: background, text, accent, line. Components may only read semantic tokens. That one rule is what makes a rebrand, a dark mode, or a second product a change of values instead of a rewrite.
+::
+
+::cs-section{n="03" title="Component contracts"}
+Tokens fix the values. Contracts fix the components. A contract is a short, written agreement for each component that design and code both sign up to:
+
+- **Anatomy and props.** What the component is made of, and every variant that exists, in the same words in Figma and in code.
+- **States.** Default, hover, focus, disabled, loading, error. If a state isn't in the contract, it doesn't ship.
+- **Tokens it may use.** No raw values. A lint rule enforces it.
+- **Accessibility.** Roles, keyboard behaviour, focus order, contrast.
+
+:todo[one concrete example of a contract you wrote, anonymised: which component, and what the contract caught]
+
+The contract is boring on purpose. It turns "does this match the design?" from an opinion into a checklist.
+::
+
+::cs-section{n="04" title="Designers prototyping in code"}
+Once tokens and components are shared, a designer can build a prototype from the real components instead of redrawing them. The prototype then behaves like the product, because it is the product's parts. Questions like "what happens on a small screen?" or "how does this load?" get answered by trying, not by annotating.
+
+This is also where AI helps. I built Claude skills for the design team: packaged instructions that know our tokens, our contracts and our conventions, so the code they help produce already follows the rules. And I ran hands-on Claude × Figma workshops for clients, where teams brought their own files and left with a working setup.
+
+:todo[one or two sentences on what a skill does in practice, and what clients took away from the workshops]
+::
+
+::cs-section{n="05" title="This site is a small demo"}
+This site is the same idea at the size of a portfolio. There are primitives, one semantic set, a build step that checks every colour pair for contrast, and a lint rule that fails if a component uses a raw colour or sets anything in all caps.
+
+:::cs-diagram
+---
+label: How this site's tokens work
+caption: The same three layers as at work, minus the package.
+steps:
+  - title: primitives.json
+    detail: White, a neutral scale, one orange.
+  - title: semantic.json
+    detail: bg, ink, ink-muted, line, panel, signal.
+  - title: Style Dictionary
+    detail: CSS variables, plus a WCAG contrast check.
+  - title: Components
+    detail: Read semantic tokens only. Lint enforces it.
+    accent: true
+---
+:::
+
+Press Delete anywhere on the site, or use the setup link in the footer, to see how it's built.
+::
+
+::cs-section{title="My part"}
+- Proposed and introduced the pipeline: the token package and the component contracts. :todo[confirm what you built yourself vs. with developers]
+- Built Claude skills for the design team.
+- Ran hands-on Claude × Figma workshops for clients.
+::
+
+::cs-section{title="What I'd do differently"}
+:todo[your words: what would you set up differently if you started the pipeline again tomorrow?]
+::
+

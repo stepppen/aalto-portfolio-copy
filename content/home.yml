@@ -1,0 +1,34 @@
+# Home page copy. Drafts: rewrite anything that doesn't sound like you.
+about:
+  photo:
+    src: /photos/stepan-1.jpg
+    alt: Stepan, arms crossed, in a navy jumper in front of a white wall and a plant.
+  statement: I design, test and build (mostly in that order)
+  paragraphs:
+    - UX/UI designer with experience in consulting, research and enterprise settings. I design complex applications, from user research and ideation to interactive prototypes that people can test.
+# Achievements under the about teaser. Facts only: a big value and one short line.
+highlights:
+  - value: CHF 100k+
+    label: raised for Kymu R&D
+  - value: 2 design awards
+    label: SDA Bachelor Design Award 2025 and a New One merit award (China)
+  - value: Pitched on stage
+    label: in front of 200+ people
+  - value: Close to the users
+    label: Tested Kymu with 20+ people, from patients to therapists
+  - value: Clinical pilot
+    label: with Lucerne Cantonal Hospital
+  - value: 0 → 1
+    label: Designed and built Calmea's first app, before it became an ETH spin-off
+# General, no real projects. Opinions, not facts.
+howIWork:
+  - title: No guessing
+    text: Five people using a rough prototype beat five meetings about a perfect one. I love to go out there and get as much feedback as possible.
+  - title: Interactive prototypes
+    text: A clickable thing beats a beautiful picture. If the idea needs real data, a real device or a bit of code, one should build it.
+  - title: Handoff drift
+    text: Design is only done when the product ships. I stay close to engineering until what's live matches what we meant.
+  - title: Make it boring to maintain
+    text: "Keep the tokens, components and names clear and consistent. Future me says thanks :)"
+  - title: Leave room for play
+    text: Good ideas tend to turn up while I'm building, printing or sketching something useless. So I keep time for useless things.

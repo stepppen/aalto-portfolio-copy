@@ -1,0 +1,33 @@
+# Startseite, deutsch. Entwürfe: umschreiben, was nicht nach dir klingt.
+about:
+  photo:
+    src: /photos/stepan-1.jpg
+    alt: Stepan mit verschränkten Armen, in einem dunkelblauen Pullover vor einer weissen Wand und einer Pflanze.
+  statement: Ich gestalte, teste und baue (meistens in dieser Reihenfolge)
+  paragraphs:
+    - UX/UI Designer mit Erfahrung in Beratung, Forschung und grossen Unternehmen. Ich gestalte komplexe Anwendungen, von der Nutzerforschung und Ideenfindung bis zu interaktiven Prototypen, die man testen kann.
+# Erfolge unter dem Über-mich-Teaser. Nur Fakten; interne Links bekommen /de automatisch.
+highlights:
+  - value: CHF 100k+
+    label: für Forschung und Entwicklung von Kymu eingeworben
+  - value: 2 Designpreise
+    label: SDA Bachelor Design Award 2025 und ein New One Merit Award (China)
+  - value: Auf der Bühne gepitcht
+    label: vor 200+ Personen
+  - value: Nah an den Nutzenden
+    label: Kymu mit 20+ Personen getestet
+  - value: Klinischer Pilot
+    label: mit dem Luzerner Kantonsspital
+  - value: 0 → 1
+    label: Die erste App von Calmea gestaltet und gebaut, bevor es ein ETH-Spin-off wurde
+howIWork:
+  - title: Nicht raten
+    text: Fünf Leute mit einem groben Prototyp schlagen fünf Meetings über einen perfekten. Ich gehe gern raus und hole mir so viel Feedback wie möglich.
+  - title: Interaktive Prototypen
+    text: Etwas Klickbares schlägt ein schönes Bild. Braucht die Idee echte Daten, ein echtes Gerät oder ein bisschen Code, sollte man sie bauen.
+  - title: Handoff-Drift
+    text: Design ist erst fertig, wenn das Produkt live ist. Ich bleibe nah an der Entwicklung, bis das, was live ist, dem entspricht, was wir gemeint haben.
+  - title: Langweilig in der Wartung
+    text: "Tokens, Komponenten und Namen klar und einheitlich halten. Mein zukünftiges Ich sagt danke :)"
+  - title: Platz zum Spielen
+    text: Gute Ideen tauchen oft auf, während ich baue, drucke oder etwas Nutzloses skizziere. Darum nehme ich mir Zeit für nutzlose Dinge.

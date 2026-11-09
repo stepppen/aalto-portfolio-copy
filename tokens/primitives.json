@@ -1,0 +1,28 @@
+{
+  "$description": "Raw values. Never used by components directly; semantic.json points here.",
+  "white": { "$type": "color", "$value": "#FFFFFF" },
+  "neutral": {
+    "$type": "color",
+    "50":  { "$value": "#F4F4F2" },
+    "100": { "$value": "#EFEFEF" },
+    "200": { "$value": "#E5E5E3" },
+    "500": { "$value": "#8C8C8C" },
+    "600": { "$value": "#6B6B6B" },
+    "950": { "$value": "#111111" }
+  },
+  "orange": { "$type": "color", "600": { "$value": "#E8540C" } },
+  "red-orange": { "$type": "color", "300": { "$value": "#F57A52" }, "500": { "$value": "#E2421B" }, "800": { "$value": "#A12A0C" } },
+  "black-45": { "$type": "color", "$value": "#00000073" },
+  "family": {
+    "$type": "fontFamily",
+    "display": { "$value": "'Inter', 'Inter Fallback', system-ui, sans-serif" },
+    "text":    { "$value": "'Inter', 'Inter Fallback', system-ui, sans-serif" },
+    "mono":    { "$value": "'Geist Mono', 'Geist Mono Fallback', ui-monospace, monospace" }
+  },
+  "scale": {
+    "$type": "dimension",
+    "1": { "$value": "0.25rem" }, "2": { "$value": "0.5rem" }, "3": { "$value": "0.75rem" },
+    "4": { "$value": "1rem" }, "6": { "$value": "1.5rem" }, "8": { "$value": "2rem" },
+    "12": { "$value": "3rem" }, "16": { "$value": "4rem" }, "24": { "$value": "6rem" }, "32": { "$value": "8rem" }
+  }
+}

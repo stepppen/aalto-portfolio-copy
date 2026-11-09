@@ -1,0 +1,6 @@
+title: Eigene Tastatur
+category: "Gerade entwerfe und baue ich eine eigene Tastatur."
+description: "Eine eigene Tastatur, die ich gerade entwerfe und baue, hier als Platzhalter mit drei Tasten, einer LED und einem Kippschalter."
+instructions: "Klick oder tipp auf eine Taste, um sie zu drücken, und auf den Kippschalter für das Licht. Seitwärts ziehen dreht es. Mit der Tastatur: 1, 2 und 3 drücken die Tasten, Enter legt den Schalter um, die Pfeiltasten drehen es."
+scene: macropad
+poster: /tiles/macropad.webp

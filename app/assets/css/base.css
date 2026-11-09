@@ -1,0 +1,304 @@
+/* Base layer. Reads semantic tokens only, nothing in all caps (see .stylelintrc.json). */
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+* { margin: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: var(--space-8);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --motion-dur-fast: 0ms; --motion-dur-switch: 0ms; }
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: var(--text-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizelegibility;
+  overflow-x: clip;
+}
+
+img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
+
+button, input, select, textarea { font: inherit; color: inherit; }
+
+button { cursor: pointer; }
+
+p, li, h1, h2, h3, h4 { overflow-wrap: break-word; }
+
+p, li { text-wrap: pretty; }
+
+::selection { background: var(--ink); color: var(--bg); }
+
+/* ---------- Focus: the signal colour, like the cap on a switch ---------- */
+:focus-visible {
+  outline: var(--focus) solid var(--signal);
+  outline-offset: 3px;
+  border-radius: var(--radius-control);
+}
+
+/* ---------- Layout ---------- */
+.container {
+  width: 100%;
+  max-width: var(--layout-max);
+  margin-inline: auto;
+  padding-inline: var(--layout-margin);
+}
+
+/* Two-column editorial section: small heading left, body right. Stacks on phones. */
+.split {
+  display: grid;
+  gap: var(--space-4) var(--layout-gutter);
+}
+
+@media (width >= 64rem) {
+  .split { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
+}
+
+.section { padding-block: var(--space-section); }
+
+.hairline { border: 0; border-top: 1px solid var(--line); }
+
+/* ---------- Type roles ---------- */
+h1, h2, h3, h4 { font-weight: 400; line-height: 1.15; text-wrap: balance; }
+
+.t-display, .t-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: var(--tracking-display);
+  line-height: 1;
+}
+
+.t-display { font-size: var(--text-display); }
+
+.t-title { font-size: var(--text-title); }
+
+.t-statement { font-size: var(--text-statement); letter-spacing: var(--tracking-heading); line-height: 1.22; }
+
+.t-heading { font-size: var(--text-heading); letter-spacing: var(--tracking-heading); line-height: 1.25; }
+
+.t-small { font-size: var(--text-small); }
+
+/* Quiet "system" text: mono, small, sentence case or lowercase. Never caps. */
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+.muted { color: var(--ink-muted); }
+
+/* ---------- Links ---------- */
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+
+a:hover { text-decoration-color: var(--ink-muted); }
+
+.link-quiet { color: var(--ink-muted); text-decoration: none; }
+
+.link-quiet:hover { color: var(--ink); }
+
+/* Mono pill tag, as on the project cards and the case-study spec. */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2em 0.75em;
+  border: 1px solid currentcolor;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* ---------- Utilities ---------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  inset-inline-start: var(--space-4);
+  top: var(--space-2);
+  z-index: 100;
+  padding: var(--space-3) var(--space-4);
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: var(--radius-control);
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus-visible { transform: none; }
+
+/* Visible placeholder for content I must not invent. */
+.todo {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px dashed var(--line-strong);
+  padding: 0.1em 0.45em;
+  border-radius: var(--radius-control);
+}
+
+/* Read mode, before JS takes over: the head script sets data-read, CSS collapses the extras.
+   Once the page is ready they use hidden="until-found" instead (findable with Ctrl+F). */
+html[data-read="quick"]:not([data-rm-ready]) .cs--quick .rm-extra { display: none; }
+
+html[data-read="full"] .rm-quick-only { display: none; }
+
+html:not([data-read="full"]) .rm-full-only { display: none; }
+
+/* hidden="until-found" only hides the content, the box (padding, rule on top) would stay. */
+.cs--quick .rm-extra[hidden] { padding-block: 0; margin-block: 0; border: 0; }
+
+/* Case-study media (global so case pages need no extra render-blocking stylesheet). */
+/* Media sits on a light-grey panel, like a product page. */
+.cs-media { display: grid; gap: var(--space-3); margin: 0; }
+
+.cs-media img {
+  width: 100%;
+  border-radius: var(--radius-media);
+  background: var(--panel);
+}
+
+.cs-media img.contain { object-fit: contain; padding: var(--space-6); }
+
+.cs-media__todo {
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+  border-radius: var(--radius-media);
+  background: var(--panel);
+  text-align: center;
+}
+
+.cs-media figcaption { max-width: 60ch; }
+
+
+/* ---------- Motion ---------- */
+/* Hover: the thing under the pointer stays sharp, its neighbours fade and soften a little.
+   Timing is asymmetric so moving quickly from one card to the next never flickers:
+   - un-dimming waits 180ms, so crossing the gap between two cards doesn't brighten everything;
+   - the newly hovered item sharpens quickly, the others fade out slowly. */
+@media (hover: hover) {
+  .hover-dim > * {
+    transition:
+      opacity 600ms var(--motion-soft) 180ms,
+      filter 600ms var(--motion-soft) 180ms;
+  }
+
+  .hover-dim:has(> :hover) > :not(:hover) {
+    opacity: 0.45;
+    filter: blur(2px);
+    transition-duration: 450ms;
+    transition-delay: 0ms;
+  }
+
+  .hover-dim:has(> :hover) > :hover {
+    transition-duration: 260ms;
+    transition-delay: 0ms;
+  }
+}
+
+/* Scroll reveal: sections fade up out of a slight blur as they enter the viewport.
+   Pure CSS (scroll-driven animations), so nothing is hidden before JS runs, and anything already
+   on screen at load is drawn in its final state. Browsers without support just show it. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* Starts once the top edge is 10% of the screen above the bottom, done when it's halfway
+       up. Measured from the top edge, so tall lists and short headings feel the same. */
+    .reveal {
+      animation: reveal var(--motion-reveal) both;
+      animation-timeline: view();
+      animation-range: cover 10vh cover 50vh;
+    }
+  }
+}
+
+@keyframes reveal {
+  from { opacity: 0; filter: blur(14px); transform: translateY(3rem) scale(0.98); }
+  to { opacity: 1; filter: none; transform: none; }
+}
+
+/* Page change: the old page blurs out, the new one sharpens in. */
+.page-enter-active, .page-leave-active { transition: opacity 220ms var(--motion-ease), filter 220ms var(--motion-ease), transform 220ms var(--motion-ease); }
+
+.page-enter-from { opacity: 0; filter: blur(6px); transform: translateY(0.5rem); }
+
+.page-leave-to { opacity: 0; filter: blur(6px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter-active, .page-leave-active { transition: opacity 120ms linear; }
+
+  .page-enter-from, .page-leave-to { filter: none; transform: none; }
+}
+
+/* ---------- Keycap toggles ---------- */
+/* A recessed pill-shaped slot with a red-orange keycap riding in it: lit top, shaded side
+   underneath, grip ridges. Used by the read-mode switch and the language switch.
+   The component positions and sizes the cap; the slot inset is set with --slot-inset. */
+.keyslot { position: relative; }
+
+.keyslot::before {
+  content: "";
+  position: absolute;
+  inset: var(--slot-inset, 0.3rem 0);
+  border-radius: var(--radius-pill);
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--ink) 14%, var(--panel)), var(--panel));
+  box-shadow:
+    inset 0 2px 3px color-mix(in srgb, var(--ink) 35%, transparent),
+    inset 0 -1px 0 var(--bg),
+    0 1px 0 var(--bg);
+}
+
+.keycap {
+  position: absolute;
+  border-radius: var(--radius-pill);
+  background:
+    repeating-linear-gradient(to right, transparent 0 3px, color-mix(in srgb, var(--switch-edge) 55%, transparent) 3px 4px) center / 0.7rem 45% no-repeat,
+    linear-gradient(to bottom, var(--switch-hi), var(--switch) 55%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--bg) 55%, transparent),
+    0 3px 0 var(--switch-edge),
+    0 5px 8px color-mix(in srgb, var(--ink) 30%, transparent);
+  transition:
+    transform var(--motion-dur-switch) var(--motion-spring),
+    box-shadow 90ms linear;
+}
+
+.keyslot:active .keycap {
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--bg) 40%, transparent),
+    0 1px 0 var(--switch-edge),
+    0 2px 3px color-mix(in srgb, var(--ink) 30%, transparent);
+}
+
+@media (forced-colors: active) {
+  .keycap { background: ButtonText; }
+}

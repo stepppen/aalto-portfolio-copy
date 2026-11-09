@@ -1,0 +1,17 @@
+title: Auf meinem Tisch
+category: "Einige meiner Lieblingsromane der letzten Jahre."
+description: "Einige meiner Lieblingsromane der letzten Jahre, gestapelt, jeder mit meiner Bewertung."
+instructions: "Fahr mit der Maus über ein Buch oder tipp es an, dann rutscht es heraus und du siehst meine Bewertung. Seitwärts ziehen dreht den Stapel. Mit der Tastatur: Pfeil hoch und runter wählen ein Buch, Escape legt es zurück."
+scene: books
+poster: /tiles/books.webp
+# Gleiche Bücher wie in content/tiles/3.books.yml, Titel bleiben im Original. Nur «why» übersetzen.
+books:
+  - title: The Count of Monte Cristo
+    author: Alexandre Dumas
+    why: 10/10
+  - title: Ready Player One
+    author: Ernest Cline
+    why: 9.5/10
+  - title: "1984"
+    author: George Orwell
+    why: 9.2/10
