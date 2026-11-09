@@ -1,11 +1,11 @@
 {
-  "measured": "2026-11-07",
+  "measured": "2026-11-09",
   "axe": 0,
   "lighthouse": {
-    "performance": 95,
+    "performance": 94,
     "accessibility": 100,
     "best-practices": 100,
     "seo": 100,
-    "pages": 28
+    "pages": 24
   }
 }
