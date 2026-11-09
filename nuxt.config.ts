@@ -28,10 +28,12 @@ export default defineNuxtConfig({
     },
   },
 
-  // No font preloads: text paints at once in a metric-matched fallback, then swaps.
+  // The two regular faces are preloaded (about 34 KB together), so the first paint is already in
+  // Inter and Geist Mono instead of a fallback that swaps a moment later, which read as "a different
+  // font" on whichever page loaded first. No italics on the site, so no italic files.
   // Latin covers German, French and Spanish; rare glyphs (e.g. Š) fall back per character.
   fonts: {
-    defaults: { subsets: ['latin'], preload: false },
+    defaults: { subsets: ['latin'], styles: ['normal'], preload: true },
     families: [
       // Only the weights the design uses: static files are about half the size of the variable ones.
       { name: 'Inter', provider: 'google', weights: [400] }, // one weight → a small static file instead of the 48 KB variable one
