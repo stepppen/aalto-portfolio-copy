@@ -36,5 +36,4 @@ In Markdown bodies, a placeholder is written `:todo[what's missing]`.
 - [x] CV: web version without phone, date of birth or grades at `public/Stepan_Vedunov_CV.pdf`. Source: `~/Documents/Private/Stepan_Vedunov_CV_2026_EN_web.docx`.
 - [x] Portrait photos and the stage photo (metadata stripped). About shows three photos of you.
 - [ ] Visitor stats: create a free Cloudflare Web Analytics site for vedunov.com, copy its token, and add it in Netlify as the environment variable `NUXT_PUBLIC_CF_ANALYTICS_TOKEN`, then redeploy. Cookie-free, so no banner.
-- [ ] focusTerra table photo (`content/work/side/2.focusterra-table.md`, cover)
 - [x] Contact form: sends through Netlify Forms. After the first deploy, turn on form detection and an email notification in Netlify (Forms).
