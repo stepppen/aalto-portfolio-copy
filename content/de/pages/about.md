@@ -60,6 +60,6 @@ outside:
   photos: []
 ---
 
-UX/UI Designer mit Erfahrung in Beratung, Forschung und grossen Unternehmen. Ich gestalte komplexe Anwendungen, von der Nutzerforschung und Ideenfindung bis zu interaktiven Prototypen in Figma und im Browser.
+UX/UI Designer mit Erfahrung in Beratung, Forschung und grossen Unternehmen. Ich gestalte komplexe Anwendungen, von der Nutzerforschung und Ideenfindung bis zu interaktiven Prototypen, die man ausprobieren kann.
 
 Ich mag Probleme, die anfangs chaotisch aussehen, und teste lieber einen groben Prototyp mit echten Menschen, als die falsche Idee zu polieren.

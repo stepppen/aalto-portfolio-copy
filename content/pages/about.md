@@ -61,6 +61,6 @@ outside:
   photos: []
 ---
 
-UX/UI designer with experience in consulting, research and enterprise settings. I design complex applications, from user research and ideation to interactive prototypes in Figma and in the browser.
+UX/UI designer with experience in consulting, research and enterprise settings. I design complex applications, from user research and ideation to interactive prototypes that people can try.
 
 I like problems that look messy at first, and I'd rather test a rough prototype with real people than polish the wrong idea.
