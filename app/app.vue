@@ -26,6 +26,20 @@ useHead({
   meta: [{ name: 'author', content: 'Stepan Vedunov' }],
 })
 
+// Cookie-free visitor stats, only when a token is configured (see nuxt.config).
+const analyticsToken = useRuntimeConfig().public.cfAnalyticsToken
+if (analyticsToken) {
+  useHead({
+    script: [{
+      key: 'cf-analytics',
+      src: 'https://static.cloudflareinsights.com/beacon.min.js',
+      defer: true,
+      'data-cf-beacon': JSON.stringify({ token: analyticsToken }),
+      tagPosition: 'bodyClose',
+    }],
+  })
+}
+
 // Structured data, so search engines know this site is Stepan Vedunov's: who he is, what he
 // does and which profiles are his. Facts only, nothing private (no birth date, no phone).
 const { data: siteData } = await useSite()

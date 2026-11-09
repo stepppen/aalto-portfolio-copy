@@ -4,6 +4,10 @@ const readModeBootstrap = `(function(){var m='quick';try{var s=localStorage.getI
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-11-01',
+
+  // Cookie-free visitor stats (Cloudflare Web Analytics). Off until the token is set as
+  // NUXT_PUBLIC_CF_ANALYTICS_TOKEN in Netlify's environment variables; no cookies, so no banner.
+  runtimeConfig: { public: { cfAnalyticsToken: '' } },
   devtools: { enabled: false },
 
   modules: ['@nuxt/content', '@nuxt/image', '@nuxt/fonts'],
