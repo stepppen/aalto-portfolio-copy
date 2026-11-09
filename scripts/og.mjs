@@ -39,14 +39,14 @@ function card({ eyebrow, title, body, withPortrait }) {
   ${ascii}
   <line x1="72" y1="548" x2="1128" y2="548" stroke="${C.ink}" stroke-width="2"/>
   <circle cx="80" cy="585" r="6" fill="${C.accent}"/>
-  <text x="98" y="593" font-family="Menlo, monospace" font-size="22" fill="${C.ink}">product designer · Zurich</text>
+  <text x="98" y="593" font-family="Menlo, monospace" font-size="22" fill="${C.ink}">interaction designer · Zurich</text>
   <text x="1128" y="593" text-anchor="end" font-family="Menlo, monospace" font-size="22" fill="${C.ink}">vedunov.com</text>
 </svg>`)
 }
 
 const pages = [
-  { slug: 'home', eyebrow: 'Stepan Vedunov · Zurich', title: 'I design health and enterprise software, from research to code.', body: 'Health and enterprise software, prototypes in code, and the odd 3D print.', withPortrait: true },
-  { slug: 'about', eyebrow: 'About', title: "Hi, I'm Stepan.", body: 'Product designer in Zurich. Design, code, and things I build at home.', withPortrait: true },
+  { slug: 'home', eyebrow: 'Stepan Vedunov · Zurich', title: 'Interaction designer working between design and code.', body: 'Health and enterprise software at OWT, Kymu, and the odd 3D print.', withPortrait: true },
+  { slug: 'about', eyebrow: 'About', title: "Hi, I'm Stepan.", body: 'Interaction designer in Zurich. Design, code, and things I build at home.', withPortrait: true },
 ]
 const files = []
 const walk = async (d) => { for (const e of await readdir(d, { withFileTypes: true })) e.isDirectory() ? await walk(join(d, e.name)) : e.name.endsWith('.md') && files.push(join(d, e.name)) }
@@ -54,6 +54,7 @@ await walk(here('../content/work'))
 for (const f of files) {
   const fm = ((await readFile(f, 'utf8')).match(/^---\n([\s\S]*?)\n---/) ?? [, ''])[1]
   const get = (k) => (fm.match(new RegExp(`^${k}:\\s*(.*)$`, 'm'))?.[1] ?? '').replace(/^"|"$/g, '')
+  if (get('tier') === 'side') continue // side projects have no page
   const archive = get('tier') === 'archive'
   pages.push({ slug: basename(f, '.md').replace(/^\d+\./, ''), eyebrow: `${archive ? 'Archive' : 'Case study'} · ${get('org') || 'Stepan Vedunov'}`, title: get('title'), body: get('outcome') })
 }

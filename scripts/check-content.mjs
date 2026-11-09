@@ -25,7 +25,7 @@ for (const f of files) {
     const value = isList ? line.replace(/^\s*-\s+/, '') : v
     if (/^["'|>]/.test(value)) return
     if (/^\[(?!TODO).*\]\s*$/.test(value)) return // intentional flow list
-    if (value.includes(': ') || /^\[(?!.*\]\s*$)/.test(value) || /^\[TODO/.test(value)) {
+    if (value.includes(': ') || /^\s*(?:-\s+)?[\w-]+:\s+\S.*:$/.test(line.trimEnd()) || /^\s*-\s+(?![\w-]+:(\s|$))\S.*:$/.test(line.trimEnd()) || /^\[(?!.*\]\s*$)/.test(value) || /^\[TODO/.test(value)) {
       bad++
       console.log(`${f.replace(/.*content\//, 'content/')}:${i + 1}  quote this value → ${line.trim()}`)
     }

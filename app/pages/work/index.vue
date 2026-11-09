@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// Work: case studies as large cards → earlier work → side projects (concrete projects, as cards).
+// Work: case studies as large cards → earlier work → side projects (not linked, just a card).
 const { t, lp, lang, col } = useLang()
 useSeoMeta({ title: () => t('work.title'), description: () => t('work.description') })
 const { data } = await useAsyncData(`work-page-${lang.value}`, async () => {
@@ -67,9 +67,10 @@ const media = (p: { cover?: { src?: string } }) => (p.cover?.src && !p.cover.src
     </section>
     <section class="work__section" aria-labelledby="w-side">
       <h2 id="w-side" class="t-statement reveal">{{ t('work.side') }}</h2>
-      <ul class="work__cases work__cases--side hover-dim reveal" role="list">
+      <!-- Side projects are just a picture and a line: no page behind them. -->
+      <ul class="work__cases work__cases--side reveal" role="list">
         <li v-for="p in side" :key="p.path" class="case" :class="{ 'case--light': !media(p) }">
-          <NuxtLink :to="hrefOf(p)" class="case__link">
+          <div class="case__link case__link--static">
             <span class="case__media">
               <NuxtImg v-if="media(p)" :src="media(p)!" :alt="p.cover?.alt ?? ''" sizes="sm:100vw md:50vw lg:33vw xl:440px" densities="x1 x2" format="webp" loading="lazy" />
               <span v-else class="case__note"><Txt :text="p.cover?.todo" /></span>
@@ -79,7 +80,7 @@ const media = (p: { cover?: { src?: string } }) => (p.cover?.src && !p.cover.src
               <span class="muted">{{ p.outcome }}</span>
               <span class="case__tags"><span class="pill">{{ p.year }}</span><span v-for="tg in p.tags ?? []" :key="tg" class="pill">{{ tg }}</span></span>
             </span>
-          </NuxtLink>
+          </div>
         </li>
       </ul>
     </section>
@@ -113,9 +114,9 @@ const media = (p: { cover?: { src?: string } }) => (p.cover?.src && !p.cover.src
 
 .case__note { padding: var(--space-6); text-align: center; }
 
-.case__link:hover .case__media img { transform: scale(1.015); }
+a.case__link:hover .case__media img { transform: scale(1.015); }
 
-.case__link:hover .t-heading { text-decoration: underline; text-decoration-thickness: 1px; }
+a.case__link:hover .t-heading { text-decoration: underline; text-decoration-thickness: 1px; }
 
 .case__link:focus-visible { outline-offset: 4px; border-radius: var(--radius-card); }
 

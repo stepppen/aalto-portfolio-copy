@@ -16,7 +16,7 @@ export default defineNuxtConfig({
       htmlAttrs: { lang: 'en' },
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
-        { name: 'description', content: 'Stepan Vedunov, product designer in Zurich. I design products and stay for the build: health and enterprise software at OWT and Kymu.' },
+        { name: 'description', content: 'Stepan Vedunov is an interaction designer in Zurich, working between design and code. Health and enterprise software at OWT, and Kymu, game-based physiotherapy.' },
         { name: 'theme-color', content: '#FFFFFF' },
       ],
       link: [{ rel: 'icon', href: '/favicon.ico' }],

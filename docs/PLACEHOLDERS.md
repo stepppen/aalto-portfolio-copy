@@ -11,19 +11,17 @@ In Markdown bodies, a placeholder is written `:todo[what's missing]`.
 - [ ] Collaborator quotes: removed for launch. To bring them back, add a `quote:` block (text, name, role) to a work file; the card and the case page show it automatically.
 
 ## Case studies: `content/work/`
-Each has a "What I'd do differently" line waiting for your words.
-- **Kymu:** anything from the LUKS pilot you can share. Facts updated from the 2026 grant deck (adult rehab, CHF 105k grants, 30+ protocols, five physios at LUKS). CHF 105k confirmed; the closed beta is no longer mentioned.
-- **Calmea:** who used the platform you built; team; design-system scope; the hardest data-vis problem; which hosting architecture was chosen and why; one lesson from building it. Screens, photos, logo and the architecture board are yours.
-- **Medical software:** outcome you can share; team; timeframe; tools; the standard(s) followed; an anonymised critical task; user groups and recruiting; session setup and scoring; what made the report useful.
-- **Alpha Factory:** team; the idea behind the glyph. (Aiko and Medgate pages: confirmed OK to show.) Brand-book visuals are the clean versions you sent; type and icons are cropped from the Figma export.
+- **Kymu:** anything from the LUKS pilot you can share. Facts from the 2026 grant deck (adult rehab, grants shown as CHF 100k+, 30+ protocols, five physios at LUKS). The closed beta is no longer mentioned.
+- **Calmea:** who used the platform you built; the hardest data-vis problem; one lesson from building it. The architecture is drawn from your board (the first, MVP option).
+- **Alpha Factory:** the idea behind the glyph. (Aiko and Medgate pages: confirmed OK to show.) Brand-book visuals are the clean versions you sent; type and icons are cropped from the Figma export.
 
 ## Notes: `content/notes/design-to-code.md`
 - [ ] Token tooling; what you built yourself vs. with developers; an anonymised contract example; what a Claude skill does in practice; workshop takeaways; numbers; "What I'd do differently".
 
 ## About: `content/pages/about.md`
-- [ ] Recognition photo for KMU Innovationstag; links for KMU Innovationstag and Creative Economies Forum if there are pages
+- [x] KMU Innovationstag photo (from the Kymu LinkedIn post; credit the photographer if needed) and links for both events
 
-## Side projects on Work: `content/work/side/`
+## Side projects on Work: `content/work/side/` (a card only, no page)
 - [ ] **AI to Eye:** a photo of the installation or the robots (I didn't take Scientifica's photo without asking); team credits; tools; what the robots do and how you built them.
 
 ## 3D tiles on About: `content/tiles/`
@@ -37,3 +35,4 @@ Each has a "What I'd do differently" line waiting for your words.
 ## Done
 - [x] CV: web version without phone, date of birth or grades at `public/Stepan_Vedunov_CV.pdf`. Source: `~/Documents/Private/Stepan_Vedunov_CV_2026_EN_web.docx`.
 - [x] Portrait photos and the stage photo (metadata stripped). About shows three photos of you.
+- [x] Contact form: sends through Netlify Forms. After the first deploy, turn on form detection and an email notification in Netlify (Forms).

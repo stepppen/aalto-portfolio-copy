@@ -7,7 +7,7 @@ const { t } = useLang()
 <template>
   <section class="container section how" aria-labelledby="how-title">
     <h2 id="how-title" class="t-statement reveal">{{ t('how.title') }}</h2>
-    <ol class="how__list hover-dim reveal" role="list">
+    <ol class="how__list reveal" role="list">
       <li v-for="(it, i) in items" :key="it.title" class="how__item">
         <span class="how__n t-mono muted" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>
         <h3 class="t-heading how__title">{{ it.title }}</h3>

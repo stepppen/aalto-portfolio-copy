@@ -1,6 +1,6 @@
 ---
 title: Über mich
-description: Über Stepan Vedunov, Produktdesigner in Zürich. Wo Design auf Code trifft, ein paar Auszeichnungen und was ich neben der Arbeit mache.
+description: Über Stepan Vedunov, Interaction Designer in Zürich. Wo Design auf Code trifft, ein paar Auszeichnungen und was ich neben der Arbeit mache.
 intro: Ich gestalte Software für Gesundheit und Unternehmen, und ich baue sie gern auch selbst.
 # Der Fotostapel oben. Gleiche Fotos wie in content/pages/about.md.
 photos:
@@ -15,7 +15,7 @@ experience:
     what: UX/UI Designer
     where: OWT (Swisscom Digital Technology), Zürich
   - when: Seit 2026
-    what: Product Designer und Research Associate
+    what: Product Designer, Wissenschaftlicher Mitarbeiter
     where: Kymu, Zürich
   - when: 2025–26
     what: UX Engineer (Zivildienst)
@@ -30,11 +30,14 @@ recognition:
   - title: KMU Innovationstag
     detail: Kymu auf der Bühne gepitcht
     year: "2026"
+    href: https://www.zh.ch/de/news-uebersicht/mitteilungen/2026/wirtschaft-arbeit/zuercher-kmu-innovationstag-2026.html
     image:
-      todo: "[TODO: the photo of you presenting]"
+      src: /photos/kmu-innovationstag.jpg
+      alt: Stepan und Elia Salerno auf der Bühne beim Pitch von Kymu, hinter ihnen die Folie «Was kann Kymu?».
   - title: Creative Economies Forum
     detail: Kymu gepitcht
     year: "2026"
+    href: https://www.zhdk.ch/en/zcce/creative-economies-forum-cef-27632/cef
     image:
       src: /photos/stepan-stage.jpg
       alt: Stepan auf der Bühne mit Mikrofon und Presenter, beim Pitch von Kymu.
@@ -53,7 +56,7 @@ recognition:
       src: /Kymu/thumbnail.webp
       alt: Ein Kind hebt vor einem Fernseher mit einer Kymu-Übung beide Arme.
 outside:
-  text: Neben der Arbeit baue ich zu Hause Elektronik, drucke Dinge in 3D, zeichne mit Aquarell und Fineliner in mein Skizzenbuch, lese und führe Plakativ, mein Plakat-Business. Ein paar davon, in 3D, zum Ausprobieren:
+  text: "Neben der Arbeit baue ich zu Hause Elektronik, drucke Dinge in 3D, zeichne mit Aquarell und Fineliner in mein Skizzenbuch, lese und führe Plakativ, mein Plakat-Business. Ein paar davon, in 3D, zum Ausprobieren:"
   photos: []
 ---
 

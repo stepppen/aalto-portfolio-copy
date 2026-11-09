@@ -1,27 +1,35 @@
 <script setup lang="ts">
-// Mail-composer-style contact block. "Send" opens the visitor's mail app with everything
-// filled in (mailto:), no backend. "From" became "Your name": a mailto link can't set the sender.
-// Without JS the form still submits to mailto: with subject and body.
+// Mail-composer-style contact form. It sends through Netlify Forms (the site is static on
+// Netlify): Netlify finds the form in the prerendered HTML, stores each message and emails it
+// on. With JS the form posts in place and shows a status; without JS it posts normally.
+// If sending fails, the status points to the address instead.
 const props = defineProps<{ email: string; heading: string }>()
 const { t } = useLang()
+const FORM = 'contact'
 const name = ref('')
+const from = ref('')
 const subject = ref('')
 const message = ref('')
+const state = ref<'idle' | 'sending' | 'sent' | 'error'>('idle')
 const status = ref('')
 
-const href = computed(() => {
-  const body = [message.value.trim(), name.value.trim() ? `\n\n${name.value.trim()}` : ''].join('')
-  const q = new URLSearchParams()
-  if (subject.value.trim()) q.set('subject', subject.value.trim())
-  if (body.trim()) q.set('body', body)
-  const qs = q.toString().replace(/\+/g, '%20')
-  return `mailto:${props.email}${qs ? `?${qs}` : ''}`
-})
-
-function send(e: Event) {
+async function send(e: Event) {
   e.preventDefault()
-  window.location.href = href.value
-  status.value = t('contact.opening')
+  const form = e.target as HTMLFormElement
+  if (state.value === 'sending') return
+  state.value = 'sending'
+  status.value = t('contact.sending')
+  try {
+    const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>).toString()
+    const res = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body })
+    if (!res.ok) throw new Error(String(res.status))
+    state.value = 'sent'
+    status.value = t('contact.sent')
+    name.value = from.value = subject.value = message.value = ''
+  } catch {
+    state.value = 'error'
+    status.value = t('contact.failed')
+  }
 }
 
 async function copy() {
@@ -31,14 +39,16 @@ async function copy() {
   } catch {
     status.value = t('contact.copyFail')
   }
-  setTimeout(() => (status.value = ''), 2500)
+  setTimeout(() => { if (state.value !== 'error') status.value = '' }, 2500)
 }
 </script>
 
 <template>
   <section id="contact" class="container section contact" aria-labelledby="contact-title">
     <h2 id="contact-title" class="t-display contact__title reveal">{{ heading }}</h2>
-    <form class="composer reveal" :action="`mailto:${email}`" method="get" enctype="text/plain" @submit="send">
+    <form :name="FORM" class="composer reveal" method="post" action="/" data-netlify="true" netlify-honeypot="company" @submit="send">
+      <input type="hidden" name="form-name" :value="FORM">
+      <p class="sr-only"><label>{{ t('contact.honeypot') }} <input name="company" tabindex="-1" autocomplete="off"></label></p>
       <div class="composer__row">
         <span class="composer__label t-mono muted" aria-hidden="true">{{ t('contact.to') }}</span>
         <a :href="`mailto:${email}`" class="composer__to">{{ email }}</a>
@@ -49,16 +59,20 @@ async function copy() {
         <input id="c-name" v-model="name" name="name" autocomplete="name" class="composer__input">
       </div>
       <div class="composer__row">
+        <label for="c-from" class="composer__label t-mono muted">{{ t('contact.from') }}</label>
+        <input id="c-from" v-model="from" name="email" type="email" autocomplete="email" required class="composer__input">
+      </div>
+      <div class="composer__row">
         <label for="c-subject" class="composer__label t-mono muted">{{ t('contact.subject') }}</label>
         <input id="c-subject" v-model="subject" name="subject" class="composer__input">
       </div>
       <div class="composer__row composer__row--msg">
         <label for="c-message" class="composer__label t-mono muted">{{ t('contact.message') }}</label>
-        <textarea id="c-message" v-model="message" name="body" rows="5" class="composer__input"></textarea>
+        <textarea id="c-message" v-model="message" name="message" rows="5" required class="composer__input"></textarea>
       </div>
       <div class="composer__foot">
-        <p class="t-mono muted" role="status">{{ status }}</p>
-        <button type="submit" class="composer__send">{{ t('contact.send') }}</button>
+        <p class="t-mono muted" role="status">{{ status }}<a v-if="state === 'error'" :href="`mailto:${email}`"> {{ email }}</a></p>
+        <button type="submit" class="composer__send" :disabled="state === 'sending'">{{ t('contact.send') }}</button>
       </div>
     </form>
   </section>

@@ -11,12 +11,11 @@ const { data: page } = await useAsyncData(`home-${lang.value}`, async () => {
   ])
   return { home: home!, featured: work }
 })
-useSeoMeta({ description: () => `${site.value.name}, ${t('site.tagline')}. ${site.value.positioning}` })
+useSeoMeta({ description: () => t('site.description'), ogDescription: () => t('site.description') })
 </script>
 
 <template>
   <section class="container hero" aria-labelledby="hero-title">
-    <p class="t-mono muted">{{ t('hero.role') }}</p>
     <h1 id="hero-title" class="t-display hero__title">{{ site.positioning }}<span class="hero__cursor" aria-hidden="true" /></h1>
     <p class="hero__proof t-mono">
       <a href="#contact" class="hero__mail">{{ t('hero.email') }}<span aria-hidden="true">&nbsp;›</span></a>

@@ -25,6 +25,43 @@ useHead({
   ],
   meta: [{ name: 'author', content: 'Stepan Vedunov' }],
 })
+
+// Structured data, so search engines know this site is Stepan Vedunov's: who he is, what he
+// does and which profiles are his. Facts only, nothing private (no birth date, no phone).
+const { data: siteData } = await useSite()
+useHead({
+  script: [{
+    key: 'ld-person',
+    type: 'application/ld+json',
+    innerHTML: () => JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Person',
+          '@id': `${SITE}/#person`,
+          name: 'Stepan Vedunov',
+          url: SITE,
+          image: `${SITE}/photos/stepan-1.jpg`,
+          jobTitle: t('site.jobTitle'),
+          description: t('site.description'),
+          worksFor: [{ '@type': 'Organization', name: 'OWT (Swisscom Digital Technology)', url: 'https://owt.swiss' }, { '@type': 'Organization', name: 'Kymu', url: 'https://kymu.ch' }],
+          alumniOf: { '@type': 'CollegeOrUniversity', name: 'Zurich University of the Arts (ZHdK)', url: 'https://www.zhdk.ch' },
+          address: { '@type': 'PostalAddress', addressLocality: 'Zurich', addressCountry: 'CH' },
+          knowsAbout: ['Interaction design', 'Product design', 'UX design', 'Design systems', 'Health technology', 'Front-end development'],
+          sameAs: [siteData.value?.site.linkedin, siteData.value?.site.github].filter(Boolean),
+        },
+        {
+          '@type': 'WebSite',
+          '@id': `${SITE}/#website`,
+          url: SITE,
+          name: 'Stepan Vedunov',
+          inLanguage: ['en', 'de-CH'],
+          publisher: { '@id': `${SITE}/#person` },
+        },
+      ],
+    }),
+  }],
+})
 useSeoMeta({
   ogSiteName: 'Stepan Vedunov',
   ogType: () => (path.value.startsWith('/work/') ? 'article' : 'website'),

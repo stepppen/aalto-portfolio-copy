@@ -2,15 +2,16 @@
 // Case-study template (Valdivia layout):
 // giant title → intro left + spec right (Team, Services, Date, Role) → read-mode switch → TL;DR
 // → full-width hero → [quick read: 2–3 key visuals] [full story: context, my role, sections,
-// outcome, quote, what I'd do differently] → next project.
+// outcome, quote] → next project.
 const slug = String(useRoute().params.slug)
 const slugOf = (p: { path: string }) => p.path.split('/').pop()
 const { t, lp, lang, col } = useLang()
 
 const { data } = await useAsyncData(`work-${lang.value}-${slug}`, async () => {
   const all = await queryCollection(col('work')).order('stem', 'ASC').all()
-  // Featured first (file order), then earlier work, then side projects.
-  const ordered = ['featured', 'archive', 'side'].flatMap((t) => all.filter((p) => p.tier === t))
+  // Featured first (file order), then earlier work.
+  // Side projects have no page of their own: they're a card on Work, nothing more.
+  const ordered = ['featured', 'archive'].flatMap((t) => all.filter((p) => p.tier === t))
   const i = ordered.findIndex((p) => slugOf(p) === slug)
   if (i < 0) return null
   const next = ordered[(i + 1) % ordered.length]
@@ -53,9 +54,7 @@ useSeoMeta({
         <dl class="cs__spec">
           <div v-if="team.length">
             <dt class="t-mono muted">{{ t('cs.team') }}</dt>
-            <dd class="cs__team">
-              <span v-for="n in team" :key="n" class="cs__person"><Txt :text="n" /></span>
-            </dd>
+            <dd><Txt :text="team.join(', ')" /></dd>
           </div>
           <div v-if="entry.services?.length">
             <dt class="t-mono muted">{{ t('cs.services') }}</dt>
@@ -107,7 +106,7 @@ useSeoMeta({
     <!-- Between the two versions, in both modes: the switch stays put when flipped, and the
          full story opens below it. -->
     <div v-if="hasQuick" class="container cs__more">
-      <p class="t-mono muted"><span class="rm-quick-only">{{ t('cs.short') }}</span><span class="rm-full-only">{{ t('cs.fromHere') }}</span></p>
+      <p class="t-mono muted rm-quick-only">{{ t('cs.short') }}</p>
       <ReadModeSwitch />
     </div>
 
@@ -126,14 +125,9 @@ useSeoMeta({
 
       <section v-if="entry.results" class="cs-section rm-extra" aria-labelledby="cs-outcome">
         <h2 id="cs-outcome" class="t-heading">{{ t('cs.outcome') }}</h2>
-        <div class="cs__prose">
-          <dl v-if="entry.results.stats?.length" class="cs__stats">
-            <div v-for="s in entry.results.stats" :key="s.label">
-              <dt class="muted"><Txt :text="s.label" /></dt>
-              <dd class="t-statement"><Txt :text="s.value" /></dd>
-            </div>
-          </dl>
-          <p v-if="entry.results.text"><Txt :text="entry.results.text" /></p>
+        <div class="cs__outcome">
+          <StatGrid v-if="entry.results.stats?.length" :items="entry.results.stats" compact />
+          <p v-if="entry.results.text" class="cs__prose"><Txt :text="entry.results.text" /></p>
         </div>
       </section>
 
@@ -143,11 +137,6 @@ useSeoMeta({
           <blockquote class="t-statement"><Txt :text="isTodo(entry.quote.text) ? entry.quote.text : `“${entry.quote.text}”`" /></blockquote>
           <figcaption class="muted"><Txt :text="entry.quote.name" /><template v-if="entry.quote.role">, <Txt :text="entry.quote.role" /></template></figcaption>
         </figure>
-      </section>
-
-      <section v-if="entry.reflection" class="cs-section rm-extra" aria-labelledby="cs-reflection">
-        <h2 id="cs-reflection" class="t-heading">{{ t('cs.reflection') }}</h2>
-        <p class="cs__prose t-heading"><Txt :text="entry.reflection" /></p>
       </section>
     </div>
 
@@ -176,12 +165,6 @@ useSeoMeta({
 
 .cs__spec dd { margin: 0; }
 
-.cs__team { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); }
-
-.cs__person { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-small); }
-
-
-
 .cs__pills { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 
 .cs__links { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-6); padding: 0; list-style: none; }
@@ -204,21 +187,13 @@ useSeoMeta({
 
 .cs__more { display: grid; justify-items: start; gap: var(--space-2); padding-block: var(--space-4) var(--space-8); }
 
-/* Quick read is one calm column: no rules between the parts. */
-html[data-read="quick"] .cs--quick .cs__tldr,
-html[data-read="quick"] .cs--quick .cs__next .hairline { border-top-color: transparent; }
-
 .cs__prose { max-width: 62ch; }
 
 .cs__prose p + p { margin-top: var(--space-4); }
 
 .cs__role { display: grid; gap: var(--space-2); padding-left: 1.1em; }
 
-.cs__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6) var(--layout-gutter); margin-bottom: var(--space-6); }
-
-.cs__stats div { display: flex; flex-direction: column-reverse; gap: var(--space-1); }
-
-.cs__stats dd { margin: 0; }
+.cs__outcome { display: grid; gap: var(--space-6); }
 
 .cs__quote { display: grid; gap: var(--space-4); margin: 0; padding: var(--space-8); border-radius: var(--radius-card); background: var(--panel); }
 
@@ -240,8 +215,6 @@ html[data-read="quick"] .cs--quick .cs__next .hairline { border-top-color: trans
   .cs__key { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--layout-gutter); }
 
   .cs__key > :first-child { grid-column: 1 / -1; }
-
-  .cs__stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 </style>
 
