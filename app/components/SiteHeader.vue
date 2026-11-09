@@ -49,7 +49,7 @@ onBeforeUnmount(() => {
       <ul class="header__nav hover-dim t-mono" role="list">
         <li><NuxtLink :to="lp('/about')" class="header__link" :aria-current="current('/about')">{{ t('nav.about') }}</NuxtLink></li>
         <li><NuxtLink :to="lp('/work')" class="header__link" :aria-current="current('/work')">{{ t('nav.work') }}</NuxtLink></li>
-        <li v-if="data?.hasNotes"><NuxtLink :to="lp('/notes')" class="header__link" :aria-current="current('/notes')">{{ t('nav.notes') }}</NuxtLink></li>
+        <li><NuxtLink :to="lp('/notes')" class="header__link" :aria-current="current('/notes')">{{ t('nav.notes') }}</NuxtLink></li>
         <li class="header__lang-item"><LangSwitch /></li>
       </ul>
     </nav>
@@ -71,7 +71,7 @@ onBeforeUnmount(() => {
           <li><NuxtLink :to="lp('/')" class="menu__link" :aria-current="home">{{ t('nav.home') }}</NuxtLink></li>
           <li><NuxtLink :to="lp('/work')" class="menu__link" :aria-current="current('/work')">{{ t('nav.work') }}</NuxtLink></li>
           <li><NuxtLink :to="lp('/about')" class="menu__link" :aria-current="current('/about')">{{ t('nav.about') }}</NuxtLink></li>
-          <li v-if="data?.hasNotes"><NuxtLink :to="lp('/notes')" class="menu__link" :aria-current="current('/notes')">{{ t('nav.notes') }}</NuxtLink></li>
+          <li><NuxtLink :to="lp('/notes')" class="menu__link" :aria-current="current('/notes')">{{ t('nav.notes') }}</NuxtLink></li>
           <li><NuxtLink :to="{ path: lp('/'), hash: '#contact' }" class="menu__link">{{ t('nav.contact') }}</NuxtLink></li>
         </ul>
         <div class="menu__foot"><LangSwitch /></div>
