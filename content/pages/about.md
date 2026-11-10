@@ -1,7 +1,7 @@
 ---
 title: About
 description: About Stepan Vedunov, interaction designer in Zurich. Where design meets code, a few things I've been recognised for, and what I do outside work.
-intro: I design, test and build (mostly in that order)
+intro: I design, test and build
 # The photo stack at the top: three photos of me. The first one is shown on load
 # (strip location metadata from new photos first, the repo is public).
 photos:
@@ -57,6 +57,6 @@ outside:
   photos: []
 ---
 
-UX/UI designer with experience in consulting, research and enterprise settings. I design complex applications, from user research and ideation to interactive prototypes that people can test.
+UX/UI designer with experience in consulting, research and enterprise settings. I design complex applications, from user research and ideation to interactive prototypes and implementation.
 
 I like problems that look messy at first, and I'd rather test a rough prototype with real people than polish the wrong idea.

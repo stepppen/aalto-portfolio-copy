@@ -42,7 +42,9 @@ useSeoMeta({ description: () => t('site.description'), ogDescription: () => t('s
 
 .hero__mail:hover { text-decoration: underline; }
 
-/* A blinking block cursor, a nod to the setup screen. Still when motion is reduced. */
+/* A blinking block cursor, a nod to the setup screen. A blink isn't movement, so it blinks with
+   reduced motion too (Windows turns that on whenever "Animation effects" is off), but then stops
+   after a few seconds instead of blinking forever. */
 .hero__cursor {
   display: inline-block;
   width: 0.08em;
@@ -52,8 +54,10 @@ useSeoMeta({ description: () => t('site.description'), ogDescription: () => t('s
   background: var(--ink);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .hero__cursor { animation: blink 1.1s steps(1) infinite; }
+.hero__cursor { animation: blink 1.1s steps(1) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__cursor { animation-iteration-count: 4; }
 }
 
 @keyframes blink { 50% { opacity: 0; } }

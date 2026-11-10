@@ -37,7 +37,7 @@ function next() {
   setTimeout(() => {
     order.value = [...order.value.slice(1), top]
     leaving.value = null
-  }, reduce ? 0 : 260)
+  }, reduce ? 200 : 260)
 }
 </script>
 
@@ -120,7 +120,10 @@ function next() {
   .stack__deck:hover .stack__card.is-top:not(.is-leaving) { transform: rotate(-1deg) translateY(-4px); }
 }
 
+/* Reduced motion (on Windows, whenever "Animation effects" is off): no sliding or tilting,
+   the top photo fades out instead of jumping. */
 @media (prefers-reduced-motion: reduce) {
-  .stack__card { transition: none; }
+  .stack__card { transition: opacity 200ms linear; }
+  .stack__card.is-leaving { transform: rotate(var(--tilt)) translateY(calc(var(--depth) * 4px)); filter: none; }
 }
 </style>

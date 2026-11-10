@@ -1,7 +1,7 @@
 ---
 title: Über mich
 description: Über Stepan Vedunov, Interaction Designer in Zürich. Wo Design auf Code trifft, ein paar Auszeichnungen und was ich neben der Arbeit mache.
-intro: Ich gestalte, teste und baue (meistens in dieser Reihenfolge)
+intro: Ich gestalte, teste und baue
 # Der Fotostapel oben. Gleiche Fotos wie in content/pages/about.md.
 photos:
   - src: /photos/stepan-2.jpg
@@ -56,6 +56,6 @@ outside:
   photos: []
 ---
 
-UX/UI Designer mit Erfahrung in Beratung, Forschung und grossen Unternehmen. Ich gestalte komplexe Anwendungen, von der Nutzerforschung und Ideenfindung bis zu interaktiven Prototypen, die man testen kann.
+UX/UI Designer mit Erfahrung in Beratung, Forschung und grossen Unternehmen. Ich gestalte komplexe Anwendungen, von der Nutzerforschung und Ideenfindung bis zu interaktiven Prototypen und zur Umsetzung.
 
 Ich mag Probleme, die anfangs chaotisch aussehen, und teste lieber einen groben Prototyp mit echten Menschen, als die falsche Idee zu polieren.

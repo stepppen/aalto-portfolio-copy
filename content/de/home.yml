@@ -3,21 +3,21 @@ about:
   photo:
     src: /photos/stepan-1.jpg
     alt: Stepan mit verschränkten Armen, in einem dunkelblauen Pullover vor einer weissen Wand und einer Pflanze.
-  statement: Ich gestalte, teste und baue (meistens in dieser Reihenfolge)
+  statement: Ich gestalte, teste und baue
   paragraphs:
-    - UX/UI Designer mit Erfahrung in Beratung, Forschung und grossen Unternehmen. Ich gestalte komplexe Anwendungen, von der Nutzerforschung und Ideenfindung bis zu interaktiven Prototypen, die man testen kann.
+    - UX/UI Designer mit Erfahrung in Beratung, Forschung und grossen Unternehmen. Ich gestalte komplexe Anwendungen, von der Nutzerforschung und Ideenfindung bis zu interaktiven Prototypen und zur Umsetzung.
 # Erfolge unter dem Über-mich-Teaser. Nur Fakten; interne Links bekommen /de automatisch.
 highlights:
   - value: CHF 100k+
     label: für Forschung und Entwicklung von Kymu eingeworben
   - value: 2 Designpreise
-    label: SDA Bachelor Design Award 2025 und ein New One Merit Award (China)
+    label: SDA Bachelor Design Award (CH) und New One Merit Award (China)
   - value: Auf der Bühne gepitcht
-    label: vor 200+ Personen
+    label: vor 200+ Personen am CEF & KMU Innovationstag
   - value: Nah an den Nutzenden
     label: Kymu mit 20+ Personen getestet
   - value: Klinischer Pilot
-    label: mit dem Luzerner Kantonsspital
+    label: mit Kymu am Luzerner Kantonsspital
   - value: 0 → 1
     label: Die erste App von Calmea gestaltet und gebaut, bevor es ein ETH-Spin-off wurde
 howIWork:

@@ -138,6 +138,9 @@ a.rec__card:hover .rec__arrow { transform: translate(2px, -2px); }
 @media (width >= 64rem) {
   .about__top { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: var(--layout-gutter); }
 
+  /* More air between the photo stack and the text. */
+  .about__story { padding-left: var(--space-16); }
+
   .about__body :deep(p) { font-size: var(--text-heading); line-height: 1.5; letter-spacing: -0.005em; }
 
   .about__list--exp li { grid-template-columns: 8rem 1fr; column-gap: var(--layout-gutter); }

@@ -3,21 +3,21 @@ about:
   photo:
     src: /photos/stepan-1.jpg
     alt: Stepan, arms crossed, in a navy jumper in front of a white wall and a plant.
-  statement: I design, test and build (mostly in that order)
+  statement: I design, test and build
   paragraphs:
-    - UX/UI designer with experience in consulting, research and enterprise settings. I design complex applications, from user research and ideation to interactive prototypes that people can test.
+    - UX/UI designer with experience in consulting, research and enterprise settings. I design complex applications, from user research and ideation to interactive prototypes and implementation.
 # Achievements under the about teaser. Facts only: a big value and one short line.
 highlights:
   - value: CHF 100k+
     label: raised for Kymu R&D
   - value: 2 design awards
-    label: SDA Bachelor Design Award 2025 and a New One merit award (China)
+    label: SDA Bachelor Design Award (CH) and New One merit award (China)
   - value: Pitched on stage
-    label: in front of 200+ people
+    label: in front of 200+ people at CEF & KMU Innovationstag
   - value: Close to the users
     label: Tested Kymu with 20+ people, from patients to therapists
   - value: Clinical pilot
-    label: with Lucerne Cantonal Hospital
+    label: with Kymu at Lucerne Cantonal Hospital
   - value: 0 → 1
     label: Designed and built Calmea's first app, before it became an ETH spin-off
 # General, no real projects. Opinions, not facts.
