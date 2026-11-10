@@ -137,8 +137,10 @@ onBeforeUnmount(() => {
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--panel) 82%, transparent);
-  backdrop-filter: blur(12px);
+  /* Solid, not frosted: a backdrop blur on a fixed button has to be redrawn on every scroll
+     frame from whatever moves under it, and that made the page flicker while scrolling. */
+  background: var(--panel);
+  box-shadow: 0 0 0 1px var(--line), 0 2px 8px color-mix(in srgb, var(--ink) 8%, transparent);
   color: var(--ink);
   cursor: pointer;
   transition: background-color 200ms var(--motion-ease), color 200ms var(--motion-ease), opacity 250ms var(--motion-ease), transform 250ms var(--motion-ease);
